@@ -1,7 +1,8 @@
 {
 	"name": "framegraph",
 	"displayName": "framegraph",
-	"description": "A plugin for vscode to view your project`s frame graph",
+	"description": "A plugin for vscode to view your project's frame graph",
+	"icon": "resources/framegraph.png",
 	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.41.0"
@@ -10,13 +11,53 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onCommand:extension.helloWorld",
+		"onView:framegraphExplorer-View",
+		"onView:framegraphExplorer-Commands",
+		"onView:framegraphExplorer-Help"
 	],
 	"homepage": "https://github.com/sz-p/vscode-framegraph",
-  "bugs": "https://github.com/sz-p/vscode-framegraph/issues",
+	"bugs": "https://github.com/sz-p/vscode-framegraph/issues",
 	"main": "./out/extension.js",
 	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "framegraph",
+					"title": "Frame Graph",
+					"icon": "resources/framegraph.svg"
+				}
+			]
+		},
+		"views": {
+			"framegraph": [
+				{
+					"id": "framegraphExplorer-View",
+					"name": "View"
+				},
+				{
+					"id": "framegraphExplorer-Commands",
+					"name": "Commands"
+				},
+				{
+					"id": "framegraphExplorer-Help",
+					"name": "Help"
+				}
+			]
+		},
+		"menus": {
+			"view/item/context": [
+				{
+					"command": "framegraph.showGraph",
+					"title": "Show Graph"
+				}
+			]
+		},
 		"commands": [
+			{
+				"command": "framegraph.openView",
+				"title": "Open View"
+			},
 			{
 				"command": "extension.helloWorld",
 				"title": "Hello World"
@@ -33,12 +74,12 @@
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.7",
-		"@types/node": "^12.11.7",
+		"@types/node": "^12.12.22",
 		"@types/vscode": "^1.41.0",
 		"glob": "^7.1.5",
 		"mocha": "^6.2.2",
-		"typescript": "^3.6.4",
 		"tslint": "^5.20.0",
+		"typescript": "^3.6.4",
 		"vscode-test": "^1.2.2"
 	},
 	"publisher": "sz-p"
