@@ -4,6 +4,7 @@
 	"description": "A plugin for vscode to view your project's frame graph",
 	"icon": "resources/framegraph.png",
 	"version": "0.1.0",
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.41.0"
 	},
