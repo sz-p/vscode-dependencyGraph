@@ -13,9 +13,7 @@
 	],
 	"activationEvents": [
 		"onCommand:extension.helloWorld",
-		"onView:framegraphExplorer-View",
-		"onView:framegraphExplorer-Commands",
-		"onView:framegraphExplorer-Help"
+		"onView:framegraphExplorer-DependencyTree"
 	],
 	"homepage": "https://github.com/sz-p/vscode-framegraph",
 	"bugs": "https://github.com/sz-p/vscode-framegraph/issues",
@@ -33,16 +31,8 @@
 		"views": {
 			"framegraph": [
 				{
-					"id": "framegraphExplorer-View",
-					"name": "View"
-				},
-				{
-					"id": "framegraphExplorer-Commands",
-					"name": "Commands"
-				},
-				{
-					"id": "framegraphExplorer-Help",
-					"name": "Help"
+					"id": "framegraphExplorer-DependencyTree",
+					"name": "DependencyTree"
 				}
 			]
 		},
@@ -89,6 +79,7 @@
 	},
 	"publisher": "sz-p",
 	"dependencies": {
+		"@types/dependency-tree": "^7.2.0",
 		"dependency-tree": "^7.2.1"
 	}
 }
