@@ -1,7 +1,9 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as dependencyTree from 'dependency-tree';
-
+import { showMessage } from '../utils/showMessage';
+import { NO_FOLDER, NO_PACKAGE_JSON, NO_MAIN_FILE } from '../i18n/types';
+import { getText } from '../i18n/i18n';
 export interface DependencyTreeData {
 	name: string;
 	path: string;
@@ -44,12 +46,13 @@ const getMainFilePath = function(packageJsonPath: string, folderPath: string): s
 };
 const getDependencyTree = function(filename: string, directory: string): dependencyTree.DependencyObj {
 	const dt = dependencyTree({
+		filter: (path) => path.indexOf('node_modules') === -1,
 		filename: filename,
 		directory: directory
 	});
-	console.log(dt);
 	return dt;
 };
+
 const processTreeData = function(dependencyTree: dependencyTree.DependencyObj): DependencyTreeData {
 	let dependencyTreeData: DependencyTreeData = {} as DependencyTreeData;
 	const nodes = [ { dependencyTree, dependencyTreeData, path: Object.keys(dependencyTree)[0] } ];
@@ -74,28 +77,31 @@ const processTreeData = function(dependencyTree: dependencyTree.DependencyObj): 
 			}
 		}
 	}
-	console.log(dependencyTreeData);
 	return dependencyTreeData;
 };
+
 const getDependencyTreeData = () => {
 	const folderPath = getCurrentFolderPath();
-	if (folderPath) {
-		const packageJsonPath = getPackageJsonPath(folderPath);
-		if (packageJsonPath) {
-			const mainFilePath = getMainFilePath(packageJsonPath, folderPath);
-			if (mainFilePath) {
-				return processTreeData(getDependencyTree(mainFilePath, folderPath));
-			} else {
-				console.log('no mainFile');
-				return undefined;
-			}
-		} else {
-			console.log('no package');
-			return undefined;
-		}
-	} else {
-		console.log('no folderPath');
+	if (!folderPath) {
+		showMessage(getText(NO_FOLDER));
 		return undefined;
 	}
+	const packageJsonPath = getPackageJsonPath(folderPath);
+	if (!packageJsonPath) {
+		showMessage(getText(NO_PACKAGE_JSON));
+		return undefined;
+	}
+	const mainFilePath = getMainFilePath(packageJsonPath, folderPath);
+	if (!mainFilePath) {
+		showMessage(getText(NO_MAIN_FILE));
+		return undefined;
+	}
+	const dependencyTree = getDependencyTree(mainFilePath, folderPath);
+	if (!Object.keys(dependencyTree).length) {
+		// TODO move to i18n
+		showMessage('get dependency tree fail');
+		return undefined;
+	}
+	return processTreeData(dependencyTree);
 };
 export { getDependencyTreeData };
