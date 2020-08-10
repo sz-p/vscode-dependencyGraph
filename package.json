@@ -56,6 +56,10 @@
 			{
 				"command": "extension.readfile",
 				"title": "Read File"
+			},
+			{
+				"command": "extension.openWebPage",
+				"title": "Open page"
 			}
 		]
 	},
@@ -80,6 +84,8 @@
 	"publisher": "sz-p",
 	"dependencies": {
 		"@types/dependency-tree": "^7.2.0",
-		"dependency-tree": "^7.2.1"
+		"dependency-tree": "^7.2.1",
+		"react": "^16.13.1",
+		"redux": "^4.0.5"
 	}
 }
