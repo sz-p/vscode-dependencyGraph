@@ -36,59 +36,54 @@
 				}
 			]
 		},
-		"menus": {
-			"view/item/context": [
-				{
-					"command": "framegraph.showGraph",
-					"title": "Show Graph"
-				}
-			]
-		},
 		"commands": [
 			{
-				"command": "framegraph.openView",
-				"title": "Open View"
-			},
-			{
-				"command": "extension.helloWorld",
+				"command": "framegraph.helloWorld",
 				"title": "Hello World"
 			},
 			{
-				"command": "extension.readfile",
+				"command": "framegraph.readfile",
 				"title": "Read File"
 			},
 			{
-				"command": "extension.openWebPage",
+				"command": "framegraph.openView",
 				"title": "Open page"
+			},
+			{
+				"command": "framegraph.postMessage",
+				"title": "post Message"
 			}
 		]
 	},
 	"scripts": {
+    "watch": "npm-run-all -p watch:*",
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
+		"watch:extension": "tsc -watch -p ./",
+		"watch:webView": "node ./src/webView/scripts/build.js",
 		"pretest": "npm run compile",
 		"buildWebView": "node ./src/webView/scripts/build.js",
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.11.1",
+		"@babel/preset-env": "^7.11.0",
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.12.22",
 		"@types/vscode": "^1.41.0",
+		"babel-loader": "^8.1.0",
+		"babel-preset-react-app": "^9.1.2",
+		"css-loader": "^4.2.1",
 		"glob": "^7.1.5",
+		"html-webpack-plugin": "^4.3.0",
 		"mocha": "^6.2.2",
+		"style-loader": "^1.2.1",
 		"tslint": "^5.20.0",
 		"typescript": "^3.6.4",
-    "vscode-test": "^1.2.2",
-    "@babel/core": "^7.11.1",
-    "@babel/preset-env": "^7.11.0",
-    "babel-loader": "^8.1.0",
-		"babel-preset-react-app": "^9.1.2",
-    "css-loader": "^4.2.1",
-    "html-webpack-plugin": "^4.3.0",
-    "style-loader": "^1.2.1",
-		"webpack": "^4.44.1"
+		"vscode-test": "^1.2.2",
+    "webpack": "^4.44.1",
+		"npm-run-all": "^4.1.5"
 	},
 	"publisher": "sz-p",
 	"dependencies": {
