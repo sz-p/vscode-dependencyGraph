@@ -1,9 +1,17 @@
 import * as React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import promiseMiddleware from 'redux-promise';
+import { Provider } from 'react-redux';
+import { reducer } from './reducers/reducers';
+
+const store = createStore(reducer, applyMiddleware(promiseMiddleware));
 
 function App() {
-	const doms = [ <div key="0">hello react</div> ];
-	let index = 1;
-	return doms;
+	return (
+		<Provider store={store}>
+			<div>hello react</div>
+		</Provider>
+	);
 }
 
 export { App };
