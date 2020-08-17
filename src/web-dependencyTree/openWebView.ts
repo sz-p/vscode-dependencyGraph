@@ -25,13 +25,9 @@ function getWebViewContent(templatePath: string) {
 /**
  * @description create view
  */
-const createView = function(): void {
-	let panel = vscode.window.createWebviewPanel('framegraph-view', 'Frame Graph', vscode.ViewColumn.One, {
-		enableScripts: true,
-		retainContextWhenHidden: true
-	});
-	panel.iconPath = vscode.Uri.file(paths.framegraphPNG);
-	panel.webview.html = getWebViewContent(webViewHTMLPath);
+const createView = function(webViewPanel: vscode.WebviewPanel): void {
+	webViewPanel.iconPath = vscode.Uri.file(paths.framegraphPNG);
+	webViewPanel.webview.html = getWebViewContent(webViewHTMLPath);
 };
 
 export { createView };
