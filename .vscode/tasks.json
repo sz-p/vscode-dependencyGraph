@@ -17,7 +17,6 @@
 				"isDefault": true
       },
       "dependsOrder": "sequence",
-      "dependsOn": ["build webView"],
     },
     {
       "label": "build webView",

@@ -4,6 +4,7 @@ import * as dependencyTree from 'dependency-tree';
 import { showMessage } from '../utils/showMessage';
 import { NO_FOLDER, NO_PACKAGE_JSON, NO_MAIN_FILE } from '../i18n/types';
 import { getText } from '../i18n/i18n';
+import { postMessage } from '../utils/postMessageToWebView';
 export interface DependencyTreeData {
 	name: string;
 	path: string;
@@ -85,23 +86,28 @@ const getDependencyTreeData = () => {
 	if (!folderPath) {
 		showMessage(getText(NO_FOLDER));
 		return undefined;
-	}
+  }
+  postMessage({ getDataStatus: 'find folder' });
 	const packageJsonPath = getPackageJsonPath(folderPath);
 	if (!packageJsonPath) {
 		showMessage(getText(NO_PACKAGE_JSON));
 		return undefined;
-	}
+  }
+  postMessage({ getDataStatus: 'get packageJsonPath' });
 	const mainFilePath = getMainFilePath(packageJsonPath, folderPath);
 	if (!mainFilePath) {
 		showMessage(getText(NO_MAIN_FILE));
 		return undefined;
-	}
+  }
+  postMessage({ getDataStatus: 'get mainFilePath' });
 	const dependencyTree = getDependencyTree(mainFilePath, folderPath);
 	if (!Object.keys(dependencyTree).length) {
 		// TODO move to i18n
 		showMessage('get dependency tree fail');
 		return undefined;
 	}
+	postMessage({ getDataStatus: 'get data' });
+	postMessage({ dependencyTreeData: dependencyTree });
 	return processTreeData(dependencyTree);
 };
 export { getDependencyTreeData };

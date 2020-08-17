@@ -2,7 +2,7 @@ const paths = require('./paths');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	mode: 'production',
+	mode: 'development',
 	entry: paths.mainjs,
 	output: {
 		path: paths.build,

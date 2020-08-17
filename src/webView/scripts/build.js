@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 
 const webpack = require('webpack');
 const config = require('../config/webpack.config');
@@ -15,24 +15,30 @@ const pathExists = function(p) {
 removeOldfiles();
 
 const compiler = webpack(config);
-
-compiler.run((err, stats) => {
-	let messages;
-	if (err) {
-		messages = {
-			errors: [ err.message ]
-		};
-		console.log(messages);
-	} else {
-		messages = stats.toJson({ all: false, warnings: true, errors: true });
-	}
-	if (messages.errors.length) {
-		if (messages.errors.length > 1) {
-			messages.errors.length = 1;
+compiler.watch(
+	{
+		aggregateTimeout: 300,
+		ignored: /node_modules/,
+		poll: 1000
+	},
+	(err, stats) => {
+		let messages;
+		if (err) {
+			messages = {
+				errors: [ err.message ]
+			};
+			console.log(messages);
+		} else {
+			messages = stats.toJson({ all: false, warnings: true, errors: true });
 		}
-		console.log(new Error(messages.errors.join('\n\n')));
+		if (messages.errors.length) {
+			if (messages.errors.length > 1) {
+				messages.errors.length = 1;
+			}
+			console.log(new Error(messages.errors.join('\n\n')));
+		}
 	}
-});
+);
 
 function removeOldfiles() {
 	if (!pathExists(paths.build)) return;
