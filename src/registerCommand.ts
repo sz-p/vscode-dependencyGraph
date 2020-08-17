@@ -29,7 +29,7 @@ export const registerCommand = function(context: vscode.ExtensionContext): void 
 	);
 	context.subscriptions.push(
 		vscode.commands.registerCommand('framegraph.postMessage', () => {
-			postMessage({ message: message++ });
+			postMessage({ key: 'postMessageTest', value: message++ });
 		})
 	);
 };
