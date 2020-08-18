@@ -5,4 +5,5 @@ const returnParams = function(Params) {
 	return Params;
 };
 
-export const action_changeGetDataStatus = createAction(type.TYPE_CHANGE_GET_DATA_STATUS, returnParams)(params);
+export const action_changeGetDataStatus = createAction(type.TYPE_CHANGE_GET_DATA_STATUS, returnParams);
+export const action_setDependenciesTreeData = createAction(type.TYPE_SET_DEPENDENCIES_TREE_DATA, returnParams);
