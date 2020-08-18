@@ -1,5 +1,5 @@
 import * as type from '../actions/actionType';
-import initialState from './initialState';
+import { initialState } from './initialState';
 const actionsCase = () => {
 	const change_getDataStatus = (state, action) => {
 		const data = action.payload.data;
@@ -26,7 +26,7 @@ export const reducer = function(state = initialState, action) {
 		return actionFunction(state, action);
 	} else {
 		console.log('unwatch action: ');
-		console.log(action);
+		console.log(action.type);
 		return state;
 	}
 };
