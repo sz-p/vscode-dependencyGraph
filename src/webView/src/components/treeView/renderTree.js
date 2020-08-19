@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { zoom, getTreeData, getDOMRect, getPath } from './treeHandle';
+import { zoom, getTreeData, getDOMRect, getPath } from './treeMethods';
 const CIRCLE_R = 8;
 const PADDING = {
 	LEFT: 100,
