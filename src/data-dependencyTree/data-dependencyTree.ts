@@ -95,21 +95,22 @@ const getDependencyTreeData = () => {
 		showMessage(getText(NO_PACKAGE_JSON));
 		return undefined;
 	}
-	postMessage({ key: MESSAGE_GETDATASTATUS, value: 2, description: 'get packageJson' });
+	postMessage({ key: MESSAGE_GETDATASTATUS, value: 3, description: 'get packageJson' });
 	const mainFilePath = getMainFilePath(packageJsonPath, folderPath);
 	if (!mainFilePath) {
 		showMessage(getText(NO_MAIN_FILE));
 		return undefined;
 	}
-	postMessage({ key: MESSAGE_GETDATASTATUS, value: 3, description: 'get mainFile' });
+	postMessage({ key: MESSAGE_GETDATASTATUS, value: 4, description: 'get mainFile' });
 	const dependencyTree = getDependencyTree(mainFilePath, folderPath);
 	if (!Object.keys(dependencyTree).length) {
 		// TODO move to i18n
 		showMessage('get dependency tree fail');
 		return undefined;
 	}
+	const processedTreeData = processTreeData(dependencyTree);
 	postMessage({ key: MESSAGE_GETDATASTATUS, value: 0, description: 'get dependencyTreeData' });
-	postMessage({ key: MESSAGE_DEPENDENCYTREEDATA, value: dependencyTree });
-	return processTreeData(dependencyTree);
+	postMessage({ key: MESSAGE_DEPENDENCYTREEDATA, value: processedTreeData });
+	return processedTreeData;
 };
 export { getDependencyTreeData };
