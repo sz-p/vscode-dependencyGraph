@@ -1,26 +1,26 @@
 import * as d3 from 'd3';
+import { zoom, getTreeData, getDOMRect, getPath } from './treeHandle';
+const CIRCLE_R = 8;
+const PADDING = {
+	LEFT: 100,
+	RIGHT: 100,
+	BOTTOM: 20,
+	TOP: 20
+};
+const NODE_TEXT_OFFSET_X = 13;
 
-function getTreeData(data, width, height) {
-	const treeData = d3.tree().size([ width, height ])(d3.hierarchy(data));
-	return treeData;
-}
-function getDOMRect(dom) {
-	return dom.getClientRects()[0];
-}
-function getPath(d) {
-	return 'M' + d.source.x + ',' + d.source.y + 'H' + d.target.x + 'V' + d.target.y;
-}
 function renderTreeView(dom, width, height, treeData) {
-	const svg = d3.select(dom).append('svg').attr('width', width).attr('height', height);
+	const svgBox = d3.select(dom).append('svg').attr('width', width).attr('height', height);
+	const svg = svgBox.append('g').attr('transform', 'translate(' + PADDING.LEFT + ',' + PADDING.TOP + ')');
+
+	svgBox.call(zoom(svg));
 
 	const links = svg
 		.selectAll('.link')
-		.data(treeData.links())
+		.data(treeData.descendants().slice(1))
 		.enter()
 		.append('path')
-		.attr('fill', 'none')
-		.attr('stroke', '#ccc')
-		.attr('stroke-width', 1)
+		.attr('class', 'link')
 		.attr('d', (d) => getPath(d));
 
 	const nodes = svg
@@ -28,23 +28,23 @@ function renderTreeView(dom, width, height, treeData) {
 		.data(treeData.descendants())
 		.enter()
 		.append('g')
-		.attr('transform', (d) => 'translate(' + d.x + ',' + d.y + ')')
-		.attr('class', 'node');
+		.attr('class', 'node')
+		.attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')');
 
-	nodes.append('circle').attr('fill', '#ccc').attr('r', (d) => {
-		return 10;
-	});
+	nodes.append('circle').attr('r', CIRCLE_R);
 
 	nodes
 		.append('text')
-		.text((d) => d.data.name)
-		.attr('font-size', 10)
-		.attr('text-anchor', 'middle')
-		.attr('dominant-baseline', 'middle')
-		.attr('fill', '#ffffff');
+		.style('text-anchor', (d) => {
+			return d.children ? 'end' : 'start';
+		})
+		.attr('x', (d) => {
+			return d.children ? -NODE_TEXT_OFFSET_X : NODE_TEXT_OFFSET_X;
+		})
+		.text((d) => d.data.name);
 }
 export const renderTree = function(dom, data) {
 	const { width, height } = getDOMRect(dom);
-	const treeData = getTreeData(data, width, height);
+	const treeData = getTreeData(data, width, height, PADDING);
 	renderTreeView(dom, width, height, treeData);
 };
