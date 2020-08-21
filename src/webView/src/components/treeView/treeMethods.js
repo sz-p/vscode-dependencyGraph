@@ -23,12 +23,12 @@ const getPath = function(d) {
 
 const clickNode = function(renderTreeView, svg, data, width, height, options) {
 	return function(d) {
-		if (d.data.children) {
-			d.data._children = d.data.children;
-			d.data.children = null;
+		if (d.children) {
+			d._children = d.children;
+			d.children = null;
 		} else {
-			d.data.children = d.data._children;
-			d.data._children = null;
+			d.children = d._children;
+			d._children = null;
 		}
 		renderTreeView(svg, data, width, height, options);
 	};
@@ -44,7 +44,7 @@ export const zoom = function(svg) {
 
 export const getTreeData = function(data, width, height, PADDING) {
 	const treeData = d3.tree().size([ height - PADDING.LEFT - PADDING.RIGHT, width - PADDING.BOTTOM - PADDING.TOP ])(
-		d3.hierarchy(data)
+		data
 	);
 	return treeData;
 };
@@ -66,7 +66,7 @@ const stashOldPosition = function(nodes) {
 export const renderTreeView = function(svg, data, width, height, options) {
 	const { NODE_TEXT_OFFSET_X, CIRCLE_R, PADDING, DURATION_TIME } = options;
 	const treeData = getTreeData(data, width, height, PADDING);
-  fixDepth(treeData)
+	fixDepth(treeData);
 	const linksData = svg.selectAll('.link').data(treeData.descendants().slice(1), (d) => {
 		d.data.name;
 	});
