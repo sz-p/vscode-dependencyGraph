@@ -1,39 +1,5 @@
 import * as d3 from 'd3';
 
-const getPath = function(d) {
-	return (
-		'M' +
-		d.y +
-		',' +
-		d.x +
-		'C' +
-		(d.y + d.parent.y) / 2 +
-		',' +
-		d.x +
-		' ' +
-		(d.y + d.parent.y) / 2 +
-		',' +
-		d.parent.x +
-		' ' +
-		d.parent.y +
-		',' +
-		d.parent.x
-	);
-};
-
-const clickNode = function(renderTreeView, svg, data, width, height, options) {
-	return function(d) {
-		if (d.children) {
-			d._children = d.children;
-			d.children = null;
-		} else {
-			d.children = d._children;
-			d._children = null;
-		}
-		renderTreeView(svg, data, width, height, options);
-	};
-};
-
 export const zoom = function(svg) {
 	const zoomed = function() {
 		const transform = d3.event.transform;
@@ -42,63 +8,141 @@ export const zoom = function(svg) {
 	return d3.zoom().on('zoom', zoomed);
 };
 
-export const getTreeData = function(data, width, height, PADDING) {
-	const treeData = d3.tree().size([ height - PADDING.LEFT - PADDING.RIGHT, width - PADDING.BOTTOM - PADDING.TOP ])(
-		data
-	);
-	return treeData;
-};
 export const getDOMRect = function(dom) {
 	return dom.getClientRects()[0];
 };
 
-const fixDepth = function(nodes) {
-	nodes.eachBefore((d) => {
-		d.y = d.depth * 180;
-	});
+export const treeLayout = function(width, height, PADDING) {
+	const treemap = d3.tree().size([ height - PADDING.LEFT - PADDING.RIGHT, width - PADDING.BOTTOM - PADDING.TOP ]);
+	return treemap;
 };
-const stashOldPosition = function(nodes) {
-	nodes.eachBefore((d) => {
+
+export const collapse = function(d) {
+	if (d.children) {
+		d._children = d.children;
+		d._children.forEach(collapse);
+		d.children = null;
+	}
+};
+
+const diagonal = function(s, d) {
+	const path = `M ${s.y} ${s.x}
+          C ${(s.y + d.y) / 2} ${s.x},
+            ${(s.y + d.y) / 2} ${d.x},
+            ${d.y} ${d.x}`;
+
+	return path;
+};
+
+const click = function(svg, treemap, root, options) {
+	return function(d) {
+		if (d.children) {
+			d._children = d.children;
+			d.children = null;
+		} else {
+			d.children = d._children;
+			d._children = null;
+		}
+		updateTree(svg, d, treemap, root, options);
+	};
+};
+
+const stashPositions = function(nodes) {
+	nodes.forEach((d) => {
 		d.x0 = d.x;
 		d.y0 = d.y;
 	});
 };
-export const renderTreeView = function(svg, data, width, height, options) {
-	const { NODE_TEXT_OFFSET_X, CIRCLE_R, PADDING, DURATION_TIME } = options;
-	const treeData = getTreeData(data, width, height, PADDING);
-	fixDepth(treeData);
-	const linksData = svg.selectAll('.link').data(treeData.descendants().slice(1), (d) => {
-		d.data.name;
+
+const getNodesLinks = function(treeData) {
+	const treeNodes = treeData.descendants();
+	const treeLinks = treeData.descendants().slice(1);
+	return {
+		treeNodes,
+		treeLinks
+	};
+};
+
+const fixDepth = function(treeNodes, DEPTH_LENGTH) {
+	treeNodes.forEach((d) => {
+		d.y = d.depth * DEPTH_LENGTH;
 	});
+};
 
-	linksData.exit().remove();
+const getNodesData = function(svg, treeNodes) {
+	return svg.selectAll('g.node').data(treeNodes, (d) => d.data.name);
+};
 
-	const linksDom = linksData
+export const updateTree = function(svg, source, treemap, root, options) {
+	const { DEPTH_LENGTH, CIRCLE_R, DURATION_TIME, NODE_TEXT_OFFSET_X } = options;
+	const treeData = treemap(root);
+	const { treeNodes, treeLinks } = getNodesLinks(treeData);
+	fixDepth(treeNodes, DEPTH_LENGTH);
+	const nodesData = getNodesData(svg, treeNodes);
+
+	const nodeDom = nodesData
 		.enter()
-		.append('path')
-		.attr('class', 'link')
+		.append('g')
+		.attr('class', 'node')
+		.attr('transform', () => 'translate(' + source.y0 + ',' + source.x0 + ')')
+		.on('click', click(svg, treemap, root, options));
+
+	nodeDom
+		.append('circle')
+		.attr('class', 'node')
+		.attr('r', CIRCLE_R)
+		.style('cursor', (d) => (d.children || d._children ? 'pointer' : 'auto'));
+
+	nodeDom
+		.append('text')
+		.style('text-anchor', (d) => (d.children || d._children ? 'end' : 'start'))
+		.attr('x', (d) => (d.children || d._children ? -NODE_TEXT_OFFSET_X : NODE_TEXT_OFFSET_X))
+		.text((d) => d.data.name)
+		.style('fill-opacity', 1e-6);
+
+	// UPDATE
+	const nodeEnter = nodeDom.merge(nodesData);
+
+	// Transition to the proper position for the node
+	nodeEnter.transition().duration(DURATION_TIME).attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')');
+
+	nodeEnter.select('circle.node').attr('r', CIRCLE_R);
+	nodeEnter.select('text').style('fill-opacity', 1);
+
+	// Remove any exiting nodes
+	const nodeExit = nodesData
+		.exit()
 		.transition()
 		.duration(DURATION_TIME)
-		.attr('d', (d) => getPath(d));
+		.attr('transform', () => 'translate(' + source.y + ',' + source.x + ')')
+		.remove();
 
-	const nodesData = svg.selectAll('.node').data(treeData.descendants(), (d) => {
-		d.data.name;
+	// On exit reduce the node circles size to 0
+	nodeExit.select('circle').attr('r', 0);
+
+	// On exit reduce the opacity of text labels
+	nodeExit.select('text').style('fill-opacity', 0);
+
+	const linkData = svg.selectAll('path.link').data(treeLinks, (d) => d.data.name);
+
+	const linkDom = linkData.enter().insert('path', 'g').attr('class', 'link').attr('d', (d) => {
+		const o = { x: source.x0, y: source.y0 };
+		return diagonal(o, o);
 	});
-	nodesData.exit().remove();
 
-	const nodesDom = nodesData.enter().append('g').attr('class', 'node');
-	nodesDom.transition().duration(DURATION_TIME).attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')');
-	nodesDom
-		.append('circle')
-		.attr('r', CIRCLE_R)
-		.on('click', clickNode(renderTreeView, svg, data, width, height, options))
-		.style('cursor', (d) => (d.children ? 'pointer' : 'auto'));
+	const linkEnter = linkDom.merge(linkData);
 
-	nodesDom
-		.append('text')
-		.style('text-anchor', (d) => {
-			return d.children ? 'end' : 'start';
+	linkEnter.transition().duration(DURATION_TIME).attr('d', (d) => diagonal(d, d.parent));
+
+	const linkExit = linkData
+		.exit()
+		.transition()
+		.duration(DURATION_TIME)
+		.attr('d', function(d) {
+			const o = { x: source.x, y: source.y };
+			return diagonal(o, o);
 		})
-		.attr('x', (d) => (d.children ? -NODE_TEXT_OFFSET_X : NODE_TEXT_OFFSET_X))
-		.text((d) => d.data.name);
+		.remove();
+
+	stashPositions(treeNodes);
 };
