@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-
+import { throttle } from '../../utils/utils';
 export const zoom = function(svg) {
 	const zoomed = function() {
 		const transform = d3.event.transform;
@@ -74,7 +74,7 @@ const getNodesData = function(svg, treeNodes) {
 };
 
 export const updateTree = function(svg, source, treemap, root, options) {
-	const { DEPTH_LENGTH, CIRCLE_R, DURATION_TIME, NODE_TEXT_OFFSET_X } = options;
+	const { DEPTH_LENGTH, CIRCLE_R, DURATION_TIME, NODE_TEXT_OFFSET_X, CLICK_DALEY } = options;
 	const treeData = treemap(root);
 	const { treeNodes, treeLinks } = getNodesLinks(treeData);
 	fixDepth(treeNodes, DEPTH_LENGTH);
@@ -85,29 +85,30 @@ export const updateTree = function(svg, source, treemap, root, options) {
 		.append('g')
 		.attr('class', 'node')
 		.attr('transform', () => 'translate(' + source.y0 + ',' + source.x0 + ')')
-		.on('click', click(svg, treemap, root, options));
-
-	nodeDom
-		.append('circle')
-		.attr('class', 'node')
-		.attr('r', CIRCLE_R)
+		.on('click', throttle(click(svg, treemap, root, options), CLICK_DALEY))
 		.style('cursor', (d) => (d.children || d._children ? 'pointer' : 'auto'));
+
+	nodeDom.append('circle').attr('class', 'node').attr('r', 0);
 
 	nodeDom
 		.append('text')
 		.style('text-anchor', (d) => (d.children || d._children ? 'end' : 'start'))
 		.attr('x', (d) => (d.children || d._children ? -NODE_TEXT_OFFSET_X : NODE_TEXT_OFFSET_X))
 		.text((d) => d.data.name)
-		.style('fill-opacity', 1e-6);
+		.style('fill-opacity', 0);
 
 	// UPDATE
 	const nodeEnter = nodeDom.merge(nodesData);
 
 	// Transition to the proper position for the node
-	nodeEnter.transition().duration(DURATION_TIME).attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')');
+	nodeEnter
+		.transition()
+		.duration(DURATION_TIME)
+		.attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
+		.style('fill-opacity', 1);
 
-	nodeEnter.select('circle.node').attr('r', CIRCLE_R);
-	nodeEnter.select('text').style('fill-opacity', 1);
+	nodeEnter.select('circle.node').transition().duration(DURATION_TIME).attr('r', CIRCLE_R);
+	nodeEnter.select('text').transition().duration(DURATION_TIME).style('fill-opacity', 1);
 
 	// Remove any exiting nodes
 	const nodeExit = nodesData

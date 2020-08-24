@@ -11,7 +11,7 @@ const PADDING = {
 const DEPTH_LENGTH = 200;
 const NODE_TEXT_OFFSET_X = 13;
 const DURATION_TIME = 750;
-
+const CLICK_DALEY = 500;
 export const renderTree = function(dom, data) {
 	const { width, height } = getDOMRect(dom);
 	const options = {
@@ -21,7 +21,8 @@ export const renderTree = function(dom, data) {
 		PADDING,
 		DEPTH_LENGTH,
 		NODE_TEXT_OFFSET_X,
-		DURATION_TIME
+		DURATION_TIME,
+		CLICK_DALEY
 	};
 	const svgBox = d3.select(dom).append('svg').attr('width', width).attr('height', height);
 	const svg = svgBox.append('g').attr('transform', 'translate(' + PADDING.LEFT + ',' + PADDING.TOP + ')');
