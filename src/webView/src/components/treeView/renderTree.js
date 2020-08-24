@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-import { getDOMRect, zoom, updateTree, treeLayout, collapse } from './treeMethods';
+import { getDOMRect, initZoom, updateTree, treeLayout, collapse } from './treeMethods';
 const CIRCLE_R = 8;
 const PADDING = {
 	LEFT: 100,
@@ -27,7 +27,7 @@ export const renderTree = function(dom, data) {
 	const svgBox = d3.select(dom).append('svg').attr('width', width).attr('height', height);
 	const svg = svgBox.append('g').attr('transform', 'translate(' + PADDING.LEFT + ',' + PADDING.TOP + ')');
 
-	svgBox.call(zoom(svg));
+	initZoom(svg, svgBox, PADDING);
 
 	const treemap = treeLayout(width, height, PADDING);
 
