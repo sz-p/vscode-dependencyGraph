@@ -1,4 +1,4 @@
-import { DependencyTreeData } from '../data-dependencyTree/data-dependencyTree';
+import { DependencyTreeData } from '../data-dependencyTree/dependencyTreeMethods';
 import * as vscode from 'vscode';
 
 export function renderTreeItem(data: DependencyTreeData): vscode.TreeItem {

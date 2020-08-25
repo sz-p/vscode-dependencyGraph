@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
-import { DependencyTreeData } from '../data-dependencyTree/data-dependencyTree';
+import { DependencyTreeData } from '../data-dependencyTree/dependencyTreeMethods';
 import { renderTreeItem } from './renderTreeItem';
 
 export class DependenciesTreeProvider implements vscode.TreeDataProvider<DependencyTreeData> {
