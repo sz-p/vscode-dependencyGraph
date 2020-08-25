@@ -36,7 +36,7 @@ const getDependencyTreeData = () => {
 		showMessage('get dependency tree fail');
 		return undefined;
 	}
-	const processedTreeData = processTreeData(dependencyTree);
+	const processedTreeData = processTreeData(dependencyTree, folderPath);
 	postMessage({ key: MESSAGE_GETDATASTATUS, value: 0, description: 'get dependencyTreeData' });
 	postMessage({ key: MESSAGE_DEPENDENCYTREEDATA, value: processedTreeData });
 	return processedTreeData;
