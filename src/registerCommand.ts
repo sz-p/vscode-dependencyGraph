@@ -1,4 +1,3 @@
-import { helloWorld } from './helloworld';
 import { postMessage } from './utils/postMessageToWebView';
 import * as vscode from 'vscode';
 import { getDependencyTreeData } from './data-dependencyTree/data-dependencyTree';
@@ -8,7 +7,6 @@ import { webViewPanel } from './initExtension';
 
 export const registerCommand = function(context: vscode.ExtensionContext): void {
 	let message = 0;
-	context.subscriptions.push(helloWorld);
 	context.subscriptions.push(
 		vscode.commands.registerCommand('framegraph.readfile', () => {
 			const dependencyTreeData = getDependencyTreeData();
