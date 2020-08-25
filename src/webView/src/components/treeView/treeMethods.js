@@ -1,11 +1,14 @@
 import * as d3 from 'd3';
 import { throttle } from '../../utils/utils';
-export const zoom = function(svg) {
+export const initZoom = function(svg, svgBox, PADDING) {
 	const zoomed = function() {
 		const transform = d3.event.transform;
 		svg.attr('transform', transform);
 	};
-	return d3.zoom().on('zoom', zoomed);
+	const zoom = d3.zoom();
+	zoom.on('zoom', zoomed);
+	svgBox.call(zoom);
+	svgBox.call(zoom.translateBy, PADDING.LEFT, PADDING.TOP);
 };
 
 export const getDOMRect = function(dom) {
