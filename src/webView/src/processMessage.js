@@ -4,7 +4,8 @@ import { store } from './app';
 const messageCase = () => {
 	return new Map([
 		[ MESSAGES.MESSAGE_GETDATASTATUS, action.action_changeGetDataStatus ],
-		[ MESSAGES.MESSAGE_DEPENDENCYTREEDATA, action.action_setDependenciesTreeData ]
+		[ MESSAGES.MESSAGE_DEPENDENCYTREEDATA, action.action_setDependenciesTreeData ],
+		[ MESSAGES.MESSAGE_FOCUS_ON_NODE, action.action_setFocusOnNode ]
 	]);
 };
 
