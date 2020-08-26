@@ -27,4 +27,7 @@ export const command_postMessage = vscode.commands.registerCommand('framegraph.p
 	postMessage({ key: 'postMessageTest', value: message++ });
 });
 
+export const command_focusOnNode = vscode.commands.registerCommand('framegraph.focusOnNode', (fileName, fileData) => {
+	postMessage({ key: 'focusOnNode', value: { fileName, fileData } });
+});
 export const allCommands = [ command_readFile, command_openView, command_postMessage ];
