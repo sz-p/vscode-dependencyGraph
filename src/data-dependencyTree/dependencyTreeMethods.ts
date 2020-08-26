@@ -4,8 +4,10 @@ import * as dependencyTree from 'dependency-tree';
 
 export interface DependencyTreeData {
 	name: string;
-	path: string;
 	type: string;
+	absolutePath: string;
+	relativePath: string;
+	ancestors: string;
 	children: Array<DependencyTreeData>;
 }
 
@@ -54,9 +56,18 @@ export const getDependencyTree = function(filename: string, directory: string): 
 	return dt;
 };
 
-export const processTreeData = function(dependencyTree: dependencyTree.DependencyObj): DependencyTreeData {
+export const processTreeData = function(
+	dependencyTree: dependencyTree.DependencyObj,
+	folderPath: string
+): DependencyTreeData {
 	let dependencyTreeData: DependencyTreeData = {} as DependencyTreeData;
-	const nodes = [ { dependencyTree, dependencyTreeData, path: Object.keys(dependencyTree)[0] } ];
+	const nodes = [
+		{
+			dependencyTree,
+			dependencyTreeData,
+			path: Object.keys(dependencyTree)[0]
+		}
+	];
 	while (nodes.length) {
 		const node = nodes.pop();
 		if (node) {
@@ -64,7 +75,8 @@ export const processTreeData = function(dependencyTree: dependencyTree.Dependenc
 			const fileName = file;
 			const fileType = file.split('.').pop();
 			node.dependencyTreeData.name = fileName;
-			node.dependencyTreeData.path = node.path;
+			node.dependencyTreeData.absolutePath = node.path;
+			node.dependencyTreeData.relativePath = node.path.replace(folderPath, '');
 			node.dependencyTreeData.type = fileType as string;
 			node.dependencyTreeData.children = [] as Array<DependencyTreeData>;
 			for (let keys in node.dependencyTree[node.path]) {
