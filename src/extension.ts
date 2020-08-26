@@ -1,11 +1,9 @@
 import * as vscode from 'vscode';
-import * as paths from './paths';
 import { webViewPanel } from './initExtension';
 import { getDependencyTreeData } from './data-dependencyTree/data-dependencyTree';
 import { createView } from './web-dependencyTree/openWebView';
 import { DependenciesTreeProvider } from './view-dependencyTree/DependenciesTreeProvider';
-import { registerCommand} from './registerCommand';
-
+import { allCommands } from './commands';
 export function activate(context: vscode.ExtensionContext) {
 	createView(webViewPanel);
 
@@ -18,7 +16,10 @@ export function activate(context: vscode.ExtensionContext) {
 		'framegraphExplorer-DependencyTree',
 		new DependenciesTreeProvider(dependencyTreeData)
   );
-  registerCommand(context);
+
+	allCommands.forEach((command) => {
+		context.subscriptions.push(command);
+	});
 }
 
 // this method is called when your extension is deactivated
