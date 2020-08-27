@@ -9,6 +9,7 @@ export const initZoom = function(svg, svgBox, PADDING) {
 	zoom.on('zoom', zoomed);
 	svgBox.call(zoom);
 	svgBox.call(zoom.translateBy, PADDING.LEFT, PADDING.TOP);
+	return zoom;
 };
 
 export const getDOMRect = function(dom) {

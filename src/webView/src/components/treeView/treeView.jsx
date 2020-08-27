@@ -10,7 +10,7 @@ const treeView = function (props) {
   const { dependencyTreeData, focusOn } = props;
   const chartArea = useRef();
   useEffect(() => { if (dependencyTreeData) { tree.init(chartArea.current, dependencyTreeData); tree.update() } }, [dependencyTreeData])
-  useEffect(() => { if (focusOn) tree.openToNode(focusOn.fileData) }, [focusOn])
+  useEffect(() => { if (focusOn) tree.focusOnNode(focusOn.fileData) }, [focusOn])
   return (<div className="treeView" ref={chartArea}></div>)
 }
 const mapStateToProps = (state) => {
