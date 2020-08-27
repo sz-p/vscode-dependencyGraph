@@ -4,7 +4,7 @@ import { DependenciesTreeProvider } from './view-dependencyTree/DependenciesTree
 import { createView } from './web-dependencyTree/openWebView';
 import { webViewPanel } from './initExtension';
 import { postMessage } from './utils/postMessageToWebView';
-
+import { MESSAGE_FOCUS_ON_NODE } from './utils/messagesKeys';
 let message = 0;
 
 export const command_readFile = vscode.commands.registerCommand('framegraph.readfile', () => {
@@ -28,6 +28,6 @@ export const command_postMessage = vscode.commands.registerCommand('framegraph.p
 });
 
 export const command_focusOnNode = vscode.commands.registerCommand('framegraph.focusOnNode', (fileName, fileData) => {
-	postMessage({ key: 'focusOnNode', value: { fileName, fileData } });
+	postMessage({ key: MESSAGE_FOCUS_ON_NODE, value: { fileName, fileData } });
 });
 export const allCommands = [ command_readFile, command_openView, command_postMessage ];

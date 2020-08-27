@@ -15,9 +15,17 @@ const actionsCase = () => {
 		});
 		return newState;
 	};
+	const setFocusOnNode = (state, action) => {
+		const data = action.payload.data;
+		const newState = Object.assign({}, state, {
+			focusOn: data.value
+		});
+		return newState;
+	};
 	return new Map([
 		[ type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus ],
-		[ type.TYPE_SET_DEPENDENCIES_TREE_DATA, setDependencyTreeData ]
+		[ type.TYPE_SET_DEPENDENCIES_TREE_DATA, setDependencyTreeData ],
+		[ type.TYPE_SET_FOCUS_ON_NODE, setFocusOnNode ]
 	]);
 };
 export const reducer = function(state = initialState, action) {
