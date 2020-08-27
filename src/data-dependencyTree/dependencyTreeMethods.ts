@@ -7,7 +7,7 @@ export interface DependencyTreeData {
 	type: string;
 	absolutePath: string;
 	relativePath: string;
-	ancestors: string;
+	ancestors: string[];
 	children: Array<DependencyTreeData>;
 }
 
@@ -65,6 +65,7 @@ export const processTreeData = function(
 		{
 			dependencyTree,
 			dependencyTreeData,
+			ancestors: [] as string[],
 			path: Object.keys(dependencyTree)[0]
 		}
 	];
@@ -76,15 +77,20 @@ export const processTreeData = function(
 			const fileType = file.split('.').pop();
 			node.dependencyTreeData.name = fileName;
 			node.dependencyTreeData.absolutePath = node.path;
+			node.dependencyTreeData.ancestors = node.ancestors;
 			node.dependencyTreeData.relativePath = node.path.replace(folderPath, '');
 			node.dependencyTreeData.type = fileType as string;
 			node.dependencyTreeData.children = [] as Array<DependencyTreeData>;
 			for (let keys in node.dependencyTree[node.path]) {
+				let ancestors = [] as string[];
+				ancestors = ancestors.concat(...node.ancestors);
+				ancestors.push(node.path);
 				let subNode = {} as DependencyTreeData;
 				node.dependencyTreeData.children.push(subNode);
 				nodes.push({
 					dependencyTree: node.dependencyTree[node.path],
 					path: keys,
+					ancestors: ancestors,
 					dependencyTreeData: subNode
 				});
 			}
