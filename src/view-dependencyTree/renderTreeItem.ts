@@ -7,6 +7,11 @@ export function renderTreeItem(data: DependencyTreeData): vscode.TreeItem {
 		? vscode.TreeItemCollapsibleState.Collapsed
 		: vscode.TreeItemCollapsibleState.None;
 	const treeItem = new vscode.TreeItem(data.name, collapsibleState);
-	treeItem.tooltip = data.path;
+	treeItem.tooltip = data.relativePath;
+	treeItem.command = {
+		command: 'framegraph.focusOnNode',
+		title: 'focusOnNode',
+		arguments: [ data.name, data ]
+	};
 	return treeItem;
 }
