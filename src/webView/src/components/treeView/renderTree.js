@@ -1,41 +1,95 @@
 import * as d3 from 'd3';
 
 import { getDOMRect, initZoom, updateTree, treeLayout, collapse } from './treeMethods';
-const CIRCLE_R = 8;
-const PADDING = {
-	LEFT: 100,
-	RIGHT: 100,
-	BOTTOM: 20,
-	TOP: 20
-};
-const DEPTH_LENGTH = 200;
-const NODE_TEXT_OFFSET_X = 13;
-const DURATION_TIME = 750;
-const CLICK_DALEY = 500;
-export const renderTree = function(dom, data) {
-	const { width, height } = getDOMRect(dom);
-	const options = {
-		width,
-		height,
-		CIRCLE_R,
-		PADDING,
-		DEPTH_LENGTH,
-		NODE_TEXT_OFFSET_X,
-		DURATION_TIME,
-		CLICK_DALEY
-	};
-	const svgBox = d3.select(dom).append('svg').attr('width', width).attr('height', height);
-	const svg = svgBox.append('g').attr('transform', 'translate(' + PADDING.LEFT + ',' + PADDING.TOP + ')');
 
-	initZoom(svg, svgBox, PADDING);
+export class D3Tree {
+	constructor() {
+		this.CIRCLE_R = 8;
+		this.PADDING = {
+			LEFT: 100,
+			RIGHT: 100,
+			BOTTOM: 20,
+			TOP: 20
+		};
+		this.DEPTH_LENGTH = 200;
+		this.NODE_TEXT_OFFSET_X = 13;
+		this.DURATION_TIME = 750;
+		this.CLICK_DALEY = 500;
+		this.options = {
+			CIRCLE_R: this.CIRCLE_R,
+			PADDING: this.PADDING,
+			DEPTH_LENGTH: this.DEPTH_LENGTH,
+			NODE_TEXT_OFFSET_X: this.NODE_TEXT_OFFSET_X,
+			DURATION_TIME: this.DURATION_TIME,
+			CLICK_DALEY: this.CLICK_DALEY
+		};
+	}
+	init(dom, data) {
+		const { width, height } = getDOMRect(dom);
+		this.dom = dom;
+		this.data = data;
+		this.options.width = this.width = width;
+		this.options.height = this.height = height;
 
-	const treemap = treeLayout(width, height, PADDING);
+		this.svgBox = d3.select(this.dom).append('svg').attr('width', this.width).attr('height', this.height);
+		this.svg = this.svgBox
+			.append('g')
+			.attr('transform', 'translate(' + this.PADDING.LEFT + ',' + this.PADDING.TOP + ')');
 
-	const root = d3.hierarchy(data, (d) => d.children);
-	root.x0 = height / 2;
-	root.y0 = 0;
+		initZoom(this.svg, this.svgBox, this.PADDING);
 
-	root.children.forEach(collapse);
+		this.treemap = treeLayout(this.width, this.height, this.PADDING);
 
-	updateTree(svg, root, treemap, root, options);
-};
+		this.root = d3.hierarchy(this.data, (d) => d.children);
+		this.root.x0 = this.height / 2;
+		this.root.y0 = 0;
+		this.root.children.forEach(collapse);
+		this.update();
+	}
+	update(svg, source, treemap, root, options) {
+		updateTree(
+			svg || this.svg,
+			source || this.root,
+			treemap || this.treemap,
+			root || this.root,
+			options || this.options
+		);
+	}
+	openToNode(data) {
+		if (!data.ancestors) console.log('error');
+		let temp = this.root;
+		let updateSource = null;
+		console.log(this.root);
+		data.ancestors.push(data.absolutePath);
+		// find child by node's ancestors
+		for (let i = 0; i < data.ancestors.length; i++) {
+			// children is not hash table so here is a loop
+			if (temp && !temp.children) {
+				if (!updateSource) {
+					updateSource = temp;
+				}
+				let tempChildren = temp.children;
+				temp.children = temp._children;
+				temp._children = tempChildren;
+			}
+			for (let j = 0; j < temp.children.length; j++) {
+				if (temp.children[j].data.absolutePath === data.ancestors[i]) {
+					temp = temp.children[j];
+					if (temp && !temp.children) {
+						if (!updateSource) {
+							updateSource = temp;
+						}
+						let tempChildren = temp.children;
+						temp.children = temp._children;
+						temp._children = tempChildren;
+					}
+					break;
+				}
+			}
+		}
+		this.update(null, updateSource);
+	}
+	focusOnNode() {
+
+  }
+}
