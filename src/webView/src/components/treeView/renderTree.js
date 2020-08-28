@@ -36,7 +36,7 @@ export class D3Tree {
 			.append('g')
 			.attr('transform', 'translate(' + this.PADDING.LEFT + ',' + this.PADDING.TOP + ')');
 
-		initZoom(this.svg, this.svgBox, this.PADDING);
+		this.zoom = initZoom(this.svg, this.svgBox, this.PADDING);
 
 		this.treemap = treeLayout(this.width, this.height, this.PADDING);
 
@@ -59,7 +59,7 @@ export class D3Tree {
 		if (!data.ancestors) console.log('error');
 		let temp = this.root;
 		let updateSource = null;
-		console.log(this.root);
+		let updateTarget = null;
 		data.ancestors.push(data.absolutePath);
 		// find child by node's ancestors
 		for (let i = 0; i < data.ancestors.length; i++) {
@@ -68,6 +68,7 @@ export class D3Tree {
 				if (!updateSource) {
 					updateSource = temp;
 				}
+				updateTarget = temp;
 				let tempChildren = temp.children;
 				temp.children = temp._children;
 				temp._children = tempChildren;
@@ -75,6 +76,7 @@ export class D3Tree {
 			for (let j = 0; j < temp.children.length; j++) {
 				if (temp.children[j].data.absolutePath === data.ancestors[i]) {
 					temp = temp.children[j];
+					updateTarget = temp;
 					if (temp && !temp.children) {
 						if (!updateSource) {
 							updateSource = temp;
@@ -87,9 +89,27 @@ export class D3Tree {
 				}
 			}
 		}
-		this.update(null, updateSource);
+		if (updateSource) {
+			this.update(null, updateSource);
+		}
+		return updateTarget;
 	}
-	focusOnNode() {
+	focusOnNode(data) {
+		const updateTarget = this.openToNode(data);
+		let transformToNode = undefined;
+		let transformX = undefined;
+		let transformY = undefined;
+		if (updateTarget) {
+			console.log(updateTarget.x);
+			console.log(updateTarget.y);
+			transformX = -updateTarget.y - this.PADDING.LEFT + this.width / 2;
+			transformY = -updateTarget.x - this.PADDING.TOP + this.height / 2;
+		} else {
+			transformX = this.PADDING.LEFT;
+			transformY = this.PADDING.TOP;
+		}
+		transformToNode = d3.zoomIdentity.translate(transformX, transformY).scale(1);
 
-  }
+		this.svg.transition().duration(1000).call(this.zoom.transform, transformToNode);
+	}
 }
