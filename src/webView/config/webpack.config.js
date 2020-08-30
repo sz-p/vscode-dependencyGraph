@@ -38,7 +38,7 @@ module.exports = {
 		]
 	},
 	resolve: {
-		extensions: [ '.tsx', '.ts', '.js', '.json', '.jsx', '.css' ]
+		extensions: [ '.tsx', '.ts', '.js', '.json', '.jsx', '.css', '.svg' ]
 	},
 	plugins: [
 		new HtmlWebpackPlugin({

@@ -2,7 +2,7 @@
 	"name": "framegraph",
 	"displayName": "framegraph",
 	"description": "A plugin for vscode to view your project's frame graph",
-	"icon": "resources/framegraph.png",
+	"icon": "assets/framegraph.png",
 	"version": "0.1.0",
 	"license": "MIT",
 	"engines": {
@@ -24,7 +24,7 @@
 				{
 					"id": "framegraph",
 					"title": "Frame Graph",
-					"icon": "resources/framegraph.svg"
+					"icon": "assets/framegraph.svg"
 				}
 			]
 		},

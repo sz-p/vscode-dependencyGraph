@@ -1,13 +1,21 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as dependencyTree from 'dependency-tree';
+import * as path from 'path';
+import { assetsPath } from '../paths';
+import { getFileIconPath } from '../utils/getFileIconPath';
+import { Uri } from 'vscode';
+import { webViewPanel } from '../initExtension';
 
 export interface DependencyTreeData {
 	name: string;
 	type: string;
+	fullType: string;
 	absolutePath: string;
 	relativePath: string;
 	ancestors: string[];
+	iconPath: string;
+	webViewIconPath: string;
 	children: Array<DependencyTreeData>;
 }
 
@@ -75,11 +83,19 @@ export const processTreeData = function(
 			const file = node.path.split('\\').pop() as string;
 			const fileName = file;
 			const fileType = file.split('.').pop();
+			const { iconPath, fullType } = getFileIconPath(fileName);
+
 			node.dependencyTreeData.name = fileName;
 			node.dependencyTreeData.absolutePath = node.path;
 			node.dependencyTreeData.ancestors = node.ancestors;
 			node.dependencyTreeData.relativePath = node.path.replace(folderPath, '');
 			node.dependencyTreeData.type = fileType as string;
+			node.dependencyTreeData.iconPath = iconPath;
+			const uri = webViewPanel.webview
+				.asWebviewUri(vscode.Uri.file(path.join(assetsPath, 'icons', `${fullType}.svg`)))
+				.toString();
+			node.dependencyTreeData.webViewIconPath = uri;
+			node.dependencyTreeData.fullType = fullType;
 			node.dependencyTreeData.children = [] as Array<DependencyTreeData>;
 			for (let keys in node.dependencyTree[node.path]) {
 				let ancestors = [] as string[];

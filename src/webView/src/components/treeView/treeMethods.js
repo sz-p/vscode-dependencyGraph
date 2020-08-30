@@ -78,7 +78,7 @@ const getNodesData = function(svg, treeNodes) {
 };
 
 export const updateTree = function(svg, source, treemap, root, options) {
-	const { DEPTH_LENGTH, CIRCLE_R, DURATION_TIME, NODE_TEXT_OFFSET_X, CLICK_DALEY } = options;
+	const { DEPTH_LENGTH, DURATION_TIME, NODE_TEXT_OFFSET_X, CLICK_DALEY, ICON_SIZE } = options;
 	const treeData = treemap(root);
 	const { treeNodes, treeLinks } = getNodesLinks(treeData);
 	fixDepth(treeNodes, DEPTH_LENGTH);
@@ -92,7 +92,16 @@ export const updateTree = function(svg, source, treemap, root, options) {
 		.on('click', throttle(click(svg, treemap, root, options), CLICK_DALEY))
 		.style('cursor', (d) => (d.children || d._children ? 'pointer' : 'auto'));
 
-	nodeDom.append('circle').attr('class', 'node').attr('r', 0);
+	nodeDom
+		.append('svg:image')
+		.attr('class', 'node')
+		.attr('xlink:href', (d) => {
+			return d.data.webViewIconPath;
+		})
+		.attr('x', 0)
+		.attr('y', 0)
+		.attr('width', 0)
+		.attr('height', 0);
 
 	nodeDom
 		.append('text')
@@ -111,7 +120,14 @@ export const updateTree = function(svg, source, treemap, root, options) {
 		.attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
 		.style('fill-opacity', 1);
 
-	nodeEnter.select('circle.node').transition().duration(DURATION_TIME).attr('r', CIRCLE_R);
+	nodeEnter
+		.select('image.node')
+		.transition()
+		.duration(DURATION_TIME)
+		.attr('x', () => -ICON_SIZE / 2)
+		.attr('y', () => -ICON_SIZE / 2)
+		.attr('width', ICON_SIZE)
+		.attr('height', ICON_SIZE);
 	nodeEnter.select('text').transition().duration(DURATION_TIME).style('fill-opacity', 1);
 
 	// Remove any exiting nodes
@@ -123,7 +139,7 @@ export const updateTree = function(svg, source, treemap, root, options) {
 		.remove();
 
 	// On exit reduce the node circles size to 0
-	nodeExit.select('circle').attr('r', 0);
+	nodeExit.select('image').attr('x', 0).attr('y', 0).attr('width', 0).attr('height', 0);
 
 	// On exit reduce the opacity of text labels
 	nodeExit.select('text').style('fill-opacity', 0);
