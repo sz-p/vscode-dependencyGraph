@@ -4,7 +4,6 @@ import { getDOMRect, initZoom, updateTree, treeLayout, collapse } from './treeMe
 
 export class D3Tree {
 	constructor() {
-		this.CIRCLE_R = 8;
 		this.PADDING = {
 			LEFT: 100,
 			RIGHT: 100,
@@ -15,13 +14,14 @@ export class D3Tree {
 		this.NODE_TEXT_OFFSET_X = 13;
 		this.DURATION_TIME = 750;
 		this.CLICK_DALEY = 500;
+		this.ICON_SIZE = 22;
 		this.options = {
-			CIRCLE_R: this.CIRCLE_R,
 			PADDING: this.PADDING,
 			DEPTH_LENGTH: this.DEPTH_LENGTH,
 			NODE_TEXT_OFFSET_X: this.NODE_TEXT_OFFSET_X,
 			DURATION_TIME: this.DURATION_TIME,
-			CLICK_DALEY: this.CLICK_DALEY
+			CLICK_DALEY: this.CLICK_DALEY,
+			ICON_SIZE: this.ICON_SIZE
 		};
 	}
 	init(dom, data) {
@@ -100,8 +100,6 @@ export class D3Tree {
 		let transformX = undefined;
 		let transformY = undefined;
 		if (updateTarget) {
-			console.log(updateTarget.x);
-			console.log(updateTarget.y);
 			transformX = -updateTarget.y - this.PADDING.LEFT + this.width / 2;
 			transformY = -updateTarget.x - this.PADDING.TOP + this.height / 2;
 		} else {
