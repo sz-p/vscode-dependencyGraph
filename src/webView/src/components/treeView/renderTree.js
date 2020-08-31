@@ -110,6 +110,6 @@ export class D3Tree {
 		}
 		transformToNode = d3.zoomIdentity.translate(transformX, transformY).scale(1);
 
-		this.svg.transition().duration(1000).call(this.zoom.transform, transformToNode);
+		this.svgBox.transition().duration(750).call(this.zoom.transform, transformToNode);
 	}
 }
