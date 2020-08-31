@@ -19,6 +19,10 @@ export class D3Tree {
 			width: 100,
 			height: 200
 		};
+		this.NODE_HIGHLIGHT_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--vscode-focusBorder');
+		this.DEFAULT_TEXT_COLOR = getComputedStyle(document.documentElement).getPropertyValue(
+			'--vscode-editor-foreground'
+		);
 		this.options = {
 			PADDING: this.PADDING,
 			DEPTH_LENGTH: this.DEPTH_LENGTH,
@@ -98,6 +102,27 @@ export class D3Tree {
 		}
 		return updateTarget;
 	}
+	hightLightFocusNode(nodeData) {
+		d3
+			.selectAll('text')
+			.select(function(d, i) {
+				if (!nodeData) {
+					if (i == 0) return this;
+				} else {
+					if (d.data.absolutePath === nodeData.data.absolutePath) {
+						return this;
+					}
+				}
+			})
+			.style('fill', (d) => {
+				return this.NODE_HIGHLIGHT_COLOR;
+			})
+			.transition()
+			.duration(this.DURATION_TIME * 2)
+			.style('fill', (d) => {
+				return this.DEFAULT_TEXT_COLOR;
+			});
+	}
 	focusOnNode(data) {
 		const updateTarget = this.openToNode(data);
 		let transformToNode = undefined;
@@ -111,7 +136,7 @@ export class D3Tree {
 			transformY = this.height / 2 - this.PADDING.TOP;
 		}
 		transformToNode = d3.zoomIdentity.translate(transformX, transformY).scale(1);
-
+		this.hightLightFocusNode(updateTarget);
 		this.svgBox.transition().duration(750).call(this.zoom.transform, transformToNode);
 	}
 }
