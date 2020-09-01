@@ -15,6 +15,10 @@ export class D3Tree {
 		this.DURATION_TIME = 750;
 		this.CLICK_DALEY = 500;
 		this.ICON_SIZE = 22;
+		this.NODE_SIZE = {
+			width: 100,
+			height: 200
+		};
 		this.options = {
 			PADDING: this.PADDING,
 			DEPTH_LENGTH: this.DEPTH_LENGTH,
@@ -34,14 +38,14 @@ export class D3Tree {
 		this.svgBox = d3.select(this.dom).append('svg').attr('width', this.width).attr('height', this.height);
 		this.svg = this.svgBox
 			.append('g')
-			.attr('transform', 'translate(' + this.PADDING.LEFT + ',' + this.PADDING.TOP + ')');
+			.attr('transform', 'translate(' + this.PADDING.LEFT + ',' + this.PADDING.TOP + this.height / 2 + ')');
 
-		this.zoom = initZoom(this.svg, this.svgBox, this.PADDING);
+		this.zoom = initZoom(this.svg, this.svgBox, this.PADDING, this.height);
 
-		this.treemap = treeLayout(this.width, this.height, this.PADDING);
+		this.treemap = treeLayout(this.NODE_SIZE);
 
 		this.root = d3.hierarchy(this.data, (d) => d.children);
-		this.root.x0 = this.height / 2;
+		this.root.x0 = 0;
 		this.root.y0 = 0;
 		this.root.children.forEach(collapse);
 		this.update();
@@ -104,7 +108,7 @@ export class D3Tree {
 			transformY = -updateTarget.x - this.PADDING.TOP + this.height / 2;
 		} else {
 			transformX = this.PADDING.LEFT;
-			transformY = this.PADDING.TOP;
+			transformY = this.height / 2 - this.PADDING.TOP;
 		}
 		transformToNode = d3.zoomIdentity.translate(transformX, transformY).scale(1);
 

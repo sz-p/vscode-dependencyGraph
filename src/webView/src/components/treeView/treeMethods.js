@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 import { throttle } from '../../utils/utils';
-export const initZoom = function(svg, svgBox, PADDING) {
+export const initZoom = function(svg, svgBox, PADDING, height) {
 	const zoomed = function() {
 		const transform = d3.event.transform;
 		svg.attr('transform', transform);
@@ -8,7 +8,7 @@ export const initZoom = function(svg, svgBox, PADDING) {
 	const zoom = d3.zoom();
 	zoom.on('zoom', zoomed);
 	svgBox.call(zoom);
-	svgBox.call(zoom.translateBy, PADDING.LEFT, PADDING.TOP);
+	svgBox.call(zoom.translateBy, PADDING.LEFT, height / 2 - PADDING.TOP);
 	return zoom;
 };
 
@@ -16,8 +16,8 @@ export const getDOMRect = function(dom) {
 	return dom.getClientRects()[0];
 };
 
-export const treeLayout = function(width, height, PADDING) {
-	const treemap = d3.tree().size([ height - PADDING.LEFT - PADDING.RIGHT, width - PADDING.BOTTOM - PADDING.TOP ]);
+export const treeLayout = function(NODE_SIZE) {
+	const treemap = d3.tree().nodeSize([ NODE_SIZE.width, NODE_SIZE.height ]);
 	return treemap;
 };
 
@@ -67,11 +67,6 @@ const getNodesLinks = function(treeData) {
 	};
 };
 
-const fixDepth = function(treeNodes, DEPTH_LENGTH) {
-	treeNodes.forEach((d) => {
-		d.y = d.depth * DEPTH_LENGTH;
-	});
-};
 
 const getNodesData = function(svg, treeNodes) {
 	return svg.selectAll('g.node').data(treeNodes, (d) => d.data.name);
@@ -81,7 +76,6 @@ export const updateTree = function(svg, source, treemap, root, options) {
 	const { DEPTH_LENGTH, DURATION_TIME, NODE_TEXT_OFFSET_X, CLICK_DALEY, ICON_SIZE } = options;
 	const treeData = treemap(root);
 	const { treeNodes, treeLinks } = getNodesLinks(treeData);
-	fixDepth(treeNodes, DEPTH_LENGTH);
 	const nodesData = getNodesData(svg, treeNodes);
 
 	const nodeDom = nodesData
