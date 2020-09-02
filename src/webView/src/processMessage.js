@@ -5,7 +5,8 @@ const messageCase = () => {
 	return new Map([
 		[ MESSAGES.MESSAGE_GET_DATA_STATUS, action.action_changeGetDataStatus ],
 		[ MESSAGES.MESSAGE_DEPENDENCY_TREE_DATA, action.action_setDependenciesTreeData ],
-		[ MESSAGES.MESSAGE_FOCUS_ON_NODE, action.action_setFocusOnNode ]
+    [ MESSAGES.MESSAGE_FOCUS_ON_NODE, action.action_setFocusOnNode ],
+    [ MESSAGES.MESSAGE_ASSETS_BASE_URL, action.action_setAssetBaseURL ]
 	]);
 };
 

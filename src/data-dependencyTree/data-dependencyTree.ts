@@ -2,7 +2,7 @@ import { showMessage } from '../utils/showMessage';
 import { NO_FOLDER, NO_PACKAGE_JSON, NO_MAIN_FILE } from '../i18n/types';
 import { getText } from '../i18n/i18n';
 import { postMessage } from '../utils/postMessageToWebView';
-import { MESSAGE_GET_DATA_STATUS, MESSAGE_DEPENDENCY_TREE_DATA } from '../utils/messagesKeys';
+import { MESSAGE_GET_DATA_STATUS, MESSAGE_DEPENDENCY_TREE_DATA, MESSAGE_ASSETS_BASE_URL } from '../utils/messagesKeys';
 import {
 	getCurrentFolderPath,
 	getPackageJsonPath,
@@ -10,6 +10,10 @@ import {
 	getDependencyTree,
 	processTreeData
 } from './dependencyTreeMethods';
+import { webViewPanel } from '../initExtension';
+import * as vscode from 'vscode';
+import * as path from 'path';
+import { assetsPath } from '../paths';
 
 const getDependencyTreeData = () => {
 	const folderPath = getCurrentFolderPath();
@@ -36,8 +40,12 @@ const getDependencyTreeData = () => {
 		showMessage('get dependency tree fail');
 		return undefined;
 	}
-  const processedTreeData = processTreeData(dependencyTree, folderPath);
-  postMessage({ key: MESSAGE_, value: 0, description: 'get dependencyTreeData' });
+	const processedTreeData = processTreeData(dependencyTree, folderPath);
+	postMessage({
+		key: MESSAGE_ASSETS_BASE_URL,
+		value: webViewPanel.webview.asWebviewUri(vscode.Uri.file(path.join(assetsPath))).toString(),
+		description: ''
+	});
 	postMessage({ key: MESSAGE_GET_DATA_STATUS, value: 0, description: 'get dependencyTreeData' });
 	postMessage({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: processedTreeData });
 	return processedTreeData;

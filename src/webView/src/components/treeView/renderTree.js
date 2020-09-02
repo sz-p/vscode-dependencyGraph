@@ -32,13 +32,13 @@ export class D3Tree {
 			ICON_SIZE: this.ICON_SIZE
 		};
 	}
-	init(dom, data) {
+	init(dom, data, assetsBaseURL) {
 		const { width, height } = getDOMRect(dom);
 		this.dom = dom;
 		this.data = data;
+		this.options.ASSETS_BASE_URL = this.ASSETS_BASE_URL = assetsBaseURL;
 		this.options.width = this.width = width;
 		this.options.height = this.height = height;
-
 		this.svgBox = d3.select(this.dom).append('svg').attr('width', this.width).attr('height', this.height);
 		this.svg = this.svgBox
 			.append('g')
