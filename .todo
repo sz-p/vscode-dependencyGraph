@@ -1,3 +1,4 @@
+[x] refactor: change file name to iconName
 [ ] feat: reload file reopenView
 [ ] fix: node open position dislocation
 [ ] feat: node open button
