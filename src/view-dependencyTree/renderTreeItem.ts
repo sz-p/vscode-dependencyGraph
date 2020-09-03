@@ -1,4 +1,5 @@
 import { DependencyTreeData } from '../data-dependencyTree/dependencyTreeMethods';
+import { getFileIconPathByFileType } from '../utils/getFileIcon';
 import * as vscode from 'vscode';
 
 export function renderTreeItem(data: DependencyTreeData): vscode.TreeItem {
@@ -8,7 +9,7 @@ export function renderTreeItem(data: DependencyTreeData): vscode.TreeItem {
 		: vscode.TreeItemCollapsibleState.None;
 	const treeItem = new vscode.TreeItem(data.name, collapsibleState);
 	treeItem.tooltip = data.relativePath;
-	treeItem.iconPath = data.iconPath;
+	treeItem.iconPath = getFileIconPathByFileType(data.type);
 	treeItem.command = {
 		command: 'framegraph.focusOnNode',
 		title: 'focusOnNode',
