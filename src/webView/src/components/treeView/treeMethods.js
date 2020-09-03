@@ -67,13 +67,12 @@ const getNodesLinks = function(treeData) {
 	};
 };
 
-
 const getNodesData = function(svg, treeNodes) {
 	return svg.selectAll('g.node').data(treeNodes, (d) => d.data.name);
 };
 
 export const updateTree = function(svg, source, treemap, root, options) {
-	const { DEPTH_LENGTH, DURATION_TIME, NODE_TEXT_OFFSET_X, CLICK_DALEY, ICON_SIZE } = options;
+	const { DURATION_TIME, NODE_TEXT_OFFSET_X, CLICK_DALEY, ICON_SIZE, ASSETS_BASE_URL } = options;
 	const treeData = treemap(root);
 	const { treeNodes, treeLinks } = getNodesLinks(treeData);
 	const nodesData = getNodesData(svg, treeNodes);
@@ -90,7 +89,7 @@ export const updateTree = function(svg, source, treemap, root, options) {
 		.append('svg:image')
 		.attr('class', 'node')
 		.attr('xlink:href', (d) => {
-			return d.data.webViewIconPath;
+			return ASSETS_BASE_URL + '/icons/' + d.data.fullType + '.svg';
 		})
 		.attr('x', 0)
 		.attr('y', 0)
