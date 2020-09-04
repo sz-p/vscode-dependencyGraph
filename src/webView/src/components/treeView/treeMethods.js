@@ -89,7 +89,7 @@ export const updateTree = function(svg, source, treemap, root, options) {
 		.append('svg:image')
 		.attr('class', 'node')
 		.attr('xlink:href', (d) => {
-			return ASSETS_BASE_URL + '/icons/' + d.data.fullType + '.svg';
+			return ASSETS_BASE_URL + '/icons/' + d.data.type + '.svg';
 		})
 		.attr('x', 0)
 		.attr('y', 0)

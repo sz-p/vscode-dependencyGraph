@@ -29,7 +29,8 @@ const checkFileExtensions = function(icons: FileIcon[], fileExtension: string): 
 	return undefined;
 };
 
-const getFileIconName = function(fileName: string): string {
+// TODO use HashTable
+export const getFileIconNameByFileName = function(fileName: string): string {
 	const pointIndex = fileName.indexOf('.');
 	const fileExtension = fileName.substring(pointIndex + 1);
 	const fileRealExtension = fileName.split('.').pop() as string;
@@ -49,12 +50,6 @@ const getFileIconName = function(fileName: string): string {
 	}
 	return 'file';
 };
-export const getFileIconPath = function(
-	fileName: string
-): {
-	iconPath: string;
-	fullType: string;
-} {
-	const fileIconName = getFileIconName(fileName);
-	return { iconPath: assetsPath + '/icons/' + fileIconName + '.svg', fullType: fileIconName };
+export const getFileIconPathByFileType = function(fileType: string): string {
+	return assetsPath + '/icons/' + fileType + '.svg';
 };

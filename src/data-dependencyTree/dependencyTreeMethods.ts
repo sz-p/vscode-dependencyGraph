@@ -1,21 +1,15 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as dependencyTree from 'dependency-tree';
-import { getFileIconPath } from '../utils/getFileIconPath';
+import { getFileIconNameByFileName } from '../utils/getFileIcon';
 
 export interface DependencyTreeData {
-	// file name
 	name: string;
-	// file ext
-	// TODO fix name
 	type: string;
-	// file type
-	fullType: string;
+	extension: string;
 	absolutePath: string;
 	relativePath: string;
 	ancestors: string[];
-	// TODO fix remove icon path
-	iconPath: string;
 	children: Array<DependencyTreeData>;
 }
 
@@ -82,16 +76,15 @@ export const processTreeData = function(
 		if (node) {
 			const file = node.path.split('\\').pop() as string;
 			const fileName = file;
-			const fileType = file.split('.').pop();
-			const { iconPath, fullType } = getFileIconPath(fileName);
+			const extension = file.split('.').pop();
+			const type = getFileIconNameByFileName(fileName);
 
 			node.dependencyTreeData.name = fileName;
 			node.dependencyTreeData.absolutePath = node.path;
 			node.dependencyTreeData.ancestors = node.ancestors;
 			node.dependencyTreeData.relativePath = node.path.replace(folderPath, '');
-			node.dependencyTreeData.type = fileType as string;
-			node.dependencyTreeData.iconPath = iconPath;
-			node.dependencyTreeData.fullType = fullType;
+			node.dependencyTreeData.extension = extension as string;
+			node.dependencyTreeData.type = type;
 			node.dependencyTreeData.children = [] as Array<DependencyTreeData>;
 			for (let keys in node.dependencyTree[node.path]) {
 				let ancestors = [] as string[];
