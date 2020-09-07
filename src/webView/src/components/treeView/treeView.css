@@ -7,6 +7,9 @@
 	stroke: var(--vscode-checkbox-border);
 	stroke-width: 1;
 }
+.arrowButton {
+	transform-origin: 22px 0px;
+}
 .node circle {
 	fill: skyblue;
 	stroke-width: 1;

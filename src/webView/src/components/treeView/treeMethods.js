@@ -82,7 +82,6 @@ export const updateTree = function(svg, source, treemap, root, options) {
 		.append('g')
 		.attr('class', 'node')
 		.attr('transform', () => 'translate(' + source.y0 + ',' + source.x0 + ')')
-		.on('click', throttle(click(svg, treemap, root, options), CLICK_DALEY))
 		.style('cursor', (d) => (d.children || d._children ? 'pointer' : 'auto'));
 
 	nodeDom
@@ -103,6 +102,26 @@ export const updateTree = function(svg, source, treemap, root, options) {
 		.text((d) => d.data.name)
 		.style('fill-opacity', 0);
 
+	nodeDom
+		.select(function(d) {
+			if (d.children || d._children) {
+				return this;
+			}
+		})
+		.append('svg:image')
+		.attr('class', 'arrowButton')
+		.attr('xlink:href', (d) => {
+			return ASSETS_BASE_URL + '/webview/arrow.svg';
+		})
+		.attr('x', 0)
+		.attr('y', 0)
+		.attr('width', 0)
+		.attr('height', 0)
+		.style('transform', (d) => {
+			return d.children ? 'rotate(180deg)' : 'rotate(0deg)';
+		})
+		.on('click', throttle(click(svg, treemap, root, options), CLICK_DALEY));
+
 	// UPDATE
 	const nodeEnter = nodeDom.merge(nodesData);
 
@@ -112,6 +131,16 @@ export const updateTree = function(svg, source, treemap, root, options) {
 		.duration(DURATION_TIME)
 		.attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
 		.style('fill-opacity', 1);
+
+	nodeEnter
+		.select('image.arrowButton')
+		.transition()
+		.duration(DURATION_TIME)
+		.attr('x', () => +ICON_SIZE / 2)
+		.attr('y', () => -ICON_SIZE / 2)
+		.attr('width', ICON_SIZE)
+		.attr('height', ICON_SIZE)
+		.style('transform', (d) => (d.children ? 'rotate(180deg)' : 'rotate(0deg)'));
 
 	nodeEnter
 		.select('image.node')
@@ -133,6 +162,12 @@ export const updateTree = function(svg, source, treemap, root, options) {
 
 	// On exit reduce the node circles size to 0
 	nodeExit.select('image').attr('x', 0).attr('y', 0).attr('width', 0).attr('height', 0);
+
+	nodeExit
+		.select('image.arrowButton')
+		.transition()
+		.duration(DURATION_TIME)
+		.style('transform', (d) => (d.children ? 'rotate(180deg)' : 'rotate(0deg)'));
 
 	// On exit reduce the opacity of text labels
 	nodeExit.select('text').style('fill-opacity', 0);
