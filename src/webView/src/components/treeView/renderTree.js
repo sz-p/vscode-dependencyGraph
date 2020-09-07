@@ -19,7 +19,9 @@ export class D3Tree {
 			width: 100,
 			height: 200
 		};
-		this.NODE_HIGHLIGHT_COLOR = getComputedStyle(document.documentElement).getPropertyValue('--vscode-focusBorder');
+		this.NODE_HIGHLIGHT_COLOR = getComputedStyle(document.documentElement).getPropertyValue(
+			'--vscode-editorLightBulb-foreground'
+		);
 		this.DEFAULT_TEXT_COLOR = getComputedStyle(document.documentElement).getPropertyValue(
 			'--vscode-editor-foreground'
 		);
@@ -31,6 +33,17 @@ export class D3Tree {
 			CLICK_DALEY: this.CLICK_DALEY,
 			ICON_SIZE: this.ICON_SIZE
 		};
+	}
+	setIDToNode(node) {
+		const stack = [ node ];
+		while (stack.length) {
+			const node = stack.pop();
+			const id = node.ancestors.concat(node.absolutePath).join();
+			node.id = id;
+			if (node.children && node.children.length) {
+				stack.push(...node.children);
+			}
+		}
 	}
 	init(dom, data, assetsBaseURL) {
 		const { width, height } = getDOMRect(dom);
@@ -47,7 +60,7 @@ export class D3Tree {
 		this.zoom = initZoom(this.svg, this.svgBox, this.PADDING, this.height);
 
 		this.treemap = treeLayout(this.NODE_SIZE);
-
+		this.setIDToNode(this.data);
 		this.root = d3.hierarchy(this.data, (d) => d.children);
 		this.root.x0 = 0;
 		this.root.y0 = 0;
@@ -109,7 +122,7 @@ export class D3Tree {
 				if (!nodeData) {
 					if (i == 0) return this;
 				} else {
-					if (d.data.absolutePath === nodeData.data.absolutePath) {
+					if (d.data.id === nodeData.data.id) {
 						return this;
 					}
 				}
