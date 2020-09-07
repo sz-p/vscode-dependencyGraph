@@ -68,7 +68,10 @@ const getNodesLinks = function(treeData) {
 };
 
 const getNodesData = function(svg, treeNodes) {
-	return svg.selectAll('g.node').data(treeNodes, (d) => d.data.name);
+	return svg.selectAll('g.node').data(treeNodes, (d, i) => {
+		const nodePath = d.data.ancestors.concat(d.data.absolutePath);
+		return 'node_' + nodePath.join();
+	});
 };
 
 export const updateTree = function(svg, source, treemap, root, options) {
@@ -172,7 +175,10 @@ export const updateTree = function(svg, source, treemap, root, options) {
 	// On exit reduce the opacity of text labels
 	nodeExit.select('text').style('fill-opacity', 0);
 
-	const linkData = svg.selectAll('path.link').data(treeLinks, (d) => d.data.name);
+	const linkData = svg.selectAll('path.link').data(treeLinks, (d, i) => {
+		const nodePath = d.data.ancestors.concat(d.data.absolutePath);
+		return 'link_' + nodePath.join();
+	});
 
 	const linkDom = linkData.enter().insert('path', 'g').attr('class', 'link').attr('d', (d) => {
 		const o = { x: source.x0, y: source.y0 };

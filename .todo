@@ -1,7 +1,7 @@
 [x] refactor: change file name to iconName
 [x] feat: node open button
+[x] fix: node open position dislocation
 [ ] feat: reload file reopenView
-[ ] fix: node open position dislocation
 [ ] feat: node highlight textColor to background color
 [ ] feat: auto i18n (view vscode-material-icon-theme-master)
 [ ] feat: settings webPage
