@@ -42,7 +42,8 @@ export const getPackageJsonPath = function(folderPath: string): string | undefin
 };
 
 export const getMainFilePath = function(packageJsonPath: string, folderPath: string): string | undefined {
-	const packageJson = require(packageJsonPath);
+	const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+	// const packageJson = require(packageJsonPath);
 	if (packageJson.main) {
 		return folderPath + packageJson.main;
 	} else {
