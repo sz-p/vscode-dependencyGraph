@@ -1,102 +1,124 @@
 {
-	"name": "framegraph",
-	"displayName": "framegraph",
-	"description": "A plugin for vscode to view your project's frame graph",
-	"icon": "assets/framegraph.png",
-	"version": "0.1.0",
-	"license": "MIT",
-	"engines": {
-		"vscode": "^1.41.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:extension.helloWorld",
-		"onView:framegraphExplorer-DependencyTree"
-	],
-	"homepage": "https://github.com/sz-p/vscode-framegraph",
-	"bugs": "https://github.com/sz-p/vscode-framegraph/issues",
-	"main": "./out/extension.js",
-	"contributes": {
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "framegraph",
-					"title": "Frame Graph",
-					"icon": "assets/framegraph.svg"
-				}
-			]
-		},
-		"views": {
-			"framegraph": [
-				{
-					"id": "framegraphExplorer-DependencyTree",
-					"name": "DependencyTree"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "framegraph.helloWorld",
-				"title": "Hello World"
-			},
-			{
-				"command": "framegraph.readfile",
-				"title": "Read File"
-			},
-			{
-				"command": "framegraph.openView",
-				"title": "Open page"
-			},
-			{
-				"command": "framegraph.postMessage",
-				"title": "post Message"
-			}
-		]
-	},
-	"scripts": {
-		"watch": "npm-run-all -p watch:*",
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch:extension": "tsc -watch -p ./",
-		"watch:webView": "node ./src/webView/scripts/build.js",
-		"pretest": "npm run compile",
-		"buildWebView": "node ./src/webView/scripts/build.js",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.11.1",
-		"@babel/preset-env": "^7.11.0",
-		"@types/glob": "^7.1.1",
-		"@types/mocha": "^5.2.7",
-		"@types/node": "^12.12.22",
-		"@types/vscode": "^1.41.0",
-		"babel-loader": "^8.1.0",
-		"babel-preset-react-app": "^9.1.2",
-		"css-loader": "^4.2.1",
-		"glob": "^7.1.5",
-		"html-webpack-plugin": "^4.3.0",
-		"mocha": "^6.2.2",
-		"npm-run-all": "^4.1.5",
-		"style-loader": "^1.2.1",
-		"tslint": "^5.20.0",
-		"typescript": "^3.6.4",
-		"vscode-test": "^1.2.2",
-		"webpack": "^4.44.1"
-	},
-	"publisher": "sz-p",
-	"dependencies": {
-		"@types/dependency-tree": "^7.2.0",
-		"@types/react": "^16.9.46",
-		"@types/react-dom": "^16.9.8",
-		"d3": "^5.16.0",
-		"dependency-tree": "^7.2.1",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"react-redux": "^7.2.1",
-		"redux": "^4.0.5",
-		"redux-actions": "^2.6.5",
-		"redux-promise": "^0.6.0"
-	}
+  "name": "framegraph",
+  "displayName": "framegraph",
+  "description": "A plugin for vscode to view your project's frame graph",
+  "icon": "assets/framegraph.png",
+  "version": "0.1.0",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.41.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.helloWorld",
+    "onView:framegraphExplorer-DependencyTree"
+  ],
+  "homepage": "https://github.com/sz-p/vscode-framegraph",
+  "bugs": "https://github.com/sz-p/vscode-framegraph/issues",
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "framegraph",
+          "title": "Frame Graph",
+          "icon": "assets/framegraph.svg"
+        }
+      ]
+    },
+    "views": {
+      "framegraph": [
+        {
+          "id": "framegraphExplorer-DependencyTree",
+          "name": "DependencyTree"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "framegraph.reOpenView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "framegraph.refreshFile",
+          "group": "navigation@1"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "framegraph.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "framegraph.readfile",
+        "title": "Read File"
+      },
+      {
+        "command": "framegraph.refreshFile",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "framegraph.openView",
+        "title": "Open page"
+      },
+      {
+        "command": "framegraph.reOpenView",
+        "title": "Open page",
+        "icon": "$(browser)"
+      },
+      {
+        "command": "framegraph.postMessage",
+        "title": "post Message"
+      }
+    ]
+  },
+  "scripts": {
+    "watch": "npm-run-all -p watch:*",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch:extension": "tsc -watch -p ./",
+    "watch:webView": "node ./src/webView/scripts/build.js",
+    "pretest": "npm run compile",
+    "buildWebView": "node ./src/webView/scripts/build.js",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.22",
+    "@types/vscode": "^1.41.0",
+    "babel-loader": "^8.1.0",
+    "babel-preset-react-app": "^9.1.2",
+    "css-loader": "^4.2.1",
+    "glob": "^7.1.5",
+    "html-webpack-plugin": "^4.3.0",
+    "mocha": "^6.2.2",
+    "npm-run-all": "^4.1.5",
+    "style-loader": "^1.2.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4",
+    "vscode-test": "^1.2.2",
+    "webpack": "^4.44.1"
+  },
+  "publisher": "sz-p",
+  "dependencies": {
+    "@types/dependency-tree": "^7.2.0",
+    "@types/react": "^16.9.46",
+    "@types/react-dom": "^16.9.8",
+    "d3": "^5.16.0",
+    "dependency-tree": "^7.2.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-actions": "^2.6.5",
+    "redux-promise": "^0.6.0"
+  }
 }

@@ -7,7 +7,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 // const htmlText = require('./index.html');
 import { webViewHTMLPath } from '../paths';
-
+import { createWebviewPanel } from '../initExtension';
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
  * @param {*} templatePath 相对于插件根目录的html文件绝对路径
@@ -25,9 +25,14 @@ function getWebViewContent(templatePath: string) {
 /**
  * @description create view
  */
-const createView = function(webViewPanel: vscode.WebviewPanel): void {
-	webViewPanel.iconPath = vscode.Uri.file(paths.framegraphPNG);
-	webViewPanel.webview.html = getWebViewContent(webViewHTMLPath);
+const createView = function(): void {
+	if (global.webViewPanel) {
+		global.webViewPanel.iconPath = vscode.Uri.file(paths.framegraphPNG);
+		global.webViewPanel.webview.html = getWebViewContent(webViewHTMLPath);
+		global.webViewPanel.onDidDispose(() => {
+			global.webViewPanel = undefined;
+		});
+	}
 };
 
 export { createView };

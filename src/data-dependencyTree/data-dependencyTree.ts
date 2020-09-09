@@ -10,11 +10,8 @@ import {
 	getDependencyTree,
 	processTreeData
 } from './dependencyTreeMethods';
-import { webViewPanel } from '../initExtension';
-import * as vscode from 'vscode';
-import * as path from 'path';
-import { assetsPath } from '../paths';
 
+import { getBaseWebViewUri } from '../utils/getWebViewUri';
 const getDependencyTreeData = () => {
 	const folderPath = getCurrentFolderPath();
 	if (!folderPath) {
@@ -43,7 +40,7 @@ const getDependencyTreeData = () => {
 	const processedTreeData = processTreeData(dependencyTree, folderPath);
 	postMessage({
 		key: MESSAGE_ASSETS_BASE_URL,
-		value: webViewPanel.webview.asWebviewUri(vscode.Uri.file(path.join(assetsPath))).toString(),
+		value: getBaseWebViewUri(),
 		description: ''
 	});
 	postMessage({ key: MESSAGE_GET_DATA_STATUS, value: 0, description: 'get dependencyTreeData' });
