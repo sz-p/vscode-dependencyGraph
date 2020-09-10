@@ -3,7 +3,7 @@ import { getDependencyTreeData, statusCallBack } from './data-dependencyTree/dat
 import { createView } from './web-dependencyTree/openWebView';
 import { postMessageCatchError } from './utils/message/postMessageToWebView';
 import { MESSAGE_FOCUS_ON_NODE } from './utils/message/messagesKeys';
-import { reOpenWebView } from './web-dependencyTree/reOpenWebView';
+import { reOpenWebView } from './web-dependencyTree/openWebView';
 import { renderTreeView } from './view-dependencyTree/renderTreeView';
 import { onError } from './utils/error/onError';
 import { NO_DEPENDENCY_TREE_DATA } from './utils/error/errorKey';
