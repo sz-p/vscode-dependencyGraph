@@ -2,17 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as dependencyTree from 'dependency-tree';
 import { getFileIconNameByFileName } from '../utils/getFileIcon';
-
-export interface DependencyTreeData {
-	name: string;
-	type: string;
-	extension: string;
-	absolutePath: string;
-	relativePath: string;
-	ancestors: string[];
-	children: Array<DependencyTreeData>;
-}
-
+import { DependencyTreeData } from './dependencyTreeData';
 /**
  * get current workspace first folder path
  *
