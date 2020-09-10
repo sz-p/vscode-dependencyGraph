@@ -1,5 +1,5 @@
 import { DependencyTreeData } from '../data-dependencyTree/dependencyTreeData';
-import { getFileIconPathByFileType } from '../utils/getFileIcon';
+import { getFileIconPathByFileType } from '../utils/fileIcons/getFileIcon';
 import * as vscode from 'vscode';
 
 export function renderTreeItem(data: DependencyTreeData): vscode.TreeItem {
