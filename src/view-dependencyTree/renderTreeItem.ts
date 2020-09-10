@@ -1,4 +1,4 @@
-import { DependencyTreeData } from '../data-dependencyTree/dependencyTreeMethods';
+import { DependencyTreeData } from '../data-dependencyTree/dependencyTreeData';
 import { getFileIconPathByFileType } from '../utils/getFileIcon';
 import * as vscode from 'vscode';
 
