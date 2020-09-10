@@ -1,22 +1,33 @@
 import * as vscode from 'vscode';
 import { initExtension } from './initExtension';
-import { getDependencyTreeData } from './data-dependencyTree/data-dependencyTree';
+import { getDependencyTreeData, statusCallBackCatchError } from './data-dependencyTree/data-dependencyTree';
 import { createView } from './web-dependencyTree/openWebView';
-import { DependenciesTreeProvider } from './view-dependencyTree/DependenciesTreeProvider';
 import { allCommands } from './commands';
+import { renderTreeView } from './view-dependencyTree/renderTreeView';
+import { openWebView } from './web-dependencyTree/openWebView';
+
 export function activate(context: vscode.ExtensionContext) {
+	// webView need catch getDependencyTreeData status create web view first
+
+	// just create webView panel
 	initExtension();
+	// create webView content
 	createView();
-	const dependencyTreeData = getDependencyTreeData();
+
+	// get dependency tree data
+	const dependencyTreeData = getDependencyTreeData(statusCallBackCatchError);
 	if (!dependencyTreeData) {
-		vscode.window.showInformationMessage('No dependency');
 		return false;
 	}
-	vscode.window.registerTreeDataProvider(
-		'framegraphExplorer-DependencyTree',
-		new DependenciesTreeProvider(dependencyTreeData)
-	);
+	global.dependencyTreeData = dependencyTreeData;
 
+	// openWebView
+	openWebView(dependencyTreeData);
+
+	// render tree view
+	renderTreeView(dependencyTreeData);
+
+	// init commands
 	allCommands.forEach((command) => {
 		context.subscriptions.push(command);
 	});
