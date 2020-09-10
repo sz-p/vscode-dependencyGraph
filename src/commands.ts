@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { getDependencyTreeData, statusCallBack } from './data-dependencyTree/data-dependencyTree';
+import { getDependencyTreeData, statusCallBackCatchError } from './data-dependencyTree/data-dependencyTree';
 import { createView } from './web-dependencyTree/openWebView';
 import { postMessageCatchError } from './utils/message/postMessageToWebView';
 import { MESSAGE_FOCUS_ON_NODE } from './utils/message/messagesKeys';
@@ -7,6 +7,7 @@ import { reOpenWebView } from './web-dependencyTree/openWebView';
 import { renderTreeView } from './view-dependencyTree/renderTreeView';
 import { onError } from './utils/error/onError';
 import { NO_DEPENDENCY_TREE_DATA } from './utils/error/errorKey';
+import { MESSAGE_DEPENDENCY_TREE_DATA } from './utils/message/messagesKeys';
 let message = 0;
 
 export const command_openView = vscode.commands.registerCommand('framegraph.openView', () => {
@@ -29,9 +30,16 @@ export const command_reOpenView = vscode.commands.registerCommand('framegraph.re
 });
 export const command_refreshFile = vscode.commands.registerCommand('framegraph.refreshFile', (fileName, fileData) => {
 	// no catch error may be webview is closed
-	global.dependencyTreeData = getDependencyTreeData(statusCallBack);
+	let callback = undefined;
+	if (global.webViewPanel) {
+		callback = statusCallBackCatchError;
+	}
+	global.dependencyTreeData = getDependencyTreeData(callback);
 	if (global.dependencyTreeData) {
 		renderTreeView(global.dependencyTreeData);
+		if (global.webViewPanel) {
+			postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: global.dependencyTreeData });
+		}
 	}
 });
 export const allCommands = [ command_openView, command_reOpenView ];
