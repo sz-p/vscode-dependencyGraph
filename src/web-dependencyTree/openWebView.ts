@@ -7,7 +7,12 @@ import * as path from 'path';
 import * as fs from 'fs';
 // const htmlText = require('./index.html');
 import { webViewHTMLPath } from '../paths';
+import { getBaseWebViewUri } from '../utils/getWebViewUri';
+import { postMessageCatchError } from '../utils/message/postMessageToWebView';
+import { MESSAGE_ASSETS_BASE_URL, MESSAGE_DEPENDENCY_TREE_DATA } from '../utils/message/messagesKeys';
+import { DependencyTreeData } from '../data-dependencyTree/dependencyTreeData';
 import { createWebviewPanel } from '../initExtension';
+
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
  * @param {*} templatePath 相对于插件根目录的html文件绝对路径
@@ -25,7 +30,7 @@ function getWebViewContent(templatePath: string) {
 /**
  * @description create view
  */
-const createView = function(): void {
+export const createView = function(): void {
 	if (global.webViewPanel) {
 		global.webViewPanel.iconPath = vscode.Uri.file(paths.framegraphPNG);
 		global.webViewPanel.webview.html = getWebViewContent(webViewHTMLPath);
@@ -35,4 +40,22 @@ const createView = function(): void {
 	}
 };
 
-export { createView };
+export const reOpenWebView = function(dependencyTreeData: DependencyTreeData) {
+	const columnToShowIn = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
+	if (global.webViewPanel) {
+		// 如果我们已经有了一个面板，那就把它显示到目标列布局中
+		global.webViewPanel.reveal(columnToShowIn);
+	} else {
+		createWebviewPanel();
+		createView();
+		openWebView(dependencyTreeData);
+	}
+};
+export const openWebView = function(dependencyTreeData: DependencyTreeData) {
+	postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: dependencyTreeData });
+	postMessageCatchError({
+		key: MESSAGE_ASSETS_BASE_URL,
+		value: getBaseWebViewUri(),
+		description: ''
+	});
+};
