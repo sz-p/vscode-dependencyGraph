@@ -212,8 +212,8 @@ export class D3Tree {
 			.style('fill-opacity', 1);
 	}
 	nodesExit(source) {
-		const x = source ? source.x0 : this.root.x0;
-		const y = source ? source.y0 : this.root.y0;
+		const x = source ? source.y0 : this.root.y0;
+		const y = source ? source.x0 : this.root.x0;
 		this.nodeExit = this.nodesData
 			.exit()
 			.transition()
