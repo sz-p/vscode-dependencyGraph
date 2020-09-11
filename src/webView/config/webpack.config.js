@@ -21,7 +21,6 @@ module.exports = {
 			},
 			{
 				test: /\.(ts|tsx)$/,
-				include: paths.src,
 				loader: 'ts-loader'
 			},
 			{
