@@ -1,9 +1,28 @@
 import * as d3 from 'd3';
+import { throttle } from '../../utils/utils';
 
-import { getDOMRect, initZoom, updateTree, treeLayout, collapse } from './treeMethods';
+const diagonal = function(s, d) {
+	const path = `M ${s.y} ${s.x}
+          C ${(s.y + d.y) / 2} ${s.x},
+            ${(s.y + d.y) / 2} ${d.x},
+            ${d.y} ${d.x}`;
+
+	return path;
+};
+
+const collapse = function(d) {
+	if (d.children) {
+		d._children = d.children;
+		d._children.forEach(collapse);
+		d.children = null;
+	}
+};
 
 export class D3Tree {
 	constructor() {
+		this.initStaticVariables();
+	}
+	initStaticVariables() {
 		this.PADDING = {
 			LEFT: 100,
 			RIGHT: 100,
@@ -34,8 +53,63 @@ export class D3Tree {
 			ICON_SIZE: this.ICON_SIZE
 		};
 	}
-	setIDToNode(node) {
-		const stack = [ node ];
+	initDom(dom) {
+		if (!this.dom) {
+			const { width, height } = dom.getClientRects()[0];
+			this.dom = dom;
+			this.options.width = this.width = width;
+			this.options.height = this.height = height;
+		}
+		if (!this.svgBox) {
+			this.svgBox = d3.select(this.dom).append('svg').attr('width', this.width).attr('height', this.height);
+		}
+		if (!this.svg) {
+			this.svg = this.svgBox
+				.append('g')
+				.attr('transform', 'translate(' + this.PADDING.LEFT + ',' + this.PADDING.TOP + this.height / 2 + ')');
+		}
+	}
+	initZoom() {
+		if (!this.zoom) {
+			const zoomed = () => {
+				const transform = d3.event.transform;
+				this.svg.attr('transform', transform);
+			};
+			this.zoom = d3.zoom();
+			this.zoom.on('zoom', zoomed);
+			this.svgBox.call(this.zoom);
+			this.svgBox.call(this.zoom.translateBy, this.PADDING.LEFT, this.height / 2 - this.PADDING.TOP);
+		}
+	}
+	initLayout() {
+		if (!this.treemap) {
+			this.treemap = d3.tree().nodeSize([ this.NODE_SIZE.width, this.NODE_SIZE.height ]);
+		}
+	}
+	getData(data) {
+		this.data = data;
+	}
+	getAssetsBaseURL(assetsBaseURL) {
+		this.options.ASSETS_BASE_URL = this.ASSETS_BASE_URL = assetsBaseURL;
+	}
+	initRoot() {
+		this.root = d3.hierarchy(this.data, (d) => d.children);
+		this.root.x0 = 0;
+		this.root.y0 = 0;
+		this.root.children.forEach(collapse);
+	}
+	init(dom, data, assetsBaseURL) {
+		this.initDom(dom);
+		this.initZoom();
+		this.getData(data);
+		this.getAssetsBaseURL(assetsBaseURL);
+		this.initLayout();
+		this.setIDInTreeNode();
+		this.initRoot();
+		this.update();
+	}
+	setIDInTreeNode() {
+		const stack = [ this.data ];
 		while (stack.length) {
 			const node = stack.pop();
 			const id = node.ancestors.concat(node.absolutePath).join();
@@ -45,36 +119,195 @@ export class D3Tree {
 			}
 		}
 	}
-	init(dom, data, assetsBaseURL) {
-		const { width, height } = getDOMRect(dom);
-		this.dom = dom;
-		this.data = data;
-		this.options.ASSETS_BASE_URL = this.ASSETS_BASE_URL = assetsBaseURL;
-		this.options.width = this.width = width;
-		this.options.height = this.height = height;
-		this.svgBox = d3.select(this.dom).append('svg').attr('width', this.width).attr('height', this.height);
-		this.svg = this.svgBox
-			.append('g')
-			.attr('transform', 'translate(' + this.PADDING.LEFT + ',' + this.PADDING.TOP + this.height / 2 + ')');
-
-		this.zoom = initZoom(this.svg, this.svgBox, this.PADDING, this.height);
-
-		this.treemap = treeLayout(this.NODE_SIZE);
-		this.setIDToNode(this.data);
-		this.root = d3.hierarchy(this.data, (d) => d.children);
-		this.root.x0 = 0;
-		this.root.y0 = 0;
-		this.root.children.forEach(collapse);
-		this.update();
+	getNodesLinksData() {
+		this.treeNodes = this.treeData.descendants();
+		this.treeLinks = this.treeData.descendants().slice(1);
 	}
-	update(svg, source, treemap, root, options) {
-		updateTree(
-			svg || this.svg,
-			source || this.root,
-			treemap || this.treemap,
-			root || this.root,
-			options || this.options
-		);
+	getNodes() {
+		this.nodesData = this.svg.selectAll('g.node').data(this.treeNodes, (d) => {
+			return 'node_' + d.data.id;
+		});
+	}
+	appendNodeDom(source) {
+		const x = source ? source.y0 : this.root.y0;
+		const y = source ? source.x0 : this.root.x0;
+		this.nodeDom = this.nodesData
+			.enter()
+			.append('g')
+			.attr('class', 'node')
+			.attr('transform', () => `translate(${x},${y})`)
+			.style('cursor', (d) => (d.children || d._children ? 'pointer' : 'auto'));
+	}
+	appendNodeIcon() {
+		this.nodeDom
+			.append('svg:image')
+			.attr('class', 'node')
+			.attr('xlink:href', (d) => {
+				return this.ASSETS_BASE_URL + '/icons/' + d.data.type + '.svg';
+			})
+			.attr('x', 0)
+			.attr('y', 0)
+			.attr('width', 0)
+			.attr('height', 0);
+	}
+	appendNodeName() {
+		this.nodeDom
+			.append('text')
+			.style('text-anchor', (d) => (d.children || d._children ? 'end' : 'start'))
+			.attr('x', (d) => (d.children || d._children ? -this.NODE_TEXT_OFFSET_X : this.NODE_TEXT_OFFSET_X))
+			.text((d) => d.data.name)
+			.style('fill-opacity', 0);
+	}
+	appendNodeArrowButton() {
+		this.nodeDom
+			.select(function(d) {
+				if (d.children || d._children) {
+					return this;
+				}
+			})
+			.append('svg:image')
+			.attr('class', 'arrowButton')
+			.attr('xlink:href', (d) => {
+				return this.ASSETS_BASE_URL + '/webview/arrow.svg';
+			})
+			.attr('x', 0)
+			.attr('y', 0)
+			.attr('width', 0)
+			.attr('height', 0)
+			.style('transform', (d) => {
+				return d.children ? 'rotate(180deg)' : 'rotate(0deg)';
+			})
+			.on('click', throttle(this.clickNodeArrowButton(), this.CLICK_DALEY));
+	}
+	nodesEnter() {
+		this.nodeEnter = this.nodeDom.merge(this.nodesData);
+	}
+	enterArrowButton() {
+		this.nodeEnter
+			.select('image.arrowButton')
+			.transition()
+			.duration(this.DURATION_TIME)
+			.attr('x', () => +this.ICON_SIZE / 2)
+			.attr('y', () => -this.ICON_SIZE / 2)
+			.attr('width', this.ICON_SIZE)
+			.attr('height', this.ICON_SIZE)
+			.style('transform', (d) => (d.children ? 'rotate(180deg)' : 'rotate(0deg)'));
+	}
+	enterNodeIcon() {
+		this.nodeEnter
+			.select('image.node')
+			.transition()
+			.duration(this.DURATION_TIME)
+			.attr('x', () => -this.ICON_SIZE / 2)
+			.attr('y', () => -this.ICON_SIZE / 2)
+			.attr('width', this.ICON_SIZE)
+			.attr('height', this.ICON_SIZE);
+	}
+	enterNodeName() {
+		this.nodeEnter.select('text').transition().duration(this.DURATION_TIME).style('fill-opacity', 1);
+		this.nodeEnter
+			.transition()
+			.duration(this.DURATION_TIME)
+			.attr('transform', (d) => 'translate(' + d.y + ',' + d.x + ')')
+			.style('fill-opacity', 1);
+	}
+	nodesExit(source) {
+		const x = source ? source.x0 : this.root.x0;
+		const y = source ? source.y0 : this.root.y0;
+		this.nodeExit = this.nodesData
+			.exit()
+			.transition()
+			.duration(this.DURATION_TIME)
+			.attr('transform', () => `translate(${x},${y})`)
+			.remove();
+	}
+	exitIcon() {
+		this.nodeExit.select('image').attr('x', 0).attr('y', 0).attr('width', 0).attr('height', 0);
+	}
+	exitName() {
+		this.nodeExit.select('text').style('fill-opacity', 0);
+	}
+	exitArrowButton() {
+		this.nodeExit
+			.select('image.arrowButton')
+			.transition()
+			.duration(this.DURATION_TIME)
+			.style('transform', (d) => (d.children ? 'rotate(180deg)' : 'rotate(0deg)'));
+	}
+	getLinks() {
+		this.linksData = this.svg.selectAll('path.link').data(this.treeLinks, (d) => {
+			return 'link_' + d.data.id;
+		});
+	}
+	appendLinkDom(source) {
+		const x = source ? source.x0 : this.root.x0;
+		const y = source ? source.y0 : this.root.y0;
+		this.linkDom = this.linksData.enter().insert('path', 'g').attr('class', 'link').attr('d', (d) => {
+			const o = { x, y };
+			return diagonal(o, o);
+		});
+	}
+	linksEnter() {
+		this.linkEnter = this.linkDom.merge(this.linksData);
+		this.linkEnter.transition().duration(this.DURATION_TIME).attr('d', (d) => diagonal(d, d.parent));
+	}
+	linksExit(source) {
+		const x = source ? source.x0 : this.root.x0;
+		const y = source ? source.y0 : this.root.y0;
+		this.linksData
+			.exit()
+			.transition()
+			.duration(this.DURATION_TIME)
+			.attr('d', function(d) {
+				const o = { x, y };
+				return diagonal(o, o);
+			})
+			.remove();
+	}
+	update(source) {
+		this.treeData = this.treemap(this.root);
+		this.getNodesLinksData();
+
+		this.getNodes();
+		this.appendNodeDom(source);
+		this.appendNodeIcon();
+		this.appendNodeName();
+		this.appendNodeArrowButton();
+
+		this.nodesEnter();
+		this.enterNodeIcon();
+		this.enterNodeName();
+		this.enterArrowButton();
+
+		this.nodesExit(source);
+		this.exitIcon();
+		this.exitName();
+		this.exitArrowButton();
+
+		this.getLinks();
+		this.appendLinkDom(source);
+		this.linksEnter();
+		this.linksExit(source);
+
+		this.stashPositions();
+	}
+	stashPositions() {
+		this.treeNodes.forEach((d) => {
+			d.x0 = d.x;
+			d.y0 = d.y;
+		});
+	}
+	clickNodeArrowButton() {
+		return (d) => {
+			if (d.children) {
+				d._children = d.children;
+				d.children = null;
+			} else {
+				d.children = d._children;
+				d._children = null;
+			}
+			this.update(d);
+		};
 	}
 	openToNode(data) {
 		if (!data.ancestors) console.log('error');
