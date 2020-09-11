@@ -25,25 +25,25 @@ export const statusCallBack = function(key: MsgKey, value: any, description: str
 export const statusCallBackCatchError = function(key: MsgKey, value: any, description: string) {
 	postMessageCatchError({ key, value, description });
 };
-export const getDependencyTreeData = (statusCallBack: Function): DependencyTreeData | undefined => {
+export const getDependencyTreeData = (statusCallBack?: Function): DependencyTreeData | undefined => {
 	const folderPath = getCurrentFolderPath();
 	if (!folderPath) {
 		onError(NO_FOLDER);
 		return undefined;
 	}
-	statusCallBack(MESSAGE_GET_DATA_STATUS, 1, 'get folder');
+	statusCallBack ? statusCallBack(MESSAGE_GET_DATA_STATUS, 1, 'get folder') : null;
 	const packageJsonPath = getPackageJsonPath(folderPath);
 	if (!packageJsonPath) {
 		onError(NO_PACKAGE_JSON);
 		return undefined;
 	}
-	statusCallBack(MESSAGE_GET_DATA_STATUS, 3, 'get packageJson');
+	statusCallBack ? statusCallBack(MESSAGE_GET_DATA_STATUS, 3, 'get packageJson') : null;
 	const mainFilePath = getMainFilePath(packageJsonPath, folderPath);
 	if (!mainFilePath) {
 		onError(NO_MAIN_FILE);
 		return undefined;
 	}
-	statusCallBack(MESSAGE_GET_DATA_STATUS, 4, 'get mainFile');
+	statusCallBack ? statusCallBack(MESSAGE_GET_DATA_STATUS, 4, 'get mainFile') : null;
 	const dependencyTree = getDependencyTree(mainFilePath, folderPath);
 	if (!Object.keys(dependencyTree).length) {
 		onError(GET_DEPENDENCY_TREE_FAIL);
@@ -53,6 +53,6 @@ export const getDependencyTreeData = (statusCallBack: Function): DependencyTreeD
 	if (!processedTreeData) {
 		onError(NO_DEPENDENCY);
 	}
-	statusCallBack(MESSAGE_GET_DATA_STATUS, 0, 'get dependencyTreeData');
+	statusCallBack ? statusCallBack(MESSAGE_GET_DATA_STATUS, 0, 'get dependencyTreeData') : null;
 	return processedTreeData;
 };
