@@ -1,8 +1,7 @@
-import { showMessage } from '../utils/showMessage';
-import { NO_FOLDER, NO_PACKAGE_JSON, NO_MAIN_FILE } from '../i18n/types';
-import { getText } from '../i18n/i18n';
-import { postMessage } from '../utils/postMessageToWebView';
-import { MESSAGE_GET_DATA_STATUS, MESSAGE_DEPENDENCY_TREE_DATA, MESSAGE_ASSETS_BASE_URL } from '../utils/messagesKeys';
+import { MsgKey } from '../utils/message/messagesKeys';
+import { DependencyTreeData } from './dependencyTreeData';
+import { postMessage, postMessageCatchError } from '../utils/message/postMessageToWebView';
+import { MESSAGE_GET_DATA_STATUS } from '../utils/message/messagesKeys';
 import {
 	getCurrentFolderPath,
 	getPackageJsonPath,
@@ -11,40 +10,49 @@ import {
 	processTreeData
 } from './dependencyTreeMethods';
 
-import { getBaseWebViewUri } from '../utils/getWebViewUri';
-const getDependencyTreeData = () => {
+import { onError } from '../utils/error/onError';
+import {
+	NO_DEPENDENCY,
+	NO_FOLDER,
+	NO_PACKAGE_JSON,
+	NO_MAIN_FILE,
+	GET_DEPENDENCY_TREE_FAIL
+} from '../utils/error/errorKey';
+
+export const statusCallBack = function(key: MsgKey, value: any, description: string) {
+	postMessage({ key, value, description });
+};
+export const statusCallBackCatchError = function(key: MsgKey, value: any, description: string) {
+	postMessageCatchError({ key, value, description });
+};
+export const getDependencyTreeData = (statusCallBack: Function): DependencyTreeData | undefined => {
 	const folderPath = getCurrentFolderPath();
 	if (!folderPath) {
-		showMessage(getText(NO_FOLDER));
+		onError(NO_FOLDER);
 		return undefined;
 	}
-	postMessage({ key: MESSAGE_GET_DATA_STATUS, value: 1, description: 'get folder' });
+	statusCallBack(MESSAGE_GET_DATA_STATUS, 1, 'get folder');
 	const packageJsonPath = getPackageJsonPath(folderPath);
 	if (!packageJsonPath) {
-		showMessage(getText(NO_PACKAGE_JSON));
+		onError(NO_PACKAGE_JSON);
 		return undefined;
 	}
-	postMessage({ key: MESSAGE_GET_DATA_STATUS, value: 3, description: 'get packageJson' });
+	statusCallBack(MESSAGE_GET_DATA_STATUS, 3, 'get packageJson');
 	const mainFilePath = getMainFilePath(packageJsonPath, folderPath);
 	if (!mainFilePath) {
-		showMessage(getText(NO_MAIN_FILE));
+		onError(NO_MAIN_FILE);
 		return undefined;
 	}
-	postMessage({ key: MESSAGE_GET_DATA_STATUS, value: 4, description: 'get mainFile' });
+	statusCallBack(MESSAGE_GET_DATA_STATUS, 4, 'get mainFile');
 	const dependencyTree = getDependencyTree(mainFilePath, folderPath);
 	if (!Object.keys(dependencyTree).length) {
-		// TODO move to i18n
-		showMessage('get dependency tree fail');
+		onError(GET_DEPENDENCY_TREE_FAIL);
 		return undefined;
 	}
 	const processedTreeData = processTreeData(dependencyTree, folderPath);
-	postMessage({
-		key: MESSAGE_ASSETS_BASE_URL,
-		value: getBaseWebViewUri(),
-		description: ''
-	});
-	postMessage({ key: MESSAGE_GET_DATA_STATUS, value: 0, description: 'get dependencyTreeData' });
-	postMessage({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: processedTreeData });
+	if (!processedTreeData) {
+		onError(NO_DEPENDENCY);
+	}
+	statusCallBack(MESSAGE_GET_DATA_STATUS, 0, 'get dependencyTreeData');
 	return processedTreeData;
 };
-export { getDependencyTreeData };
