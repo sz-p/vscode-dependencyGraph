@@ -221,13 +221,13 @@ export class D3Tree {
 			.attr('transform', () => `translate(${x},${y})`)
 			.remove();
 	}
-	exitIcon() {
+	nodesExitIcon() {
 		this.nodeExit.select('image').attr('x', 0).attr('y', 0).attr('width', 0).attr('height', 0);
 	}
-	exitName() {
+	nodesExitName() {
 		this.nodeExit.select('text').style('fill-opacity', 0);
 	}
-	exitArrowButton() {
+	nodesExitArrowButton() {
 		this.nodeExit
 			.select('image.arrowButton')
 			.transition()
@@ -280,9 +280,9 @@ export class D3Tree {
 		this.enterArrowButton();
 
 		this.nodesExit(source);
-		this.exitIcon();
-		this.exitName();
-		this.exitArrowButton();
+		this.nodesExitIcon();
+		this.nodesExitName();
+		this.nodesExitArrowButton();
 
 		this.getLinks();
 		this.appendLinkDom(source);
