@@ -54,10 +54,6 @@
         "title": "Hello World"
       },
       {
-        "command": "framegraph.readfile",
-        "title": "Read File"
-      },
-      {
         "command": "framegraph.refreshFile",
         "title": "Refresh",
         "icon": "$(refresh)"
@@ -105,7 +101,8 @@
     "tslint": "^5.20.0",
     "typescript": "^3.6.4",
     "vscode-test": "^1.2.2",
-    "webpack": "^4.44.1"
+    "webpack": "^4.44.1",
+    "ts-loader": "^8.0.3"
   },
   "publisher": "sz-p",
   "dependencies": {
