@@ -35,11 +35,9 @@ export const command_refreshFile = vscode.commands.registerCommand('framegraph.r
 		callback = statusCallBackCatchError;
 	}
 	global.dependencyTreeData = getDependencyTreeData(callback);
-	if (global.dependencyTreeData) {
-		renderTreeView(global.dependencyTreeData);
-		if (global.webViewPanel) {
-			postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: global.dependencyTreeData });
-		}
+	renderTreeView(global.dependencyTreeData);
+	if (global.webViewPanel) {
+		postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: global.dependencyTreeData });
 	}
 });
 export const allCommands = [ command_openView, command_reOpenView ];
