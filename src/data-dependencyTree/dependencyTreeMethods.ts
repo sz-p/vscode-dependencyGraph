@@ -3,24 +3,6 @@ import * as fs from 'fs';
 import * as dependencyTree from 'dependency-tree';
 import { getFileIconNameByFileName } from '../utils/fileIcons/getFileIcon';
 import { DependencyTreeData } from './dependencyTreeData';
-/**
- * get current workspace first folder path
- *
- * @returns {(String | undefined)}
- */
-export const getCurrentFolderPath = function(): string | undefined {
-	const ws = vscode.workspace;
-	let folder = ws.workspaceFolders;
-	let folderPath = '';
-	if (folder !== undefined) {
-		folderPath = folder[0].uri.fsPath;
-	}
-	if (folderPath) {
-		return folderPath;
-	} else {
-		return undefined;
-	}
-};
 
 export const getPackageJsonPath = function(folderPath: string): string | undefined {
 	const files = fs.readdirSync(folderPath);
@@ -31,7 +13,7 @@ export const getPackageJsonPath = function(folderPath: string): string | undefin
 	}
 };
 
-export const getMainFilePath = function(packageJsonPath: string, folderPath: string): string | undefined {
+export const getMainFilePath = function(folderPath: string, packageJsonPath: string): string | undefined {
 	const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 	// const packageJson = require(packageJsonPath);
 	if (packageJson.main) {
