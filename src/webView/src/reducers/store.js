@@ -1,8 +1,8 @@
-export const FIND_FOLDER = 0;
 export const initialState = {
+	folderPath: undefined,
 	gotDependencyTreeData: false,
 	assetsBaseURL: undefined,
-	getDataStatus: FIND_FOLDER,
+	getDataStatus: undefined,
 	dependencyTreeData: undefined,
 	getDataFailed: undefined,
 	focusOn: undefined
