@@ -9,10 +9,16 @@ import * as fs from 'fs';
 import { webViewHTMLPath } from '../paths';
 import { getBaseWebViewUri } from '../utils/getWebViewUri';
 import { postMessageCatchError } from '../utils/message/postMessageToWebView';
-import { MESSAGE_ASSETS_BASE_URL, MESSAGE_DEPENDENCY_TREE_DATA } from '../utils/message/messagesKeys';
+import {
+	MESSAGE_ASSETS_BASE_URL,
+	MESSAGE_DEPENDENCY_TREE_DATA,
+	MESSAGE_FOLDER_PATH
+} from '../utils/message/messagesKeys';
 import { DependencyTreeData } from '../data-dependencyTree/dependencyTreeData';
 import { createWebviewPanel } from '../initExtension';
-
+import { getCurrentFolderPath } from '../utils//utils';
+import { onError } from '../utils/error/onError';
+import { NO_FOLDER } from '../utils/error/errorKey';
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
  * @param {*} templatePath 相对于插件根目录的html文件绝对路径
@@ -52,10 +58,16 @@ export const reOpenWebView = function(dependencyTreeData: DependencyTreeData) {
 	}
 };
 export const openWebView = function(dependencyTreeData: DependencyTreeData) {
-	postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: dependencyTreeData });
-	postMessageCatchError({
-		key: MESSAGE_ASSETS_BASE_URL,
-		value: getBaseWebViewUri(),
-		description: ''
-	});
+	const folderPath = getCurrentFolderPath();
+	if (folderPath) {
+		postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: dependencyTreeData });
+		postMessageCatchError({ key: MESSAGE_FOLDER_PATH, value: folderPath });
+		postMessageCatchError({
+			key: MESSAGE_ASSETS_BASE_URL,
+			value: getBaseWebViewUri(),
+			description: ''
+		});
+	} else {
+		onError(NO_FOLDER);
+	}
 };
