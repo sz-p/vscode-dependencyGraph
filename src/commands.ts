@@ -2,12 +2,17 @@ import * as vscode from 'vscode';
 import { getDependencyTreeData, statusCallBackCatchError } from './data-dependencyTree/data-dependencyTree';
 import { createView } from './web-dependencyTree/openWebView';
 import { postMessageCatchError } from './utils/message/postMessageToWebView';
-import { MESSAGE_FOCUS_ON_NODE } from './utils/message/messagesKeys';
 import { reOpenWebView } from './web-dependencyTree/openWebView';
 import { renderTreeView } from './view-dependencyTree/renderTreeView';
 import { onError } from './utils/error/onError';
 import { NO_DEPENDENCY_TREE_DATA } from './utils/error/errorKey';
-import { MESSAGE_DEPENDENCY_TREE_DATA } from './utils/message/messagesKeys';
+import {
+	MESSAGE_DEPENDENCY_TREE_DATA,
+	MESSAGE_FOCUS_ON_NODE,
+	MESSAGE_UPDATE_WEBVIEW
+} from './utils/message/messagesKeys';
+import stringRandom from 'string-random';
+
 let message = 0;
 
 export const command_createView = vscode.commands.registerCommand('framegraph.createView', () => {
@@ -34,6 +39,7 @@ export const command_refreshFile = vscode.commands.registerCommand('framegraph.r
 	if (global.webViewPanel) {
 		callback = statusCallBackCatchError;
 	}
+	postMessageCatchError({ key: MESSAGE_UPDATE_WEBVIEW, value: stringRandom() });
 	global.dependencyTreeData = getDependencyTreeData(callback);
 	renderTreeView(global.dependencyTreeData);
 	if (global.webViewPanel) {
