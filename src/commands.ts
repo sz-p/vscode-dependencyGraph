@@ -10,7 +10,7 @@ import { NO_DEPENDENCY_TREE_DATA } from './utils/error/errorKey';
 import { MESSAGE_DEPENDENCY_TREE_DATA } from './utils/message/messagesKeys';
 let message = 0;
 
-export const command_openView = vscode.commands.registerCommand('framegraph.openView', () => {
+export const command_createView = vscode.commands.registerCommand('framegraph.createView', () => {
 	createView();
 });
 
@@ -40,4 +40,4 @@ export const command_refreshFile = vscode.commands.registerCommand('framegraph.r
 		postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: global.dependencyTreeData });
 	}
 });
-export const allCommands = [ command_openView, command_reOpenView ];
+export const allCommands = [ command_createView, command_reOpenView ];
