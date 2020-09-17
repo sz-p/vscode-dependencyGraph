@@ -1,4 +1,4 @@
 {
-  "configuration.title": "FrameGraph",
+  "framegraph.title": "FrameGraph",
   "framegraph.entryFilePath": "FrameGraph: The absolute path of the entry file to be analyzed"
 }
