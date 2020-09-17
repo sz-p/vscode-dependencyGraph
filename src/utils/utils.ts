@@ -17,3 +17,19 @@ export const getCurrentFolderPath = function(): string | undefined {
 		return undefined;
 	}
 };
+
+const getConfig = function(section: string) {
+	return vscode.workspace.getConfiguration();
+};
+const getFrameGraphConfig = function(section: string) {
+	return getConfig('framegraph').inspect(section);
+};
+const setFrameGraphConfig = function(section: string, value: any, global: boolean = false) {
+	return getConfig('framegraph').update(section, value, global);
+};
+export const getEntryFilePath = function() {
+	return getFrameGraphConfig('entryFilePath');
+};
+export const setEntryFilePath = function(value: any) {
+	return setFrameGraphConfig('entryFilePath', value);
+};
