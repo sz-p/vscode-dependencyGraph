@@ -74,7 +74,7 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "%configuration.title%",
+      "title": "%framegraph.title%",
       "properties": {
         "framegraph.entryFilePath": {
           "type": "string",
