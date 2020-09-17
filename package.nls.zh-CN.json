@@ -1,4 +1,5 @@
 {
   "framegraph.title": "FrameGraph",
-  "framegraph.entryFilePath": "待分析文件的入口文件绝对路径"
+  "framegraph.entryFilePath": "待分析的入口文件绝对路径",
+  "framegraph.folderPath": "文件夹路径"
 }
