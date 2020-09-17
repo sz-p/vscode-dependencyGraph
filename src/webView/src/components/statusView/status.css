@@ -1,0 +1,18 @@
+.statusView {
+	margin: 20px auto 0px auto;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	max-width: 800px;
+	left: 0px;
+	right: 0px;
+}
+.statusView-inputBox {
+	display: inline-block;
+	width: 80%;
+}
+
+.statusView-button {
+	top: 29px;
+	float: right;
+}
