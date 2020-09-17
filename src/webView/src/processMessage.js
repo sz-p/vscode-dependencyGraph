@@ -6,8 +6,9 @@ const messageCase = () => {
 		[ MESSAGES.MESSAGE_GET_DATA_STATUS, action.action_changeGetDataStatus ],
 		[ MESSAGES.MESSAGE_DEPENDENCY_TREE_DATA, action.action_setDependenciesTreeData ],
 		[ MESSAGES.MESSAGE_FOCUS_ON_NODE, action.action_setFocusOnNode ],
-    [ MESSAGES.MESSAGE_ASSETS_BASE_URL, action.action_setAssetBaseURL ],
-    [ MESSAGES.MESSAGE_FOLDER_PATH, action.action_setFolderPath ]
+		[ MESSAGES.MESSAGE_ASSETS_BASE_URL, action.action_setAssetBaseURL ],
+		[ MESSAGES.MESSAGE_FOLDER_PATH, action.action_setFolderPath ],
+		[ MESSAGES.MESSAGE_UPDATE_WEBVIEW, action.action_getVewViewHash ]
 	]);
 };
 

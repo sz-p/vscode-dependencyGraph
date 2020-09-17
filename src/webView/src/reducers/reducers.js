@@ -36,6 +36,13 @@ const actionsCase = () => {
 			folderPath: data.value
 		});
 		return newState;
+  };
+  const getWebViewHash = (state, action) => {
+		const data = action.payload.data;
+		const newState = Object.assign({}, state, {
+			viewHash: data.value
+		});
+		return newState;
 	};
 	return new Map([
 		[ type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus ],
@@ -43,6 +50,7 @@ const actionsCase = () => {
 		[ type.TYPE_SET_FOCUS_ON_NODE, setFocusOnNode ],
     [ type.TYPE_SET_ASSET_BASE_URL, setAssetBaseURL ],
     [ type.TYPE_SET_FOLDER_PATH, setFolderPath ],
+    [ type.TYPE_GET_WEBVIEW_HASH, getWebViewHash ],
 	]);
 };
 export const reducer = function(state = initialState, action) {
