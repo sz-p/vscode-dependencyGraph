@@ -1,4 +1,4 @@
 {
   "framegraph.title": "FrameGraph",
-  "framegraph.entryFilePath": "FrameGraph: The absolute path of the entry file to be analyzed"
+  "framegraph.entryFilePath": "The absolute path of the entry file to be analyzed"
 }
