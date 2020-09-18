@@ -1,4 +1,4 @@
 {
-  "configuration.title": "FrameGraph",
+  "framegraph.title": "FrameGraph",
   "framegraph.entryFilePath": "FrameGraph: 待分析文件的入口文件绝对路径"
 }
