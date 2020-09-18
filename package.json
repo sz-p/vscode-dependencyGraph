@@ -80,6 +80,11 @@
           "type": "string",
           "default": "",
           "description": "%framegraph.entryFilePath%"
+        },
+        "framegraph.folderPath":{
+          "type": "string",
+          "default": "",
+          "description": "%framegraph.folderPath%"
         }
       }
     }
