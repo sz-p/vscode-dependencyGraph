@@ -1,8 +1,15 @@
 import * as fs from 'fs';
 import * as dependencyTree from 'dependency-tree';
+import * as path from 'path';
+import * as vscode from 'vscode';
+
 import { getFileIconNameByFileName } from '../utils/fileIcons/getFileIcon';
 import { DependencyTreeData } from './dependencyTreeData';
-import * as path from 'path';
+import {
+	setEntryFilePath,
+	getCurrentFolderPath as getFolderPathByConfig,
+	setCurrentFolderPath
+} from '../utils/config';
 
 export const getPackageJsonPath = function(folderPath: string): string | undefined {
 	const files = fs.readdirSync(folderPath);
@@ -18,6 +25,7 @@ export const getMainFilePath = function(folderPath: string, packageJsonPath: str
 	// const packageJson = require(packageJsonPath);
 	if (packageJson.main) {
 		const mainFilePath = path.join(folderPath, packageJson.main);
+		setEntryFilePath(mainFilePath);
 		return mainFilePath;
 	} else {
 		return undefined;
@@ -32,6 +40,30 @@ export const getDependencyTree = function(filename: string, directory: string): 
 	return dt;
 };
 
+/**
+ * get current workspace first folder path
+ * catch path return path
+ *
+ * @returns {(String | undefined)}
+ */
+export const getCurrentFolderPath = function(): string | undefined {
+	let currentFolderPath = getFolderPathByConfig();
+	if (currentFolderPath) {
+		return currentFolderPath;
+	}
+	const ws = vscode.workspace;
+	let folder = ws.workspaceFolders;
+	let folderPath = '';
+	if (folder !== undefined) {
+		folderPath = folder[0].uri.fsPath;
+	}
+	if (folderPath) {
+		setCurrentFolderPath(folderPath);
+		return folderPath;
+	} else {
+		return undefined;
+	}
+};
 export const processTreeData = function(
 	dependencyTree: dependencyTree.DependencyObj,
 	folderPath: string
