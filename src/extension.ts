@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { initExtension } from './initExtension';
-import { getDependencyTreeData, statusCallBackCatchError } from './data-dependencyTree/data-dependencyTree';
+import { getDependencyTreeData } from './data-dependencyTree/data-dependencyTree';
 import { createView } from './web-dependencyTree/openWebView';
 import { allCommands } from './commands';
 import { renderTreeView } from './view-dependencyTree/renderTreeView';
@@ -15,10 +15,8 @@ export function activate(context: vscode.ExtensionContext) {
 	createView();
 
 	// get dependency tree data
-	const dependencyTreeData = getDependencyTreeData(statusCallBackCatchError);
-	if (!dependencyTreeData) {
-		return false;
-	}
+	const dependencyTreeData = getDependencyTreeData(true);
+
 	global.dependencyTreeData = dependencyTreeData;
 
 	// openWebView
