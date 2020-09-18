@@ -1,8 +1,8 @@
-import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as dependencyTree from 'dependency-tree';
 import { getFileIconNameByFileName } from '../utils/fileIcons/getFileIcon';
 import { DependencyTreeData } from './dependencyTreeData';
+import * as path from 'path';
 
 export const getPackageJsonPath = function(folderPath: string): string | undefined {
 	const files = fs.readdirSync(folderPath);
@@ -17,7 +17,8 @@ export const getMainFilePath = function(folderPath: string, packageJsonPath: str
 	const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 	// const packageJson = require(packageJsonPath);
 	if (packageJson.main) {
-		return folderPath + packageJson.main;
+		const mainFilePath = path.join(folderPath, packageJson.main);
+		return mainFilePath;
 	} else {
 		return undefined;
 	}
