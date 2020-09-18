@@ -71,7 +71,18 @@
         "command": "framegraph.postMessage",
         "title": "post Message"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "%configuration.title%",
+      "properties": {
+        "framegraph.entryFilePath": {
+          "type": "string",
+          "default": "",
+          "description": "%framegraph.entryFilePath%"
+        }
+      }
+    }
   },
   "scripts": {
     "watch": "npm-run-all -p watch:*",
@@ -117,6 +128,7 @@
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
-    "redux-promise": "^0.6.0"
+    "redux-promise": "^0.6.0",
+    "string-random": "^0.1.3"
   }
 }
