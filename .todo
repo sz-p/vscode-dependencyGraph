@@ -3,5 +3,11 @@
 [x] fix: node open position dislocation
 [x] feat: node highlight textColor to background color
 [x] feat: reload file reopenView
+[ ] feat: status webPage
 [ ] feat: auto i18n (view vscode-material-icon-theme-master)
-[ ] feat: settings webPage
+[ ] feat: auto theme light、dark
+[ ] feat: webview data save
+[ ] feat: webview data read
+[ ] feat: file information views
+[ ] feat: save file node
+[ ] feat: save node to file
