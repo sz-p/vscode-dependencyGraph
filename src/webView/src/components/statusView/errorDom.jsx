@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { PrimaryButton, TextField } from 'office-ui-fabric-react';
 import * as React from 'react';
 // TODO i18n
-
+import { msgOpenFolder } from '../../utils/messages'
 const openFolder = function () {
-  window.console.log('openFolder');
+  msgOpenFolder.post();
 }
 const setEntryFile = function () {
   window.console.log('setEntryFile');
