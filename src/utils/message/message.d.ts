@@ -1,5 +1,5 @@
 import { MsgKey } from './messagesKeys';
-export interface MsgToWebView {
+export interface Msg {
 	key: MsgKey;
 	value: any;
 	description?: string;
