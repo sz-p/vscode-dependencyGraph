@@ -3,17 +3,34 @@ import { initialState } from './store';
 const actionsCase = () => {
 	const change_getDataStatus = (state, action) => {
 		const data = action.payload.data;
-		const newState = Object.assign({}, state, {
-			getDataStatus: data.value
-		});
+		let newState = undefined;
+		if (data.value === 'error') {
+			newState = Object.assign({}, state, {
+				getDataStatus: data.value,
+				gotDependencyTreeData: false
+			});
+		} else {
+			newState = Object.assign({}, state, {
+				getDataStatus: data.value
+			});
+		}
 		return newState;
 	};
 	const setDependencyTreeData = (state, action) => {
 		const data = action.payload.data;
-		const newState = Object.assign({}, state, {
-			dependencyTreeData: data.value,
-			gotDependencyTreeData: true
-		});
+		let newState = undefined;
+		if (data.value) {
+			newState = Object.assign({}, state, {
+				dependencyTreeData: data.value,
+				gotDependencyTreeData: true
+			});
+		} else {
+			newState = Object.assign({}, state, {
+				dependencyTreeData: data.value,
+				gotDependencyTreeData: false
+			});
+		}
+
 		return newState;
 	};
 	const setFocusOnNode = (state, action) => {
@@ -29,15 +46,15 @@ const actionsCase = () => {
 			assetsBaseURL: data.value
 		});
 		return newState;
-  };
-  const setFolderPath = (state, action) => {
+	};
+	const setFolderPath = (state, action) => {
 		const data = action.payload.data;
 		const newState = Object.assign({}, state, {
 			folderPath: data.value
 		});
 		return newState;
-  };
-  const getWebViewHash = (state, action) => {
+	};
+	const getWebViewHash = (state, action) => {
 		const data = action.payload.data;
 		const newState = Object.assign({}, state, {
 			viewHash: data.value
@@ -48,9 +65,9 @@ const actionsCase = () => {
 		[ type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus ],
 		[ type.TYPE_SET_DEPENDENCIES_TREE_DATA, setDependencyTreeData ],
 		[ type.TYPE_SET_FOCUS_ON_NODE, setFocusOnNode ],
-    [ type.TYPE_SET_ASSET_BASE_URL, setAssetBaseURL ],
-    [ type.TYPE_SET_FOLDER_PATH, setFolderPath ],
-    [ type.TYPE_GET_WEBVIEW_HASH, getWebViewHash ],
+		[ type.TYPE_SET_ASSET_BASE_URL, setAssetBaseURL ],
+		[ type.TYPE_SET_FOLDER_PATH, setFolderPath ],
+		[ type.TYPE_GET_WEBVIEW_HASH, getWebViewHash ]
 	]);
 };
 export const reducer = function(state = initialState, action) {
