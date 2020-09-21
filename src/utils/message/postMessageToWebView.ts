@@ -1,13 +1,13 @@
 import { NO_WEBVIEW_PANEL } from '../error/errorKey';
 import { onError } from '../error/onError';
 
-import { MsgToWebView } from './message';
-export const postMessage = function(msg: MsgToWebView) {
+import { Msg } from './message';
+export const postMessage = function(msg: Msg) {
 	if (global.webViewPanel) {
 		global.webViewPanel.webview.postMessage(msg);
 	}
 };
-export const postMessageCatchError = function(msg: MsgToWebView) {
+export const postMessageCatchError = function(msg: Msg) {
 	if (global.webViewPanel) {
 		global.webViewPanel.webview.postMessage(msg);
 	} else {

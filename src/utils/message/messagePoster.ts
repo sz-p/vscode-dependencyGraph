@@ -1,9 +1,9 @@
-import { MsgToWebView } from './message';
+import { Msg } from './message';
 import { onError } from '../error/onError';
 import { NO_WEBVIEW_PANEL } from '../error/errorKey';
 import { StatusKey } from '../../data-dependencyTree/statusType';
 import { MsgKey, MESSAGE_GET_DATA_STATUS } from './messagesKeys';
-const postMessage = function(msg: MsgToWebView) {
+const postMessage = function(msg: Msg) {
 	if (global.webViewPanel) {
 		global.webViewPanel.webview.postMessage(msg);
 	} else {
