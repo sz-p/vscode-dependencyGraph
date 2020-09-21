@@ -1,4 +1,4 @@
-import { MESSAGE_OPEN_FOLDER } from '../../../utils/message/messagesKeys';
+import { MESSAGE_OPEN_FOLDER, MESSAGE_SET_ENTRY_FILE } from '../../../utils/message/messagesKeys';
 class Msg {
 	constructor(key, value, description) {
 		this.msg = {
@@ -12,3 +12,4 @@ class Msg {
 	}
 }
 export const msgOpenFolder = new Msg(MESSAGE_OPEN_FOLDER, true);
+export const msgSetEntryFile = (value) => new Msg(MESSAGE_SET_ENTRY_FILE, value);
