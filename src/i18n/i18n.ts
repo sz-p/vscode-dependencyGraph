@@ -1,12 +1,19 @@
-import * as vscode from 'vscode';
 import { zhcn } from './zh-cn/zh-cn';
 import { engl } from './en-gl/en-gl';
-export const getCurrentLanguage = (): string => vscode.env.language;
-let LANGUAGE = getCurrentLanguage();
-export function getText(text: string) {
-	if (LANGUAGE === 'en-gl') {
-		return engl[text];
-	} else if (LANGUAGE === 'zh-cn') {
-		return zhcn[text] || engl[text];
+export class I18n {
+	language: string;
+	constructor(language?: string) {
+		this.language = language || 'en';
+	}
+	setLanguage(language: string) {
+		this.language = language || 'en';
+	}
+	getText(text: string) {
+		if (this.language === 'en') {
+			return engl[text];
+		} else if (this.language === 'zh-cn') {
+			return zhcn[text] || engl[text];
+		}
 	}
 }
+export const i18n = new I18n();

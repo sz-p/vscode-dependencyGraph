@@ -1,9 +1,9 @@
 import { ErrorKey } from './errorKey';
 import { showMessage } from '../showMessage';
-import { getText } from '../../i18n/i18n';
+import { i18n } from '../../i18n/i18n';
 
 const getErrorMessage = function(errorKey: ErrorKey) {
-	return getText(errorKey as string);
+	return i18n.getText(errorKey as string);
 };
 export const onError = function(errorKey: ErrorKey, message?: string, callback?: Function, callbackArg?: any) {
 	let messageText = `${errorKey}: ${getErrorMessage(errorKey)}`;

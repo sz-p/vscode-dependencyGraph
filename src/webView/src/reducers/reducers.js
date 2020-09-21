@@ -1,4 +1,5 @@
 import * as type from '../actions/actionType';
+import { i18n } from '../../../i18n/i18n';
 import { initialState } from './store';
 const actionsCase = () => {
 	const change_getDataStatus = (state, action) => {
@@ -61,13 +62,22 @@ const actionsCase = () => {
 		});
 		return newState;
 	};
+	const getLanguage = (state, action) => {
+		const data = action.payload.data;
+		i18n.setLanguage(data.value);
+		const newState = Object.assign({}, state, {
+			language: data.value
+		});
+		return newState;
+	};
 	return new Map([
 		[ type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus ],
 		[ type.TYPE_SET_DEPENDENCIES_TREE_DATA, setDependencyTreeData ],
 		[ type.TYPE_SET_FOCUS_ON_NODE, setFocusOnNode ],
 		[ type.TYPE_SET_ASSET_BASE_URL, setAssetBaseURL ],
 		[ type.TYPE_SET_FOLDER_PATH, setFolderPath ],
-		[ type.TYPE_GET_WEBVIEW_HASH, getWebViewHash ]
+		[ type.TYPE_GET_WEBVIEW_HASH, getWebViewHash ],
+		[ type.TYPE_GET_LANGUAGE, getLanguage ]
 	]);
 };
 export const reducer = function(state = initialState, action) {
