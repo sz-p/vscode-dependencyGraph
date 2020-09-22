@@ -72,9 +72,9 @@ export const reOpenWebView = function(dependencyTreeData: DependencyTreeData | u
 	}
 };
 export const openWebView = function(dependencyTreeData: DependencyTreeData | undefined) {
-	const folderPath = getCurrentFolderPath();
-	postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: dependencyTreeData });
-	postMessageCatchError({ key: MESSAGE_FOLDER_PATH, value: folderPath });
+  const folderPath = getCurrentFolderPath();
+  msgGetLanguage.post();
 	postMessageCatchError({ key: MESSAGE_ASSETS_BASE_URL, value: getBaseWebViewUri() });
-	msgGetLanguage.post();
+	postMessageCatchError({ key: MESSAGE_FOLDER_PATH, value: folderPath });
+	postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: dependencyTreeData });
 };

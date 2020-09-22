@@ -64,7 +64,7 @@ const actionsCase = () => {
 	};
 	const getLanguage = (state, action) => {
 		const data = action.payload.data;
-		i18n.setLanguage(data.value);
+    i18n.setLanguage(data.value);
 		const newState = Object.assign({}, state, {
 			language: data.value
 		});

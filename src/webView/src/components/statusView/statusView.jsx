@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import "./status.css"
 import { loadTheme } from '@fluentui/react';
 import { dark } from '../../utils/theme'
-import { StatusDoms } from './statusDom';
+import { StatusDom } from './statusDom';
 import { useEffect, useState } from 'react'
 loadTheme(dark);
 const statusView = function (props) {
@@ -18,7 +18,7 @@ const statusView = function (props) {
   }, [viewHash])
   useEffect(() => {
     if (getDataStatus) {
-      setDoms(doms.concat(StatusDoms[getDataStatus.type][getDataStatus.status]))
+      setDoms(doms.concat(<StatusDom type={getDataStatus.type} status={getDataStatus.status} />))
     }
   }, [getDataStatus])
   if (gotDependencyTreeData) return null
