@@ -1,5 +1,8 @@
 import { MessagePoster, StatusMessagePoster } from './messagePoster';
+import { getBaseWebViewUri } from '../getWebViewUri';
 import * as STATUS from '../../data-dependencyTree/statusType';
+import * as MSG from './messagesKeys';
+import * as vscode from 'vscode';
 
 export const statusMsgGetFolderPath = new StatusMessagePoster(STATUS.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER);
 export const statusMsgGetPackageJsonPath = new StatusMessagePoster(STATUS.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON);
@@ -8,3 +11,6 @@ export const statusMsgGetDependencyData = new StatusMessagePoster(STATUS.STATUS_
 export const statusMsgGetDependencyProcessData = new StatusMessagePoster(
 	STATUS.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA
 );
+
+export const msgGetLanguage = new MessagePoster(MSG.MESSAGE_GET_LANGUAGE, vscode.env.language);
+export const msgGetBaseWebViewUri = new MessagePoster(MSG.MESSAGE_ASSETS_BASE_URL, getBaseWebViewUri());

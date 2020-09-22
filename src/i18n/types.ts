@@ -1,3 +1,4 @@
-export const NO_FOLDER = 'NO_FOLDER';
-export const NO_PACKAGE_JSON = 'NO_PACKAGE_JSON';
-export const NO_MAIN_FILE = 'NO_MAIN_FILE';
+export const FOLDER = 'FOLDER';
+export const OPEN_FOLDER = 'OPEN_FOLDER';
+export const ENTRY_FILE = 'ENTRY_FILE';
+export const SET_ENTRY_FILE = 'SET_ENTRY_FILE';

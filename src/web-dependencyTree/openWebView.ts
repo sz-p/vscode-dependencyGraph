@@ -19,7 +19,12 @@ import { createWebviewPanel } from '../initExtension';
 import { getCurrentFolderPath } from '../data-dependencyTree/dependencyTreeMethods';
 import { getEntryFilePath } from '../utils/config';
 
-import { statusMsgGetFolderPath, statusMsgGetEntryFile } from '../utils/message/messages';
+import {
+	statusMsgGetFolderPath,
+	statusMsgGetEntryFile,
+	msgGetLanguage,
+	msgGetBaseWebViewUri
+} from '../utils/message/messages';
 
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
@@ -75,9 +80,6 @@ export const openWebView = function(dependencyTreeData: DependencyTreeData | und
 	const folderPath = getCurrentFolderPath();
 	postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: dependencyTreeData });
 	postMessageCatchError({ key: MESSAGE_FOLDER_PATH, value: folderPath });
-	postMessageCatchError({
-		key: MESSAGE_ASSETS_BASE_URL,
-		value: getBaseWebViewUri(),
-		description: ''
-	});
+	msgGetLanguage.post();
+	msgGetBaseWebViewUri.post();
 };

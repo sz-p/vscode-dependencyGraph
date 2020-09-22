@@ -1,4 +1,5 @@
 export const initialState = {
+	language: undefined,
 	folderPath: undefined,
 	entryFilePath: undefined,
 	gotDependencyTreeData: false,
