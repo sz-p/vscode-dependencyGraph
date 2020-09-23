@@ -15,36 +15,47 @@ const setEntryFile = function (entryFilePath) {
 }
 const onEnter = function (entryFilePath) {
   return function (key) {
-    console.log(entryFilePath)
-    console.log(key)
     if (key.key === "Enter" && entryFilePath !== undefined) {
       setEntryFile(entryFilePath)
     }
   }
 }
 const errorDom = function (props) {
-  const { folderPath, defaultEntryFilePath } = props;
+  const { folderPath, defaultEntryFilePath, language } = props;
   let [entryFilePath, setEntryFilePath] = useState(defaultEntryFilePath);
+  let [TEXT_FOLDER, SET_TEXT_FOLDER] = useState();
+  let [TEXT_OPEN_FOLDER, SET_TEXT_OPEN_FOLDER] = useState();
+  let [TEXT_ENTRY_FILE, SET_TEXT_ENTRY_FILE] = useState();
+  let [TEXT_SET_ENTRY_FILE, SET_SET_ENTRY_FILE] = useState();
+
   useEffect(() => {
     const onKeyPress = onEnter(entryFilePath)
     document.addEventListener("keypress", onKeyPress);
     return () => document.removeEventListener("keypress", onKeyPress)
   }, [entryFilePath])
+  useEffect(() => {
+    i18n.setLanguage(language);
+    TEXT_FOLDER = SET_TEXT_FOLDER(i18n.getText(FOLDER));
+    TEXT_OPEN_FOLDER = SET_TEXT_OPEN_FOLDER(i18n.getText(OPEN_FOLDER));
+    TEXT_ENTRY_FILE = SET_TEXT_ENTRY_FILE(i18n.getText(ENTRY_FILE));
+    TEXT_SET_ENTRY_FILE = SET_SET_ENTRY_FILE(i18n.getText(SET_ENTRY_FILE));
+  }, [language])
   return (<div className="statusView-errorArea">
     <div>
-      <TextField className="statusView-inputBox" label={i18n.getText(FOLDER)} disabled required value={folderPath} />
-      <PrimaryButton className="statusView-button" text={i18n.getText(OPEN_FOLDER)} onClick={openFolder} />
+      <TextField className="statusView-inputBox" label={TEXT_FOLDER} disabled required value={folderPath} />
+      <PrimaryButton className="statusView-button" text={TEXT_OPEN_FOLDER} onClick={openFolder} />
     </div>
     <div>
-      <TextField className="statusView-inputBox" label={i18n.getText(ENTRY_FILE)} required prefix={folderPath} onChange={(e, v) => { setEntryFilePath(v) }} value={entryFilePath} />
-      <PrimaryButton className="statusView-button" text={i18n.getText(SET_ENTRY_FILE)} onClick={() => setEntryFile(entryFilePath)} />
+      <TextField className="statusView-inputBox" label={TEXT_ENTRY_FILE} required prefix={folderPath} onChange={(e, v) => { setEntryFilePath(v) }} value={entryFilePath} />
+      <PrimaryButton className="statusView-button" text={TEXT_SET_ENTRY_FILE} onClick={() => setEntryFile(entryFilePath)} />
     </div>
   </div>)
 }
 const mapStateToProps = (state) => {
   return {
     folderPath: state.folderPath,
-    defaultEntryFilePath: state.entryFilePath
+    defaultEntryFilePath: state.entryFilePath,
+    language: state.language
   }
 };
 export const ErrorDom = connect(mapStateToProps)(errorDom);

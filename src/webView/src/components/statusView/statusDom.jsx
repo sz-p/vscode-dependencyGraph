@@ -4,68 +4,52 @@ import {
   MessageBarType,
   initializeIcons
 } from 'office-ui-fabric-react';
-import * as STATUS from '../../../../data-dependencyTree/statusType';
+import { useEffect, useState } from 'react'
+
 import { ErrorDom } from './errorDom';
-const StatusDoms = {}
+import { i18n } from "../../../../i18n/i18n";
+import {
+  SUCCESS,
+  FAILED
+} from "../../../../i18n/types";
+import { connect } from 'react-redux';
 initializeIcons();
-// TODO i18n
-StatusDoms[STATUS.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER] = {
-  "success": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER}
-    messageBarType={MessageBarType.success}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER}:获取已打开的文件夹：成功</MessageBar>],
-  "error": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER}
-    messageBarType={MessageBarType.error}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER}:获取已打开的文件夹：失败</MessageBar>,
-  <ErrorDom key={`error_${STATUS.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER}`} />]
+function getText(statusKey, status) {
+  const text = statusKey
+    + ': '
+    + i18n.getText(statusKey)
+    + ': '
+    + i18n.getText(status)
+  console.log(text)
+  return text
 }
-StatusDoms[STATUS.STATUS_GET_DEPENDENCY_DATA_GET_SAVED_DATA] = {
-  "success": [<div></div>],
-  "error": [<div></div>]
+const statusDom = function (props) {
+  const { type, status, language } = props;
+  let [TEXT_FAILED, SET_TEXT_FAILED] = useState();
+  let [TEXT_SUCCESS, SET_TEXT_SUCCESS] = useState();
+  useEffect(() => {
+    i18n.setLanguage(language);
+    TEXT_FAILED = SET_TEXT_FAILED(getText(type, FAILED));
+    TEXT_SUCCESS = SET_TEXT_SUCCESS(getText(type, SUCCESS));
+  }, [language])
+  if (status === 'success') {
+    return (<MessageBar key={type}
+      messageBarType={MessageBarType.success}
+      isMultiline={false}
+    > {TEXT_SUCCESS}</MessageBar>)
+  }
+  if (status === 'error') {
+    return [<MessageBar key={type}
+      messageBarType={MessageBarType.error}
+      isMultiline={false}
+    > {TEXT_FAILED}</MessageBar>,
+    <ErrorDom key={"error_" + type} />]
+  }
+  return null
 }
-StatusDoms[STATUS.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON] = {
-  "success": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON}
-    messageBarType={MessageBarType.success}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON}:获取PackageJson文件：成功</MessageBar>],
-  "error": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON}
-    messageBarType={MessageBarType.error}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON}:获取PackageJson文件：失败</MessageBar>,
-  <ErrorDom key={`error_${STATUS.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON}`} />]
-}
-StatusDoms[STATUS.STATUS_GET_DEPENDENCY_DATA_GET_ENTRY_FILE] = {
-  "success": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_GET_ENTRY_FILE}
-    messageBarType={MessageBarType.success}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_GET_ENTRY_FILE}:获取入口文件：成功</MessageBar>],
-  "error": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_GET_ENTRY_FILE}
-    messageBarType={MessageBarType.error}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_GET_ENTRY_FILE}:获取入口文件：失败</MessageBar>,
-  <ErrorDom key={`error_${STATUS.STATUS_GET_DEPENDENCY_DATA_GET_ENTRY_FILE}`} />]
-}
-StatusDoms[STATUS.STATUS_GET_DEPENDENCY_DATA_GET_DATA] = {
-  "success": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_GET_DATA}
-    messageBarType={MessageBarType.success}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_GET_DATA}:获取依赖树：成功</MessageBar>],
-  "error": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_GET_DATA}
-    messageBarType={MessageBarType.error}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_GET_DATA}:获取依赖树：失败</MessageBar>,
-  <ErrorDom key={`error_${STATUS.STATUS_GET_DEPENDENCY_DATA_GET_DATA}`} />]
-}
-StatusDoms[STATUS.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA] = {
-  "success": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA}
-    messageBarType={MessageBarType.success}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA}:处理依赖树：成功</MessageBar>],
-  "error": [<MessageBar key={STATUS.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA}
-    messageBarType={MessageBarType.error}
-    isMultiline={false}
-  > {STATUS.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA}:处理依赖树：失败</MessageBar>,
-  <ErrorDom key={`error_${STATUS.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA}`} />]
-}
-export { StatusDoms }
+const mapStateToProps = (state) => {
+  return {
+    language: state.language
+  }
+};
+export const StatusDom = connect(mapStateToProps)(statusDom);
