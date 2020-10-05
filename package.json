@@ -23,7 +23,7 @@
       "activitybar": [
         {
           "id": "framegraph",
-          "title": "Frame Graph",
+          "title": "%framegraph.framegraphWebView%",
           "icon": "assets/framegraph.svg"
         }
       ]
@@ -55,7 +55,7 @@
       },
       {
         "command": "framegraph.refreshFile",
-        "title": "Refresh",
+        "title": "%framegraph.refresh%",
         "icon": "$(refresh)"
       },
       {
@@ -64,7 +64,7 @@
       },
       {
         "command": "framegraph.reOpenView",
-        "title": "Open page",
+        "title": "%framegraph.openPage%",
         "icon": "$(browser)"
       },
       {

@@ -18,6 +18,7 @@ zhcn[types.FOLDER] = '文件夹';
 zhcn[types.OPEN_FOLDER] = '打开文件夹';
 zhcn[types.ENTRY_FILE] = '入口文件';
 zhcn[types.SET_ENTRY_FILE] = '设置入口文件';
+zhcn[types.FRAME_GRAPH_WEBVIEW] = '架构图插件视图页面';
 
 zhcn[status.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER] = '获取已打开的文件夹';
 zhcn[status.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON] = '获取PackageJson文件';

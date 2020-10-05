@@ -5,3 +5,4 @@ export const FOLDER = 'FOLDER';
 export const OPEN_FOLDER = 'OPEN_FOLDER';
 export const ENTRY_FILE = 'ENTRY_FILE';
 export const SET_ENTRY_FILE = 'SET_ENTRY_FILE';
+export const FRAME_GRAPH_WEBVIEW = 'FRAME_GRAPH_WEBVIEW'
