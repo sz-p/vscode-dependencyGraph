@@ -19,6 +19,7 @@ engl[types.FOLDER] = 'Folder';
 engl[types.OPEN_FOLDER] = 'Open folder';
 engl[types.ENTRY_FILE] = 'Entry file';
 engl[types.SET_ENTRY_FILE] = 'Set entry file';
+engl[types.FRAME_GRAPH_WEBVIEW] = 'Frame graph view page';
 
 engl[status.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER] = 'Get opened folder';
 engl[status.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON] = 'Get packageJson file';

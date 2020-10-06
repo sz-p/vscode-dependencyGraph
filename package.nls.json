@@ -1,5 +1,8 @@
 {
   "framegraph.title": "FrameGraph",
   "framegraph.entryFilePath": "The absolute path of the entry file to be analyzed",
-  "framegraph.folderPath": "The files folder path"
+  "framegraph.folderPath": "The files folder path",
+  "framegraph.openPage": "Open view page",
+  "framegraph.refresh": "Refresh dependencies data",
+  "framegraph.framegraphWebView":"Frame graph view page"
 }
