@@ -64,9 +64,16 @@ const actionsCase = () => {
 	};
 	const getLanguage = (state, action) => {
 		const data = action.payload.data;
-    i18n.setLanguage(data.value);
+		i18n.setLanguage(data.value);
 		const newState = Object.assign({}, state, {
 			language: data.value
+		});
+		return newState;
+	};
+	const getActiveThemeKind = (state, action) => {
+		const data = action.payload.data;
+		const newState = Object.assign({}, state, {
+			activeThemeKind: data.value
 		});
 		return newState;
 	};
@@ -77,7 +84,8 @@ const actionsCase = () => {
 		[ type.TYPE_SET_ASSET_BASE_URL, setAssetBaseURL ],
 		[ type.TYPE_SET_FOLDER_PATH, setFolderPath ],
 		[ type.TYPE_GET_WEBVIEW_HASH, getWebViewHash ],
-		[ type.TYPE_GET_LANGUAGE, getLanguage ]
+		[ type.TYPE_GET_LANGUAGE, getLanguage ],
+		[ type.TYPE_GET_ACTIVE_THEME_KIND, getActiveThemeKind ]
 	]);
 };
 export const reducer = function(state = initialState, action) {

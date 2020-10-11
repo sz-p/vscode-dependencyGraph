@@ -1,4 +1,5 @@
 import { MessagePoster, StatusMessagePoster } from './messagePoster';
+import { getActiveTheme } from '../config';
 import * as STATUS from '../../data-dependencyTree/statusType';
 import * as MSG from './messagesKeys';
 import * as vscode from 'vscode';
@@ -12,3 +13,4 @@ export const statusMsgGetDependencyProcessData = new StatusMessagePoster(
 );
 
 export const msgGetLanguage = new MessagePoster(MSG.MESSAGE_GET_LANGUAGE, vscode.env.language);
+export const msgGetActiveThemeKind = new MessagePoster(MSG.MESSAGE_GET_ACTIVE_THEME_KIND, getActiveTheme());

@@ -21,3 +21,7 @@ export const getCurrentFolderPath = function() :string | undefined  {
 export const setCurrentFolderPath = function(value:any){
 	return setFrameGraphConfig('folderPath', value);
 }
+export const getActiveTheme = function() {
+	const kind = vscode.window.activeColorTheme.kind;
+	return vscode.ColorThemeKind[kind];
+};

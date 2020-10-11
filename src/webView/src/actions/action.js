@@ -11,4 +11,5 @@ export const action_setFocusOnNode = createAction(type.TYPE_SET_FOCUS_ON_NODE, r
 export const action_setAssetBaseURL = createAction(type.TYPE_SET_ASSET_BASE_URL, returnParams);
 export const action_setFolderPath = createAction(type.TYPE_SET_FOLDER_PATH, returnParams);
 export const action_getVewViewHash = createAction(type.TYPE_GET_WEBVIEW_HASH, returnParams);
-export const action_getLanguage = createAction(type.TYPE_GET_LANGUAGE, returnParams)
+export const action_getLanguage = createAction(type.TYPE_GET_LANGUAGE, returnParams);
+export const action_getActiveThemeKind = createAction(type.TYPE_GET_ACTIVE_THEME_KIND, returnParams);

@@ -1,4 +1,5 @@
 export const initialState = {
+	activeThemeKind: undefined,
 	language: undefined,
 	folderPath: undefined,
 	entryFilePath: undefined,
