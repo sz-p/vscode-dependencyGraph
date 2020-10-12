@@ -20,7 +20,6 @@ function getText(statusKey, status) {
     + i18n.getText(statusKey)
     + ': '
     + i18n.getText(status)
-  console.log(text)
   return text
 }
 const statusDom = function (props) {
