@@ -4,5 +4,6 @@
   "framegraph.folderPath": "The files folder path",
   "framegraph.openPage": "Open view page",
   "framegraph.refresh": "Refresh dependencies data",
-  "framegraph.framegraphWebView":"Frame graph view page"
+  "framegraph.framegraphTreeView": "FrameGraph",
+  "framegraph.DependencyTree": "DependencyTree"
 }
