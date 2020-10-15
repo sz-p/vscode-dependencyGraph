@@ -1,4 +1,5 @@
 import { DependencyTreeData } from './dependencyTreeData';
+import * as dependencyTree from 'dependency-tree';
 
 import {
 	statusMsgGetFolderPath,
@@ -56,21 +57,20 @@ export const getDependencyTreeData = (postMessage?: boolean): DependencyTreeData
 	}
 	postMessage ? statusMsgGetEntryFile.postSuccess() : null;
 
-	const dependencyTree = getDependencyTree(mainFilePath, folderPath);
-	if (!Object.keys(dependencyTree).length) {
+	const dependencyTreeData = getDependencyTree(mainFilePath, folderPath);
+	if (!Object.keys(dependencyTreeData as dependencyTree.DependencyObj).length) {
 		onError(GET_DEPENDENCY_TREE_FAIL);
 		postMessage ? statusMsgGetDependencyData.postError() : null;
 		return undefined;
-  }
+	}
 	postMessage ? statusMsgGetDependencyData.postSuccess() : null;
 
-
-  const processedTreeData = processTreeData(dependencyTree, folderPath);
+	const processedTreeData = processTreeData(dependencyTreeData as dependencyTree.DependencyObj, folderPath);
 	if (!processedTreeData) {
 		onError(NO_DEPENDENCY);
 		postMessage ? statusMsgGetDependencyProcessData.postError() : null;
 	}
 	postMessage ? statusMsgGetDependencyProcessData.postSuccess() : null;
 
-  return processedTreeData;
+	return processedTreeData;
 };

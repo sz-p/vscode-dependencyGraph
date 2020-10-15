@@ -5,11 +5,9 @@ import * as vscode from 'vscode';
 
 import { getFileIconNameByFileName } from '../utils/fileIcons/getFileIcon';
 import { DependencyTreeData } from './dependencyTreeData';
-import {
-	setEntryFilePath,
-	getCurrentFolderPath as getFolderPathByConfig,
-	setCurrentFolderPath
-} from '../utils/config';
+import { setEntryFilePath, getCurrentFolderPath as getFolderPathByConfig, setCurrentFolderPath } from '../utils/config';
+
+import { analysesFile } from '../fileAnalysis/javascript/javascriptAnalysis';
 
 export const getPackageJsonPath = function(folderPath: string): string | undefined {
 	const files = fs.readdirSync(folderPath);
@@ -84,7 +82,14 @@ export const processTreeData = function(
 			const fileName = file;
 			const extension = file.split('.').pop();
 			const type = getFileIconNameByFileName(fileName);
-
+			const analyseData = analysesFile(node.path);
+			if (analyseData.analysed) {
+				node.dependencyTreeData.analysed = true;
+				node.dependencyTreeData.lines = analyseData.lines;
+				node.dependencyTreeData.functions = analyseData.functionsList;
+      }
+      node.dependencyTreeData.analysed = false;
+			node.dependencyTreeData.fileDescription = analyseData.fileInformation;
 			node.dependencyTreeData.name = fileName;
 			node.dependencyTreeData.absolutePath = node.path;
 			node.dependencyTreeData.ancestors = node.ancestors;
