@@ -212,8 +212,8 @@ export class D3Tree {
 			.style('fill-opacity', 1);
 	}
 	nodesExit(source) {
-		const x = source ? source.y0 : this.root.y0;
-		const y = source ? source.x0 : this.root.x0;
+		const x = source ? source.y : this.root.y0;
+		const y = source ? source.x : this.root.x0;
 		this.nodeExit = this.nodesData
 			.exit()
 			.transition()
@@ -252,8 +252,8 @@ export class D3Tree {
 		this.linkEnter.transition().duration(this.DURATION_TIME).attr('d', (d) => diagonal(d, d.parent));
 	}
 	linksExit(source) {
-		const x = source ? source.x0 : this.root.x0;
-		const y = source ? source.y0 : this.root.y0;
+		const x = source ? source.x : this.root.x0;
+		const y = source ? source.y : this.root.y0;
 		this.linksData
 			.exit()
 			.transition()
