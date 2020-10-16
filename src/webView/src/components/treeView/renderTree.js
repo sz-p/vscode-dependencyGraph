@@ -136,7 +136,7 @@ export class D3Tree {
 			.append('g')
 			.attr('class', 'node')
 			.attr('transform', () => `translate(${x},${y})`)
-			.style('cursor', (d) => (d.children || d._children ? 'pointer' : 'auto'));
+			.style('cursor', () => 'pointer');
 	}
 	appendNodeIcon() {
 		this.nodeDom
@@ -362,8 +362,8 @@ export class D3Tree {
 			})
 			.style('fill', (d) => {
 				return this.NODE_HIGHLIGHT_COLOR;
-      })
-      .style('fill-opacity', (d) => {
+			})
+			.style('fill-opacity', (d) => {
 				return 1;
 			})
 			.transition()
