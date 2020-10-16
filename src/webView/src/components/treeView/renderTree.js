@@ -77,7 +77,7 @@ export class D3Tree {
 			};
 			this.zoom = d3.zoom();
 			this.zoom.on('zoom', zoomed);
-			this.svgBox.call(this.zoom);
+			this.svgBox.call(this.zoom).on("dblclick.zoom", null);;
 			this.svgBox.call(this.zoom.translateBy, this.PADDING.LEFT, this.height / 2 - this.PADDING.TOP);
 		}
 	}
