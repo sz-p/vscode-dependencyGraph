@@ -5,9 +5,10 @@
 [x] feat: reload file reopenView
 [x] feat: status webPage
 [x] feat: auto i18n (view vscode-material-icon-theme-master)
-[ ] feat: auto theme light、dark
-[ ] feat: webview data save
+[x] feat: auto theme light dark
+[x] feat: get file fileDescription functions
 [ ] feat: webview data read
 [ ] feat: file information views
+[ ] feat: save node information to file
+[ ] feat: webview data save
 [ ] feat: save file node
-[ ] feat: save node to file
