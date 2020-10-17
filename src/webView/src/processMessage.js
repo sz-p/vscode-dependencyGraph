@@ -1,6 +1,6 @@
 import * as action from './actions/action.js';
 import * as MESSAGES from '../../utils/message/messagesKeys';
-import { store } from './app';
+import { store } from './reducers/store';
 const messageCase = () => {
 	return new Map([
 		[ MESSAGES.MESSAGE_GET_DATA_STATUS, action.action_changeGetDataStatus ],

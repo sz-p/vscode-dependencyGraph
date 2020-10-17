@@ -1,13 +1,4 @@
-export const initialState = {
-	activeThemeKind: undefined,
-	language: undefined,
-	folderPath: undefined,
-	entryFilePath: undefined,
-	gotDependencyTreeData: false,
-	assetsBaseURL: undefined,
-	getDataStatus: undefined,
-	dependencyTreeData: undefined,
-	getDataFailed: undefined,
-	focusOn: undefined,
-	viewHash: undefined
-};
+import { createStore, applyMiddleware } from 'redux';
+import promiseMiddleware from 'redux-promise';
+import { reducer } from './reducers';
+export const store = createStore(reducer, applyMiddleware(promiseMiddleware));
