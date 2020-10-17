@@ -77,7 +77,7 @@ export class D3Tree {
 			};
 			this.zoom = d3.zoom();
 			this.zoom.on('zoom', zoomed);
-			this.svgBox.call(this.zoom).on("dblclick.zoom", null);;
+			this.svgBox.call(this.zoom).on('dblclick.zoom', null);
 			this.svgBox.call(this.zoom.translateBy, this.PADDING.LEFT, this.height / 2 - this.PADDING.TOP);
 		}
 	}
@@ -362,6 +362,9 @@ export class D3Tree {
 			})
 			.style('fill', (d) => {
 				return this.NODE_HIGHLIGHT_COLOR;
+      })
+      .style('fill-opacity', (d) => {
+				return 1;
 			})
 			.transition()
 			.duration(this.DURATION_TIME * 2)
