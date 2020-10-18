@@ -13,3 +13,4 @@ export const action_setFolderPath = createAction(type.TYPE_SET_FOLDER_PATH, retu
 export const action_getVewViewHash = createAction(type.TYPE_GET_WEBVIEW_HASH, returnParams);
 export const action_getLanguage = createAction(type.TYPE_GET_LANGUAGE, returnParams);
 export const action_getActiveThemeKind = createAction(type.TYPE_GET_ACTIVE_THEME_KIND, returnParams);
+export const action_selectNode = createAction(type.TYPE_SELECT_NODE, returnParams);
