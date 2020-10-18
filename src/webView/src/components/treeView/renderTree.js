@@ -319,7 +319,8 @@ export class D3Tree {
 				d.children = d._children;
 				d._children = null;
 			}
-			this.update(d);
+      this.update(d);
+      d3.event.stopPropagation();
 		};
 	}
 	openToNode(data) {
