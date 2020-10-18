@@ -63,7 +63,14 @@ export class D3Tree {
 			this.options.height = this.height = height;
 		}
 		if (!this.svgBox) {
-			this.svgBox = d3.select(this.dom).append('svg').attr('width', this.width).attr('height', this.height);
+			this.svgBox = d3
+				.select(this.dom)
+				.append('svg')
+				.attr('width', this.width)
+				.attr('height', this.height)
+				.on('click', () => {
+					store.dispatch(action_selectNode({}));
+				});
 		}
 		if (!this.svg) {
 			this.svg = this.svgBox
@@ -138,7 +145,11 @@ export class D3Tree {
 			.append('g')
 			.attr('class', 'node')
 			.attr('transform', () => `translate(${x},${y})`)
-			.style('cursor', () => 'pointer');
+			.style('cursor', () => 'pointer')
+			.on('click', function(d) {
+				d3.event.stopPropagation();
+				store.dispatch(action_selectNode(d));
+			});
 	}
 	appendNodeIcon() {
 		this.nodeDom
@@ -158,10 +169,7 @@ export class D3Tree {
 			.style('text-anchor', (d) => (d.children || d._children ? 'end' : 'start'))
 			.attr('x', (d) => (d.children || d._children ? -this.NODE_TEXT_OFFSET_X : this.NODE_TEXT_OFFSET_X))
 			.text((d) => d.data.name)
-			.style('fill-opacity', 0)
-			.on('click', (d) => {
-				store.dispatch(action_selectNode(d));
-			});
+			.style('fill-opacity', 0);
 	}
 	appendNodeArrowButton() {
 		this.nodeDom
