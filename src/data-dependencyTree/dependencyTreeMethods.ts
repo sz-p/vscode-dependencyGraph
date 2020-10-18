@@ -87,9 +87,10 @@ export const processTreeData = function(
 				node.dependencyTreeData.analysed = true;
 				node.dependencyTreeData.lines = analyseData.lines;
 				node.dependencyTreeData.functions = analyseData.functionsList;
+      }else{
+        node.dependencyTreeData.analysed = false;
       }
-      node.dependencyTreeData.analysed = false;
-			node.dependencyTreeData.fileDescription = analyseData.fileInformation;
+      node.dependencyTreeData.fileDescription = analyseData.fileInformation;
 			node.dependencyTreeData.name = fileName;
 			node.dependencyTreeData.absolutePath = node.path;
 			node.dependencyTreeData.ancestors = node.ancestors;
