@@ -1,5 +1,7 @@
 import * as d3 from 'd3';
 import { throttle } from '../../utils/utils';
+import { store } from '../../reducers/store';
+import { action_selectNode } from '../../actions/action';
 
 const diagonal = function(s, d) {
 	const path = `M ${s.y} ${s.x}
@@ -156,7 +158,10 @@ export class D3Tree {
 			.style('text-anchor', (d) => (d.children || d._children ? 'end' : 'start'))
 			.attr('x', (d) => (d.children || d._children ? -this.NODE_TEXT_OFFSET_X : this.NODE_TEXT_OFFSET_X))
 			.text((d) => d.data.name)
-			.style('fill-opacity', 0);
+			.style('fill-opacity', 0)
+			.on('click', (d) => {
+				store.dispatch(action_selectNode(d));
+			});
 	}
 	appendNodeArrowButton() {
 		this.nodeDom
