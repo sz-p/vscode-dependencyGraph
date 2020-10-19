@@ -29,7 +29,7 @@ const statusView = function (props) {
   }, [activeThemeKind])
   useEffect(() => {
     if (getDataStatus) {
-      setDoms(doms.concat(<StatusDom type={getDataStatus.type} status={getDataStatus.status} />))
+      setDoms(doms.concat(<StatusDom key={getDataStatus.type} type={getDataStatus.type} status={getDataStatus.status} />))
     }
   }, [getDataStatus])
   if (gotDependencyTreeData) return null
