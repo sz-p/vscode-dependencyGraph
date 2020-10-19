@@ -98,7 +98,6 @@ const getDescription = function(codeString:string){
   }
 }
 export const analysesFile = function(filePath: string) :AnalyseData |AnalyseFiled{
-  let analysed = undefined;
   const fileInformation = {} as FileInformation;
   const functionsList = [] as FunctionInformation[];
   const codeString = fs.readFileSync(filePath).toString();
@@ -107,9 +106,8 @@ export const analysesFile = function(filePath: string) :AnalyseData |AnalyseFile
   let ast = undefined;
 	try {
     ast = babelParser.parse(codeString);
-    analysed = true;
 	} catch (e) {
-    analysed = false;
+    //TODO catch error
   }
   if(!ast){
     return  {
