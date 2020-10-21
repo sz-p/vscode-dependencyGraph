@@ -24,11 +24,23 @@ const getFunctionNameInVariableDeclarator = function(nodePath:NodePath<namedType
     return undefined;
   }
 }
+const getFunctionNameInObjectMethod = function(nodePath:NodePath<namedTypes.ObjectMethod>):string | undefined {
+  const identifier = nodePath?.node?.key as unknown as NodePath<namedTypes.Identifier> | undefined;
+  let functionName = undefined;
+  if(identifier){
+    functionName = identifier.name;
+    return functionName
+  }else{
+    return undefined;
+  }
+}
 const getPathNodes = function(nodePath:NodePath<namedTypes.Function>){
   let FunctionDeclaration = nodePath;
   let ExportNamedDeclaration = undefined;
   let VariableDeclarator = undefined;
   let VariableDeclaration = undefined;
+  let ObjectMethod = undefined;
+  let ObjectProperty = undefined;
   if(FunctionDeclaration?.parent?.node.type ==='ExportNamedDeclaration'){
     ExportNamedDeclaration = FunctionDeclaration.parent;
   }else if(FunctionDeclaration?.parent?.node.type === 'VariableDeclarator'){
@@ -39,12 +51,20 @@ const getPathNodes = function(nodePath:NodePath<namedTypes.Function>){
         ExportNamedDeclaration = VariableDeclaration.parent;
       }
     }
+  }else if(nodePath?.node?.type ==='ObjectMethod'){
+    ObjectMethod = FunctionDeclaration;
+  }else if(nodePath?.node?.type === 'ArrowFunctionExpression'){
+    if(nodePath?.parent?.node.type === 'ObjectProperty'){
+      ObjectProperty = nodePath.parent;
+    }
   }
   return {
     FunctionDeclaration,
     ExportNamedDeclaration,
     VariableDeclarator,
-    VariableDeclaration
+    VariableDeclaration,
+    ObjectMethod,
+    ObjectProperty
   }
 }
 const setArrowFunction = function(FunctionDeclaration:NodePath<namedTypes.Function>,functionInfo:FunctionInformation){
@@ -121,7 +141,10 @@ export const analysesFile = function(filePath: string) :AnalyseData |AnalyseFile
         FunctionDeclaration,
         ExportNamedDeclaration,
         VariableDeclarator,
-        VariableDeclaration} = getPathNodes(nodePath);
+        VariableDeclaration,
+        ObjectMethod,
+        ObjectProperty
+      } = getPathNodes(nodePath);
 
       const functionInfo = {} as FunctionInformation;
 
@@ -142,9 +165,8 @@ export const analysesFile = function(filePath: string) :AnalyseData |AnalyseFile
           setLoc(FunctionDeclaration,functionInfo)
           functionInfo["export"] = false;
         }
-      }else{
-        if(VariableDeclarator
-          && (functionName = getFunctionNameInVariableDeclarator(VariableDeclarator as NodePath<namedTypes.VariableDeclarator>))){
+      }else if(VariableDeclarator
+        && (functionName = getFunctionNameInVariableDeclarator(VariableDeclarator as NodePath<namedTypes.VariableDeclarator>))){
             functionInfo["name"] = functionName;
             if(VariableDeclaration){
               functionInfo["kind"] = VariableDeclaration.node.kind;
@@ -158,7 +180,22 @@ export const analysesFile = function(filePath: string) :AnalyseData |AnalyseFile
                 functionInfo["export"] = false;
               }
             }
-        }
+      }else if(ObjectMethod
+        && (functionName = getFunctionNameInObjectMethod(ObjectMethod as NodePath<namedTypes.ObjectMethod>))){
+          functionInfo["name"] = functionName;
+          // true is ObjectMethod temporary is function
+          functionInfo["kind"] = 'function';
+          functionInfo["export"] = false;
+          setLoc(ObjectMethod,functionInfo)
+          setComment(ObjectMethod,functionInfo);
+      }else if(ObjectProperty
+        && (functionName = getFunctionNameInObjectMethod(ObjectProperty as NodePath<namedTypes.ObjectMethod>))){
+          functionInfo["name"] = functionName;
+          // true is ObjectMethod temporary is function
+          functionInfo["kind"] = 'function';
+          functionInfo["export"] = false;
+          setLoc(ObjectProperty,functionInfo)
+          setComment(ObjectProperty,functionInfo);
       }
       functionsList.push(functionInfo);
 			return false;
