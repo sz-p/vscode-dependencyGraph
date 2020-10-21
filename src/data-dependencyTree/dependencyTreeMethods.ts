@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as dependencyTree from 'dependency-tree';
+import * as getdependencytree from 'get-dependency-tree';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
@@ -30,12 +31,18 @@ export const getMainFilePath = function(folderPath: string, packageJsonPath: str
 	}
 };
 export const getDependencyTree = function(filename: string, directory: string): dependencyTree.DependencyObj {
-	const dt = dependencyTree({
-		filter: (path: string) => path.indexOf('node_modules') === -1,
-		filename: filename,
-		directory: directory
-	});
-	return dt;
+	let tree = undefined;
+	try {
+		tree = getdependencytree({ entry: filename }).tree;
+	} catch (err) {
+		console.log(err);
+	}
+	// const dt = dependencyTree({
+	// 	filter: (path: string) => path.indexOf('node_modules') === -1,
+	// 	filename: filename,
+	// 	directory: directory
+	// });
+	return tree;
 };
 
 /**
@@ -87,10 +94,10 @@ export const processTreeData = function(
 				node.dependencyTreeData.analysed = true;
 				node.dependencyTreeData.lines = analyseData.lines;
 				node.dependencyTreeData.functions = analyseData.functionsList;
-      }else{
-        node.dependencyTreeData.analysed = false;
-      }
-      node.dependencyTreeData.fileDescription = analyseData.fileInformation;
+			} else {
+				node.dependencyTreeData.analysed = false;
+			}
+			node.dependencyTreeData.fileDescription = analyseData.fileInformation;
 			node.dependencyTreeData.name = fileName;
 			node.dependencyTreeData.absolutePath = node.path;
 			node.dependencyTreeData.ancestors = node.ancestors;
@@ -113,5 +120,6 @@ export const processTreeData = function(
 			}
 		}
 	}
+	console.log(dependencyTreeData);
 	return dependencyTreeData;
 };
