@@ -14,7 +14,7 @@ export interface FunctionInformation {
 	loc: namedTypes.SourceLocation | null | undefined;
 	params: Param[] | [];
 	arrowFunction: boolean;
-	kind: 'const' | 'let' | 'function';
+	kind: 'const' | 'let' | 'function' | 'var';
 	name: string;
 }
 export interface DependencyTreeData {
