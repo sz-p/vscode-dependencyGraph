@@ -1,6 +1,14 @@
 import { FunctionInformation, Param, FileInformation } from '../../data-dependencyTree/dependencyTreeData';
 import { NodePath } from 'ast-types/lib/node-path';
+import {ASTNode} from 'ast-types/lib/types';
 import { namedTypes } from 'ast-types/gen/namedTypes';
+import { prettyPrint } from 'recast';
+import * as recast from 'recast';
+
+const getCode = function(ASTNode:ASTNode):string {
+  const code = prettyPrint(ASTNode).code
+  return code;
+}
 
 const getPathNodes = function(nodePath:NodePath<namedTypes.Function>){
   let FunctionDeclaration = nodePath;
@@ -88,7 +96,7 @@ const getFunctionNameInObject = function(nodePath:NodePath<namedTypes.ObjectMeth
 const setComment = function(nodePath:NodePath,functionInfo:FunctionInformation){
   const {leadingComments} = nodePath.node;
   if(leadingComments){
-    functionInfo['comment'] = leadingComments[0];
+    functionInfo['comment'] = leadingComments[0].value;
   }
 }
 const setLoc = function(nodePath:NodePath,functionInfo:FunctionInformation){
@@ -106,10 +114,12 @@ const getFunctionInformationFunctionDeclaration = function(functionInfo:Function
     setComment(ExportNamedDeclaration,functionInfo);
     setLoc(ExportNamedDeclaration,functionInfo)
     functionInfo["export"] = true;
+    functionInfo["code"] = getCode(ExportNamedDeclaration.node);
   }else{
     setComment(FunctionDeclaration,functionInfo);
     setLoc(FunctionDeclaration,functionInfo)
     functionInfo["export"] = false;
+    functionInfo["code"] = getCode(FunctionDeclaration.node);
   }
 }
 const getFunctionInVariableDeclarator = function(functionInfo:FunctionInformation,functionName:string,VariableDeclaration:NodePath<namedTypes.VariableDeclaration>|undefined,ExportNamedDeclaration:NodePath<namedTypes.ExportNamedDeclaration>|undefined){
@@ -119,10 +129,12 @@ const getFunctionInVariableDeclarator = function(functionInfo:FunctionInformatio
     if(ExportNamedDeclaration){
       setComment(ExportNamedDeclaration,functionInfo);
       setLoc(ExportNamedDeclaration,functionInfo)
+      functionInfo["code"] = getCode(ExportNamedDeclaration.node);
       functionInfo["export"] = true;
     }else{
       setComment(VariableDeclaration,functionInfo);
       setLoc(VariableDeclaration,functionInfo)
+      functionInfo["code"] = getCode(VariableDeclaration.node);
       functionInfo["export"] = false;
     }
   }
@@ -132,8 +144,16 @@ const getFunctionInObject = function(functionInfo:FunctionInformation,functionNa
   // true is ObjectMethod temporary is function
   functionInfo["kind"] = 'function';
   functionInfo["export"] = false;
+  functionInfo["code"] = getCode(ObjectMethod.node);
   setLoc(ObjectMethod,functionInfo)
   setComment(ObjectMethod,functionInfo);
+}
+const removeBody = function(nodePath: NodePath<namedTypes.Function>){
+  if(nodePath?.node?.body?.type==='BlockStatement'){
+    const builder = recast.types.builders;
+    const emptyBlockStatement = builder.blockStatement([])
+    nodePath.node.body = emptyBlockStatement;
+  }
 }
 export const getFunctionInformation = function(nodePath: NodePath<namedTypes.Function>): FunctionInformation {
   const functionInfo = {} as FunctionInformation;
@@ -147,6 +167,7 @@ export const getFunctionInformation = function(nodePath: NodePath<namedTypes.Fun
     ObjectProperty
   } = getPathNodes(nodePath);
 
+  removeBody(FunctionDeclaration)
   setArrowFunction(FunctionDeclaration,functionInfo)
   setParams(FunctionDeclaration,functionInfo)
   let functionName = undefined;

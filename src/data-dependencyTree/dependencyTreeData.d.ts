@@ -10,7 +10,7 @@ export interface Param {
 export interface FunctionInformation {
 	comment?: string;
 	export: boolean;
-
+	code: string;
 	loc: namedTypes.SourceLocation | null | undefined;
 	params: Param[] | [];
 	arrowFunction: boolean;
