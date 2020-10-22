@@ -26,3 +26,10 @@ engl[status.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON] = 'Get packageJson file
 engl[status.STATUS_GET_DEPENDENCY_DATA_GET_ENTRY_FILE] = 'Get entry file';
 engl[status.STATUS_GET_DEPENDENCY_DATA_GET_DATA] = 'Get dependency data';
 engl[status.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA] = 'Process dependency data';
+
+engl[types.FILE_LINES] = 'File lineNumbers';
+engl[types.FILE_TYPE] = 'File type';
+engl[types.INTRODUCTION] = 'Introduction';
+engl[types.DESCRIPTION] = 'Description';
+engl[types.METHODS] = 'Methods';
+engl[types.METHODS_ANALYZED_FAILED] = 'Methods analyzed failed';
