@@ -7,9 +7,11 @@
 [x] feat: auto i18n (view vscode-material-icon-theme-master)
 [x] feat: auto theme light dark
 [x] feat: get file fileDescription functions
+[x] feat: file information views
 [ ] fix: not show error when give error 'framegraph.entryFilePath' config
+[ ] fix: open multiple webview send message error
+[ ] fix: resend activeThemeKind(when changed theme kind get kind error)
 [ ] feat: webview data read
-[ ] feat: file information views
 [ ] feat: save node information to file
 [ ] feat: webview data save
 [ ] feat: save file node
