@@ -9,9 +9,9 @@ const tree = new D3Tree();
 const focusOnNode = throttle(tree.focusOnNode.bind(tree), tree.DURATION_TIME);
 
 const treeView = function (props) {
-  const { dependencyTreeData, focusOn, assetsBaseURL, gotDependencyTreeData } = props;
+  const { dependencyTreeData, focusOn, assetsBaseURL, gotDependencyTreeData, activeThemeKind } = props;
   const chartArea = useRef();
-  useEffect(() => { if (dependencyTreeData && assetsBaseURL) { tree.init(chartArea.current, dependencyTreeData, assetsBaseURL); tree.update() } }, [dependencyTreeData, assetsBaseURL])
+  useEffect(() => { if (dependencyTreeData && assetsBaseURL) { tree.init(chartArea.current, dependencyTreeData, assetsBaseURL, activeThemeKind); tree.update() } }, [dependencyTreeData, assetsBaseURL])
   useEffect(() => { if (focusOn) focusOnNode(focusOn.fileData) }, [focusOn])
   const viewStatus = gotDependencyTreeData ? "treeView" : "treeView hidden";
   return (<div className={viewStatus} ref={chartArea}></div>)
@@ -19,6 +19,7 @@ const treeView = function (props) {
 const mapStateToProps = (state) => {
   return {
     dependencyTreeData: state.dependencyTreeData,
+    activeThemeKind: state.activeThemeKind,
     assetsBaseURL: state.assetsBaseURL,
     focusOn: state.focusOn,
     gotDependencyTreeData: state.gotDependencyTreeData,
