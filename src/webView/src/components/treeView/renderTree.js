@@ -101,17 +101,23 @@ export class D3Tree {
 	getAssetsBaseURL(assetsBaseURL) {
 		this.options.ASSETS_BASE_URL = this.ASSETS_BASE_URL = assetsBaseURL;
 	}
+	getActiveThemeKind(activeThemeKind) {
+		this.options.ASSETS_BASE_URL = this.activeThemeKind = activeThemeKind
+			? activeThemeKind.toLocaleLowerCase()
+			: 'dark';
+	}
 	initRoot() {
 		this.root = d3.hierarchy(this.data, (d) => d.children);
 		this.root.x0 = 0;
 		this.root.y0 = 0;
 		this.root.children.forEach(collapse);
 	}
-	init(dom, data, assetsBaseURL) {
+	init(dom, data, assetsBaseURL, activeThemeKind) {
 		this.initDom(dom);
 		this.initZoom();
 		this.getData(data);
 		this.getAssetsBaseURL(assetsBaseURL);
+		this.getActiveThemeKind(activeThemeKind);
 		this.initLayout();
 		this.setIDInTreeNode();
 		this.initRoot();
@@ -181,7 +187,7 @@ export class D3Tree {
 			.append('svg:image')
 			.attr('class', 'arrowButton')
 			.attr('xlink:href', (d) => {
-				return this.ASSETS_BASE_URL + '/webview/arrow.svg';
+				return `${this.ASSETS_BASE_URL}/webview/arrow-${this.activeThemeKind}.svg`;
 			})
 			.attr('x', 0)
 			.attr('y', 0)
@@ -319,8 +325,8 @@ export class D3Tree {
 				d.children = d._children;
 				d._children = null;
 			}
-      this.update(d);
-      d3.event.stopPropagation();
+			this.update(d);
+			d3.event.stopPropagation();
 		};
 	}
 	openToNode(data) {
