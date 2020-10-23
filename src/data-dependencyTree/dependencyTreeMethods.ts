@@ -32,18 +32,18 @@ export const getMainFilePath = function(folderPath: string, packageJsonPath: str
 };
 export const getDependencyTree = function(filename: string, directory: string): dependencyTree.DependencyObj {
 	let tree = undefined;
-	try {
-		tree = getdependencytree({ entry: filename }).tree;
-	} catch (err) {
-    // TODO catch getDependencyTree error
-		console.log(err);
-	}
-	// const dt = dependencyTree({
-	// 	filter: (path: string) => path.indexOf('node_modules') === -1,
-	// 	filename: filename,
-	// 	directory: directory
-	// });
-	return tree;
+	// try {
+	// 	tree = getdependencytree({ entry: filename }).tree;
+	// } catch (err) {
+  //   // TODO catch getDependencyTree error
+	// 	console.log(err);
+	// }
+	const dt = dependencyTree({
+		filter: (path: string) => path.indexOf('node_modules') === -1,
+		filename: filename,
+		directory: directory
+	});
+	return dt;
 };
 
 /**

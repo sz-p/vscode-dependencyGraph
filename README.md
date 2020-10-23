@@ -1,7 +1,6 @@
 # framegraph
+A plugin for vscode to view your project's frame graph
 
-> do not download this now 
+> is not available now
 
-## TODO
-
-A plugin for vscode to view your project`s frame graph
+![framegraph-screenshot](https://github.com/sz-p/vscode-framegraph/blob/master/doc/framegraph.gif)
