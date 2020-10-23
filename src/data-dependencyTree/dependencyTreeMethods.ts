@@ -35,6 +35,7 @@ export const getDependencyTree = function(filename: string, directory: string): 
 	try {
 		tree = getdependencytree({ entry: filename }).tree;
 	} catch (err) {
+    // TODO catch getDependencyTree error
 		console.log(err);
 	}
 	// const dt = dependencyTree({
