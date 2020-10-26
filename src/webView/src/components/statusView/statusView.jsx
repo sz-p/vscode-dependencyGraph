@@ -8,6 +8,7 @@ import { StatusDom } from './statusDom';
 import { useEffect, useState } from 'react'
 const statusView = function (props) {
   let [doms, setDoms] = useState([]);
+  let [error, setError] = useState(false);
   const { getDataStatus, viewHash, gotDependencyTreeData, activeThemeKind } = props;
 
   useEffect(() => {
@@ -28,7 +29,10 @@ const statusView = function (props) {
     }
   }, [activeThemeKind])
   useEffect(() => {
-    if (getDataStatus) {
+    if (getDataStatus && !error) {
+      if (getDataStatus.status === 'error') {
+        setError(true)
+      }
       setDoms(doms.concat(<StatusDom key={getDataStatus.type} type={getDataStatus.type} status={getDataStatus.status} />))
     }
   }, [getDataStatus])
