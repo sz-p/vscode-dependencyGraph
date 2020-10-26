@@ -9,9 +9,14 @@
 [x] feat: get file fileDescription functions
 [x] feat: file information views
 [x] fix: not show error when give error 'framegraph.entryFilePath' config
-[ ] fix: open multiple webview send message error
-[ ] fix: resend activeThemeKind(when changed theme kind get kind error)
+[x] feat: reopen webview send get dependency tree status
+[x] feat: status view get error only one time
+[x] feat: catch get dependency tree error
 [ ] feat: webview data read
 [ ] feat: save node information to file
 [ ] feat: webview data save
 [ ] feat: save file node
+
+
+[ ] fix: open multiple webview send message error(always send, but not get don't know why)
+[ ] fix: resend activeThemeKind(when changed theme kind get kind error)(get the kind is previous kind don't know why)
