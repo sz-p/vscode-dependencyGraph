@@ -8,7 +8,7 @@
 [x] feat: auto theme light dark
 [x] feat: get file fileDescription functions
 [x] feat: file information views
-[ ] fix: not show error when give error 'framegraph.entryFilePath' config
+[x] fix: not show error when give error 'framegraph.entryFilePath' config
 [ ] fix: open multiple webview send message error
 [ ] fix: resend activeThemeKind(when changed theme kind get kind error)
 [ ] feat: webview data read

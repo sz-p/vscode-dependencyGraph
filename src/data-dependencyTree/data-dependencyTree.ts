@@ -27,10 +27,12 @@ import {
 	GET_DEPENDENCY_TREE_FAIL
 } from '../utils/error/errorKey';
 
+import { pathExists } from '../utils/utils';
+
 export const getDependencyTreeData = (postMessage?: boolean): DependencyTreeData | undefined => {
 	// find folder Path catch path sendStatus
 	const folderPath = getCurrentFolderPath();
-	if (!folderPath) {
+	if (!folderPath || !pathExists(folderPath)) {
 		onError(NO_FOLDER);
 		postMessage ? statusMsgGetFolderPath.postError() : null;
 		return undefined;
@@ -49,16 +51,16 @@ export const getDependencyTreeData = (postMessage?: boolean): DependencyTreeData
 		}
 		postMessage ? statusMsgGetPackageJsonPath.postSuccess() : null;
 		mainFilePath = getMainFilePath(folderPath, packageJsonPath);
-		if (!mainFilePath) {
-			onError(NO_MAIN_FILE);
-			postMessage ? statusMsgGetEntryFile.postError() : null;
-			return undefined;
-		}
+	}
+	if (!mainFilePath || !pathExists(mainFilePath)) {
+		onError(NO_MAIN_FILE);
+		postMessage ? statusMsgGetEntryFile.postError() : null;
+		return undefined;
 	}
 	postMessage ? statusMsgGetEntryFile.postSuccess() : null;
 
 	const dependencyTreeData = getDependencyTree(mainFilePath, folderPath);
-	if (!Object.keys(dependencyTreeData as dependencyTree.DependencyObj).length) {
+	if (!dependencyTreeData || !Object.keys(dependencyTreeData as dependencyTree.DependencyObj).length) {
 		onError(GET_DEPENDENCY_TREE_FAIL);
 		postMessage ? statusMsgGetDependencyData.postError() : null;
 		return undefined;
