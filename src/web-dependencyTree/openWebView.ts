@@ -22,9 +22,14 @@ import { getEntryFilePath } from '../utils/config';
 import {
 	statusMsgGetFolderPath,
 	statusMsgGetEntryFile,
+	statusMsgGetDependencyData,
 	msgGetLanguage,
 	msgGetActiveThemeKind
 } from '../utils/message/messages';
+
+import { pathExists } from '../utils/utils';
+import { onError } from '../utils/error/onError';
+import { GET_DEPENDENCY_TREE_FAIL } from '../utils/error/errorKey';
 
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
@@ -63,12 +68,12 @@ export const reOpenWebView = function(dependencyTreeData: DependencyTreeData | u
 		createView();
 		const folderPath = getCurrentFolderPath();
 		const entryFilePath = getEntryFilePath();
-		if (folderPath) {
+		if (folderPath && pathExists(folderPath)) {
 			statusMsgGetFolderPath.postSuccess();
 		} else {
 			statusMsgGetFolderPath.postError();
 		}
-		if (entryFilePath) {
+		if (entryFilePath && pathExists(entryFilePath)) {
 			statusMsgGetEntryFile.postSuccess();
 		} else {
 			statusMsgGetEntryFile.postError();
@@ -82,5 +87,10 @@ export const openWebView = function(dependencyTreeData: DependencyTreeData | und
 	msgGetActiveThemeKind.post();
 	postMessageCatchError({ key: MESSAGE_ASSETS_BASE_URL, value: getBaseWebViewUri() });
 	postMessageCatchError({ key: MESSAGE_FOLDER_PATH, value: folderPath });
+	if (!dependencyTreeData || !Object.keys(dependencyTreeData).length) {
+		onError(GET_DEPENDENCY_TREE_FAIL);
+		statusMsgGetDependencyData.postError();
+		return undefined;
+	}
 	postMessageCatchError({ key: MESSAGE_DEPENDENCY_TREE_DATA, value: dependencyTreeData });
 };
