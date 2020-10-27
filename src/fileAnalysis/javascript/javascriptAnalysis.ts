@@ -1,10 +1,11 @@
-import * as babelParser from 'recast/parsers/babel';
 import { parse, visit } from 'recast';
 import * as fs from 'fs';
 import { FunctionInformation,Param,FileInformation } from '../../data-dependencyTree/dependencyTreeData';
 import {AnalyseData,AnalyseFiled} from './javascriptAnalysis.d';
 
 import {getFunctionInformation} from './getFunctionInformation';
+
+import {getAST} from './getAST';
 
 const getIntroduction = function(codeString:string){
   const reg = /@introduction (.*)\n/
@@ -30,12 +31,9 @@ export const analysesFile = function(filePath: string) :AnalyseData |AnalyseFile
   const codeString = fs.readFileSync(filePath).toString();
   fileInformation.description = getDescription(codeString);
   fileInformation.introduction = getIntroduction(codeString);
-  let ast = undefined;
-	try {
-    ast = babelParser.parse(codeString);
-	} catch (e) {
-    //TODO catch error
-  }
+
+  let ast = getAST(codeString);
+
   if(!ast){
     return  {
       analysed:false,

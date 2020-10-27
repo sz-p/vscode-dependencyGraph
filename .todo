@@ -12,6 +12,7 @@
 [x] feat: reopen webview send get dependency tree status
 [x] feat: status view get error only one time
 [x] feat: catch get dependency tree error
+[ ] feat: analyze javascript file and get dependency tree all use babel
 [ ] feat: webview data read
 [ ] feat: save node information to file
 [ ] feat: webview data save
