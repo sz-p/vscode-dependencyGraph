@@ -30,20 +30,23 @@ export const getMainFilePath = function(folderPath: string, packageJsonPath: str
 		return undefined;
 	}
 };
-export const getDependencyTree = function(filename: string, directory: string): dependencyTree.DependencyObj {
+export const getDependencyTree = function(
+	filename: string,
+	directory: string
+): dependencyTree.DependencyObj | undefined {
 	let tree = undefined;
-	// try {
-	// 	tree = getdependencytree({ entry: filename }).tree;
-	// } catch (err) {
-  //   // TODO catch getDependencyTree error
-	// 	console.log(err);
-	// }
-	const dt = dependencyTree({
-		filter: (path: string) => path.indexOf('node_modules') === -1,
-		filename: filename,
-		directory: directory
-	});
-	return dt;
+	try {
+		tree = getdependencytree({ entry: filename }).tree;
+		// tree = dependencyTree({
+		// 	filter: (path: string) => path.indexOf('node_modules') === -1,
+		// 	filename: filename,
+		// 	directory: directory
+		// });
+	} catch (err) {
+		return undefined;
+	}
+
+	return tree;
 };
 
 /**
@@ -121,6 +124,5 @@ export const processTreeData = function(
 			}
 		}
 	}
-	console.log(dependencyTreeData);
 	return dependencyTreeData;
 };
