@@ -4,7 +4,7 @@ import { AnalyseData, AnalyseFiled } from './javascriptAnalysis.d';
 
 import { getFunctionInformation } from './getFunctionInformation';
 
-import { getAST } from './getAST';
+import { getAST } from './getAST/getAST';
 import { parseFile } from './parseFile';
 const getIntroduction = function(codeString: string) {
 	const reg = /@introduction (.*)\n/;
@@ -33,7 +33,7 @@ export const analysesFile = function(filePath: string, folderPath: string): Anal
 	fileInformation.description = getDescription(codeString);
 	fileInformation.introduction = getIntroduction(codeString);
 
-	let ast = getAST(codeString);
+	let ast = getAST(extname,codeString);
 
 	if (!ast) {
 		return {
