@@ -10,6 +10,7 @@ zhcn[errorKey.GET_DEPENDENCY_TREE_FAIL] = '获取文件依赖树失败';
 zhcn[errorKey.NO_WEBVIEW_PANEL] = '无WebView页面';
 zhcn[errorKey.NO_DEPENDENCY] = '无文件依赖';
 zhcn[errorKey.NO_DEPENDENCY_TREE_DATA] = '无文件依赖数据';
+zhcn[errorKey.GET_AST_FAILED] = '获取AST语法树失败';
 
 zhcn[types.SUCCESS] = '成功';
 zhcn[types.FAILED] = '失败';
@@ -32,3 +33,4 @@ zhcn[types.INTRODUCTION] = '简介';
 zhcn[types.DESCRIPTION] = '描述';
 zhcn[types.METHODS] = '方法';
 zhcn[types.METHODS_ANALYZED_FAILED] = '方法分析失败';
+zhcn[types.NOT_SUPPORTED] = ' 文件暂不支持';
