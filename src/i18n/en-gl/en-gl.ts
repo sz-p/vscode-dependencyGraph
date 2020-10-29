@@ -11,6 +11,7 @@ engl[errorKey.GET_DEPENDENCY_TREE_FAIL] = 'Get file dependency tree fail';
 engl[errorKey.NO_WEBVIEW_PANEL] = 'No webview panel';
 engl[errorKey.NO_DEPENDENCY] = 'No file dependency';
 engl[errorKey.NO_DEPENDENCY_TREE_DATA] = 'No file dependency tree data';
+engl[errorKey.GET_AST_FAILED] = 'get AST syntax tree fail';
 
 engl[types.SUCCESS] = 'Success';
 engl[types.FAILED] = 'Failed';
@@ -33,3 +34,4 @@ engl[types.INTRODUCTION] = 'Introduction';
 engl[types.DESCRIPTION] = 'Description';
 engl[types.METHODS] = 'Methods';
 engl[types.METHODS_ANALYZED_FAILED] = 'Methods analyzed failed';
+engl[types.NOT_SUPPORTED] = ' is not supported for now';
