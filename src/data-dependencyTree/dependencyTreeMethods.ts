@@ -93,7 +93,7 @@ export const processTreeData = function(
 			const fileName = file;
 			const extension = file.split('.').pop();
 			const type = getFileIconNameByFileName(fileName);
-			const analyseData = analysesFile(node.path);
+			const analyseData = analysesFile(node.path, folderPath);
 			if (analyseData.analysed) {
 				node.dependencyTreeData.analysed = true;
 				node.dependencyTreeData.lines = analyseData.lines;
