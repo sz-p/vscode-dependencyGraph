@@ -29,14 +29,14 @@ export interface FileAttribute {
 	introduction: string | undefined;
 	dirName: string;
 }
-export const parseFile = function(filePath: string, folderPath: string): FileAttribute | undefined {
+export const parseFile = function(filePath: string, folderPath: string): FileAttribute | false {
 	// TODO not only undefined is not existed
-	if (!pathExists(filePath)) return undefined;
+	if (!pathExists(filePath)) return false;
 	const absolutePath = filePath;
 	const extname = path.extname(filePath);
 	const baseName = path.basename(filePath);
 	const dirName = path.dirname(absolutePath);
-	const relativePath = path.relative(absolutePath, folderPath);
+	const relativePath = absolutePath.replace(folderPath, '');
 	const codeString = fs.readFileSync(filePath).toString();
 	const description = getDescription(codeString);
 	const introduction = getIntroduction(codeString);
