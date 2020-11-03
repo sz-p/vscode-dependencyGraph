@@ -21,7 +21,7 @@ export interface DependencyTreeData {
 	name: string;
 	fileDescription: FileInformation;
 	type: string;
-	lines: number;
+	lines: number | undefined;
 	analysed: boolean;
 	functions: FunctionInformation[] | [];
 	extension: string;
