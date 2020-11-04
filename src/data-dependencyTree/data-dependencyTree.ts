@@ -1,5 +1,6 @@
 import { DependencyTreeData } from './dependencyTreeData';
 import * as dependencyTree from 'dependency-tree';
+import { analysesFile } from '../fileAnalysis/javascript/javascriptAnalysis';
 
 import {
 	statusMsgGetFolderPath,
@@ -59,15 +60,16 @@ export const getDependencyTreeData = (postMessage?: boolean): DependencyTreeData
 	}
 	postMessage ? statusMsgGetEntryFile.postSuccess() : null;
 
-	const dependencyTreeData = getDependencyTree(mainFilePath, folderPath);
-	if (!dependencyTreeData || !Object.keys(dependencyTreeData as dependencyTree.DependencyObj).length) {
-		onError(GET_DEPENDENCY_TREE_FAIL);
-		postMessage ? statusMsgGetDependencyData.postError() : null;
-		return undefined;
-	}
-	postMessage ? statusMsgGetDependencyData.postSuccess() : null;
+	const { dependencyTree: processedTreeData, dependencyHash } = analysesFile(mainFilePath, folderPath);
+	// const dependencyTreeData = getDependencyTree(mainFilePath, folderPath);
+	// if (!dependencyTreeData || !Object.keys(dependencyTreeData as dependencyTree.DependencyObj).length) {
+	// 	onError(GET_DEPENDENCY_TREE_FAIL);
+	// 	postMessage ? statusMsgGetDependencyData.postError() : null;
+	// 	return undefined;
+	// }
+	// postMessage ? statusMsgGetDependencyData.postSuccess() : null;
 
-	const processedTreeData = processTreeData(dependencyTreeData as dependencyTree.DependencyObj, folderPath);
+	// const processedTreeData = processTreeData(dependencyTreeData as dependencyTree.DependencyObj, folderPath);
 	if (!processedTreeData) {
 		onError(NO_DEPENDENCY);
 		postMessage ? statusMsgGetDependencyProcessData.postError() : null;
