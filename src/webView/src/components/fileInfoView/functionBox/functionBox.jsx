@@ -7,6 +7,7 @@ const options = {
   selectOnLineNumbers: false,
   lineNumbers: 'off',
   readOnly: true,
+  folding: false,
   minimap: {
     enabled: false
   },
@@ -19,7 +20,12 @@ export const FunctionsBox = function (props) {
   let codeText = '';
   for (let i = 0; i < functionsList.length; i++) {
     const { comment, code } = functionsList[i];
-    codeText = codeText + comment + '\n' + code + '\n';
+    if (comment) {
+      codeText = codeText + comment + '\n';
+    }
+    if (code) {
+      codeText = codeText + code + '\n\n';
+    }
   }
   return (<div className="fileInfoView-functionBox-function"><MonacoEditor
     language={type}
