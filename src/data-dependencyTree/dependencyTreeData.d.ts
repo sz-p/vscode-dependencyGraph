@@ -19,7 +19,8 @@ export interface FunctionInformation {
 }
 export interface DependencyTreeData {
 	name: string;
-	fileDescription: FileInformation;
+  fileDescription: FileInformation;
+  circularStructure?:true;
 	type: string;
 	lines: number | undefined;
 	analysed: boolean;
