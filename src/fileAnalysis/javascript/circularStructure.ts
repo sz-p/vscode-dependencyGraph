@@ -2,7 +2,8 @@ import * as _ from 'lodash'
 import {
   DependencyTreeData
 } from '../../data-dependencyTree/dependencyTreeData';
-
+import { i18n } from '../../i18n/i18n';
+import { CIRCULAR_STRUCTURE_NODE_INTRODUCTION, CIRCULAR_STRUCTURE_NODE_DESCRIPTION } from '../../i18n/types'
 interface DependencyHash {
   [key: string]: DependencyTreeData;
 }
@@ -17,7 +18,10 @@ const CircularStructureNode = {
   relativePath: 'circularStructure',
   extension: '',
   ancestors: [] as string[],
-  fileDescription: {}
+  fileDescription: {
+    introduction: i18n.getText(CIRCULAR_STRUCTURE_NODE_INTRODUCTION),
+    description: i18n.getText(CIRCULAR_STRUCTURE_NODE_DESCRIPTION)
+  }
 } as DependencyTreeData
 /**
  * use absolutePath and ancestors find circular structure
