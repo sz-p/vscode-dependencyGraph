@@ -16,7 +16,8 @@ const CircularStructureNode = {
   absolutePath: 'circularStructure',
   relativePath: 'circularStructure',
   extension: '',
-  ancestors: [] as string[]
+  ancestors: [] as string[],
+  fileDescription: {}
 } as DependencyTreeData
 /**
  * use absolutePath and ancestors find circular structure
