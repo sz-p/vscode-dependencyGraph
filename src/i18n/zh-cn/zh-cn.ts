@@ -15,6 +15,9 @@ zhcn[errorKey.GET_AST_FAILED] = '获取AST语法树失败';
 zhcn[types.SUCCESS] = '成功';
 zhcn[types.FAILED] = '失败';
 
+zhcn[types.CIRCULAR_STRUCTURE_NODE_INTRODUCTION] = '环形结构';
+zhcn[types.CIRCULAR_STRUCTURE_NODE_DESCRIPTION] = '循环依赖 \\n 在引用链上存在上一个节点';
+
 zhcn[types.FOLDER] = '文件夹';
 zhcn[types.OPEN_FOLDER] = '打开文件夹';
 zhcn[types.ENTRY_FILE] = '入口文件';

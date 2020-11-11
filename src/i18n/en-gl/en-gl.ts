@@ -16,6 +16,9 @@ engl[errorKey.GET_AST_FAILED] = 'get AST syntax tree fail';
 engl[types.SUCCESS] = 'Success';
 engl[types.FAILED] = 'Failed';
 
+engl[types.CIRCULAR_STRUCTURE_NODE_INTRODUCTION] = 'Circular Structure';
+engl[types.CIRCULAR_STRUCTURE_NODE_DESCRIPTION] = 'Loop dependence \\n The previous node was existed in dependence chain';
+
 engl[types.FOLDER] = 'Folder';
 engl[types.OPEN_FOLDER] = 'Open folder';
 engl[types.ENTRY_FILE] = 'Entry file';
