@@ -96,7 +96,8 @@ const getFunctionNameInObject = function (nodePath: NodePath<namedTypes.ObjectMe
 const setComment = function (nodePath: NodePath, functionInfo: FunctionInformation) {
   const { leadingComments } = nodePath.node;
   if (leadingComments) {
-    functionInfo['comment'] = leadingComments[0].value;
+    functionInfo['comment'] = leadingComments[leadingComments.length - 1].value;
+    functionInfo['comment'] = "/*" + functionInfo['comment'] + '*/'
   }
 }
 const setLoc = function (nodePath: NodePath, functionInfo: FunctionInformation) {
