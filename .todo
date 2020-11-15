@@ -17,7 +17,9 @@
 [ ] feat: save node information to file
 [ ] feat: webview data save
 [ ] feat: save file node
-
+[ ] feat: webview svgBox support resize
+[ ] feat: codeBox with highlight
+[ ] feat: node with hash
 
 [ ] fix: open multiple webview send message error(always send, but not get don't know why)
 [ ] fix: resend activeThemeKind(when changed theme kind get kind error)(get the kind is previous kind don't know why)
