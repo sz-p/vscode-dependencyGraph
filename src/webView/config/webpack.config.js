@@ -1,8 +1,6 @@
 const paths = require('./paths');
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-const MONACO_DIR = path.resolve(__dirname, './node_modules/monaco-editor');
 
 module.exports = {
   mode: 'development',
@@ -16,7 +14,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: paths.src,
+        include: [paths.src, paths.monacoDir],
         loader: require.resolve('babel-loader'),
         options: {
           configFile: paths.babelConfig
@@ -36,6 +34,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        include: [paths.src, paths.monacoDir],
         use: [
           {
             loader: require.resolve('style-loader')
@@ -44,11 +43,6 @@ module.exports = {
             loader: require.resolve('css-loader')
           }
         ]
-      },
-      {
-        test: /\.css$/,
-        include: MONACO_DIR,
-        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -60,7 +54,7 @@ module.exports = {
       template: paths.indexHTML
     }),
     new MonacoWebpackPlugin({
-      languages: ['json']
+      languages: ['json', 'javascript']
     })
   ],
   devtool: 'source-map'
