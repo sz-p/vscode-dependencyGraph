@@ -12,7 +12,10 @@
 [x] feat: reopen webview send get dependency tree status
 [x] feat: status view get error only one time
 [x] feat: catch get dependency tree error
-[ ] feat: analyze javascript file and get dependency tree all use babel
+[x] feat: analyze javascript file and get dependency tree all use babel
+[ ] feat: file information view drag to resize
+[ ] feat: change get dependency tree as a module
+[ ] refactor: change analyze javascript file as plugin to get dependency tree
 [ ] feat: webview data read
 [ ] feat: save node information to file
 [ ] feat: webview data save
@@ -21,5 +24,7 @@
 [ ] feat: codeBox with highlight
 [ ] feat: node with hash
 
+TODO
+[ ] feat: monaco editor highlight(can not use monaco language server in webview https://github.com/microsoft/vscode/issues/87282)
 [ ] fix: open multiple webview send message error(always send, but not get don't know why)
 [ ] fix: resend activeThemeKind(when changed theme kind get kind error)(get the kind is previous kind don't know why)
