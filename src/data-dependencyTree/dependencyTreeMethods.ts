@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as dependencyTree from 'dependency-tree';
-import * as getdependencytree from 'get-dependency-tree';
+// import * as getdependencytree from 'get-dependency-tree';
 import * as path from 'path';
 import * as vscode from 'vscode';
 
@@ -36,7 +36,7 @@ export const getDependencyTree = function(
 ): dependencyTree.DependencyObj | undefined {
 	let tree = undefined;
 	try {
-		tree = getdependencytree({ entry: filename }).tree;
+		// tree = getdependencytree({ entry: filename }).tree;
 		// tree = dependencyTree({
 		// 	filter: (path: string) => path.indexOf('node_modules') === -1,
 		// 	filename: filename,
