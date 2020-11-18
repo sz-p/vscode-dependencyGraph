@@ -22,6 +22,8 @@
 [ ] feat: save file node
 [ ] feat: webview svgBox support resize
 [ ] feat: node with hash
+[ ] feat: use webpack package vsce
+[ ] feat: if main of package.json is unequal with config use main
 
 TODO
 [ ] feat: monaco editor highlight(can not use monaco language server in webview https://github.com/microsoft/vscode/issues/87282)
