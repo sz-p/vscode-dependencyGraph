@@ -3,7 +3,7 @@
   "displayName": "framegraph",
   "description": "A plugin for vscode to view your project's frame graph",
   "icon": "assets/framegraph.png",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "license": "MIT",
   "engines": {
     "vscode": "^1.41.0"
@@ -15,6 +15,7 @@
     "onCommand:extension.helloWorld",
     "onView:framegraphExplorer-DependencyTree"
   ],
+  "repository": "https://github.com/sz-p/vscode-framegraph",
   "homepage": "https://github.com/sz-p/vscode-framegraph",
   "bugs": "https://github.com/sz-p/vscode-framegraph/issues",
   "main": "./out/extension.js",
