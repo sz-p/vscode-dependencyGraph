@@ -2,9 +2,13 @@
 .vscode-test/**
 out/test/**
 src/**
+.yarnrc
 .gitignore
 vsc-extension-quickstart.md
 **/tsconfig.json
 **/tslint.json
 **/*.map
 **/*.ts
+doc
+yarn-error.log
+yarn.lock
