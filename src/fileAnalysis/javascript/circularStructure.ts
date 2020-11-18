@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import { cloneDeep } from 'lodash'
 import {
   DependencyTreeData
 } from '../../data-dependencyTree/dependencyTreeData';
@@ -46,8 +46,8 @@ export const isCircularStructure = function (absolutePath: string, ancestors: st
  * @returns {DependencyTreeData}
  */
 export const getCircularStructureNode = function (absolutePath: string, dependencyHash: DependencyHash): DependencyTreeData {
-  let circularStructureNode = _.cloneDeep(dependencyHash[absolutePath])
-  const circularStructureNodeChild = _.cloneDeep(CircularStructureNode)
+  let circularStructureNode = cloneDeep(dependencyHash[absolutePath])
+  const circularStructureNodeChild = cloneDeep(CircularStructureNode)
   circularStructureNodeChild.ancestors = circularStructureNode.ancestors.concat(absolutePath)
   circularStructureNode.children = [circularStructureNodeChild];
   return circularStructureNode;
