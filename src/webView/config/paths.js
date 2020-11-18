@@ -5,7 +5,7 @@ module.exports = {
   indexHTML: path.resolve(__dirname, '../public/index.html'),
   public: path.resolve(__dirname, '../public'),
   mainjs: path.resolve(__dirname, '../src/index.js'),
-  build: path.resolve(__dirname, '../../../out/webView'),
+  build: path.resolve(__dirname, '../../../outWebView'),
   webViewCode: path.resolve(__dirname, '../../webView'),
   src: path.resolve(__dirname, '../src'),
   config: path.resolve(__dirname),
