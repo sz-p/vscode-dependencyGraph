@@ -1,4 +1,4 @@
-import * as _ from 'lodash'
+import { cloneDeep } from 'lodash'
 
 import { visit } from 'recast';
 import {
@@ -89,7 +89,7 @@ export const analysesFile = function (entryPath: string, folderPath: string): an
           if (isCircularStructure(importedFilePath, ancestors)) {
             dependencyChildren = getCircularStructureNode(importedFilePath, dependencyHash)
           } else {
-            dependencyChildren = _.cloneDeep(dependencyHash[importedFilePath]);
+            dependencyChildren = cloneDeep(dependencyHash[importedFilePath]);
           }
           //
           concatAncestors(dependencyChildren, dependencyNode.ancestors)
