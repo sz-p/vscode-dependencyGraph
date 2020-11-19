@@ -1,83 +1,83 @@
 .fileInfoView {
-	display: grid;
-	grid-template-rows: auto auto auto 1fr;
-	height: 100%;
-	background: var(--vscode-breadcrumbPicker-background);
-	width: 297px;
-	position: fixed;
-	float: right;
-	top: 0px;
-	right: 0px;
-	transition: all 0.3s;
-	opacity: 1;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  height: 100%;
+  background: var(--vscode-breadcrumbPicker-background);
+  width: 297px;
+  position: fixed;
+  float: right;
+  top: 0px;
+  right: 0px;
+  transition: all 0.3s;
+  opacity: 1;
 }
 .hidden-right {
-	width: 0px;
-	opacity: 0;
+  width: 0px;
+  opacity: 0;
 }
 .fileInfoView-titleBar {
-	height: 35px;
-	padding-left: 8px;
-	padding-right: 8px;
+  height: 35px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 .fileInfoView-titleBar-titleLabel {
-	line-height: 35px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	padding-left: 12px;
-	display: inline-block;
+  line-height: 35px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 12px;
+  display: inline-block;
 }
 .fileInfoView-titleBar-titleButton {
-	position: fixed;
-	cursor: pointer;
-	right: 0px;
-	display: inline-block;
-	height: 35px;
-	line-height: 35px;
-	width: 20px;
-	margin-right: 20px;
+  position: fixed;
+  cursor: pointer;
+  right: 0px;
+  display: inline-block;
+  height: 35px;
+  line-height: 35px;
+  width: 20px;
+  margin-right: 20px;
 }
 .fileInfoView-type {
-	padding: 0px 8px;
-	line-height: 35px;
+  padding: 0px 8px;
+  line-height: 35px;
 }
 .fileInfoView-type-type {
-	display: inline-block;
-	padding: 0px 12px;
-	width: 130px;
+  display: inline-block;
+  padding: 0px 12px;
+  width: 130px;
 }
 .fileInfoView-type-line {
-	display: inline-block;
+  display: inline-block;
 }
 .fileTypeText {
-	color: var(--vscode-charts-yellow);
+  color: var(--vscode-charts-yellow);
 }
 .fileLineText {
-	color: var(--vscode-charts-blue);
+  color: var(--vscode-charts-blue);
 }
 .fileInfoView-fileDescription {
-	padding: 0px 20px;
+  padding: 0px 20px;
 }
 .fileInfoView-fileDescription-title {
-	line-height: 35px;
+  line-height: 35px;
 }
 .fileInfoView-fileDescription-view {
-	color: var(--vscode-charts-green);
-	word-break: break-all;
+  color: var(--vscode-charts-green);
+  word-break: break-all;
 }
 .fileInfoView-functionBox {
-	padding: 0px 20px;
-	flex: 1;
+  padding: 0px 20px;
+  flex: 1;
 }
 .fileInfoView-functionBox-title {
-	line-height: 35px;
+  line-height: 35px;
 }
 .fileInfoView-functionBox-function {
-	width: 275px;
-	height: 100%;
+  width: 275px;
+  height: 100%;
 }
 .function-comment {
-	color: var(--vscode-charts-green);
-	word-break: break-all;
+  color: var(--vscode-charts-green);
+  word-break: break-all;
 }
