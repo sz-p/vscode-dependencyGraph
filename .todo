@@ -13,6 +13,8 @@
 [x] feat: status view get error only one time
 [x] feat: catch get dependency tree error
 [x] feat: analyze javascript file and get dependency tree all use babel
+[x] feat: use webpack package vsce
+[x] feat: config save relative path
 [ ] feat: file information view drag to resize
 [ ] feat: change get dependency tree as a module
 [ ] refactor: change analyze javascript file as plugin to get dependency tree
@@ -22,9 +24,7 @@
 [ ] feat: save file node
 [ ] feat: webview svgBox support resize
 [ ] feat: node with hash
-[ ] feat: use webpack package vsce
 [ ] feat: if main of package.json is unequal with config use main
-[ ] feat: config save relative path
 
 TODO
 [ ] feat: monaco editor highlight(can not use monaco language server in webview https://github.com/microsoft/vscode/issues/87282)
