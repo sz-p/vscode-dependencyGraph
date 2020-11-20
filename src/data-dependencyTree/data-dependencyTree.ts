@@ -1,37 +1,39 @@
-import * as path from 'path';
-import { DependencyTreeData } from './dependencyTreeData';
-import * as dependencyTree from 'dependency-tree';
-import { analysesFile } from '../fileAnalysis/javascript/javascriptAnalysis';
+import * as path from "path";
+import { DependencyTreeData } from "./dependencyTreeData";
+import * as dependencyTree from "dependency-tree";
+import { analysesFile } from "../fileAnalysis/javascript/javascriptAnalysis";
 
 import {
   statusMsgGetFolderPath,
   statusMsgGetPackageJsonPath,
   statusMsgGetEntryFile,
   statusMsgGetDependencyData,
-  statusMsgGetDependencyProcessData
-} from '../utils/message/messages';
+  statusMsgGetDependencyProcessData,
+} from "../utils/message/messages";
 
 import {
   getPackageJsonPath,
   getMainFilePath,
   getDependencyTree,
   processTreeData,
-  getCurrentFolderPath
-} from './dependencyTreeMethods';
+  getCurrentFolderPath,
+} from "./dependencyTreeMethods";
 
-import { getEntryFileRelativePath } from '../utils/config';
-import { onError } from '../utils/error/onError';
+import { getEntryFileRelativePath } from "../utils/config";
+import { onError } from "../utils/error/onError";
 import {
   NO_DEPENDENCY,
   NO_FOLDER,
   NO_PACKAGE_JSON,
   NO_MAIN_FILE,
-  GET_DEPENDENCY_TREE_FAIL
-} from '../utils/error/errorKey';
+  GET_DEPENDENCY_TREE_FAIL,
+} from "../utils/error/errorKey";
 
-import { pathExists } from '../utils/utils';
+import { pathExists } from "../utils/utils";
 
-export const getDependencyTreeData = (postMessage?: boolean): DependencyTreeData | undefined => {
+export const getDependencyTreeData = (
+  postMessage?: boolean
+): DependencyTreeData | undefined => {
   // find folder Path catch path sendStatus
   const folderPath = getCurrentFolderPath();
   if (!folderPath || !pathExists(folderPath)) {
@@ -61,7 +63,10 @@ export const getDependencyTreeData = (postMessage?: boolean): DependencyTreeData
   }
   postMessage ? statusMsgGetEntryFile.postSuccess() : null;
 
-  const { dependencyTree: processedTreeData, dependencyHash } = analysesFile(path.join(folderPath, mainFilePath), folderPath);
+  const { dependencyTree: processedTreeData, dependencyHash } = analysesFile(
+    path.join(folderPath, mainFilePath),
+    folderPath
+  );
   // const dependencyTreeData = getDependencyTree(mainFilePath, folderPath);
   // if (!dependencyTreeData || !Object.keys(dependencyTreeData as dependencyTree.DependencyObj).length) {
   // 	onError(GET_DEPENDENCY_TREE_FAIL);

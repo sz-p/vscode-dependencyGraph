@@ -1,7 +1,7 @@
-const paths = require('./paths');
+const paths = require("./paths");
 module.exports = {
-  mode: 'development',
-  target: 'node',
+  mode: "development",
+  target: "node",
   node: {
     __dirname: false,
     __filename: false,
@@ -9,11 +9,11 @@ module.exports = {
   entry: paths.mainjs,
   output: {
     path: paths.build,
-    filename: 'extension.js',
-    libraryTarget: 'commonjs2'
+    filename: "extension.js",
+    libraryTarget: "commonjs2",
   },
   externals: {
-    vscode: 'commonjs vscode' // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
+    vscode: "commonjs vscode", // the vscode-module is created on-the-fly and must be excluded. Add other modules that cannot be webpack'ed, 📖 -> https://webpack.js.org/configuration/externals/
   },
   // loader
   module: {
@@ -21,13 +21,13 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        loader: 'ts-loader'
-      }
-    ]
+        loader: "ts-loader",
+      },
+    ],
   },
   resolve: {
-    extensions: ['.ts', '.js', '.json']
+    extensions: [".ts", ".js", ".json"],
   },
   plugins: [],
-  devtool: 'source-map'
+  devtool: "source-map",
 };

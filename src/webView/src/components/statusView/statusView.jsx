@@ -1,25 +1,30 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { connect } from 'react-redux';
-import "./status.css"
-import { loadTheme } from '@fluentui/react';
-import { dark, light } from '../../utils/theme'
-import { StatusDom } from './statusDom';
-import { useEffect, useState } from 'react'
+import { connect } from "react-redux";
+import "./status.css";
+import { loadTheme } from "@fluentui/react";
+import { dark, light } from "../../utils/theme";
+import { StatusDom } from "./statusDom";
+import { useEffect, useState } from "react";
 const statusView = function (props) {
   let [doms, setDoms] = useState([]);
   let [error, setError] = useState(false);
-  const { getDataStatus, viewHash, gotDependencyTreeData, activeThemeKind } = props;
+  const {
+    getDataStatus,
+    viewHash,
+    gotDependencyTreeData,
+    activeThemeKind,
+  } = props;
 
   useEffect(() => {
     if (viewHash) {
-      doms = [], setDoms(doms)
+      (doms = []), setDoms(doms);
     }
-  }, [viewHash])
+  }, [viewHash]);
   useEffect(() => {
     if (activeThemeKind) {
       switch (activeThemeKind) {
-        case 'Light':
+        case "Light":
           loadTheme(light);
           break;
         default:
@@ -27,26 +32,32 @@ const statusView = function (props) {
           break;
       }
     }
-  }, [activeThemeKind])
+  }, [activeThemeKind]);
   useEffect(() => {
     if (getDataStatus && !error) {
-      if (getDataStatus.status === 'error') {
-        setError(true)
+      if (getDataStatus.status === "error") {
+        setError(true);
       }
-      setDoms(doms.concat(<StatusDom key={getDataStatus.type} type={getDataStatus.type} status={getDataStatus.status} />))
+      setDoms(
+        doms.concat(
+          <StatusDom
+            key={getDataStatus.type}
+            type={getDataStatus.type}
+            status={getDataStatus.status}
+          />
+        )
+      );
     }
-  }, [getDataStatus])
-  if (gotDependencyTreeData) return null
-  return (
-    <div className="statusView">{doms}</div>
-  )
-}
+  }, [getDataStatus]);
+  if (gotDependencyTreeData) return null;
+  return <div className="statusView">{doms}</div>;
+};
 const mapStateToProps = (state) => {
   return {
     getDataStatus: state.getDataStatus,
     viewHash: state.viewHash,
     gotDependencyTreeData: state.gotDependencyTreeData,
-    activeThemeKind: state.activeThemeKind
-  }
+    activeThemeKind: state.activeThemeKind,
+  };
 };
 export const StatusView = connect(mapStateToProps)(statusView);

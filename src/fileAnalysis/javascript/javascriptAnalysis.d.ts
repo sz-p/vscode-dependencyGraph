@@ -1,11 +1,14 @@
-import { FunctionInformation, FileInformation } from '../../data-dependencyTree/dependencyTreeData';
+import {
+  FunctionInformation,
+  FileInformation,
+} from "../../data-dependencyTree/dependencyTreeData";
 export interface AnalyseData {
-	analysed: true;
-	lines: number;
-	fileInformation: FileInformation;
-	functionsList: FunctionInformation[];
+  analysed: true;
+  lines: number;
+  fileInformation: FileInformation;
+  functionsList: FunctionInformation[];
 }
 export interface AnalyseFiled {
-	analysed: false;
-	fileInformation: FileInformation;
+  analysed: false;
+  fileInformation: FileInformation;
 }

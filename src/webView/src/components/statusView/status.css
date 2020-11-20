@@ -1,19 +1,19 @@
 .statusView {
   z-index: 10;
-	margin: 20px auto 0px auto;
-	position: absolute;
-	width: 100%;
-	height: calc(100% - 20px);
-	max-width: 800px;
-	left: 0px;
-	right: 0px;
+  margin: 20px auto 0px auto;
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 20px);
+  max-width: 800px;
+  left: 0px;
+  right: 0px;
 }
 .statusView-inputBox {
-	display: inline-block;
-	width: 80%;
+  display: inline-block;
+  width: 80%;
 }
 
 .statusView-button {
-	top: 29px;
-	float: right;
+  top: 29px;
+  float: right;
 }

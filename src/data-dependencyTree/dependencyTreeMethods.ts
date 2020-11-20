@@ -1,26 +1,31 @@
-import * as fs from 'fs';
-import * as dependencyTree from 'dependency-tree';
+import * as fs from "fs";
+import * as dependencyTree from "dependency-tree";
 // import * as getdependencytree from 'get-dependency-tree';
-import * as path from 'path';
-import * as vscode from 'vscode';
+import * as path from "path";
+import * as vscode from "vscode";
 
-import { getFileIconNameByFileName } from '../utils/fileIcons/getFileIcon';
-import { DependencyTreeData } from './dependencyTreeData';
-import { setEntryFileRelativePath } from '../utils/config';
+import { getFileIconNameByFileName } from "../utils/fileIcons/getFileIcon";
+import { DependencyTreeData } from "./dependencyTreeData";
+import { setEntryFileRelativePath } from "../utils/config";
 
-import { analysesFile } from '../fileAnalysis/javascript/javascriptAnalysis';
+import { analysesFile } from "../fileAnalysis/javascript/javascriptAnalysis";
 
-export const getPackageJsonPath = function (folderPath: string): string | undefined {
+export const getPackageJsonPath = function (
+  folderPath: string
+): string | undefined {
   const files = fs.readdirSync(folderPath);
-  if (files.includes('package.json')) {
-    return folderPath + '/package.json';
+  if (files.includes("package.json")) {
+    return folderPath + "/package.json";
   } else {
     return undefined;
   }
 };
 
-export const getMainFilePath = function (folderPath: string, packageJsonPath: string): string | undefined {
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+export const getMainFilePath = function (
+  folderPath: string,
+  packageJsonPath: string
+): string | undefined {
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
   // const packageJson = require(packageJsonPath);
   if (packageJson.main) {
     const mainFilePath = path.join(packageJson.main);
@@ -59,14 +64,13 @@ export const getCurrentFolderPath = function (): string | undefined {
   // not get or set folderPath in config
   // just use script to get path
 
-
   // let currentFolderPath = getFolderPathByConfig();
   // if (currentFolderPath) {
   // 	return currentFolderPath;
   // }
   const ws = vscode.workspace;
   let folder = ws.workspaceFolders;
-  let folderPath = '';
+  let folderPath = "";
   if (folder !== undefined) {
     folderPath = folder[0].uri.fsPath;
   }
@@ -87,15 +91,15 @@ export const processTreeData = function (
       dependencyTree,
       dependencyTreeData,
       ancestors: [] as string[],
-      path: Object.keys(dependencyTree)[0]
-    }
+      path: Object.keys(dependencyTree)[0],
+    },
   ];
   while (nodes.length) {
     const node = nodes.pop();
     if (node) {
-      const file = node.path.split('\\').pop() as string;
+      const file = node.path.split("\\").pop() as string;
       const fileName = file;
-      const extension = file.split('.').pop();
+      const extension = file.split(".").pop();
       const type = getFileIconNameByFileName(fileName);
       const analyseData = analysesFile(node.path, folderPath);
       if (analyseData.analysed) {
@@ -109,7 +113,7 @@ export const processTreeData = function (
       node.dependencyTreeData.name = fileName;
       node.dependencyTreeData.absolutePath = node.path;
       node.dependencyTreeData.ancestors = node.ancestors;
-      node.dependencyTreeData.relativePath = node.path.replace(folderPath, '');
+      node.dependencyTreeData.relativePath = node.path.replace(folderPath, "");
       node.dependencyTreeData.extension = extension as string;
       node.dependencyTreeData.type = type;
       node.dependencyTreeData.children = [] as Array<DependencyTreeData>;
@@ -123,7 +127,7 @@ export const processTreeData = function (
           dependencyTree: node.dependencyTree[node.path],
           path: keys,
           ancestors: ancestors,
-          dependencyTreeData: subNode
+          dependencyTreeData: subNode,
         });
       }
     }
