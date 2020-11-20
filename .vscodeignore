@@ -10,5 +10,10 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 doc
+config
+node_modules
+out
+scripts
+utils
 yarn-error.log
 yarn.lock

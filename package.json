@@ -3,7 +3,7 @@
   "displayName": "framegraph",
   "description": "A plugin for vscode to view your project's frame graph",
   "icon": "assets/framegraph.png",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "license": "MIT",
   "engines": {
     "vscode": "^1.41.0"
@@ -92,11 +92,14 @@
   },
   "scripts": {
     "watch": "npm-run-all -p watch:*",
-    "vscode:prepublish": "npm run compile",
+    "build": "npm-run-all -p build:*",
+    "vscode:prepublish": "npm-run-all -p build:*",
     "compile": "tsc -p ./",
-    "pretest": "npm run compile",
-    "watch:Extension": "node ./scripts/build.js",
-    "watch:WebView": "node ./src/webView/scripts/build.js",
+    "pretest": "npm-run-all -p build:*",
+    "watch:Extension": "node ./scripts/watch.js",
+    "watch:WebView": "node ./src/webView/scripts/watch.js",
+    "build:Extension": "node ./scripts/build.js",
+    "build:WebView": "node ./src/webView/scripts/build.js",
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {

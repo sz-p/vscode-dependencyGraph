@@ -1,7 +1,7 @@
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 const utils = require('../../../utils/utils');
 const paths = require('../config/paths');
 const config = require('../config/webpack.config');
-const { buildSources } = utils
+const { watchSources } = utils
 
-buildSources(config, paths.build)
+watchSources(config, paths.build)

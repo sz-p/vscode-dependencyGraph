@@ -22,15 +22,21 @@ const buildCallback = (err, stats) => {
     console.log(new Error(messages.errors.join('\n\n')));
   }
 }
-function buildAndWatchSources(webpackConfig, buildPath) {
+function watchSources(webpackConfig, buildPath) {
   const compiler = webpack(webpackConfig);
-  fs.rmdirSync(buildPath, { recursive: true })
   compiler.watch(
     watchOptions,
     buildCallback
   );
 }
-
+function buildSources(webpackConfig, buildPath) {
+  const compiler = webpack(webpackConfig);
+  fs.rmdirSync(buildPath, { recursive: true })
+  compiler.run(
+    buildCallback
+  );
+}
 module.exports = {
-  buildAndWatchSources
+  watchSources,
+  buildSources
 }
