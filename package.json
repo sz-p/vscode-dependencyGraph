@@ -94,6 +94,7 @@
     "watch": "npm-run-all -p watch:*",
     "build": "npm-run-all -p build:*",
     "vscode:prepublish": "npm-run-all -p build:*",
+    "codeCount": "cloc ./ --exclude-dir=node_modules,out,outExtension,outWebView,assets,fileIcons",
     "compile": "tsc -p ./",
     "pretest": "npm-run-all -p build:*",
     "watch:Extension": "node ./scripts/watch.js",
