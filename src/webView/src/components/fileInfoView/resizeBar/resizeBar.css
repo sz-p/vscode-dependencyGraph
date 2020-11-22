@@ -1,0 +1,9 @@
+.fileInfoView-resizeBar {
+  width: 4px;
+  height: 100%;
+  background: transparent;
+  left: 0px;
+  position: absolute;
+  z-index: 10;
+  cursor: ew-resize;
+}

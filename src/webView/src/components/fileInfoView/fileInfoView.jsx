@@ -1,7 +1,8 @@
 import * as React from "react";
 import "./fileInfoView.css";
 import { FunctionsBox } from "./functionBox/functionBox";
-
+import { ResizeBar } from "./resizeBar/resizeBar";
+import { useRef } from "react";
 import { connect } from "react-redux";
 import { i18n } from "../../../../i18n/i18n";
 import {
@@ -12,8 +13,18 @@ import {
   METHODS,
 } from "../../../../i18n/types";
 
+let boxWidth = 297;
 const fileInfoView = function (props) {
+  const dom = useRef();
   const { selectedNode, assetsBaseURL, activeThemeKind } = props;
+  const resizeBox = function (dx) {
+    dom.current.style.transition = "auto";
+    dom.current.style.width = boxWidth + dx + "px";
+  };
+  const resizeEnd = function (dx) {
+    dom.current.style.transition = "all 0.3s";
+    boxWidth = boxWidth + dx;
+  };
   let className = "fileInfoView hidden-right";
   if (!selectedNode || !assetsBaseURL) {
     return <div className={className}></div>;
@@ -31,7 +42,8 @@ const fileInfoView = function (props) {
   introduction ? (introduction = introduction.replace(/\\n/g, "</br>")) : null;
   description ? (description = description.replace(/\\n/g, "</br>")) : null;
   return (
-    <div className={className}>
+    <div ref={dom} className={className}>
+      <ResizeBar onResize={resizeBox} onResizeEnd={resizeEnd} />
       <div className="fileInfoView-titleBar">
         <div className="fileInfoView-titleBar-titleLabel">{name}</div>
         <div
