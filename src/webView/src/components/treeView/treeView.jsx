@@ -18,9 +18,9 @@ const treeView = function (props) {
   } = props;
   const chartArea = useRef();
   useEffect(() => {
-    function resizeTree(e) {
+    const observer = new ResizeObserver(() => {
       tree.resize();
-    }
+    });
     if (dependencyTreeData && assetsBaseURL) {
       tree.init(
         chartArea.current,
@@ -29,10 +29,10 @@ const treeView = function (props) {
         activeThemeKind
       );
       tree.update();
-      window.addEventListener("resize", resizeTree);
+      observer.observe(chartArea.current);
     }
     return () => {
-      window.removeEventListener("resize", resizeTree);
+      observer.unobserve(chartArea.current);
     };
   }, [dependencyTreeData, assetsBaseURL]);
   useEffect(() => {
