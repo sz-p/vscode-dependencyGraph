@@ -49,6 +49,9 @@
 }
 .fileInfoView-type-line {
   display: inline-block;
+  position: fixed;
+  right: 0px;
+  margin-right: 20px;
 }
 .fileTypeText {
   color: var(--vscode-charts-yellow);
@@ -74,7 +77,7 @@
   line-height: 35px;
 }
 .fileInfoView-functionBox-function {
-  width: 275px;
+  width: 100%;
   height: 100%;
 }
 .function-comment {
