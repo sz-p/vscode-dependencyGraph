@@ -24,6 +24,14 @@ export class D3Tree {
   constructor() {
     this.initStaticVariables();
   }
+  resize() {
+    const { width, height } = this.dom.getClientRects()[0];
+    this.width = width;
+    this.height = height;
+    this.options.width = width;
+    this.options.height = height;
+    this.svgBox.attr("width", this.width).attr("height", this.height);
+  }
   initStaticVariables() {
     this.PADDING = {
       LEFT: 100,

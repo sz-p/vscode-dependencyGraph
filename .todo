@@ -15,6 +15,7 @@
 [x] feat: analyze javascript file and get dependency tree all use babel
 [x] feat: use webpack package vsce
 [x] feat: config save relative path
+[ ] feat: webview svgBox support resize
 [ ] feat: file information view drag to resize
 [ ] feat: change get dependency tree as a module
 [ ] refactor: change analyze javascript file as plugin to get dependency tree
@@ -22,7 +23,6 @@
 [ ] feat: save node information to file
 [ ] feat: webview data save
 [ ] feat: save file node
-[ ] feat: webview svgBox support resize
 [ ] feat: node with hash
 [ ] feat: if main of package.json is unequal with config use main
 
