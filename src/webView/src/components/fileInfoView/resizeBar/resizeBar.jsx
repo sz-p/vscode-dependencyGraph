@@ -14,8 +14,9 @@ const resizeBar = function (props) {
     }
   };
   const mouseUp = function (e) {
-    mouseDowned = false;
-    if (typeof props.onResizeEnd === "function") {
+    if (typeof props.onResizeEnd === "function" && mouseDowned) {
+      document.getElementsByTagName("html")[0].style.userSelect = "auto";
+      mouseDowned = false;
       const dx = mouseX - e.pageX;
       props.onResizeEnd(dx);
     }
@@ -23,6 +24,7 @@ const resizeBar = function (props) {
 
   const mouseDown = function (e) {
     if (e.target === dom.current) {
+      document.getElementsByTagName("html")[0].style.userSelect = "none";
       mouseDowned = true;
       mouseX = e.pageX;
     }
