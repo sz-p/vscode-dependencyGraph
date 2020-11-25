@@ -133,6 +133,7 @@
     "@types/react-dom": "^16.9.8",
     "ast-types": "^0.14.2",
     "babylon": "^6.18.0",
+    "cssom": "^0.4.4",
     "d3": "^5.16.0",
     "dependency-tree": "^7.2.1",
     "file-loader": "^6.1.1",
