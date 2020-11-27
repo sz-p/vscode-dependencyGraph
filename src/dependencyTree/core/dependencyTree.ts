@@ -169,7 +169,7 @@ export class DependencyTree {
       this.options = options;
     }
   }
-  parse(folderPath: string, entryPath: string) {
+  parse(entryPath: string, folderPath: string) {
     this.dependencyTreeData = {
       absolutePath: entryPath,
       ancestors: [] as string[],
@@ -205,6 +205,12 @@ export class DependencyTree {
       );
       for (let i = 0; i < children.length; i++) {
         const childrenPath = this.getRealPath(children[i]);
+
+        if (!this.pathExists(childrenPath)) {
+          console.error(`file does not exist: ${childrenPath}`);
+          continue;
+        }
+
         let dependencyChildren = undefined;
         // old node; node was analysed
         if (this.dependencyHash[childrenPath]) {

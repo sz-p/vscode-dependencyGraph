@@ -14,10 +14,12 @@ import {
 import {
   getPackageJsonPath,
   getMainFilePath,
-  getDependencyTree,
+  // getDependencyTree,
   processTreeData,
   getCurrentFolderPath,
 } from "./dependencyTreeMethods";
+
+import { getDependencyTree } from "../dependencyTree/index";
 
 import { getEntryFileRelativePath } from "../utils/config";
 import { onError } from "../utils/error/onError";
@@ -62,6 +64,19 @@ export const getDependencyTreeData = (
     return undefined;
   }
   postMessage ? statusMsgGetEntryFile.postSuccess() : null;
+
+  console.log(getDependencyTree);
+  const { dependencyTree: dp } = getDependencyTree(
+    path.join(folderPath, mainFilePath),
+    folderPath
+  );
+  console.log(dp);
+  // const { dependencyTree: dp } = getDependencyTree(
+  //   path.join(folderPath, mainFilePath),
+  //   folderPath
+  // );
+
+  // console.log(dp);
 
   const { dependencyTree: processedTreeData, dependencyHash } = analysesFile(
     path.join(folderPath, mainFilePath),
