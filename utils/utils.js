@@ -19,7 +19,7 @@ const buildCallback = (err, stats) => {
     if (messages.errors.length > 1) {
       messages.errors.length = 1;
     }
-    console.log(new Error(messages.errors.join("\n\n")));
+    console.error(messages.errors.join("\n\n"));
   }
 };
 function watchSources(webpackConfig, buildPath) {

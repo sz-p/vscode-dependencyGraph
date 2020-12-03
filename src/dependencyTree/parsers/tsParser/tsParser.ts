@@ -6,6 +6,7 @@ import {
 import { triggerOnGotAST } from "../utils/utils";
 import { visit } from "recast";
 import * as path from "path";
+import * as Resolve from "enhanced-resolve";
 
 import * as babelParser from "recast/parsers/babel";
 const babelOption = {};
@@ -28,11 +29,17 @@ export const parser: Parser = function (
     return dependencies;
   }
   triggerOnGotAST(dependencyNode, absolutePath, options, ast);
+  const { resolveExtensions, alias } = options;
   visit(ast, {
     visitImportDeclaration(nodePath) {
       if (typeof nodePath.node.source.value !== "string") return false;
-      const dependencyPath = path.join(dirName, nodePath.node.source.value);
-      dependencies.push(dependencyPath);
+
+      const resolve = Resolve.create.sync({
+        extensions: resolveExtensions,
+        alias: alias,
+      });
+      const dependencyPath = resolve(dirName, nodePath.node.source.value);
+      if (dependencyPath) dependencies.push(dependencyPath);
       return false;
     },
     visitIdentifier(nodePath) {
