@@ -38,8 +38,20 @@ export const parser: Parser = function (
         extensions: resolveExtensions,
         alias: alias,
       });
-      const dependencyPath = resolve(dirName, nodePath.node.source.value);
-      if (dependencyPath) dependencies.push(dependencyPath);
+      let dependencyPath = undefined;
+      try {
+        dependencyPath = resolve(dirName, nodePath.node.source.value);
+      } catch (e) {
+        console.error(`resolve children node error: ${absolutePath}`);
+        return false;
+      }
+      if (dependencyPath) {
+        if (dependencyPath.includes("node_modules")) {
+          // TODO parse package dependencies
+          return false;
+        }
+        dependencies.push(dependencyPath);
+      }
       return false;
     },
     visitIdentifier(nodePath) {
