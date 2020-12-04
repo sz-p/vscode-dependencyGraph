@@ -13,6 +13,7 @@ import {
 } from "../index.d";
 import { parser as tsParser } from "../parsers/tsParser/tsParser";
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
+import { pathExists, isDirectory } from "../utils/utils";
 export class DependencyTree {
   options: DependencyTreeOptions;
   parsers: Parsers;
@@ -52,14 +53,6 @@ export class DependencyTree {
     dependencyNode.relativePath = relativePath;
     dependencyNode.children = [];
   }
-  private pathExists(p: string): boolean {
-    try {
-      fs.accessSync(p);
-    } catch (err) {
-      return false;
-    }
-    return true;
-  }
   private triggerGetFileString(
     dependencyNode: DependencyTreeData,
     absolutePath: string,
@@ -97,23 +90,42 @@ export class DependencyTree {
   private processExt(absolutePath: string, extList: string[]): string {
     for (let i = 0; i < extList.length; i++) {
       const _absolutePath = absolutePath + extList[i];
-      if (this.pathExists(_absolutePath)) {
+      if (pathExists(_absolutePath)) {
         return _absolutePath;
       }
     }
     return absolutePath;
   }
-  private getRealPath(absolutePath: string): string {
-    const { resolveExtensions, alias } = this.options;
-    if (this.pathExists(absolutePath)) {
-      return absolutePath;
-    }
-    let _absolutePath = this.processExt(absolutePath, resolveExtensions);
-    if (this.pathExists(_absolutePath)) {
-      return _absolutePath;
-    }
-    _absolutePath = this.processAlias(absolutePath, alias);
-    return _absolutePath;
+  /**
+   * webpack get file path with some rules like no ext, no 'node_modules' in here parse these rules
+   *
+   *
+   *
+   * @private
+   * @param {string} absolutePath
+   * @returns {string}
+   * @memberof DependencyTree
+   */
+  private getRealPath(absolutePath: string, folder: string): void {
+    // // let _absolutePath = absolutePath;
+    // // if path was exited return path
+    // if (pathExists(absolutePath)) {
+    //   return absolutePath;
+    // }
+    // // import 'xx' from './dirName' is import 'xx' from './dirName/index'
+    // if (isDirectory(absolutePath)) {
+    //   _absolutePath = _absolutePath + "/index";
+    // }
+    // // get ext
+    // _absolutePath = this.processExt(absolutePath, resolveExtensions);
+    // if (pathExists(_absolutePath)) {
+    //   return _absolutePath;
+    // }
+    // _absolutePath = this.processAlias(absolutePath, alias);
+    //   return _absolutePath;
+    // else {
+    //   return absolutePath;
+    // }
   }
   /**
    * use absolutePath and ancestors find circular structure
@@ -170,6 +182,7 @@ export class DependencyTree {
     }
   }
   parse(entryPath: string, folderPath: string) {
+    this.dependencyHash = {};
     this.dependencyTreeData = {
       absolutePath: entryPath,
       ancestors: [] as string[],
@@ -183,7 +196,7 @@ export class DependencyTree {
 
       let { absolutePath, ancestors } = dependencyNode;
 
-      if (!this.pathExists(absolutePath)) {
+      if (!pathExists(absolutePath)) {
         console.error(`file does not exist: ${absolutePath}`);
         continue;
       }
@@ -204,14 +217,18 @@ export class DependencyTree {
         this.options
       );
       for (let i = 0; i < children.length; i++) {
-        const childrenPath = this.getRealPath(children[i]);
+        const childrenPath = children[i];
 
-        if (!this.pathExists(childrenPath)) {
+        if (!pathExists(childrenPath)) {
           console.error(`file does not exist: ${childrenPath}`);
           continue;
         }
 
         let dependencyChildren = undefined;
+
+        console.log(dependencyNode);
+        console.log(absolutePath);
+        console.log(children[i]);
         // old node; node was analysed
         if (this.dependencyHash[childrenPath]) {
           if (this.isCircularStructure(childrenPath, ancestors)) {
@@ -239,7 +256,7 @@ export class DependencyTree {
           dependencyList.push(dependencyChildren);
           this.dependencyHash[
             childrenPath
-          ] = dependencyNode as DependencyTreeData;
+          ] = dependencyChildren as DependencyTreeData;
         }
         dependencyNode.children.push(dependencyChildren);
       }
