@@ -1,6 +1,6 @@
 export interface DependencyTreeOptions {
-  resolveExtensions: string[];
-  alias: Alias;
+  resolveExtensions?: string[];
+  alias?: Alias;
   onGetFileString?: (
     dependencyNode: DependencyTreeData,
     absolutePath: string,
