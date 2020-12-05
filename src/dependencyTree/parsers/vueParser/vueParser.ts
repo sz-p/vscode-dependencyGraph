@@ -4,7 +4,7 @@ import {
   DependencyTreeData,
   DependencyTreeOptions,
 } from "../../index.d";
-import { parser as tsParser } from "../tsParser/tsParser";
+import { parser as tsParser } from "../generalJsParser/generalJsParser";
 export const parser: Parser = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,
