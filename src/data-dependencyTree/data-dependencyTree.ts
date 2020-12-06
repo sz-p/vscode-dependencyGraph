@@ -33,6 +33,8 @@ import {
 
 import { pathExists } from "../utils/utils";
 
+import { onGetFileString, onGotAST } from "../fileAnalysis/fileAnalysis";
+
 export const getDependencyTreeData = (
   postMessage?: boolean
 ): DependencyTreeData | undefined => {
@@ -65,10 +67,10 @@ export const getDependencyTreeData = (
   }
   postMessage ? statusMsgGetEntryFile.postSuccess() : null;
 
-  console.log(getDependencyTree);
   const { dependencyTree: dp } = getDependencyTree(
     path.join(folderPath, mainFilePath),
-    folderPath
+    folderPath,
+    { onGetFileString, onGotAST }
   );
   console.log(dp);
   // const { dependencyTree: dp } = getDependencyTree(
@@ -78,10 +80,10 @@ export const getDependencyTreeData = (
 
   // console.log(dp);
 
-  const { dependencyTree: processedTreeData, dependencyHash } = analysesFile(
-    path.join(folderPath, mainFilePath),
-    folderPath
-  );
+  // const { dependencyTree: processedTreeData, dependencyHash } = analysesFile(
+  //   path.join(folderPath, mainFilePath),
+  //   folderPath
+  // );
   // const dependencyTreeData = getDependencyTree(mainFilePath, folderPath);
   // if (!dependencyTreeData || !Object.keys(dependencyTreeData as dependencyTree.DependencyObj).length) {
   // 	onError(GET_DEPENDENCY_TREE_FAIL);
@@ -91,11 +93,11 @@ export const getDependencyTreeData = (
   // postMessage ? statusMsgGetDependencyData.postSuccess() : null;
 
   // const processedTreeData = processTreeData(dependencyTreeData as dependencyTree.DependencyObj, folderPath);
-  if (!processedTreeData) {
+  if (!dp) {
     onError(NO_DEPENDENCY);
     postMessage ? statusMsgGetDependencyProcessData.postError() : null;
   }
   postMessage ? statusMsgGetDependencyProcessData.postSuccess() : null;
 
-  return processedTreeData;
+  return dp as DependencyTreeData;
 };
