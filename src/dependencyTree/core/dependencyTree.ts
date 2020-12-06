@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
-import { cloneDeep } from "lodash";
+import { cloneDeep, merge } from "lodash";
 import { defaultOptions } from "./defaultOptions";
 import {
   DependencyTreeOptions,
@@ -25,7 +25,8 @@ export class DependencyTree {
   static vueParser: Parser;
 
   constructor(options?: DependencyTreeOptions) {
-    options ? (this.options = options) : (this.options = defaultOptions);
+    this.options = defaultOptions;
+    if (options) merge(this.options, options);
     this.parsers = {};
     this.parseRule = {};
     this.dependencyHash = {};
@@ -177,9 +178,7 @@ export class DependencyTree {
     delete this.parseRule[key];
   }
   setOptions(options: DependencyTreeOptions) {
-    if (options) {
-      this.options = options;
-    }
+    if (options) merge(this.options, options);
   }
   parse(entryPath: string, folderPath: string) {
     this.dependencyHash = {};
