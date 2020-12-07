@@ -12,7 +12,7 @@ export interface DependencyTreeOptions {
     circularStructureNode: DependencyTreeData
   ) => void;
   onGotAST?: (
-    circularStructureNode: DependencyTreeData,
+    dependencyNode: DependencyTreeData,
     absolutePath: string,
     AST: any
   ) => void;

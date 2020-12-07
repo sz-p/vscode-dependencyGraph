@@ -225,10 +225,6 @@ export class DependencyTree {
         }
 
         let dependencyChildren = undefined;
-
-        console.log(dependencyNode);
-        console.log(absolutePath);
-        console.log(children[i]);
         // old node; node was analysed
         if (this.dependencyHash[childrenPath]) {
           if (this.isCircularStructure(childrenPath, ancestors)) {
