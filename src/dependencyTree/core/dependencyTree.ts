@@ -13,6 +13,7 @@ import {
 } from "../index.d";
 import { parser as tsParser } from "../parsers/generalJsParser/generalJsParser";
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
+import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
 import { pathExists, isDirectory } from "../utils/utils";
 export class DependencyTree {
   options: DependencyTreeOptions;
@@ -23,6 +24,7 @@ export class DependencyTree {
   circularStructureNode: DependencyTreeData;
   static tsParser: Parser;
   static vueParser: Parser;
+  static noDependenceParser: Parser;
 
   constructor(options?: DependencyTreeOptions) {
     this.options = defaultOptions;
@@ -264,3 +266,4 @@ export class DependencyTree {
 }
 DependencyTree.tsParser = tsParser;
 DependencyTree.vueParser = vueParser;
+DependencyTree.noDependenceParser = noDependenceParser;

@@ -11,6 +11,9 @@ const getDependencyTree = function (
   if (options) dp.setOptions(options);
   dp.registerParser("tsParser", DependencyTree.tsParser);
   dp.registerParser("vueParser", DependencyTree.vueParser);
+  dp.registerParser("noDependenceParser", DependencyTree.noDependenceParser);
+
+  dp.registerParseRule(".json", DependencyTree.noDependenceParser);
 
   dp.registerParseRule(".vue", DependencyTree.vueParser);
 
