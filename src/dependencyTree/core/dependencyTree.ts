@@ -13,6 +13,7 @@ import {
 } from "../index.d";
 import { parser as tsParser } from "../parsers/generalJsParser/generalJsParser";
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
+import { parser as cssParser } from "../parsers/cssParser/cssParser";
 import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
 import { pathExists, isDirectory } from "../utils/utils";
 export class DependencyTree {
@@ -25,6 +26,7 @@ export class DependencyTree {
   static tsParser: Parser;
   static vueParser: Parser;
   static noDependenceParser: Parser;
+  static cssParser: Parser;
 
   constructor(options?: DependencyTreeOptions) {
     this.options = defaultOptions;
@@ -207,7 +209,7 @@ export class DependencyTree {
       const parser = this.parseRule[dependencyNode.extension];
       if (!parser) {
         console.warn(
-          `no ${dependencyNode.extension} parser please register parserRule or parser`
+          `no ${dependencyNode.extension} parser please register parserRule and parser`
         );
         continue;
       }
@@ -266,4 +268,5 @@ export class DependencyTree {
 }
 DependencyTree.tsParser = tsParser;
 DependencyTree.vueParser = vueParser;
+DependencyTree.cssParser = cssParser;
 DependencyTree.noDependenceParser = noDependenceParser;
