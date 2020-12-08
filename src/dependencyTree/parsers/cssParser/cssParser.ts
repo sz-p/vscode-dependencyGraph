@@ -4,13 +4,15 @@ import {
   Parser,
   DependencyTreeData,
   DependencyTreeOptions,
+  Parsers,
 } from "../../index.d";
 import * as path from "path";
 export const parser: Parser = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,
   codeString: string,
-  options: DependencyTreeOptions
+  options: DependencyTreeOptions,
+  parsers?: Parsers
 ) {
   let dependencies = [] as string[];
   console.log(postcss);

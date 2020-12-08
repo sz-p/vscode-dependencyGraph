@@ -2,6 +2,7 @@ import {
   Parser,
   DependencyTreeData,
   DependencyTreeOptions,
+  Parsers
 } from "../../index.d";
 import { triggerOnGotAST } from "../utils/utils";
 import { visit } from "recast";
@@ -14,7 +15,8 @@ export const parser: Parser = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,
   codeString: string,
-  options: DependencyTreeOptions
+  options: DependencyTreeOptions,
+  parsers?: Parsers
 ) {
   const dirName = path.dirname(absolutePath);
   let ast = undefined;

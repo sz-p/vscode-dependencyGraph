@@ -11,7 +11,7 @@ import {
   DependencyTreeData,
   Alias,
 } from "../index.d";
-import { parser as tsParser } from "../parsers/generalJsParser/generalJsParser";
+import { parser as generalJsParser } from "../parsers/generalJsParser/generalJsParser";
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
 import { parser as cssParser } from "../parsers/cssParser/cssParser";
 import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
@@ -23,7 +23,7 @@ export class DependencyTree {
   dependencyHash: DependencyHash;
   dependencyTreeData: DependencyTreeData;
   circularStructureNode: DependencyTreeData;
-  static tsParser: Parser;
+  static generalJsParser: Parser;
   static vueParser: Parser;
   static noDependenceParser: Parser;
   static cssParser: Parser;
@@ -172,8 +172,8 @@ export class DependencyTree {
   registerParser(key: string, parser: Parser) {
     this.parsers[key] = parser;
   }
-  registerParseRule(key: string, parser: Parser) {
-    this.parseRule[key] = parser;
+  registerParseRule(key: string, parserKey: string) {
+    this.parseRule[key] = parserKey;
   }
   removeParser(key: string) {
     delete this.parsers[key];
@@ -206,7 +206,7 @@ export class DependencyTree {
       this.setDataToDependencyNode(dependencyNode, absolutePath, folderPath);
       const codeString = fs.readFileSync(absolutePath).toString();
       this.triggerGetFileString(dependencyNode, absolutePath, codeString);
-      const parser = this.parseRule[dependencyNode.extension];
+      const parser = this.parsers[this.parseRule[dependencyNode.extension]];
       if (!parser) {
         console.warn(
           `no ${dependencyNode.extension} parser please register parserRule and parser`
@@ -217,7 +217,8 @@ export class DependencyTree {
         dependencyNode,
         absolutePath,
         codeString,
-        this.options
+        this.options,
+        this.parsers
       );
       for (let i = 0; i < children.length; i++) {
         const childrenPath = children[i];
@@ -266,7 +267,7 @@ export class DependencyTree {
     };
   }
 }
-DependencyTree.tsParser = tsParser;
+DependencyTree.generalJsParser = generalJsParser;
 DependencyTree.vueParser = vueParser;
 DependencyTree.cssParser = cssParser;
 DependencyTree.noDependenceParser = noDependenceParser;

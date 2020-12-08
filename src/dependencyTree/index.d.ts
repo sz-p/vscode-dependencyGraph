@@ -28,11 +28,12 @@ export interface Parser {
     dependencyNode: DependencyTreeData,
     absolutePath: string,
     codeString: string,
-    options: DependencyTreeOptions
+    options: DependencyTreeOptions,
+    parsers?: Parsers
   ): string[];
 }
 export interface ParseRule {
-  [key: string]: Parser;
+  [key: string]: string;
 }
 export interface DependencyHash {
   [key: string]: DependencyTreeData;
