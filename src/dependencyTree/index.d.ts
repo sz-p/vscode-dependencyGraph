@@ -29,6 +29,7 @@ export interface Parser {
     absolutePath: string,
     codeString: string,
     options: DependencyTreeOptions,
+    ParseRule?: ParseRule,
     parsers?: Parsers
   ): string[];
 }
