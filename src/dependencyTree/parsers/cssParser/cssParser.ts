@@ -11,11 +11,9 @@ export const parser: Parser = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,
   codeString: string,
-  options: DependencyTreeOptions,
-  parsers?: Parsers
+  options: DependencyTreeOptions
 ) {
   let dependencies = [] as string[];
-  console.log(postcss);
   let root = undefined;
   try {
     root = postcss.parse(codeString);

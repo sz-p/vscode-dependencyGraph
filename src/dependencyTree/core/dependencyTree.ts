@@ -218,6 +218,7 @@ export class DependencyTree {
         absolutePath,
         codeString,
         this.options,
+        this.parseRule,
         this.parsers
       );
       for (let i = 0; i < children.length; i++) {
