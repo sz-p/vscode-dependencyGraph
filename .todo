@@ -17,7 +17,7 @@
 [x] feat: config save relative path
 [x] feat: webview svgBox support resize
 [x] feat: file information view drag to resize
-[ ] feat: change get dependency tree as a module
+[x] feat: change get dependency tree as a module
 [ ] refactor: change analyze javascript file as plugin to get dependency tree
 [ ] feat: webview data read
 [ ] feat: save node information to file
