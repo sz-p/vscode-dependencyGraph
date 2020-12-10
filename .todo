@@ -18,7 +18,12 @@
 [x] feat: webview svgBox support resize
 [x] feat: file information view drag to resize
 [x] feat: change get dependency tree as a module
-[ ] refactor: change analyze javascript file as plugin to get dependency tree
+[x] refactor: change analyze javascript file as plugin to get dependency tree
+
+[ ] feat: double check tree view to option file
+[ ] feat: double check webview tree node to option file
+[ ] feat: change monaco to other rich text editor
+
 [ ] feat: webview data read
 [ ] feat: save node information to file
 [ ] feat: webview data save
