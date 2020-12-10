@@ -1,6 +1,9 @@
 import { DependencyTreeData } from "../dependencyTree/index.d";
 import { DependencyTreeData as DTD } from "../data-dependencyTree/dependencyTreeData.d";
-import { onGetJsFileString, onGotJsAST } from "./javascript/parseJavascript";
+import {
+  onGotJsAST,
+  onGetJsCircularStructureNode,
+} from "./javascript/parseJavascript";
 import { getFileIconNameByFileName } from "../utils/fileIcons/getFileIcon";
 
 const getIntroduction = function (codeString: string) {
@@ -34,12 +37,24 @@ export const onGetFileString = function (
   (dependencyNode as DTD).fileDescription = fileInformation;
   (dependencyNode as DTD).type = getFileIconNameByFileName(dependencyNode.name);
 
+  // switch (dependencyNode.extension) {
+  //   case ".js":
+  //   case ".ts":
+  //   case ".jsx":
+  //   case ".vue":
+  //     onGetJsFileString(dependencyNode as DTD, absolutePath, codeString);
+  // }
+};
+
+export const onGetCircularStructureNode = function (
+  dependencyNode: DependencyTreeData
+) {
   switch (dependencyNode.extension) {
     case ".js":
     case ".ts":
     case ".jsx":
     case ".vue":
-      onGetJsFileString(dependencyNode as DTD, absolutePath, codeString);
+      onGetJsCircularStructureNode(dependencyNode as DTD);
   }
 };
 export const onGotAST = function (

@@ -33,7 +33,11 @@ import {
 
 import { pathExists } from "../utils/utils";
 
-import { onGetFileString, onGotAST } from "../fileAnalysis/fileAnalysis";
+import {
+  onGetFileString,
+  onGotAST,
+  onGetCircularStructureNode,
+} from "../fileAnalysis/fileAnalysis";
 
 export const getDependencyTreeData = (
   postMessage?: boolean
@@ -70,7 +74,7 @@ export const getDependencyTreeData = (
   const { dependencyTree: dp } = getDependencyTree(
     path.join(folderPath, mainFilePath),
     folderPath,
-    { onGetFileString, onGotAST }
+    { onGetFileString, onGotAST, onGetCircularStructureNode }
   );
   console.log(dp);
   // const { dependencyTree: dp } = getDependencyTree(
