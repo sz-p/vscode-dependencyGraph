@@ -16,10 +16,7 @@ const buildCallback = (err, stats) => {
     messages = stats.toJson({ all: false, warnings: true, errors: true });
   }
   if (messages.errors.length) {
-    if (messages.errors.length > 1) {
-      messages.errors.length = 1;
-    }
-    console.error(messages.errors.join("\n\n"));
+    console.error(messages.errors);
   }
 };
 function watchSources(webpackConfig, buildPath) {
