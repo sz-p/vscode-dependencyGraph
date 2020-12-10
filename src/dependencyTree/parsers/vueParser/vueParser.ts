@@ -48,7 +48,7 @@ export const parser: Parser = function (
           );
         } else {
           console.warn(
-            `no ${style.lang} parser please register parserRule and parser`
+            `no .${style.lang} parser please register parserRule and parser`
           );
         }
       }
