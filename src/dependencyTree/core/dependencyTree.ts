@@ -15,6 +15,7 @@ import { parser as generalJsParser } from "../parsers/generalJsParser/generalJsP
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
 import { parser as cssParser } from "../parsers/cssParser/cssParser";
 import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
+import { parser as generalCssParser} from "../parsers/generalCssParser/generalCssParser";
 import { pathExists, isDirectory } from "../utils/utils";
 export class DependencyTree {
   options: DependencyTreeOptions;
@@ -24,6 +25,7 @@ export class DependencyTree {
   dependencyTreeData: DependencyTreeData;
   circularStructureNode: DependencyTreeData;
   static generalJsParser: Parser;
+  static generalCssParser: Parser;
   static vueParser: Parser;
   static noDependenceParser: Parser;
   static cssParser: Parser;
@@ -272,3 +274,4 @@ DependencyTree.generalJsParser = generalJsParser;
 DependencyTree.vueParser = vueParser;
 DependencyTree.cssParser = cssParser;
 DependencyTree.noDependenceParser = noDependenceParser;
+DependencyTree.generalCssParser = generalCssParser;
