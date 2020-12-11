@@ -33,6 +33,7 @@ export interface Parser {
     parsers?: Parsers
   ): string[];
 }
+// TODO ParseRule should be like webpack config
 export interface ParseRule {
   [key: string]: string;
 }
