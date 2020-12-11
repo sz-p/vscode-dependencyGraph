@@ -43,7 +43,7 @@ export const parser: Parser = function (
           cssParser = parsers[parseRule["." + style.lang]];
         }
         if (cssParser) {
-          dependencies.concat(
+          dependencies = dependencies.concat(
             cssParser(dependencyNode, absolutePath, style.content, options)
           );
         } else {
