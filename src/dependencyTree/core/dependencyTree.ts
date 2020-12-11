@@ -15,7 +15,7 @@ import { parser as generalJsParser } from "../parsers/generalJsParser/generalJsP
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
 import { parser as cssParser } from "../parsers/cssParser/cssParser";
 import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
-import { parser as generalCssParser} from "../parsers/generalCssParser/generalCssParser";
+import { parser as generalCssParser } from "../parsers/generalCssParser/generalCssParser";
 import { pathExists, isDirectory } from "../utils/utils";
 export class DependencyTree {
   options: DependencyTreeOptions;

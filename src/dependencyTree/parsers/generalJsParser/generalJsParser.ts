@@ -46,7 +46,7 @@ export const parser: Parser = function (
         console.error(`resolve children node error: ${absolutePath}`);
         return false;
       }
-      if (dependencyPath) {
+      if (typeof dependencyPath === "string") {
         if (dependencyPath.includes("node_modules")) {
           // TODO parse package dependencies
           return false;
