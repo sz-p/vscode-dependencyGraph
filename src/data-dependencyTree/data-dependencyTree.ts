@@ -1,107 +1,74 @@
-import * as path from "path";
-import { DependencyTreeData } from "./dependencyTreeData";
-import * as dependencyTree from "dependency-tree";
-import { analysesFile } from "../fileAnalysis/javascript/javascriptAnalysis";
+import * as path from 'path';
+import { DependencyTreeData } from './dependencyTreeData';
 
 import {
-  statusMsgGetFolderPath,
-  statusMsgGetPackageJsonPath,
-  statusMsgGetEntryFile,
-  statusMsgGetDependencyData,
-  statusMsgGetDependencyProcessData,
-} from "../utils/message/messages";
+	statusMsgGetFolderPath,
+	statusMsgGetPackageJsonPath,
+	statusMsgGetEntryFile,
+	statusMsgGetDependencyData,
+	statusMsgGetDependencyProcessData
+} from '../utils/message/messages';
 
+import { getPackageJsonPath, getMainFilePath, getCurrentFolderPath } from './dependencyTreeMethods';
+
+import { getDependencyTree } from '../dependencyTree/index';
+
+import { getEntryFileRelativePath } from '../utils/config';
+import { onError } from '../utils/error/onError';
 import {
-  getPackageJsonPath,
-  getMainFilePath,
-  // getDependencyTree,
-  processTreeData,
-  getCurrentFolderPath,
-} from "./dependencyTreeMethods";
+	NO_DEPENDENCY,
+	NO_FOLDER,
+	NO_PACKAGE_JSON,
+	NO_MAIN_FILE,
+	GET_DEPENDENCY_TREE_FAIL
+} from '../utils/error/errorKey';
 
-import { getDependencyTree } from "../dependencyTree/index";
+import { pathExists } from '../utils/utils';
 
-import { getEntryFileRelativePath } from "../utils/config";
-import { onError } from "../utils/error/onError";
-import {
-  NO_DEPENDENCY,
-  NO_FOLDER,
-  NO_PACKAGE_JSON,
-  NO_MAIN_FILE,
-  GET_DEPENDENCY_TREE_FAIL,
-} from "../utils/error/errorKey";
+import { onGetFileString, onGotAST, onGetCircularStructureNode } from '../fileAnalysis/fileAnalysis';
 
-import { pathExists } from "../utils/utils";
+export const getDependencyTreeData = (postMessage?: boolean): DependencyTreeData | undefined => {
+	// find folder Path catch path sendStatus
+	const folderPath = getCurrentFolderPath();
+	if (!folderPath || !pathExists(folderPath)) {
+		onError(NO_FOLDER);
+		postMessage ? statusMsgGetFolderPath.postError() : null;
+		return undefined;
+	}
+	postMessage ? statusMsgGetFolderPath.postSuccess() : null;
 
-import {
-  onGetFileString,
-  onGotAST,
-  onGetCircularStructureNode,
-} from "../fileAnalysis/fileAnalysis";
+	// find cached path sendStatus
+	let mainFilePath = getEntryFileRelativePath();
+	if (mainFilePath === undefined) {
+		// find package.json and main file
+		const packageJsonPath = getPackageJsonPath(folderPath);
+		if (!packageJsonPath) {
+			onError(NO_PACKAGE_JSON);
+			postMessage ? statusMsgGetPackageJsonPath.postError() : null;
+			return undefined;
+		}
+		postMessage ? statusMsgGetPackageJsonPath.postSuccess() : null;
+		mainFilePath = getMainFilePath(folderPath, packageJsonPath);
+	}
+	if (!mainFilePath || !pathExists(path.join(folderPath, mainFilePath))) {
+		onError(NO_MAIN_FILE);
+		postMessage ? statusMsgGetEntryFile.postError() : null;
+		return undefined;
+	}
+	postMessage ? statusMsgGetEntryFile.postSuccess() : null;
 
-export const getDependencyTreeData = (
-  postMessage?: boolean
-): DependencyTreeData | undefined => {
-  // find folder Path catch path sendStatus
-  const folderPath = getCurrentFolderPath();
-  if (!folderPath || !pathExists(folderPath)) {
-    onError(NO_FOLDER);
-    postMessage ? statusMsgGetFolderPath.postError() : null;
-    return undefined;
-  }
-  postMessage ? statusMsgGetFolderPath.postSuccess() : null;
+	const { dependencyTree: dp } = getDependencyTree(path.join(folderPath, mainFilePath), folderPath, {
+		onGetFileString,
+		onGotAST,
+		onGetCircularStructureNode
+	});
+	console.log(dp);
 
-  // find cached path sendStatus
-  let mainFilePath = getEntryFileRelativePath();
-  if (mainFilePath === undefined) {
-    // find package.json and main file
-    const packageJsonPath = getPackageJsonPath(folderPath);
-    if (!packageJsonPath) {
-      onError(NO_PACKAGE_JSON);
-      postMessage ? statusMsgGetPackageJsonPath.postError() : null;
-      return undefined;
-    }
-    postMessage ? statusMsgGetPackageJsonPath.postSuccess() : null;
-    mainFilePath = getMainFilePath(folderPath, packageJsonPath);
-  }
-  if (!mainFilePath || !pathExists(path.join(folderPath, mainFilePath))) {
-    onError(NO_MAIN_FILE);
-    postMessage ? statusMsgGetEntryFile.postError() : null;
-    return undefined;
-  }
-  postMessage ? statusMsgGetEntryFile.postSuccess() : null;
+	if (!dp) {
+		onError(NO_DEPENDENCY);
+		postMessage ? statusMsgGetDependencyProcessData.postError() : null;
+	}
+	postMessage ? statusMsgGetDependencyProcessData.postSuccess() : null;
 
-  const { dependencyTree: dp } = getDependencyTree(
-    path.join(folderPath, mainFilePath),
-    folderPath,
-    { onGetFileString, onGotAST, onGetCircularStructureNode }
-  );
-  console.log(dp);
-  // const { dependencyTree: dp } = getDependencyTree(
-  //   path.join(folderPath, mainFilePath),
-  //   folderPath
-  // );
-
-  // console.log(dp);
-
-  // const { dependencyTree: processedTreeData, dependencyHash } = analysesFile(
-  //   path.join(folderPath, mainFilePath),
-  //   folderPath
-  // );
-  // const dependencyTreeData = getDependencyTree(mainFilePath, folderPath);
-  // if (!dependencyTreeData || !Object.keys(dependencyTreeData as dependencyTree.DependencyObj).length) {
-  // 	onError(GET_DEPENDENCY_TREE_FAIL);
-  // 	postMessage ? statusMsgGetDependencyData.postError() : null;
-  // 	return undefined;
-  // }
-  // postMessage ? statusMsgGetDependencyData.postSuccess() : null;
-
-  // const processedTreeData = processTreeData(dependencyTreeData as dependencyTree.DependencyObj, folderPath);
-  if (!dp) {
-    onError(NO_DEPENDENCY);
-    postMessage ? statusMsgGetDependencyProcessData.postError() : null;
-  }
-  postMessage ? statusMsgGetDependencyProcessData.postSuccess() : null;
-
-  return dp as DependencyTreeData;
+	return dp as DependencyTreeData;
 };
