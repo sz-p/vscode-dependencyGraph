@@ -84,25 +84,6 @@ export class DependencyTree {
       this.options.onGetCircularStructureNode(dependencyNode);
     }
   }
-  private processAlias(absolutePath: string, alias: Alias): string {
-    let _absolutePath = absolutePath;
-    for (let key in alias) {
-      if (absolutePath.includes(key)) {
-        _absolutePath = _absolutePath.replace(key, alias[key]);
-        return _absolutePath;
-      }
-    }
-    return _absolutePath;
-  }
-  private processExt(absolutePath: string, extList: string[]): string {
-    for (let i = 0; i < extList.length; i++) {
-      const _absolutePath = absolutePath + extList[i];
-      if (pathExists(_absolutePath)) {
-        return _absolutePath;
-      }
-    }
-    return absolutePath;
-  }
   /**
    * webpack get file path with some rules like no ext, no 'node_modules' in here parse these rules
    *
