@@ -2,7 +2,6 @@ import * as MESSAGES from "./utils/message/messagesKeys";
 import * as vscode from "vscode";
 import { Msg } from "./utils/message/message";
 import { setEntryFileRelativePath } from "./utils/config";
-import * as path from "path";
 import { onError } from "./utils/error/onError";
 import { NO_FOLDER } from "./utils/error/errorKey";
 const actionOpenFolder = function (msg: Msg) {
@@ -16,8 +15,12 @@ const actionSetEntryFile = async function (msg: Msg) {
   }
   vscode.commands.executeCommand("framegraph.refreshFile");
 };
+const actionOpenFile = function (msg: Msg) {
+  vscode.commands.executeCommand("framegraph.openFileInView", msg.value);
+};
 const messageCase = () => {
   return new Map([
+    [MESSAGES.MESSAGE_OPEN_FILE_FROM_WEBVIEW, actionOpenFile],
     [MESSAGES.MESSAGE_OPEN_FOLDER, actionOpenFolder],
     [MESSAGES.MESSAGE_SET_ENTRY_FILE, actionSetEntryFile],
   ]);

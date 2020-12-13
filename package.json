@@ -47,12 +47,23 @@
           "command": "framegraph.refreshFile",
           "group": "navigation@1"
         }
+      ],
+      "view/item/context":[
+        {
+          "command": "framegraph.openFileInView",
+          "group": "inline"
+        }
       ]
     },
     "commands": [
       {
         "command": "framegraph.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "framegraph.openFileInView",
+        "title": "%framegraph.openFileInView%",
+        "icon": "$(edit)"
       },
       {
         "command": "framegraph.refreshFile",

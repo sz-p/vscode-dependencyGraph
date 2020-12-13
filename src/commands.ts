@@ -61,4 +61,20 @@ export const command_refreshFile = vscode.commands.registerCommand(
     }
   }
 );
+// TODO function overload
+export const command_openFile = vscode.commands.registerCommand(
+  "framegraph.openFileInView",
+  (absoluteFilePath) => {
+    let _absolutePath = undefined;
+    if (typeof absoluteFilePath === "string") {
+      _absolutePath = absoluteFilePath;
+    } else {
+      _absolutePath = absoluteFilePath.absolutePath;
+    }
+    let uri = vscode.Uri.file(_absolutePath);
+    vscode.workspace.openTextDocument(uri).then((doc) => {
+      vscode.window.showTextDocument(doc, vscode.ViewColumn.Beside);
+    });
+  }
+);
 export const allCommands = [command_createView, command_reOpenView];
