@@ -5,5 +5,6 @@
   "framegraph.openPage": "Open view page",
   "framegraph.refresh": "Refresh dependencies data",
   "framegraph.framegraphTreeView": "FrameGraph",
-  "framegraph.DependencyTree": "DependencyTree"
+  "framegraph.DependencyTree": "DependencyTree",
+  "framegraph.openFileInView": "Edit"
 }

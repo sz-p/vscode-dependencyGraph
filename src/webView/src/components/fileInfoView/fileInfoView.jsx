@@ -12,6 +12,7 @@ import {
   DESCRIPTION,
   METHODS,
 } from "../../../../i18n/types";
+import { msgOpenFileInView } from "../../utils/messages";
 
 let boxWidth = 297;
 const fileInfoView = function (props) {
@@ -51,6 +52,9 @@ const fileInfoView = function (props) {
             background: `url(${assetsBaseURL}/webview/edit-${
               activeThemeKind ? activeThemeKind.toLocaleLowerCase() : "dark"
             }.svg) center center / contain no-repeat`,
+          }}
+          onClick={() => {
+            msgOpenFileInView(selectedNode.absolutePath).post();
           }}
           className="fileInfoView-titleBar-titleButton"
         ></div>
