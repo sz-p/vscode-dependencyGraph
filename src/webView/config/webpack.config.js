@@ -1,11 +1,11 @@
 const paths = require("./paths");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
-
 module.exports = {
   mode: "development",
-  entry: paths.mainjs,
+  entry: [paths.mainjs, paths.monacoDir],
   output: {
+    globalObject: "self",
     path: paths.build,
     filename: "bundle.[hash:8].js",
   },
@@ -52,9 +52,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: paths.indexHTML,
-    }),
-    new MonacoWebpackPlugin({
-      languages: ["json", "javascript"],
     }),
   ],
   devtool: "source-map",
