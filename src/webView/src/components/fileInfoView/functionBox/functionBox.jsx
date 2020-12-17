@@ -3,6 +3,7 @@ import MonacoEditor from "react-monaco-editor";
 import ReactResizeDetector from "react-resize-detector";
 import { i18n } from "../../../../../i18n/i18n";
 import { METHODS_ANALYZED_FAILED } from "../../../../../i18n/types";
+import "monaco-editor/esm/vs/basic-languages/javascript/javascript.js";
 
 const options = {
   selectOnLineNumbers: false,
@@ -47,7 +48,8 @@ export const FunctionsBox = function (props) {
     >
       <div className="fileInfoView-functionBox-function">
         <MonacoEditor
-          language={type}
+          // todo dependencyData get language attr
+          language={"javascript"}
           theme={`vs-${
             activeThemeKind ? activeThemeKind.toLocaleLowerCase() : "dark"
           }`}
