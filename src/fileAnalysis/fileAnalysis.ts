@@ -2,7 +2,7 @@ import { DependencyTreeData } from "../dependencyTree/index.d";
 import { DependencyTreeData as DTD } from "../data-dependencyTree/dependencyTreeData.d";
 import {
   onGotJsAST,
-  onGetJsCircularStructureNode,
+  onGotJsCircularStructureNode,
 } from "./javascript/parseJavascript";
 import { getFileIconNameByFileName } from "../utils/fileIcons/getFileIcon";
 
@@ -25,7 +25,7 @@ const getDescription = function (codeString: string) {
   }
 };
 
-export const onGetFileString = function (
+export const onGotFileString = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,
   codeString: string
@@ -46,7 +46,7 @@ export const onGetFileString = function (
   // }
 };
 
-export const onGetCircularStructureNode = function (
+export const onGotCircularStructureNode = function (
   dependencyNode: DependencyTreeData
 ) {
   switch (dependencyNode.extension) {
@@ -54,7 +54,7 @@ export const onGetCircularStructureNode = function (
     case ".ts":
     case ".jsx":
     case ".vue":
-      onGetJsCircularStructureNode(dependencyNode as DTD);
+      onGotJsCircularStructureNode(dependencyNode as DTD);
   }
 };
 export const onGotAST = function (

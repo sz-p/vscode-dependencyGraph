@@ -1,14 +1,14 @@
 export interface DependencyTreeOptions {
   resolveExtensions?: string[];
   alias?: Alias;
-  onGetFileString?: (
+  onGotFileString?: (
     dependencyNode: DependencyTreeData,
     absolutePath: string,
     codeString: string
   ) => void;
   onGetNewDependencyTreeNode?: (dependencyNode: DependencyTreeData) => void;
   onGetOldDependencyTreeNode?: (dependencyNode: DependencyTreeData) => void;
-  onGetCircularStructureNode?: (
+  onGotCircularStructureNode?: (
     circularStructureNode: DependencyTreeData
   ) => void;
   onGotAST?: (

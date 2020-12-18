@@ -21,8 +21,9 @@
 [x] refactor: change analyze javascript file as plugin to get dependency tree
 [x] feat: ~~double~~ click edit button tree view to option file
 [x] feat: ~~double~~ click edit webview tree node to option file
+[x] feat: ~~change monaco to other rich text editor~~ monaco editor highlight javascript code
 
-[ ] feat: change monaco to other rich text editor
+[ ] feat: analyzedData get file language
 
 [ ] feat: webview data read
 [ ] feat: save node information to file

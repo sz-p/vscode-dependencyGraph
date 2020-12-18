@@ -25,7 +25,7 @@ import {
 
 import { pathExists } from '../utils/utils';
 
-import { onGetFileString, onGotAST, onGetCircularStructureNode } from '../fileAnalysis/fileAnalysis';
+import { onGotFileString, onGotAST, onGotCircularStructureNode } from '../fileAnalysis/fileAnalysis';
 
 export const getDependencyTreeData = (postMessage?: boolean): DependencyTreeData | undefined => {
 	// find folder Path catch path sendStatus
@@ -58,9 +58,9 @@ export const getDependencyTreeData = (postMessage?: boolean): DependencyTreeData
 	postMessage ? statusMsgGetEntryFile.postSuccess() : null;
 
 	const { dependencyTree: dp } = getDependencyTree(path.join(folderPath, mainFilePath), folderPath, {
-		onGetFileString,
+		onGotFileString,
 		onGotAST,
-		onGetCircularStructureNode
+		onGotCircularStructureNode
 	});
 	console.log(dp);
 
