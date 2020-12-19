@@ -30,7 +30,7 @@ export const onGotJsAST = function (
   dependencyNode.functions = functionsList;
 };
 
-export const onGetJsCircularStructureNode = function (
+export const onGotJsCircularStructureNode = function (
   dependencyNode: DependencyTreeData
 ) {
   const circularStructureNode = dependencyNode.children[0];

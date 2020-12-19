@@ -65,8 +65,8 @@ export class DependencyTree {
     absolutePath: string,
     codeString: string
   ) {
-    if (typeof this.options.onGetFileString === "function") {
-      this.options.onGetFileString(dependencyNode, absolutePath, codeString);
+    if (typeof this.options.onGotFileString === "function") {
+      this.options.onGotFileString(dependencyNode, absolutePath, codeString);
     }
   }
   private triggerGetNewDependencyTreeNode(dependencyNode: DependencyTreeData) {
@@ -80,8 +80,8 @@ export class DependencyTree {
     }
   }
   private triggerGetCircularStructureNode(dependencyNode: DependencyTreeData) {
-    if (typeof this.options.onGetCircularStructureNode === "function") {
-      this.options.onGetCircularStructureNode(dependencyNode);
+    if (typeof this.options.onGotCircularStructureNode === "function") {
+      this.options.onGotCircularStructureNode(dependencyNode);
     }
   }
   /**
