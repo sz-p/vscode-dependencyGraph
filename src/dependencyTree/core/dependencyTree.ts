@@ -9,7 +9,6 @@ import {
   ParseRule,
   DependencyHash,
   DependencyTreeData,
-  Alias,
 } from "../index.d";
 import { parser as generalJsParser } from "../parsers/generalJsParser/generalJsParser";
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
@@ -83,37 +82,6 @@ export class DependencyTree {
     if (typeof this.options.onGotCircularStructureNode === "function") {
       this.options.onGotCircularStructureNode(dependencyNode);
     }
-  }
-  /**
-   * webpack get file path with some rules like no ext, no 'node_modules' in here parse these rules
-   *
-   *
-   *
-   * @private
-   * @param {string} absolutePath
-   * @returns {string}
-   * @memberof DependencyTree
-   */
-  private getRealPath(absolutePath: string, folder: string): void {
-    // // let _absolutePath = absolutePath;
-    // // if path was exited return path
-    // if (pathExists(absolutePath)) {
-    //   return absolutePath;
-    // }
-    // // import 'xx' from './dirName' is import 'xx' from './dirName/index'
-    // if (isDirectory(absolutePath)) {
-    //   _absolutePath = _absolutePath + "/index";
-    // }
-    // // get ext
-    // _absolutePath = this.processExt(absolutePath, resolveExtensions);
-    // if (pathExists(_absolutePath)) {
-    //   return _absolutePath;
-    // }
-    // _absolutePath = this.processAlias(absolutePath, alias);
-    //   return _absolutePath;
-    // else {
-    //   return absolutePath;
-    // }
   }
   /**
    * use absolutePath and ancestors find circular structure
