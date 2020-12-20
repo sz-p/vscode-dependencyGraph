@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import MonacoEditor from "react-monaco-editor";
 import ReactResizeDetector from "react-resize-detector";
 import { i18n } from "../../../../../i18n/i18n";
@@ -14,7 +15,7 @@ const options = {
     enabled: false,
   },
 };
-
+let monacoEditor = undefined;
 export const FunctionsBox = function (props) {
   const { analysed, functionsList, activeThemeKind, type, language } = props;
   if (!analysed || !functionsList || !type) {
@@ -30,12 +31,10 @@ export const FunctionsBox = function (props) {
       codeText = codeText + code + "\n\n";
     }
   }
-  let monacoEditor = undefined;
   const handleEditorDidMount = (editor) => {
     monacoEditor = editor;
   };
   const layoutMonacoEditor = () => {
-    console.log("resize");
     if (monacoEditor) {
       monacoEditor.layout();
     }
@@ -48,13 +47,14 @@ export const FunctionsBox = function (props) {
     >
       <div className="fileInfoView-functionBox-function">
         <MonacoEditor
-          // todo dependencyData get language attr
           language={language}
           theme={`vs-${
             activeThemeKind ? activeThemeKind.toLocaleLowerCase() : "dark"
           }`}
           editorDidMount={handleEditorDidMount}
-          value={codeText}
+          // monaco's bug string:'' to string:'someCode' all code will be preSelected
+          // so use ' ' to replace ''
+          value={codeText ? codeText : " "}
           options={options}
         />
       </div>

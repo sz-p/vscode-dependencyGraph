@@ -35,3 +35,6 @@ TODO
 [ ] feat: monaco editor highlight(can not use monaco language server in webview https://github.com/microsoft/vscode/issues/87282)
 [ ] fix: open multiple webview send message error(always send, but not get don't know why)
 [ ] fix: resend activeThemeKind(when changed theme kind get kind error)(get the kind is previous kind don't know why)
+
+
+// return require("./PnpPlugin").PnpApiImpl; // eslint-disable-line node/no-missing-require
