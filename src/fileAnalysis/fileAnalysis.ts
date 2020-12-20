@@ -5,6 +5,7 @@ import {
   onGotJsCircularStructureNode,
 } from "./javascript/parseJavascript";
 import { getFileIconNameByFileName } from "../utils/fileIcons/getFileIcon";
+import { setFileLanguage } from "./setFileLanguage";
 
 const getIntroduction = function (codeString: string) {
   const reg = /@introduction (.*)\n/;
@@ -36,7 +37,7 @@ export const onGotFileString = function (
 
   (dependencyNode as DTD).fileDescription = fileInformation;
   (dependencyNode as DTD).type = getFileIconNameByFileName(dependencyNode.name);
-
+  setFileLanguage(dependencyNode as DTD);
   // switch (dependencyNode.extension) {
   //   case ".js":
   //   case ".ts":

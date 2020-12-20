@@ -22,8 +22,7 @@
 [x] feat: ~~double~~ click edit button tree view to option file
 [x] feat: ~~double~~ click edit webview tree node to option file
 [x] feat: ~~change monaco to other rich text editor~~ monaco editor highlight javascript code
-
-[ ] feat: analyzedData get file language
+[x] feat: DependencyTreeData get file language
 
 [ ] feat: webview data read
 [ ] feat: save node information to file
