@@ -16,7 +16,7 @@ const options = {
 };
 
 export const FunctionsBox = function (props) {
-  const { analysed, functionsList, activeThemeKind, type } = props;
+  const { analysed, functionsList, activeThemeKind, type, language } = props;
   if (!analysed || !functionsList || !type) {
     return <div>{i18n.getText(METHODS_ANALYZED_FAILED)}</div>;
   }
@@ -49,7 +49,7 @@ export const FunctionsBox = function (props) {
       <div className="fileInfoView-functionBox-function">
         <MonacoEditor
           // todo dependencyData get language attr
-          language={"javascript"}
+          language={language}
           theme={`vs-${
             activeThemeKind ? activeThemeKind.toLocaleLowerCase() : "dark"
           }`}

@@ -22,6 +22,7 @@ export interface DependencyTreeData {
   fileDescription: FileInformation;
   circularStructure?: true;
   type: string;
+  language: "javascript" | "css" | "file";
   lines: number | undefined;
   analysed: boolean;
   functions: FunctionInformation[] | [];
