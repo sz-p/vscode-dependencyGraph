@@ -24,6 +24,10 @@
 [x] feat: ~~change monaco to other rich text editor~~ monaco editor highlight javascript code
 [x] feat: DependencyTreeData get file language
 
+[ ] feat: load webpack config
+[ ] fix: fix dependencyTree loaded error
+[ ] feat: setting page
+
 [ ] feat: webview data read
 [ ] feat: save node information to file
 [ ] feat: webview data save
@@ -38,3 +42,5 @@ TODO
 
 
 // return require("./PnpPlugin").PnpApiImpl; // eslint-disable-line node/no-missing-require
+// vsce package
+// https://marketplace.visualstudio.com/manage/publishers/sz-p
