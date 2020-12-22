@@ -3,7 +3,7 @@
   "displayName": "framegraph",
   "description": "A plugin for vscode to view your project's frame graph",
   "icon": "assets/framegraph.png",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "engines": {
     "vscode": "^1.41.0"
