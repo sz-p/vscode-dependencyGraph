@@ -183,6 +183,10 @@ export class DependencyTree {
         let dependencyChildren = undefined;
         // old node; node was analysed
         if (this.dependencyHash[childrenPath]) {
+          if (!this.dependencyHash[childrenPath].name) {
+            // import a file from the same file twice will cloneDeep a not analyzed dependencyChildren
+            continue;
+          }
           if (this.isCircularStructure(childrenPath, ancestors)) {
             dependencyChildren = this.getCircularStructureNode(
               childrenPath,
