@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
 export const pathExists = function (p: string): boolean {
   try {
@@ -8,6 +8,13 @@ export const pathExists = function (p: string): boolean {
     return false;
   }
   return true;
+};
+
+export const getObjectFromJsonFile = function (
+  filePath: string
+): Object | false {
+  if (!pathExists(filePath)) return false;
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
 };
 
 /**
