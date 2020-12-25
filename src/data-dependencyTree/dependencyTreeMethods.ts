@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as vscode from 'vscode';
 
 import { setEntryFileRelativePath } from '../utils/config';
 
@@ -20,27 +19,6 @@ export const getMainFilePath = function(folderPath: string, packageJsonPath: str
 		const mainFilePath = path.join(packageJson.main);
 		setEntryFileRelativePath(mainFilePath);
 		return mainFilePath;
-	} else {
-		return undefined;
-	}
-};
-
-/**
- * get current workspace first folder path
- * catch path return path
- *
- * @returns {(String | undefined)}
- */
-export const getCurrentFolderPath = function(): string | undefined {
-	const ws = vscode.workspace;
-	let folder = ws.workspaceFolders;
-	let folderPath = '';
-	if (folder !== undefined) {
-		folderPath = folder[0].uri.fsPath;
-	}
-	if (folderPath) {
-		// setCurrentFolderPath(folderPath);
-		return folderPath;
 	} else {
 		return undefined;
 	}
