@@ -23,11 +23,14 @@
 [x] feat: ~~double~~ click edit webview tree node to option file
 [x] feat: ~~change monaco to other rich text editor~~ monaco editor highlight javascript code
 [x] feat: DependencyTreeData get file language
+[x] feat: set config to .framegraph
 
 [ ] feat: load webpack config
 [ ] fix: fix dependencyTree loaded error
 [ ] feat: setting page
+[ ] feat: save setting to local file
 
+[ ] feat: update one file
 [ ] feat: webview data read
 [ ] feat: save node information to file
 [ ] feat: webview data save
@@ -36,7 +39,7 @@
 [ ] feat: if main of package.json is unequal with config use main
 
 TODO
-[ ] feat: monaco editor highlight(can not use monaco language server in webview https://github.com/microsoft/vscode/issues/87282)
+~~[ ] feat: monaco editor highlight(can not use monaco language server in webview https://github.com/microsoft/vscode/issues/87282)~~
 [ ] fix: open multiple webview send message error(always send, but not get don't know why)
 [ ] fix: resend activeThemeKind(when changed theme kind get kind error)(get the kind is previous kind don't know why)
 

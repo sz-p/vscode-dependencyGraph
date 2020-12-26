@@ -1,7 +1,7 @@
 import * as MESSAGES from "./utils/message/messagesKeys";
 import * as vscode from "vscode";
 import { Msg } from "./utils/message/message";
-import { setEntryFileRelativePath } from "./utils/config";
+import { setEntryFileRelativePath } from "./utils/setting";
 import { onError } from "./utils/error/onError";
 import { NO_FOLDER } from "./utils/error/errorKey";
 const actionOpenFolder = function (msg: Msg) {
