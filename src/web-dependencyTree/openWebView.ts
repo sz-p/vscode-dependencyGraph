@@ -17,7 +17,7 @@ import {
 import { DependencyTreeData } from "../data-dependencyTree/dependencyTreeData";
 import { createWebviewPanel } from "../initExtension";
 import { getCurrentFolderPath } from "../utils/utils";
-import { getEntryFileRelativePath } from "../utils/config";
+import { getEntryFileRelativePath } from "../utils/setting";
 
 import {
   statusMsgGetFolderPath,

@@ -14,7 +14,7 @@ import { getCurrentFolderPath } from "../utils/utils";
 
 import { getDependencyTree } from "../dependencyTree/index";
 
-import { getEntryFileRelativePath } from "../utils/config";
+import { getEntryFileRelativePath } from "../utils/setting";
 import { onError } from "../utils/error/onError";
 import {
   NO_DEPENDENCY,
@@ -46,7 +46,7 @@ export const getDependencyTreeData = (
 
   // find cached path sendStatus
   let mainFilePath = getEntryFileRelativePath();
-  if (mainFilePath === undefined) {
+  if (!mainFilePath) {
     // find package.json and main file
     const packageJsonPath = getPackageJsonPath(folderPath);
     if (!packageJsonPath) {

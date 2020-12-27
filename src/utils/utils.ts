@@ -10,9 +10,7 @@ export const pathExists = function (p: string): boolean {
   return true;
 };
 
-export const getObjectFromJsonFile = function (
-  filePath: string
-): Object | false {
+export const getObjectFromJsonFile = function (filePath: string): any {
   if (!pathExists(filePath)) return false;
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 };
