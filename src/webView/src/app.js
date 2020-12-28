@@ -4,6 +4,7 @@ import { StatusView } from "./components/statusView/statusView";
 import { SettingView } from "./components/settingView/settingView";
 import { TreeView } from "./components/treeView/treeView";
 import { FileInfoView } from "./components/fileInfoView/fileInfoView";
+import { ToolBox } from "./components/toolBox/toolBox";
 import { store } from "./reducers/store";
 export const App = function () {
   return (
@@ -12,6 +13,7 @@ export const App = function () {
       <SettingView />
       <TreeView />
       <FileInfoView />
+      <ToolBox />
     </Provider>
   );
 };

@@ -1,0 +1,15 @@
+.toolBox {
+  position: absolute;
+  width: 45px;
+  top: 35px;
+  left: 35px;
+  border-radius: 5px;
+  background: var(--vscode-debugToolBar-background);
+  z-index: 999;
+}
+.toolBoxIcon {
+  font-size: 25px;
+  color: var(--vscode-editor-foreground);
+  margin: 8px 10px;
+  cursor: pointer;
+}
