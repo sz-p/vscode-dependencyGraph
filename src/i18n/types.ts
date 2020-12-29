@@ -1,6 +1,10 @@
 export const SUCCESS = "SUCCESS";
 export const FAILED = "FAILED";
 
+export const SETTING = "SETTING"
+export const SAVE = "SAVE"
+export const EXPORT = "EXPORT"
+
 export const FOLDER = "FOLDER";
 export const OPEN_FOLDER = "OPEN_FOLDER";
 export const ENTRY_FILE = "ENTRY_FILE";

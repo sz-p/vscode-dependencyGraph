@@ -84,6 +84,12 @@ const actionsCase = () => {
     });
     return newState;
   };
+  const changeSettingStatus = (state, action) => {
+    const newState = Object.assign({}, state, {
+      showSetting: !state.showSetting,
+    });
+    return newState;
+  };
   return new Map([
     [type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus],
     [type.TYPE_SET_DEPENDENCIES_TREE_DATA, setDependencyTreeData],
@@ -94,6 +100,7 @@ const actionsCase = () => {
     [type.TYPE_GET_LANGUAGE, getLanguage],
     [type.TYPE_GET_ACTIVE_THEME_KIND, getActiveThemeKind],
     [type.TYPE_SELECT_NODE, selectNode],
+    [type.TYPE_CHANGE_SETTING_STATUS, changeSettingStatus],
   ]);
 };
 export const reducer = function (state = initialState, action) {

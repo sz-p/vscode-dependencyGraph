@@ -41,3 +41,8 @@ export const action_selectNode = createAction(
   type.TYPE_SELECT_NODE,
   returnParams
 );
+
+export const action_changeSettingStatus = createAction(
+  type.TYPE_CHANGE_SETTING_STATUS,
+  returnParams
+);
