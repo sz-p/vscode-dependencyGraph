@@ -13,6 +13,7 @@ const messageCase = () => {
     [MESSAGES.MESSAGE_FOLDER_PATH, action.action_setFolderPath],
     [MESSAGES.MESSAGE_UPDATE_WEBVIEW, action.action_getVewViewHash],
     [MESSAGES.MESSAGE_GET_LANGUAGE, action.action_getLanguage],
+    [MESSAGES.MESSAGE_GET_ENTRY_FILE, action.action_getEntryFile],
     [MESSAGES.MESSAGE_GET_ACTIVE_THEME_KIND, action.action_getActiveThemeKind],
   ]);
 };

@@ -7,6 +7,7 @@ import {
   statusMsgGetEntryFile,
   statusMsgGetDependencyData,
   statusMsgGetDependencyProcessData,
+  postEntryPath,
 } from "../utils/message/messages";
 
 import { getPackageJsonPath, getMainFilePath } from "./dependencyTreeMethods";
@@ -63,7 +64,7 @@ export const getDependencyTreeData = (
     return undefined;
   }
   postMessage ? statusMsgGetEntryFile.postSuccess() : null;
-
+  postEntryPath(mainFilePath);
   const { dependencyTree: dp } = getDependencyTree(
     path.join(folderPath, mainFilePath),
     folderPath,
