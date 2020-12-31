@@ -46,3 +46,7 @@ export const action_changeSettingStatus = createAction(
   type.TYPE_CHANGE_SETTING_STATUS,
   returnParams
 );
+export const action_getEntryFile = createAction(
+  type.TYPE_GET_ENTRY_FILE,
+  returnParams
+);
