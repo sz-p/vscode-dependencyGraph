@@ -10,12 +10,13 @@ import {
   ENTRY_FILE,
   SET_ENTRY_FILE,
 } from "../../../../i18n/types";
-import { msgOpenFolder, msgSetEntryFile } from "../../utils/messages";
+import { msgOpenFolder, msgSetSetting } from "../../utils/messages";
+import { SETTING_KEY_ENTRY_FILE_PATH } from "../../../../utils/setting/settingKey";
 const openFolder = function () {
   msgOpenFolder.post();
 };
 const setEntryFile = function (entryFilePath) {
-  msgSetEntryFile(entryFilePath).post();
+  msgSetSetting(SETTING_KEY_ENTRY_FILE_PATH, entryFilePath).post();
 };
 const onEnter = function (entryFilePath) {
   return function (key) {

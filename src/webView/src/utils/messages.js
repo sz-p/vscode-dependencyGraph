@@ -1,6 +1,6 @@
 import {
   MESSAGE_OPEN_FOLDER,
-  MESSAGE_SET_ENTRY_FILE,
+  MESSAGE_SET_SETTING,
   MESSAGE_OPEN_FILE_FROM_WEBVIEW,
 } from "../../../utils/message/messagesKeys";
 class Msg {
@@ -16,7 +16,7 @@ class Msg {
   }
 }
 export const msgOpenFolder = new Msg(MESSAGE_OPEN_FOLDER, true);
-export const msgSetEntryFile = (value) =>
-  new Msg(MESSAGE_SET_ENTRY_FILE, value);
+export const msgSetSetting = (key, value) =>
+  new Msg(MESSAGE_SET_SETTING, { key, value });
 export const msgOpenFileInView = (value) =>
   new Msg(MESSAGE_OPEN_FILE_FROM_WEBVIEW, value);
