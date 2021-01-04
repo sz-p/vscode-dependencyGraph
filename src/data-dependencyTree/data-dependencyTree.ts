@@ -7,7 +7,7 @@ import {
   statusMsgGetEntryFile,
   statusMsgGetDependencyData,
   statusMsgGetDependencyProcessData,
-  postEntryPath,
+  postSetting,
 } from "../utils/message/messages";
 
 import { getPackageJsonPath, getMainFilePath } from "./dependencyTreeMethods";
@@ -15,7 +15,8 @@ import { getCurrentFolderPath } from "../utils/utils";
 
 import { getDependencyTree } from "../dependencyTree/index";
 
-import { getEntryFileRelativePath } from "../utils/setting/setting";
+import { getAllSettingFromSettingFile } from "../utils/setting/setting";
+import { SETTING_KEY_ENTRY_FILE_PATH } from "../utils/setting/settingKey";
 import { onError } from "../utils/error/onError";
 import {
   NO_DEPENDENCY,
@@ -45,8 +46,8 @@ export const getDependencyTreeData = (
   }
   postMessage ? statusMsgGetFolderPath.postSuccess() : null;
 
-  // find cached path sendStatus
-  let mainFilePath = getEntryFileRelativePath();
+  const setting = getAllSettingFromSettingFile();
+  let mainFilePath = setting[SETTING_KEY_ENTRY_FILE_PATH];
   if (!mainFilePath) {
     // find package.json and main file
     const packageJsonPath = getPackageJsonPath(folderPath);
@@ -63,8 +64,8 @@ export const getDependencyTreeData = (
     postMessage ? statusMsgGetEntryFile.postError() : null;
     return undefined;
   }
+  postSetting(setting);
   postMessage ? statusMsgGetEntryFile.postSuccess() : null;
-  postEntryPath(mainFilePath);
   const { dependencyTree: dp } = getDependencyTree(
     path.join(folderPath, mainFilePath),
     folderPath,

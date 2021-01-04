@@ -26,8 +26,8 @@ const onEnter = function (entryFilePath) {
   };
 };
 const folderAndEntry = function (props) {
-  const { folderPath, defaultEntryFilePath, language } = props;
-  let [entryFilePath, setEntryFilePath] = useState(defaultEntryFilePath);
+  const { folderPath, setting, language } = props;
+  let [entryFilePath, setEntryFilePath] = useState();
   let [TEXT_FOLDER, SET_TEXT_FOLDER] = useState();
   let [TEXT_OPEN_FOLDER, SET_TEXT_OPEN_FOLDER] = useState();
   let [TEXT_ENTRY_FILE, SET_TEXT_ENTRY_FILE] = useState();
@@ -38,8 +38,10 @@ const folderAndEntry = function (props) {
     return () => document.removeEventListener("keypress", onKeyPress);
   }, [entryFilePath]);
   useEffect(() => {
-    setEntryFilePath(defaultEntryFilePath);
-  }, [defaultEntryFilePath]);
+    if (setting && setting[SETTING_KEY_ENTRY_FILE_PATH]) {
+      setEntryFilePath(setting[SETTING_KEY_ENTRY_FILE_PATH]);
+    }
+  }, [setting]);
   useEffect(() => {
     i18n.setLanguage(language);
     TEXT_FOLDER = SET_TEXT_FOLDER(i18n.getText(FOLDER));
@@ -86,7 +88,7 @@ const folderAndEntry = function (props) {
 const mapStateToProps = (state) => {
   return {
     folderPath: state.folderPath,
-    defaultEntryFilePath: state.entryFilePath,
+    setting: state.setting,
     language: state.language,
   };
 };
