@@ -25,6 +25,7 @@ import {
   statusMsgGetDependencyData,
   msgGetLanguage,
   msgGetActiveThemeKind,
+  postEntryPath,
 } from "../utils/message/messages";
 
 import { pathExists } from "../utils/utils";
@@ -91,6 +92,7 @@ export const reOpenWebView = function (
       pathExists(path.join(folderPath as string, entryFilePath))
     ) {
       statusMsgGetEntryFile.postSuccess();
+      postEntryPath(entryFilePath);
     } else {
       statusMsgGetEntryFile.postError();
     }
