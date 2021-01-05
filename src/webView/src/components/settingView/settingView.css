@@ -1,4 +1,20 @@
+.settingViewMask {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 20px);
+  z-index: 100;
+  background: var(--vscode-breadcrumb-background);
+}
 .settingView {
+  margin: 20px auto 0px auto;
+  position: absolute;
   width: 100%;
   height: 100%;
+  max-width: 800px;
+  left: 0px;
+  right: 0px;
+}
+.closeButton {
+  cursor: pointer;
+  margin-bottom: 20px;
 }
