@@ -6,7 +6,7 @@ import {
 } from "office-ui-fabric-react";
 import { useEffect, useState } from "react";
 
-import { ErrorDom } from "./errorDom";
+import { FolderAndEntry } from "./folderAndEntrySetting";
 import { i18n } from "../../../../i18n/i18n";
 import { SUCCESS, FAILED } from "../../../../i18n/types";
 import { connect } from "react-redux";
@@ -47,7 +47,7 @@ const statusDom = function (props) {
         {" "}
         {TEXT_FAILED}
       </MessageBar>,
-      <ErrorDom key={"error_" + type} />,
+      <FolderAndEntry key={"error_" + type} />,
     ];
   }
   return null;

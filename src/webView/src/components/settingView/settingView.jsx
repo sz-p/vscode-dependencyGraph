@@ -5,21 +5,26 @@ import "./settingView.css";
 import { FontIcon } from "office-ui-fabric-react/lib/Icon";
 import { action_changeSettingStatus } from "../../actions/action";
 import { store } from "../../reducers/store";
+import { FolderAndEntry } from "../statusView/folderAndEntrySetting";
 
 const settingView = function (props) {
   const { showSetting } = props;
   console.log(showSetting);
   return (
     <div
-      className="settingView"
+      className="settingViewMask"
       style={{ display: showSetting ? "block" : "none" }}
     >
-      <FontIcon
-        iconName="ChromeClose"
-        onClick={() => {
-          store.dispatch(action_changeSettingStatus());
-        }}
-      />
+      <div className="settingView">
+        <FontIcon
+          iconName="ChromeClose"
+          className="closeButton"
+          onClick={() => {
+            store.dispatch(action_changeSettingStatus());
+          }}
+        />
+        <FolderAndEntry />
+      </div>
     </div>
   );
 };
