@@ -9,7 +9,6 @@ import { FolderAndEntry } from "../statusView/folderAndEntrySetting";
 
 const settingView = function (props) {
   const { showSetting } = props;
-  console.log(showSetting);
   return (
     <div
       className="settingViewMask"

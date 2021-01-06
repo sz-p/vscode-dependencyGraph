@@ -28,7 +28,7 @@ export const msgGetActiveThemeKind = new MessagePoster(
   MSG.MESSAGE_GET_ACTIVE_THEME_KIND,
   getActiveTheme()
 );
-export const postEntryPath = function (entryPath: string) {
-  const poster = new MessagePoster(MSG.MESSAGE_GET_ENTRY_FILE, entryPath);
+export const postSetting = function (setting: object) {
+  const poster = new MessagePoster(MSG.MESSAGE_GET_ENTRY_FILE, setting);
   poster.post();
 };

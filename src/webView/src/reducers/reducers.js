@@ -93,7 +93,7 @@ const actionsCase = () => {
   const getEntryFile = (state, action) => {
     const data = action.payload.data;
     const newState = Object.assign({}, state, {
-      entryFilePath: data.value,
+      setting: data.value,
     });
     return newState;
   };
