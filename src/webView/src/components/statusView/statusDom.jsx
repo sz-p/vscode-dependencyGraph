@@ -6,7 +6,7 @@ import {
 } from "office-ui-fabric-react";
 import { useEffect, useState } from "react";
 
-import { FolderAndEntry } from "./folderAndEntrySetting";
+import { FolderAndEntry } from "../settingView/folderAndEntrySetting";
 import { i18n } from "../../../../i18n/i18n";
 import { SUCCESS, FAILED } from "../../../../i18n/types";
 import { connect } from "react-redux";
