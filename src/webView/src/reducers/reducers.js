@@ -90,6 +90,13 @@ const actionsCase = () => {
     });
     return newState;
   };
+  const getEntryFile = (state, action) => {
+    const data = action.payload.data;
+    const newState = Object.assign({}, state, {
+      entryFilePath: data.value,
+    });
+    return newState;
+  };
   return new Map([
     [type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus],
     [type.TYPE_SET_DEPENDENCIES_TREE_DATA, setDependencyTreeData],
@@ -101,6 +108,7 @@ const actionsCase = () => {
     [type.TYPE_GET_ACTIVE_THEME_KIND, getActiveThemeKind],
     [type.TYPE_SELECT_NODE, selectNode],
     [type.TYPE_CHANGE_SETTING_STATUS, changeSettingStatus],
+    [type.TYPE_GET_ENTRY_FILE, getEntryFile],
   ]);
 };
 export const reducer = function (state = initialState, action) {
