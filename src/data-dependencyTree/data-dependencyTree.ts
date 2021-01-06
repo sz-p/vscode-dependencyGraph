@@ -14,9 +14,16 @@ import { getPackageJsonPath, getMainFilePath } from "./dependencyTreeMethods";
 import { getCurrentFolderPath } from "../utils/utils";
 
 import { getDependencyTree } from "../dependencyTree/index";
-
-import { getAllSettingFromSettingFile } from "../utils/setting/setting";
-import { SETTING_KEY_ENTRY_FILE_PATH } from "../utils/setting/settingKey";
+import { defaultOptions } from "../dependencyTree/core/defaultOptions";
+import {
+  getAllSettingFromSettingFile,
+  setSetting,
+} from "../utils/setting/setting";
+import {
+  SETTING_KEY_ENTRY_FILE_PATH,
+  SETTING_KEY_RESOLVE_EXTENSIONS,
+  SETTING_KEY_ALIAS,
+} from "../utils/setting/settingKey";
 import { onError } from "../utils/error/onError";
 import {
   NO_DEPENDENCY,
@@ -64,12 +71,21 @@ export const getDependencyTreeData = (
     postMessage ? statusMsgGetEntryFile.postError() : null;
     return undefined;
   }
-  postSetting(setting);
   postMessage ? statusMsgGetEntryFile.postSuccess() : null;
+
+  let resolveExtensions = setting[SETTING_KEY_RESOLVE_EXTENSIONS];
+  let alias = setting[SETTING_KEY_ALIAS];
+  if (!resolveExtensions) {
+    resolveExtensions = defaultOptions.resolveExtensions;
+    setSetting(SETTING_KEY_RESOLVE_EXTENSIONS, resolveExtensions);
+  }
+  postSetting(setting);
   const { dependencyTree: dp } = getDependencyTree(
     path.join(folderPath, mainFilePath),
     folderPath,
     {
+      alias,
+      resolveExtensions,
       onGotFileString,
       onGotAST,
       onGotCircularStructureNode,
