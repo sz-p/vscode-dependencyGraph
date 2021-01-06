@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import { setEntryFileRelativePath } from "../utils/setting";
+import { setEntryFileRelativePath } from "../utils/setting/setting";
 import { getObjectFromJsonFile } from "../utils/utils";
 export const getPackageJsonPath = function (
   folderPath: string

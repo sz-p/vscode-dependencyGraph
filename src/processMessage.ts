@@ -1,15 +1,16 @@
 import * as MESSAGES from "./utils/message/messagesKeys";
 import * as vscode from "vscode";
 import { Msg } from "./utils/message/message";
-import { setEntryFileRelativePath } from "./utils/setting";
+import { setSetting } from "./utils/setting/setting";
 import { onError } from "./utils/error/onError";
 import { NO_FOLDER } from "./utils/error/errorKey";
+
 const actionOpenFolder = function (msg: Msg) {
   vscode.commands.executeCommand("workbench.action.files.openFolder");
 };
-const actionSetEntryFile = async function (msg: Msg) {
+const actionSetSetting = async function (msg: Msg) {
   try {
-    await setEntryFileRelativePath(msg.value);
+    await setSetting(msg.value.key, msg.value.value);
   } catch (e) {
     onError(NO_FOLDER, e);
   }
@@ -22,7 +23,7 @@ const messageCase = () => {
   return new Map([
     [MESSAGES.MESSAGE_OPEN_FILE_FROM_WEBVIEW, actionOpenFile],
     [MESSAGES.MESSAGE_OPEN_FOLDER, actionOpenFolder],
-    [MESSAGES.MESSAGE_SET_ENTRY_FILE, actionSetEntryFile],
+    [MESSAGES.MESSAGE_SET_SETTING, actionSetSetting],
   ]);
 };
 

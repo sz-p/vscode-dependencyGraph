@@ -3,8 +3,9 @@ import {
   getCurrentFolderPath,
   pathExists,
   getObjectFromJsonFile,
-} from "./utils";
+} from "../utils";
 import * as vscode from "vscode";
+
 
 const createDir = function (): void {
   const dirPath = getCurrentFolderPath();
@@ -29,7 +30,7 @@ const getSetting = function (settingKey: string): any {
   return setting[settingKey];
 };
 
-const setSetting = function (settingKey: string, value: any): boolean {
+export const setSetting = function (settingKey: string, value: any): boolean {
   let setting = getAllSettingFromSettingFile();
   if (!setting) {
     createDir();

@@ -15,7 +15,7 @@ import { getCurrentFolderPath } from "../utils/utils";
 
 import { getDependencyTree } from "../dependencyTree/index";
 
-import { getEntryFileRelativePath } from "../utils/setting";
+import { getEntryFileRelativePath } from "../utils/setting/setting";
 import { onError } from "../utils/error/onError";
 import {
   NO_DEPENDENCY,
