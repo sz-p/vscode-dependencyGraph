@@ -5,7 +5,7 @@ import {
   getObjectFromJsonFile,
 } from "../utils";
 import * as vscode from "vscode";
-
+import { SETTING_KEY_ENTRY_FILE_PATH } from "./settingKey";
 
 const createDir = function (): void {
   const dirPath = getCurrentFolderPath();
@@ -18,7 +18,7 @@ const getSettingFilePath = function (): string | false {
   return dirPath + "/.framegraph/setting.json";
 };
 
-const getAllSettingFromSettingFile = function (): any {
+export const getAllSettingFromSettingFile = function (): any {
   const settingFilePath = getSettingFilePath();
   if (!settingFilePath) return false;
   return getObjectFromJsonFile(settingFilePath);
@@ -49,10 +49,10 @@ export const setSetting = function (settingKey: string, value: any): boolean {
 };
 
 export const getEntryFileRelativePath = function (): string | false {
-  return getSetting("entryFilePath");
+  return getSetting(SETTING_KEY_ENTRY_FILE_PATH);
 };
 export const setEntryFileRelativePath = function (value: string) {
-  return setSetting("entryFilePath", value);
+  return setSetting(SETTING_KEY_ENTRY_FILE_PATH, value);
 };
 
 export const getActiveTheme = function () {

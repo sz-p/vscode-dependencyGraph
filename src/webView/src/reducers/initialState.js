@@ -4,7 +4,7 @@ export const initialState = {
   selectedNode: undefined,
   language: undefined,
   folderPath: undefined,
-  entryFilePath: undefined,
+  setting: undefined,
   gotDependencyTreeData: false,
   assetsBaseURL: undefined,
   getDataStatus: undefined,

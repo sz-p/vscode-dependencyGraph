@@ -17,7 +17,8 @@ import {
 import { DependencyTreeData } from "../data-dependencyTree/dependencyTreeData";
 import { createWebviewPanel } from "../initExtension";
 import { getCurrentFolderPath } from "../utils/utils";
-import { getEntryFileRelativePath } from "../utils/setting/setting";
+import { getAllSettingFromSettingFile } from "../utils/setting/setting";
+import { SETTING_KEY_ENTRY_FILE_PATH } from "../utils/setting/settingKey";
 
 import {
   statusMsgGetFolderPath,
@@ -25,7 +26,7 @@ import {
   statusMsgGetDependencyData,
   msgGetLanguage,
   msgGetActiveThemeKind,
-  postEntryPath,
+  postSetting,
 } from "../utils/message/messages";
 
 import { pathExists } from "../utils/utils";
@@ -81,7 +82,8 @@ export const reOpenWebView = function (
     createWebviewPanel();
     createView();
     const folderPath = getCurrentFolderPath();
-    const entryFilePath = getEntryFileRelativePath();
+    const setting = getAllSettingFromSettingFile();
+    let entryFilePath = setting[SETTING_KEY_ENTRY_FILE_PATH];
     if (folderPath && pathExists(folderPath)) {
       statusMsgGetFolderPath.postSuccess();
     } else {
@@ -92,7 +94,7 @@ export const reOpenWebView = function (
       pathExists(path.join(folderPath as string, entryFilePath))
     ) {
       statusMsgGetEntryFile.postSuccess();
-      postEntryPath(entryFilePath);
+      postSetting(setting);
     } else {
       statusMsgGetEntryFile.postError();
     }
