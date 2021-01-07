@@ -1,4 +1,4 @@
-import "./status.css";
+import "./settingView.css";
 import { connect } from "react-redux";
 import { PrimaryButton, TextField } from "office-ui-fabric-react";
 import * as React from "react";
@@ -50,24 +50,24 @@ const folderAndEntry = function (props) {
     TEXT_SET_ENTRY_FILE = SET_SET_ENTRY_FILE(i18n.getText(SET_ENTRY_FILE));
   }, [language]);
   return (
-    <div className="statusView-errorArea">
+    <div className="settingView-errorArea">
       <div>
         <TextField
-          className="statusView-inputBox"
+          className="settingView-inputBox"
           label={TEXT_FOLDER}
           disabled
           required
           value={folderPath}
         />
         <PrimaryButton
-          className="statusView-button"
+          className="settingView-button"
           text={TEXT_OPEN_FOLDER}
           onClick={openFolder}
         />
       </div>
       <div>
         <TextField
-          className="statusView-inputBox"
+          className="settingView-inputBox"
           label={TEXT_ENTRY_FILE}
           required
           prefix={folderPath}
@@ -77,7 +77,7 @@ const folderAndEntry = function (props) {
           value={entryFilePath}
         />
         <PrimaryButton
-          className="statusView-button"
+          className="settingView-button"
           text={TEXT_SET_ENTRY_FILE}
           onClick={() => setEntryFile(entryFilePath)}
         />
