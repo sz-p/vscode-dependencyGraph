@@ -69,7 +69,6 @@ const folderAndEntry = function (props) {
           required
           prefix={folderPath}
           onChange={(e, v) => {
-            console.log(v);
             setEntryFilePath(v);
           }}
           value={entryFilePath}
