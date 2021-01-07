@@ -18,3 +18,23 @@
   cursor: pointer;
   margin-bottom: 20px;
 }
+
+.settingView-inputBox {
+  display: inline-block;
+  width: 80%;
+}
+
+.settingView-button {
+  top: 29px;
+  float: right;
+}
+
+.settingView-button-add {
+  top: 29px;
+  float: right;
+  right: 100px;
+}
+
+.settingView-detailsList {
+  margin-top: 5px;
+}
