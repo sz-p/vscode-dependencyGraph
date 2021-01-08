@@ -31,9 +31,10 @@ const getSetting = function (settingKey: string): any {
 };
 
 export const setSetting = function (settingKey: string, value: any): boolean {
+  const dirPath = getCurrentFolderPath();
+  if (!pathExists(dirPath + "/.framegraph")) createDir();
   let setting = getAllSettingFromSettingFile();
   if (!setting) {
-    createDir();
     setting = {};
   }
   setting[settingKey] = value;
