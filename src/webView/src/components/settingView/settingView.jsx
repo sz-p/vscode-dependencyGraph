@@ -5,7 +5,9 @@ import "./settingView.css";
 import { FontIcon } from "office-ui-fabric-react/lib/Icon";
 import { action_changeSettingStatus } from "../../actions/action";
 import { store } from "../../reducers/store";
-import { FolderAndEntry } from "../statusView/folderAndEntrySetting";
+import { FolderAndEntry } from "./folderAndEntrySetting";
+import { ResolveSetting } from "./resolveSetting";
+import { AliasSetting } from "./aliasSetting";
 
 const settingView = function (props) {
   const { showSetting } = props;
@@ -23,6 +25,8 @@ const settingView = function (props) {
           }}
         />
         <FolderAndEntry />
+        <ResolveSetting />
+        <AliasSetting />
       </div>
     </div>
   );
