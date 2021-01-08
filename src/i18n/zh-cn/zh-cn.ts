@@ -12,6 +12,10 @@ zhcn[errorKey.NO_DEPENDENCY] = "无文件依赖";
 zhcn[errorKey.NO_DEPENDENCY_TREE_DATA] = "无文件依赖数据";
 zhcn[errorKey.GET_AST_FAILED] = "获取AST语法树失败";
 
+zhcn[types.CONFIRM] = "确认";
+zhcn[types.ADD] = "添加";
+zhcn[types.DELETE] = "删除";
+
 zhcn[types.SUCCESS] = "成功";
 zhcn[types.FAILED] = "失败";
 
@@ -23,11 +27,13 @@ zhcn[types.CIRCULAR_STRUCTURE_NODE_INTRODUCTION] = "环形结构";
 zhcn[types.CIRCULAR_STRUCTURE_NODE_DESCRIPTION] =
   "循环依赖 \\n 在引用链上存在上一个节点";
 
+zhcn[types.FRAME_GRAPH_WEBVIEW] = "架构图插件视图页面";
 zhcn[types.FOLDER] = "文件夹";
 zhcn[types.OPEN_FOLDER] = "打开文件夹";
 zhcn[types.ENTRY_FILE] = "入口文件";
 zhcn[types.SET_ENTRY_FILE] = "设置入口文件";
-zhcn[types.FRAME_GRAPH_WEBVIEW] = "架构图插件视图页面";
+zhcn[types.RESOLVE_EXTENSIONS] = "被解析文件的后缀名";
+zhcn[types.RESOLVE_ALIAS] = "被解析文件的路径别名";
 
 zhcn[status.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER] = "获取已打开的文件夹";
 zhcn[status.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON] =

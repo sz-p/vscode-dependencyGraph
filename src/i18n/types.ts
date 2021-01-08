@@ -1,15 +1,21 @@
+export const CONFIRM = "CONFIRM";
+export const ADD = "ADD";
+export const DELETE = "DELETE";
+
 export const SUCCESS = "SUCCESS";
 export const FAILED = "FAILED";
 
-export const SETTING = "SETTING"
-export const SAVE = "SAVE"
-export const EXPORT = "EXPORT"
+export const SETTING = "SETTING";
+export const SAVE = "SAVE";
+export const EXPORT = "EXPORT";
 
 export const FOLDER = "FOLDER";
 export const OPEN_FOLDER = "OPEN_FOLDER";
 export const ENTRY_FILE = "ENTRY_FILE";
 export const SET_ENTRY_FILE = "SET_ENTRY_FILE";
 export const FRAME_GRAPH_WEBVIEW = "FRAME_GRAPH_WEBVIEW";
+export const RESOLVE_EXTENSIONS = "RESOLVE_EXTENSIONS";
+export const RESOLVE_ALIAS = "RESOLVE_ALIAS";
 
 export const FILE_LINES = "FILE_LINES";
 export const FILE_TYPE = "FILE_TYPE";
