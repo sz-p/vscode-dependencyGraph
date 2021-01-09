@@ -34,7 +34,9 @@ engl[types.OPEN_FOLDER] = "Open folder";
 engl[types.ENTRY_FILE] = "Entry file";
 engl[types.SET_ENTRY_FILE] = "Set entry file";
 engl[types.RESOLVE_EXTENSIONS] = "Resolve extensions";
-engl[types.RESOLVE_ALIAS] = "Resolve alias";
+engl[types.RESOLVE_ALIAS] = "Alias";
+engl[types.NO_RESOLVE_ALIAS] = "No resolve path alias";
+engl[types.RESOLVE_PATH] = "Resolve path";
 
 engl[status.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER] = "Get opened folder";
 engl[status.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON] =
