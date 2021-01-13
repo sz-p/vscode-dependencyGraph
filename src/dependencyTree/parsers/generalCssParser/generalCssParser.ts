@@ -6,6 +6,8 @@ import {
 } from "../../index.d";
 import * as Resolve from "enhanced-resolve";
 import * as path from "path";
+import { resolveChildrenNodeError } from "../utils/utils";
+
 const getCssImport = function (codeString: string): string[] {
   const reg = /@import (.*);/g;
   const results = codeString.match(reg);
@@ -45,7 +47,7 @@ export const parser: Parser = function (
     try {
       dependencyPath = resolve(dirName, importedPath[i]);
     } catch (e) {
-      console.error(`resolve children node error: ${absolutePath}`);
+      resolveChildrenNodeError(importedPath[i], absolutePath);
       continue;
     }
     if (typeof dependencyPath === "string") {
