@@ -7,6 +7,8 @@ import {
   Parsers,
 } from "../../index.d";
 import * as path from "path";
+import { resolveChildrenNodeError } from "../utils/utils";
+
 export const parser: Parser = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,
@@ -33,13 +35,11 @@ export const parser: Parser = function (
 
   root.walkAtRules("import", (rule) => {
     let dependencyPath = undefined;
+    const childNodeName = rule.params.replace(/\'/g, "").replace(/\"/g, "");
     try {
-      dependencyPath = resolve(
-        dirName,
-        rule.params.replace(/\'/g, "").replace(/\"/g, "")
-      );
+      dependencyPath = resolve(dirName, childNodeName);
     } catch (e) {
-      console.error(`resolve children node error: ${absolutePath}`);
+      resolveChildrenNodeError(childNodeName, absolutePath);
       return false;
     }
     if (typeof dependencyPath === "string") {
