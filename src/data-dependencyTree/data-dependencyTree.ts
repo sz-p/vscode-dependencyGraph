@@ -19,7 +19,7 @@ import {
   getAllSettingFromSettingFile,
   setSetting,
 } from "../utils/setting/setting";
-// import { setData } from "../utils/data/data";
+import { setData } from "../utils/data/data";
 import {
   SETTING_KEY_ENTRY_FILE_PATH,
   SETTING_KEY_RESOLVE_EXTENSIONS,
@@ -95,7 +95,7 @@ export const getDependencyTreeData = (
       onGotCircularStructureNode,
     }
   );
-  // setData(dp);
+  setData(dp);
   if (!dp) {
     onError(NO_DEPENDENCY);
     postMessage ? statusMsgGetDependencyProcessData.postError() : null;
