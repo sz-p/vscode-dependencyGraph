@@ -27,14 +27,70 @@
 .settingView-button {
   top: 29px;
   float: right;
-}
-
-.settingView-button-add {
-  top: 29px;
-  float: right;
-  right: 100px;
+  width: 18%;
 }
 
 .settingView-detailsList {
   margin-top: 5px;
+}
+
+.settingView-inputBox-alias {
+  width: 39%;
+  display: inline-block;
+}
+
+.settingView-inputBox-path {
+  width: 39%;
+  display: inline-block;
+  margin-left: 15px;
+}
+.setting-resolveList-title {
+  background: var(--vscode-activityBar-background);
+}
+.setting-resolveList-title-item {
+  display: inline-block;
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI",
+    -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  font-weight: 600;
+  box-sizing: border-box;
+  box-shadow: none;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  padding-top: 5px;
+  padding-right: 0px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+  overflow-wrap: break-word;
+}
+.alias {
+  width: 41%;
+}
+.path {
+  width: 41%;
+}
+.delete {
+  width: 18%;
+}
+.setting-resolveList-detail,
+.setting-resolveList-detail-line {
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI",
+    -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  background: var(--vscode-dropdown-background);
+  line-height: 32px;
+}
+.setting-resolveList-detail-item {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: start;
+}
+.confirm-resolve {
+  margin-top: 20px;
 }
