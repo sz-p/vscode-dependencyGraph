@@ -4,7 +4,7 @@ import {
   DependencyTreeOptions,
   Parsers,
 } from "../../index.d";
-import { triggerOnGotAST } from "../utils/utils";
+import { triggerOnGotAST, resolveChildrenNodeError } from "../utils/utils";
 import { visit } from "recast";
 import * as path from "path";
 import * as Resolve from "enhanced-resolve";
@@ -43,7 +43,7 @@ export const parser: Parser = function (
       try {
         dependencyPath = resolve(dirName, nodePath.node.source.value);
       } catch (e) {
-        console.error(`resolve children node error: ${absolutePath}`);
+        resolveChildrenNodeError(nodePath.node.source.value, absolutePath);
         return false;
       }
       if (typeof dependencyPath === "string") {
