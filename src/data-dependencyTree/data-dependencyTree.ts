@@ -19,6 +19,7 @@ import {
   getAllSettingFromSettingFile,
   setSetting,
 } from "../utils/setting/setting";
+// import { setData } from "../utils/data/data";
 import {
   SETTING_KEY_ENTRY_FILE_PATH,
   SETTING_KEY_RESOLVE_EXTENSIONS,
@@ -75,6 +76,9 @@ export const getDependencyTreeData = (
 
   let resolveExtensions = setting[SETTING_KEY_RESOLVE_EXTENSIONS];
   let alias = setting[SETTING_KEY_ALIAS];
+  for (let key in alias) {
+    alias[key] = path.join(folderPath, alias[key]);
+  }
   if (!resolveExtensions) {
     resolveExtensions = defaultOptions.resolveExtensions;
     setSetting(SETTING_KEY_RESOLVE_EXTENSIONS, resolveExtensions);
@@ -91,8 +95,7 @@ export const getDependencyTreeData = (
       onGotCircularStructureNode,
     }
   );
-  console.log(dp);
-
+  // setData(dp);
   if (!dp) {
     onError(NO_DEPENDENCY);
     postMessage ? statusMsgGetDependencyProcessData.postError() : null;
