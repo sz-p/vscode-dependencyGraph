@@ -24,15 +24,15 @@
 [x] feat: ~~change monaco to other rich text editor~~ monaco editor highlight javascript code
 [x] feat: DependencyTreeData get file language
 [x] feat: set config to .framegraph
+[x] feat: ~~load webpack config~~ use setting view to set resolve config
+[x] feat: setting page
+[x] feat: save setting to local file
+[x] feat: save node information to file
 
-[ ] feat: load webpack config
+[ ] feat: take absolute path hash of file as ID
 [ ] fix: fix dependencyTree loaded error
-[ ] feat: setting page
-[ ] feat: save setting to local file
-
 [ ] feat: update one file
 [ ] feat: webview data read
-[ ] feat: save node information to file
 [ ] feat: webview data save
 [ ] feat: save file node
 [ ] feat: node with hash
