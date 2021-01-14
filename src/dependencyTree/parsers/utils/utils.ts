@@ -9,3 +9,11 @@ export const triggerOnGotAST = function (
     options.onGotAST(dependencyNode, absolutePath, AST);
   }
 };
+export const resolveChildrenNodeError = function (
+  childrenNodeName: string,
+  parentNodePath: string
+): void {
+  console.error(
+    `resolve children node '${childrenNodeName}' error in: '${parentNodePath}'`
+  );
+};
