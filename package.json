@@ -48,7 +48,7 @@
           "group": "navigation@1"
         }
       ],
-      "view/item/context":[
+      "view/item/context": [
         {
           "command": "framegraph.openFileInView",
           "group": "inline"
@@ -140,6 +140,7 @@
     "@fluentui/react": "^7.137.1",
     "@types/dependency-tree": "^7.2.0",
     "@types/lodash": "^4.14.165",
+    "@types/md5": "^2.2.1",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
     "ast-types": "^0.14.2",
@@ -151,6 +152,7 @@
     "file-loader": "^6.1.1",
     "get-dependency-tree": "^4.0.1",
     "lodash": "^4.17.20",
+    "md5": "^2.3.0",
     "monaco-editor": "^0.21.2",
     "monaco-editor-webpack-plugin": "^2.0.0",
     "react": "^16.13.1",

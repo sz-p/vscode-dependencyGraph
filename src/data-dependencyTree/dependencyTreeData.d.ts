@@ -19,6 +19,7 @@ export interface FunctionInformation {
 }
 export interface DependencyTreeData {
   name: string;
+  ID: string;
   fileDescription: FileInformation;
   circularStructure?: true;
   type: string;
