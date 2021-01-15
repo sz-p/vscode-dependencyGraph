@@ -1,46 +1,42 @@
+import * as md5 from "md5";
 import * as path from "path";
-import { DependencyTreeData } from "./dependencyTreeData";
-
-import {
-  statusMsgGetFolderPath,
-  statusMsgGetPackageJsonPath,
-  statusMsgGetEntryFile,
-  statusMsgGetDependencyData,
-  statusMsgGetDependencyProcessData,
-  postSetting,
-} from "../utils/message/messages";
-
-import { getPackageJsonPath, getMainFilePath } from "./dependencyTreeMethods";
-import { getCurrentFolderPath } from "../utils/utils";
-
-import { getDependencyTree } from "../dependencyTree/index";
 import { defaultOptions } from "../dependencyTree/core/defaultOptions";
+import { DependencyTreeData } from "./dependencyTreeData";
+import {
+  GET_DEPENDENCY_TREE_FAIL,
+  NO_DEPENDENCY,
+  NO_FOLDER,
+  NO_MAIN_FILE,
+  NO_PACKAGE_JSON,
+} from "../utils/error/errorKey";
 import {
   getAllSettingFromSettingFile,
   setSetting,
 } from "../utils/setting/setting";
-import { setData } from "../utils/data/data";
-import {
-  SETTING_KEY_ENTRY_FILE_PATH,
-  SETTING_KEY_RESOLVE_EXTENSIONS,
-  SETTING_KEY_ALIAS,
-} from "../utils/setting/settingKey";
+import { getCurrentFolderPath } from "../utils/utils";
+import { getDependencyTree } from "../dependencyTree/index";
+import { getMainFilePath, getPackageJsonPath } from "./dependencyTreeMethods";
 import { onError } from "../utils/error/onError";
 import {
-  NO_DEPENDENCY,
-  NO_FOLDER,
-  NO_PACKAGE_JSON,
-  NO_MAIN_FILE,
-  GET_DEPENDENCY_TREE_FAIL,
-} from "../utils/error/errorKey";
-
-import { pathExists } from "../utils/utils";
-
-import {
-  onGotFileString,
   onGotAST,
   onGotCircularStructureNode,
+  onGotFileString,
 } from "../fileAnalysis/fileAnalysis";
+import { pathExists } from "../utils/utils";
+import {
+  postSetting,
+  statusMsgGetDependencyData,
+  statusMsgGetDependencyProcessData,
+  statusMsgGetEntryFile,
+  statusMsgGetFolderPath,
+  statusMsgGetPackageJsonPath,
+} from "../utils/message/messages";
+import { setData } from "../utils/data/data";
+import {
+  SETTING_KEY_ALIAS,
+  SETTING_KEY_ENTRY_FILE_PATH,
+  SETTING_KEY_RESOLVE_EXTENSIONS,
+} from "../utils/setting/settingKey";
 
 export const getDependencyTreeData = (
   postMessage?: boolean
@@ -84,7 +80,7 @@ export const getDependencyTreeData = (
     setSetting(SETTING_KEY_RESOLVE_EXTENSIONS, resolveExtensions);
   }
   postSetting(setting);
-  const { dependencyTree: dp } = getDependencyTree(
+  const { dependencyTree: dp, dependencyNodes } = getDependencyTree(
     path.join(folderPath, mainFilePath),
     folderPath,
     {
@@ -95,6 +91,27 @@ export const getDependencyTreeData = (
       onGotCircularStructureNode,
     }
   );
+  (dependencyNodes as unknown) as DependencyTreeData;
+  for (let key in dependencyNodes) {
+    let dependencyNode = dependencyNodes[key] as DependencyTreeData;
+    dependencyNode["ID"] = md5(key);
+  }
+  let dependencyNodeStack = [dp];
+  while (dependencyNodeStack.length) {
+    let dependencyNode = dependencyNodeStack.pop() as DependencyTreeData;
+    if (dependencyNode?.children.length) {
+      dependencyNodeStack = dependencyNodeStack.concat(
+        dependencyNode?.children
+      );
+    }
+    if (dependencyNode) {
+      dependencyNode["ID"] = dependencyNodes[dependencyNode.absolutePath].ID;
+    }
+    for (let i = 0; i < dependencyNode.ancestors.length; i++) {
+      dependencyNode.ancestors[i] =
+        dependencyNodes[dependencyNode.ancestors[i]].ID;
+    }
+  }
   setData(dp);
   if (!dp) {
     onError(NO_DEPENDENCY);
