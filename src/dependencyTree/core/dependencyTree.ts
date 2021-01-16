@@ -38,6 +38,7 @@ export class DependencyTree {
     this.dependencyTreeData = {} as DependencyTreeData;
     this.circularStructureNode = {
       name: "circularStructure",
+      ID: "circularStructure",
       circularStructure: true,
       absolutePath: "circularStructure",
       relativePath: "circularStructure",
@@ -172,6 +173,7 @@ export class DependencyTree {
         this.parseRule,
         this.parsers
       );
+      this.dependencyHash[entryPath] = dependencyNode;
       for (let i = 0; i < children.length; i++) {
         const childrenPath = children[i];
 
@@ -219,7 +221,7 @@ export class DependencyTree {
     }
     return {
       dependencyTree: this.dependencyTreeData,
-      dependencyHash: this.dependencyHash,
+      dependencyNodes: this.dependencyHash,
     };
   }
 }
