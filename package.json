@@ -41,10 +41,12 @@
       "view/title": [
         {
           "command": "framegraph.reOpenView",
+          "when": "view == framegraphExplorer-DependencyTree",
           "group": "navigation@2"
         },
         {
           "command": "framegraph.refreshFile",
+          "when": "view == framegraphExplorer-DependencyTree",
           "group": "navigation@1"
         }
       ],
