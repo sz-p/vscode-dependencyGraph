@@ -1,4 +1,3 @@
-import * as md5 from "md5";
 import * as path from "path";
 import { defaultOptions } from "../dependencyTree/core/defaultOptions";
 import { DependencyTreeData } from "./dependencyTreeData";
@@ -38,6 +37,7 @@ import {
   SETTING_KEY_RESOLVE_EXTENSIONS,
 } from "../utils/setting/settingKey";
 
+import { processDependenciesTreeData } from "./processTreeData";
 export const getDependencyTreeData = (
   postMessage?: boolean
 ): DependencyTreeData | undefined => {
@@ -91,28 +91,12 @@ export const getDependencyTreeData = (
       onGotCircularStructureNode,
     }
   );
-  (dependencyNodes as unknown) as DependencyTreeData;
-  for (let key in dependencyNodes) {
-    let dependencyNode = dependencyNodes[key] as DependencyTreeData;
-    dependencyNode["ID"] = md5(key);
-  }
-  let dependencyNodeStack = [dp];
-  while (dependencyNodeStack.length) {
-    let dependencyNode = dependencyNodeStack.pop() as DependencyTreeData;
-    if (dependencyNode?.children.length) {
-      dependencyNodeStack = dependencyNodeStack.concat(
-        dependencyNode?.children
-      );
-    }
-    if (dependencyNode) {
-      dependencyNode["ID"] = dependencyNodes[dependencyNode.absolutePath].ID;
-    }
-    for (let i = 0; i < dependencyNode.ancestors.length; i++) {
-      dependencyNode.ancestors[i] =
-        dependencyNodes[dependencyNode.ancestors[i]].ID;
-    }
-  }
-  setData(dp);
+  const {
+    dependencyNodes: nodes,
+    dependencyTree: tree,
+  } = processDependenciesTreeData(dp as DependencyTreeData, dependencyNodes);
+  const data = { nodes, tree };
+  setData(data);
   if (!dp) {
     onError(NO_DEPENDENCY);
     postMessage ? statusMsgGetDependencyProcessData.postError() : null;
