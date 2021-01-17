@@ -33,3 +33,31 @@ export interface DependencyTreeData {
   ancestors: string[];
   children: Array<DependencyTreeData>;
 }
+
+export interface DependencyTree {
+  name: string;
+  nodeID: string;
+  fileID: string;
+  children: Array<DependencyTree>;
+  ancestors: string[];
+}
+
+//TODO extends
+export interface DependencyNode {
+  name: string;
+  fileID: string;
+  fileDescription: FileInformation;
+  circularStructure?: true;
+  type: string;
+  language: "javascript" | "css" | "file";
+  lines: number | undefined;
+  analysed: boolean;
+  functions: FunctionInformation[] | [];
+  extension: string;
+  absolutePath: string;
+  relativePath: string;
+  children: string[];
+}
+export interface DependencyNodes {
+  [key: string]: DependencyNode;
+}
