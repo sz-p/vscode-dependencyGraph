@@ -12,18 +12,18 @@ export const processDependenciesTreeData = function (
     const md5Hash = md5(key);
     const dependencyTreeNode = dependencyTreeNodes[key] as DependencyTreeData;
     dependencyNodes[md5Hash] = {
-      name: dependencyTreeNode.name,
       fileID: md5Hash,
-      fileDescription: dependencyTreeNode.fileDescription,
+      name: dependencyTreeNode.name,
       circularStructure: dependencyTreeNode.circularStructure,
       type: dependencyTreeNode.type,
+      extension: dependencyTreeNode.extension,
       language: dependencyTreeNode.language,
       lines: dependencyTreeNode.lines,
       analysed: dependencyTreeNode.analysed,
-      functions: dependencyTreeNode.functions,
-      extension: dependencyTreeNode.extension,
       absolutePath: dependencyTreeNode.absolutePath,
       relativePath: dependencyTreeNode.relativePath,
+      fileDescription: dependencyTreeNode.fileDescription,
+      functions: dependencyTreeNode.functions,
       children: [] as string[],
     };
     for (let i = 0; i < dependencyTreeNode.children.length; i++) {
@@ -42,8 +42,7 @@ export const processDependenciesTreeData = function (
       node: DependencyTreeData;
       tree: DependencyTree;
     };
-    tree.fileID = md5(node.absolutePath);
-    tree.name = node.name;
+    let fileID = md5(node.absolutePath);
     let treePath = "";
     let ancestors = [];
     for (let i = 0; i < node.ancestors.length; i++) {
@@ -51,9 +50,11 @@ export const processDependenciesTreeData = function (
       treePath = treePath + nodeHash;
       ancestors.push(nodeHash);
     }
-    treePath += tree.fileID;
-    tree.ancestors = ancestors;
+    treePath += fileID;
     tree.nodeID = md5(treePath);
+    tree.fileID = fileID;
+    tree.name = node.name;
+    tree.ancestors = ancestors;
     tree.children = [] as DependencyTree[];
     for (let i = 0; i < node.children.length; i++) {
       let treeChild = {} as DependencyTree;
