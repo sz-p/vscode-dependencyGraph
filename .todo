@@ -28,9 +28,9 @@
 [x] feat: setting page
 [x] feat: save setting to local file
 [x] feat: save node information to file
+[x] feat: take absolute path hash of file as ID
+[x] feat: send file Information and file dependencies to webview
 
-[ ] feat: take absolute path hash of file as ID
-[ ] feat: send file Information and file dependencies to webview
 [ ] fix: fix dependencyTree loaded error
 [ ] feat: update one file
 [ ] feat: webview data read
