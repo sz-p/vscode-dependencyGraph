@@ -4,7 +4,8 @@ import {
   pathExists,
   getObjectFromJsonFile,
 } from "../utils";
-
+import { DependencyTreeData } from "../../data-dependencyTree/dependencyTreeData.d";
+import { transportsDataToDependenciesTreeData } from "../../data-dependencyTree/processTreeData";
 const createDir = function (): void {
   const dirPath = getCurrentFolderPath();
   fs.mkdirSync(dirPath + "/.framegraph");
@@ -20,6 +21,18 @@ export const getDataFromDataFile = function (): any {
   const DataFilePath = getDataFilePath();
   if (!DataFilePath) return false;
   return getObjectFromJsonFile(DataFilePath);
+};
+
+export const getData = function (): DependencyTreeData | false {
+  let dp = {} as DependencyTreeData;
+  const data = getDataFromDataFile();
+  if (!data) return false;
+  try {
+    dp = transportsDataToDependenciesTreeData(data.tree, data.nodes);
+  } catch (e) {
+    return false;
+  }
+  return dp;
 };
 
 export const setData = function (value: any): boolean {

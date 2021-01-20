@@ -30,14 +30,14 @@ import {
   statusMsgGetFolderPath,
   statusMsgGetPackageJsonPath,
 } from "../utils/message/messages";
-import { setData } from "../utils/data/data";
+import { setData, getData } from "../utils/data/data";
 import {
   SETTING_KEY_ALIAS,
   SETTING_KEY_ENTRY_FILE_PATH,
   SETTING_KEY_RESOLVE_EXTENSIONS,
 } from "../utils/setting/settingKey";
 
-import { processDependenciesTreeData } from "./processTreeData";
+import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 export const getDependencyTreeData = (
   postMessage?: boolean
 ): DependencyTreeData | undefined => {
@@ -80,6 +80,10 @@ export const getDependencyTreeData = (
     setSetting(SETTING_KEY_RESOLVE_EXTENSIONS, resolveExtensions);
   }
   postSetting(setting);
+  let dpDataFromFile = getData();
+  if (dpDataFromFile) {
+    return dpDataFromFile;
+  }
   const { dependencyTree: dp, dependencyNodes } = getDependencyTree(
     path.join(folderPath, mainFilePath),
     folderPath,
@@ -94,7 +98,10 @@ export const getDependencyTreeData = (
   const {
     dependencyNodes: nodes,
     dependencyTree: tree,
-  } = processDependenciesTreeData(dp as DependencyTreeData, dependencyNodes);
+  } = dependenciesTreeDataToTransportsData(
+    dp as DependencyTreeData,
+    dependencyNodes
+  );
   const data = { nodes, tree };
   setData(data);
   if (!dp) {

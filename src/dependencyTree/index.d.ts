@@ -41,7 +41,7 @@ export interface DependencyHash {
   [key: string]: DependencyTreeData;
 }
 export interface DependencyTreeData {
-  ID: string;
+  fileID: string;
   name: string;
   extension: string;
   ancestors: string[];

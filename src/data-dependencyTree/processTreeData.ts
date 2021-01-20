@@ -2,7 +2,7 @@ import * as md5 from "md5";
 import { DependencyHash } from "../dependencyTree/index.d";
 import { DependencyTreeData } from "./dependencyTreeData.d";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
-export const processDependenciesTreeData = function (
+export const dependenciesTreeDataToTransportsData = function (
   dependencyTreeData: DependencyTreeData,
   dependencyTreeNodes: DependencyHash
 ): { dependencyTree: DependencyTree; dependencyNodes: DependencyNodes } {
@@ -32,7 +32,7 @@ export const processDependenciesTreeData = function (
       );
     }
     let dependencyNode = dependencyTreeNodes[key];
-    dependencyNode["ID"] = md5(key);
+    dependencyNode["fileID"] = md5(key);
   }
   let dependencyTreeDataHashTable = [
     { node: dependencyTreeData, tree: dependencyTree },
@@ -66,4 +66,49 @@ export const processDependenciesTreeData = function (
     }
   }
   return { dependencyNodes, dependencyTree };
+};
+export const transportsDataToDependenciesTreeData = function (
+  dependencyTree: DependencyTree,
+  dependencyNodes: DependencyNodes
+): DependencyTreeData {
+  let dependencyTreeData = {} as DependencyTreeData;
+
+  let dependencyTreeDataHashTable = [
+    { dependencyTree: dependencyTree, dependencyTreeData: dependencyTreeData },
+  ];
+  while (dependencyTreeDataHashTable.length) {
+    let {
+      dependencyTree,
+      dependencyTreeData,
+    } = dependencyTreeDataHashTable.pop() as {
+      dependencyTree: DependencyTree;
+      dependencyTreeData: DependencyTreeData;
+    };
+    const nodesData = dependencyNodes[dependencyTree.fileID];
+
+    dependencyTreeData.name = dependencyTree.name;
+    dependencyTreeData.fileID = dependencyTree.fileID;
+    dependencyTreeData.ancestors = dependencyTree.ancestors;
+    dependencyTreeData.fileDescription = nodesData.fileDescription;
+    dependencyTreeData.circularStructure = nodesData.circularStructure;
+    dependencyTreeData.type = nodesData.type;
+    dependencyTreeData.language = nodesData.language;
+    dependencyTreeData.lines = nodesData.lines;
+    dependencyTreeData.analysed = nodesData.analysed;
+    dependencyTreeData.functions = nodesData.functions;
+    dependencyTreeData.extension = nodesData.extension;
+    dependencyTreeData.absolutePath = nodesData.absolutePath;
+    dependencyTreeData.relativePath = nodesData.relativePath;
+    dependencyTreeData.children = [] as DependencyTreeData[];
+
+    for (let i = 0; i < dependencyTree.children.length; i++) {
+      let child = {} as DependencyTreeData;
+      dependencyTreeData.children.push(child);
+      dependencyTreeDataHashTable.push({
+        dependencyTree: dependencyTree.children[i],
+        dependencyTreeData: child,
+      });
+    }
+  }
+  return dependencyTreeData;
 };
