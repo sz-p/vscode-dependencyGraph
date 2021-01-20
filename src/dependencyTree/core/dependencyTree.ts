@@ -38,7 +38,7 @@ export class DependencyTree {
     this.dependencyTreeData = {} as DependencyTreeData;
     this.circularStructureNode = {
       name: "circularStructure",
-      ID: "circularStructure",
+      fileID: "circularStructure",
       circularStructure: true,
       absolutePath: "circularStructure",
       relativePath: "circularStructure",
@@ -173,10 +173,9 @@ export class DependencyTree {
         this.parseRule,
         this.parsers
       );
-      this.dependencyHash[entryPath] = dependencyNode;
+      this.dependencyHash[absolutePath] = cloneDeep(dependencyNode);
       for (let i = 0; i < children.length; i++) {
         const childrenPath = children[i];
-
         if (!pathExists(childrenPath)) {
           console.error(`file does not exist: ${childrenPath}`);
           continue;
