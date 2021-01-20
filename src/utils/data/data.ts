@@ -27,10 +27,7 @@ export const setData = function (value: any): boolean {
   if (!pathExists(dirPath + "/.framegraph")) createDir();
   let Data = value;
   try {
-    fs.writeFileSync(
-      getDataFilePath() as string,
-      JSON.stringify(Data, null, 2)
-    );
+    fs.writeFileSync(getDataFilePath() as string, JSON.stringify(Data));
     return true;
   } catch (err) {
     return false;
