@@ -31,13 +31,14 @@ import {
   statusMsgGetFolderPath,
   statusMsgGetPackageJsonPath,
 } from "../utils/message/messages";
-import { setData } from "../utils/data/data";
+import { setData, getData } from "../utils/data/data";
 import {
   SETTING_KEY_ALIAS,
   SETTING_KEY_ENTRY_FILE_PATH,
   SETTING_KEY_RESOLVE_EXTENSIONS,
 } from "../utils/setting/settingKey";
 
+import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 export const getDependencyTreeData = (
   postMessage?: boolean
 ): DependencyTreeData | undefined => {
@@ -80,6 +81,10 @@ export const getDependencyTreeData = (
     setSetting(SETTING_KEY_RESOLVE_EXTENSIONS, resolveExtensions);
   }
   postSetting(setting);
+  let dpDataFromFile = getData();
+  if (dpDataFromFile) {
+    return dpDataFromFile;
+  }
   const { dependencyTree: dp, dependencyNodes } = getDependencyTree(
     path.join(folderPath, mainFilePath),
     folderPath,
@@ -91,28 +96,15 @@ export const getDependencyTreeData = (
       onGotCircularStructureNode,
     }
   );
-  (dependencyNodes as unknown) as DependencyTreeData;
-  for (let key in dependencyNodes) {
-    let dependencyNode = dependencyNodes[key] as DependencyTreeData;
-    dependencyNode["ID"] = md5(key);
-  }
-  let dependencyNodeStack = [dp];
-  while (dependencyNodeStack.length) {
-    let dependencyNode = dependencyNodeStack.pop() as DependencyTreeData;
-    if (dependencyNode?.children.length) {
-      dependencyNodeStack = dependencyNodeStack.concat(
-        dependencyNode?.children
-      );
-    }
-    if (dependencyNode) {
-      dependencyNode["ID"] = dependencyNodes[dependencyNode.absolutePath].ID;
-    }
-    for (let i = 0; i < dependencyNode.ancestors.length; i++) {
-      dependencyNode.ancestors[i] =
-        dependencyNodes[dependencyNode.ancestors[i]].ID;
-    }
-  }
-  setData(dp);
+  const {
+    dependencyNodes: nodes,
+    dependencyTree: tree,
+  } = dependenciesTreeDataToTransportsData(
+    dp as DependencyTreeData,
+    dependencyNodes
+  );
+  const data = { nodes, tree };
+  setData(data);
   if (!dp) {
     onError(NO_DEPENDENCY);
     postMessage ? statusMsgGetDependencyProcessData.postError() : null;
