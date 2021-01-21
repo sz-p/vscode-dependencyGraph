@@ -6,6 +6,11 @@ import {
 } from "../utils";
 import { DependencyTreeData } from "../../data-dependencyTree/dependencyTreeData.d";
 import { transportsDataToDependenciesTreeData } from "../../data-dependencyTree/processTreeData";
+import {
+  DependencyTree,
+  DependencyNodes,
+} from "../../data-dependencyTree/dependencyTreeData.d";
+
 const createDir = function (): void {
   const dirPath = getCurrentFolderPath();
   fs.mkdirSync(dirPath + "/.framegraph");
@@ -23,7 +28,15 @@ export const getDataFromDataFile = function (): any {
   return getObjectFromJsonFile(DataFilePath);
 };
 
-export const getData = function (): DependencyTreeData | false {
+export const getData = function ():
+  | {
+      dependencyTreeData: DependencyTreeData;
+      transportsData: {
+        dependencyTree: DependencyTree;
+        dependencyNodes: DependencyNodes;
+      };
+    }
+  | false {
   let dp = {} as DependencyTreeData;
   const data = getDataFromDataFile();
   if (!data) return false;
@@ -32,7 +45,13 @@ export const getData = function (): DependencyTreeData | false {
   } catch (e) {
     return false;
   }
-  return dp;
+  return {
+    dependencyTreeData: dp,
+    transportsData: {
+      dependencyTree: data.tree,
+      dependencyNodes: data.nodes,
+    },
+  };
 };
 
 export const setData = function (value: any): boolean {
