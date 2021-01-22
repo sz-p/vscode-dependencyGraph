@@ -38,9 +38,18 @@ import {
 } from "../utils/setting/settingKey";
 
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
+import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
 export const getDependencyTreeData = (
   postMessage?: boolean
-): DependencyTreeData | undefined => {
+):
+  | {
+      dependencyTreeData: DependencyTreeData;
+      transportsData: {
+        dependencyTree: DependencyTree;
+        dependencyNodes: DependencyNodes;
+      };
+    }
+  | undefined => {
   // find folder Path catch path sendStatus
   const folderPath = getCurrentFolderPath();
   if (!folderPath || !pathExists(folderPath)) {
@@ -109,6 +118,11 @@ export const getDependencyTreeData = (
     postMessage ? statusMsgGetDependencyProcessData.postError() : null;
   }
   postMessage ? statusMsgGetDependencyProcessData.postSuccess() : null;
-
-  return dp as DependencyTreeData;
+  return {
+    dependencyTreeData: dp as DependencyTreeData,
+    transportsData: {
+      dependencyTree: tree,
+      dependencyNodes: nodes,
+    },
+  };
 };

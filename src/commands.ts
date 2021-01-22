@@ -36,7 +36,9 @@ export const command_focusOnNode = vscode.commands.registerCommand(
 export const command_reOpenView = vscode.commands.registerCommand(
   "framegraph.reOpenView",
   (fileName, fileData) => {
-    reOpenWebView(global.dependencyTreeData);
+    if (global.dependencyTreeData) {
+      reOpenWebView(global.dependencyTreeData.dependencyTreeData);
+    }
   }
 );
 export const command_refreshFile = vscode.commands.registerCommand(
@@ -51,13 +53,16 @@ export const command_refreshFile = vscode.commands.registerCommand(
         value: stringRandom(),
       });
     }
-    global.dependencyTreeData = getDependencyTreeData(postMessage);
-    renderTreeView(global.dependencyTreeData);
-    if (global.webViewPanel) {
-      postMessageCatchError({
-        key: MESSAGE_DEPENDENCY_TREE_DATA,
-        value: global.dependencyTreeData,
-      });
+    const data = getDependencyTreeData(postMessage);
+    if (data) {
+      global.dependencyTreeData = data;
+      renderTreeView(global.dependencyTreeData.dependencyTreeData);
+      if (global.webViewPanel) {
+        postMessageCatchError({
+          key: MESSAGE_DEPENDENCY_TREE_DATA,
+          value: data.transportsData,
+        });
+      }
     }
   }
 );
