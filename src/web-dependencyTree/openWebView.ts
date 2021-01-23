@@ -119,6 +119,6 @@ export const openWebView = function (
   }
   postMessageCatchError({
     key: MESSAGE_DEPENDENCY_TREE_DATA,
-    value: dependencyTreeData,
+    value: global.dependencyTreeData?.transportsData,
   });
 };
