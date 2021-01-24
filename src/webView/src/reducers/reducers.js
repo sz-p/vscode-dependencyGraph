@@ -18,16 +18,16 @@ const actionsCase = () => {
     return newState;
   };
   const setDependencyTreeData = (state, action) => {
-    const data = action.payload.data;
+    const data = action.payload;
     let newState = undefined;
-    if (data.value) {
+    if (data) {
       newState = Object.assign({}, state, {
-        dependencyTreeData: data.value,
+        dependencyTreeData: data,
         gotDependencyTreeData: true,
       });
     } else {
       newState = Object.assign({}, state, {
-        dependencyTreeData: data.value,
+        dependencyTreeData: data,
         gotDependencyTreeData: false,
       });
     }
