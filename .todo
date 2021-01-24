@@ -30,8 +30,8 @@
 [x] feat: save node information to file
 [x] feat: take absolute path hash of file as ID
 [x] feat: send file Information and file dependencies to webview
+[x] feat: send new data to webview
 
-[ ] feat: send new data to webview
 [ ] feat: show waiting view when data is not received
 [ ] fix: fix dependencyTree loaded error
 [ ] feat: update one file
