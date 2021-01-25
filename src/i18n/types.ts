@@ -19,6 +19,7 @@ export const RESOLVE_ALIAS = "RESOLVE_ALIAS";
 export const NO_RESOLVE_ALIAS = "NO_RESOLVE__ALIAS";
 export const RESOLVE_PATH = "RESOLVE_PATH";
 
+export const WAITING_DATA = "WAITING_DATA";
 export const FILE_LINES = "FILE_LINES";
 export const FILE_TYPE = "FILE_TYPE";
 export const INTRODUCTION = "INTRODUCTION";

@@ -6,8 +6,9 @@ import { loadTheme } from "@fluentui/react";
 import { dark, light } from "../../utils/theme";
 import { StatusDom } from "./statusDom";
 import { useEffect, useState } from "react";
+import { WaitingView } from "../waitingView/waitingView";
 const statusView = function (props) {
-  let [doms, setDoms] = useState([]);
+  let [doms, setDoms] = useState([<WaitingView key="WaitingView" />]);
   let [error, setError] = useState(false);
   const {
     getDataStatus,
@@ -18,7 +19,8 @@ const statusView = function (props) {
 
   useEffect(() => {
     if (viewHash) {
-      (doms = []), setDoms(doms);
+      doms = [<WaitingView key="WaitingView" />];
+      setDoms(doms);
     }
   }, [viewHash]);
   useEffect(() => {
@@ -35,18 +37,20 @@ const statusView = function (props) {
   }, [activeThemeKind]);
   useEffect(() => {
     if (getDataStatus && !error) {
+      doms.pop();
+      doms = doms.concat(
+        <StatusDom
+          key={getDataStatus.type}
+          type={getDataStatus.type}
+          status={getDataStatus.status}
+        />
+      );
+      doms.push(<WaitingView key="WaitingView" />);
       if (getDataStatus.status === "error") {
         setError(true);
+        doms.pop();
       }
-      setDoms(
-        doms.concat(
-          <StatusDom
-            key={getDataStatus.type}
-            type={getDataStatus.type}
-            status={getDataStatus.status}
-          />
-        )
-      );
+      setDoms(doms);
     }
   }, [getDataStatus]);
   if (gotDependencyTreeData) return null;

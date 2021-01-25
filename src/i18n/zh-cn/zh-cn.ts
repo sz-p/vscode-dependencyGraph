@@ -12,6 +12,7 @@ zhcn[errorKey.NO_DEPENDENCY] = "无文件依赖";
 zhcn[errorKey.NO_DEPENDENCY_TREE_DATA] = "无文件依赖数据";
 zhcn[errorKey.GET_AST_FAILED] = "获取AST语法树失败";
 
+zhcn[types.WAITING_DATA] = "正在等待数据...";
 zhcn[types.CONFIRM] = "确认";
 zhcn[types.ADD] = "添加";
 zhcn[types.DELETE] = "删除";
