@@ -13,6 +13,7 @@ engl[errorKey.NO_DEPENDENCY] = "No file dependency";
 engl[errorKey.NO_DEPENDENCY_TREE_DATA] = "No file dependency tree data";
 engl[errorKey.GET_AST_FAILED] = "get AST syntax tree fail";
 
+engl[types.WAITING_DATA] = "Waiting for data...";
 engl[types.CONFIRM] = "Confirm";
 engl[types.ADD] = "Insert";
 engl[types.DELETE] = "Delete";
