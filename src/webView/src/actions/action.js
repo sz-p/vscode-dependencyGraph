@@ -5,10 +5,15 @@ const returnParams = function (Params) {
   return Params;
 };
 const getDependenciesTreeData = function (Params) {
-  return transportsDataToDependenciesTreeData(
-    Params.data.value.dependencyTree,
-    Params.data.value.dependencyNodes
-  );
+  try {
+    const data = transportsDataToDependenciesTreeData(
+      Params.data.value.dependencyTree,
+      Params.data.value.dependencyNodes
+    );
+    return data;
+  } catch (error) {
+    return false;
+  }
 };
 export const action_changeGetDataStatus = createAction(
   type.TYPE_CHANGE_GET_DATA_STATUS,
