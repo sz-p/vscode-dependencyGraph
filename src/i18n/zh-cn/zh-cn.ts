@@ -21,6 +21,7 @@ zhcn[types.SUCCESS] = "成功";
 zhcn[types.FAILED] = "失败";
 
 zhcn[types.SETTING] = "设置";
+zhcn[types.COMMAND] = "命令";
 zhcn[types.SAVE] = "保存";
 zhcn[types.EXPORT] = "导出";
 

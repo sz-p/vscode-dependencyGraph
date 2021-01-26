@@ -6,6 +6,7 @@ export const SUCCESS = "SUCCESS";
 export const FAILED = "FAILED";
 
 export const SETTING = "SETTING";
+export const COMMAND = "COMMAND";
 export const SAVE = "SAVE";
 export const EXPORT = "EXPORT";
 
