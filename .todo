@@ -31,14 +31,20 @@
 [x] feat: take absolute path hash of file as ID
 [x] feat: send file Information and file dependencies to webview
 [x] feat: send new data to webview
+[x] feat: show waiting view when data is not received
+[x] feat: node with hash
+[x] feat: make status view theme to dark
+[x] fix: fix setting view theme
 
-[ ] feat: show waiting view when data is not received
+[ ] fix: fix resolve path
 [ ] fix: fix dependencyTree loaded error
+[ ] fix: click tree view node open webview node error
+
+
 [ ] feat: update one file
 [ ] feat: webview data read
 [ ] feat: webview data save
 [ ] feat: save file node
-[ ] feat: node with hash
 [ ] feat: if main of package.json is unequal with config use main
 
 TODO

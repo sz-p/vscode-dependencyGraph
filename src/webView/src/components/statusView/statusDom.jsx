@@ -5,6 +5,7 @@ import {
   initializeIcons,
 } from "office-ui-fabric-react";
 import { useEffect, useState } from "react";
+import "./status.css";
 
 import { FolderAndEntry } from "../settingView/folderAndEntrySetting";
 import { i18n } from "../../../../i18n/i18n";
