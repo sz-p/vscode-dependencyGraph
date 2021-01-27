@@ -60,7 +60,9 @@ export const getDependencyTreeData = (
   postMessage ? statusMsgGetFolderPath.postSuccess() : null;
 
   const setting = getAllSettingFromSettingFile();
-  let mainFilePath = setting[SETTING_KEY_ENTRY_FILE_PATH];
+  let mainFilePath = JSON.parse(
+    JSON.stringify(setting[SETTING_KEY_ENTRY_FILE_PATH])
+  );
   if (!mainFilePath) {
     // find package.json and main file
     const packageJsonPath = getPackageJsonPath(folderPath);
@@ -79,8 +81,10 @@ export const getDependencyTreeData = (
   }
   postMessage ? statusMsgGetEntryFile.postSuccess() : null;
 
-  let resolveExtensions = setting[SETTING_KEY_RESOLVE_EXTENSIONS];
-  let alias = setting[SETTING_KEY_ALIAS];
+  let resolveExtensions = JSON.parse(
+    JSON.stringify(setting[SETTING_KEY_RESOLVE_EXTENSIONS])
+  );
+  let alias = JSON.parse(JSON.stringify(setting[SETTING_KEY_ALIAS]));
   for (let key in alias) {
     alias[key] = path.join(folderPath, alias[key]);
   }
