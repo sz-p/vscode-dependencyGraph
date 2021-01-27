@@ -2,7 +2,7 @@
   "framegraph.title": "FrameGraph",
   "framegraph.entryFilePath": "待分析的入口文件绝对路径",
   "framegraph.folderPath": "文件夹路径",
-  "framegraph.openPage": "打开视图页面",
+  "framegraph.reOpenView": "打开视图页面",
   "framegraph.refresh": "刷新依赖树",
   "framegraph.framegraphTreeView": "架构图",
   "framegraph.DependencyTree": "依赖树",

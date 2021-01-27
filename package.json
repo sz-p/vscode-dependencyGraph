@@ -12,7 +12,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.helloWorld",
     "onView:framegraphExplorer-DependencyTree"
   ],
   "repository": "https://github.com/sz-p/vscode-framegraph",
@@ -59,10 +58,6 @@
     },
     "commands": [
       {
-        "command": "framegraph.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "framegraph.openFileInView",
         "title": "%framegraph.openFileInView%",
         "icon": "$(edit)"
@@ -78,30 +73,14 @@
       },
       {
         "command": "framegraph.reOpenView",
-        "title": "%framegraph.openPage%",
+        "title": "%framegraph.reOpenView%",
         "icon": "$(browser)"
       },
       {
         "command": "framegraph.postMessage",
-        "title": "post Message"
+        "title": "Post message to framegraph webView"
       }
-    ],
-    "configuration": {
-      "type": "object",
-      "title": "%framegraph.title%",
-      "properties": {
-        "framegraph.entryFilePath": {
-          "type": "string",
-          "default": "",
-          "description": "%framegraph.entryFilePath%"
-        },
-        "framegraph.folderPath": {
-          "type": "string",
-          "default": "",
-          "description": "%framegraph.folderPath%"
-        }
-      }
-    }
+    ]
   },
   "scripts": {
     "watch": "npm-run-all -p watch:*",
