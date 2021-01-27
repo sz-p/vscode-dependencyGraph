@@ -5,7 +5,7 @@ const actionsCase = () => {
   const change_getDataStatus = (state, action) => {
     const data = action.payload.data;
     let newState = undefined;
-    if (data.value === "error") {
+    if (data.value === "error" || data.value.status === "error") {
       newState = Object.assign({}, state, {
         getDataStatus: data.value,
         gotDependencyTreeData: false,
@@ -27,7 +27,7 @@ const actionsCase = () => {
       });
     } else {
       newState = Object.assign({}, state, {
-        dependencyTreeData: data,
+        dependencyTreeData: undefined,
         gotDependencyTreeData: false,
       });
     }
