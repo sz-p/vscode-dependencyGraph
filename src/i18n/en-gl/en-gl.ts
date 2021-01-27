@@ -22,6 +22,7 @@ engl[types.SUCCESS] = "Success";
 engl[types.FAILED] = "Failed";
 
 engl[types.SETTING] = "Setting";
+engl[types.COMMAND] = "Command";
 engl[types.SAVE] = "Save";
 engl[types.EXPORT] = "Export";
 
