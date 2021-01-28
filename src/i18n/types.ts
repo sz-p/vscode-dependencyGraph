@@ -10,6 +10,14 @@ export const COMMAND = "COMMAND";
 export const SAVE = "SAVE";
 export const EXPORT = "EXPORT";
 
+export const SAVE_DATA = "SAVE_DATA";
+export const SAVE_DATA_TOOLTIP = "SAVE_DATA_TOOLTIP";
+export const UPDATE_DATA = "UPDATE_DATA";
+export const UPDATE_DATA_TOOLTIP = "UPDATE_DATA_TOOLTIP";
+export const EXPORT_SVG = "EXPORT_SVG";
+export const EXPORT_PNG = "EXPORT_PNG";
+export const EXPORT_TOOLTIP = "EXPORT_TOOLTIP";
+
 export const FOLDER = "FOLDER";
 export const OPEN_FOLDER = "OPEN_FOLDER";
 export const ENTRY_FILE = "ENTRY_FILE";
