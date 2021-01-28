@@ -35,8 +35,9 @@
 [x] feat: node with hash
 [x] feat: make status view theme to dark
 [x] fix: fix setting view theme
+[x] fix: fix resolve path
 
-[ ] fix: fix resolve path
+[ ] feat: setting page command view
 [ ] fix: fix dependencyTree loaded error
 [ ] fix: click tree view node open webview node error
 
