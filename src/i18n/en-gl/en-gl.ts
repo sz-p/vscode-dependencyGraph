@@ -24,7 +24,16 @@ engl[types.FAILED] = "Failed";
 engl[types.SETTING] = "Setting";
 engl[types.COMMAND] = "Command";
 engl[types.SAVE] = "Save";
+engl[types.SAVE_DATA] = "Save data";
+engl[types.SAVE_DATA_TOOLTIP] =
+  "After saving the data, the existing data will be read by default next time. To update the data, please click the update data button.  ";
 engl[types.EXPORT] = "Export";
+engl[types.UPDATE_DATA] = "Update data";
+engl[types.UPDATE_DATA_TOOLTIP] = "Update data will save data when data not saved";
+engl[types.EXPORT_SVG] = "Export SVG";
+engl[types.EXPORT_PNG] = "Export PNG";
+engl[types.EXPORT_TOOLTIP] = "Export";
+
 
 engl[types.CIRCULAR_STRUCTURE_NODE_INTRODUCTION] = "Circular Structure";
 engl[types.CIRCULAR_STRUCTURE_NODE_DESCRIPTION] =
