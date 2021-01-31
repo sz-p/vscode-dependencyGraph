@@ -97,6 +97,13 @@ const actionsCase = () => {
     });
     return newState;
   };
+  const getSavedData = (state, action) => {
+    const data = action.payload.data;
+    const newState = Object.assign({}, state, {
+      savedData: true,
+    });
+    return newState;
+  };
   return new Map([
     [type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus],
     [type.TYPE_SET_DEPENDENCIES_TREE_DATA, setDependencyTreeData],
@@ -109,6 +116,7 @@ const actionsCase = () => {
     [type.TYPE_SELECT_NODE, selectNode],
     [type.TYPE_CHANGE_SETTING_STATUS, changeSettingStatus],
     [type.TYPE_GET_ENTRY_FILE, getEntryFile],
+    [type.TYPE_GET_SAVED_DATA, getSavedData],
   ]);
 };
 export const reducer = function (state = initialState, action) {

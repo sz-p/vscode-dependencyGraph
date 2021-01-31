@@ -15,6 +15,7 @@ const messageCase = () => {
     [MESSAGES.MESSAGE_GET_LANGUAGE, action.action_getLanguage],
     [MESSAGES.MESSAGE_GET_ENTRY_FILE, action.action_getEntryFile],
     [MESSAGES.MESSAGE_GET_ACTIVE_THEME_KIND, action.action_getActiveThemeKind],
+    [MESSAGES.MESSAGE_SAVED_DATA, action.action_getSavedData],
   ]);
 };
 

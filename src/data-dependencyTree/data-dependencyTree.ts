@@ -29,6 +29,7 @@ import {
   statusMsgGetEntryFile,
   statusMsgGetFolderPath,
   statusMsgGetPackageJsonPath,
+  msgGetSavedData,
 } from "../utils/message/messages";
 import { setData, getData } from "../utils/data/data";
 import {
@@ -95,6 +96,7 @@ export const getDependencyTreeData = (
   postSetting(setting);
   let dpDataFromFile = getData();
   if (dpDataFromFile) {
+    msgGetSavedData.post();
     return dpDataFromFile;
   }
   const { dependencyTree: dp, dependencyNodes } = getDependencyTree(
