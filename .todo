@@ -36,9 +36,9 @@
 [x] feat: make status view theme to dark
 [x] fix: fix setting view theme
 [x] fix: fix resolve path
+[x] feat: get saved data status
 
 [ ] feat: remove absolute path in DependencyTreeData
-[ ] feat: get saved data status
 [ ] feat: setting page command view
 [ ] fix: fix dependencyTree loaded error
 [ ] fix: click tree view node open webview node error

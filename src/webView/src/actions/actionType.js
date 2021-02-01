@@ -12,3 +12,5 @@ export const TYPE_CHANGE_SETTING_STATUS = "TYPE_CHANGE_SETTING_STATUS";
 
 //TODO change entryFile to setting
 export const TYPE_GET_ENTRY_FILE = "TYPE_GET_ENTRY_FILE";
+
+export const TYPE_GET_SAVED_DATA = "TYPE_GET_SAVED_DATA";

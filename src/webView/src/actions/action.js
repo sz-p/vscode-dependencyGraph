@@ -60,3 +60,7 @@ export const action_getEntryFile = createAction(
   type.TYPE_GET_ENTRY_FILE,
   returnParams
 );
+export const action_getSavedData = createAction(
+  type.TYPE_GET_SAVED_DATA,
+  returnParams
+);
