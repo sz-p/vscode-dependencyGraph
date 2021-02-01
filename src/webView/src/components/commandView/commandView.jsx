@@ -35,7 +35,7 @@ function _onMenuClick(ev) {
 const commandView = function (props) {
   const tooltipId_saveData = useId("tooltipId_saveData");
   const tooltipId_updateData = useId("tooltipId_updateData");
-  const { language } = props;
+  const { language, savedData } = props;
   let [TEXT_COMMAND, SET_TEXT_COMMAND] = useState();
   let [TEXT_SAVE_DATA, SET_TEXT_SAVE_DATA] = useState();
   let [TEXT_SAVE_DATA_TOOLTIP, SET_TEXT_SAVE_DATA_TOOLTIP] = useState();
@@ -85,43 +85,47 @@ const commandView = function (props) {
     <div className="commandView">
       <h2 className="commandView-title">{TEXT_COMMAND}</h2>
       <div>
-        <TooltipHost
-          content={TEXT_SAVE_DATA_TOOLTIP}
-          id={tooltipId_saveData}
-          calloutProps={calloutProps}
-          styles={hostStyles}
-        >
-          <PrimaryButton
-            style={{ width: "100%" }}
-            className="commandView-button commandView-button-save"
-            text={TEXT_SAVE_DATA}
-            onClick={() => {
-              console.log("save");
-            }}
-          />
-        </TooltipHost>
-        <TooltipHost
-          content={TEXT_UPDATE_DATA_TOOLTIP}
-          id={tooltipId_updateData}
-          calloutProps={calloutProps}
-          styles={hostStyles}
-        >
-          <PrimaryButton
-            style={{ width: "100%" }}
-            className="commandView-button commandView-button-update"
-            text={TEXT_UPDATE_DATA}
-            onClick={() => {
-              console.log("update");
-            }}
-          />
-        </TooltipHost>
+        {!savedData ? (
+          <TooltipHost
+            content={TEXT_SAVE_DATA_TOOLTIP}
+            id={tooltipId_saveData}
+            calloutProps={calloutProps}
+            styles={hostStyles}
+          >
+            <PrimaryButton
+              style={{ width: "100%" }}
+              className="commandView-button commandView-button-save"
+              text={TEXT_SAVE_DATA}
+              onClick={() => {
+                console.log("save");
+              }}
+            />
+          </TooltipHost>
+        ) : (
+          <TooltipHost
+            content={TEXT_UPDATE_DATA_TOOLTIP}
+            id={tooltipId_updateData}
+            calloutProps={calloutProps}
+            styles={hostStyles}
+          >
+            <PrimaryButton
+              style={{ width: "100%" }}
+              className="commandView-button commandView-button-update"
+              text={TEXT_UPDATE_DATA}
+              onClick={() => {
+                console.log("update");
+              }}
+            />
+          </TooltipHost>
+        )}
+
         <TooltipHost
           // content={TEXT_UPDATE_DATA_TOOLTIP}
           id={tooltipId_updateData}
           calloutProps={calloutProps}
           styles={hostStyles}
         >
-          <DefaultButton
+          <PrimaryButton
             className="commandView-button commandView-button-export"
             style={{ width: "100%", top: "3px" }}
             text={TEXT_EXPORT}
@@ -139,6 +143,7 @@ const commandView = function (props) {
 const mapStateToProps = (state) => {
   return {
     language: state.language,
+    savedData: state.savedData,
   };
 };
 export const CommandView = connect(mapStateToProps)(commandView);
