@@ -63,6 +63,10 @@
         "icon": "$(edit)"
       },
       {
+        "command": "framegraph.saveData",
+        "title": "save framegraph Data"
+      },
+      {
         "command": "framegraph.refreshFile",
         "title": "%framegraph.refresh%",
         "icon": "$(refresh)"

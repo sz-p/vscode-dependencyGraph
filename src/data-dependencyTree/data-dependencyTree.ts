@@ -117,8 +117,6 @@ export const getDependencyTreeData = (
     dp as DependencyTreeData,
     dependencyNodes
   );
-  const data = { nodes, tree };
-  setData(data);
   if (!dp) {
     onError(NO_DEPENDENCY);
     postMessage ? statusMsgGetDependencyProcessData.postError() : null;
