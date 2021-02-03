@@ -7,6 +7,7 @@ import {
   DefaultButton,
 } from "office-ui-fabric-react";
 // import { , , IContextualMenuProps, IIconProps } from 'office-ui-fabric-react';
+import { msgSaveData } from "../../utils/messages";
 
 import { TooltipHost } from "office-ui-fabric-react/lib/Tooltip";
 import { i18n } from "../../../../i18n/i18n";
@@ -97,7 +98,7 @@ const commandView = function (props) {
               className="commandView-button commandView-button-save"
               text={TEXT_SAVE_DATA}
               onClick={() => {
-                console.log("save");
+                msgSaveData.post();
               }}
             />
           </TooltipHost>
