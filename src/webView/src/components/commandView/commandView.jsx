@@ -103,21 +103,21 @@ const commandView = function (props) {
             />
           </TooltipHost>
         ) : (
-          <TooltipHost
-            content={TEXT_UPDATE_DATA_TOOLTIP}
-            id={tooltipId_updateData}
-            calloutProps={calloutProps}
-            styles={hostStyles}
-          >
-            <PrimaryButton
-              style={{ width: "100%" }}
-              className="commandView-button commandView-button-update"
-              text={TEXT_UPDATE_DATA}
-              onClick={() => {
-                console.log("update");
-              }}
-            />
-          </TooltipHost>
+          // <TooltipHost
+          //   content={TEXT_UPDATE_DATA_TOOLTIP}
+          //   id={tooltipId_updateData}
+          //   calloutProps={calloutProps}
+          //   styles={hostStyles}
+          // >
+          <PrimaryButton
+            style={{ width: "100%" }}
+            className="commandView-button commandView-button-update"
+            text={TEXT_UPDATE_DATA}
+            onClick={() => {
+              console.log("update");
+            }}
+          />
+          // </TooltipHost>
         )}
 
         <TooltipHost
