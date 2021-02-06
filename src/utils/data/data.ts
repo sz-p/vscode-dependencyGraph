@@ -10,7 +10,7 @@ import {
   DependencyTree,
   DependencyNodes,
 } from "../../data-dependencyTree/dependencyTreeData.d";
-
+import * as path from "path";
 const createDir = function (): void {
   const dirPath = getCurrentFolderPath();
   fs.mkdirSync(dirPath + "/.framegraph");
@@ -39,17 +39,22 @@ export const getData = function ():
   | false {
   let dp = {} as DependencyTreeData;
   const data = getDataFromDataFile();
-  if (!data) return false;
+  const dirPath = getCurrentFolderPath();
+  if (!data || !dirPath) return false;
   try {
-    dp = transportsDataToDependenciesTreeData(data.tree, data.nodes);
+    dp = transportsDataToDependenciesTreeData(
+      data.dependencyTree,
+      data.dependencyNodes,
+      dirPath
+    );
   } catch (e) {
     return false;
   }
   return {
     dependencyTreeData: dp,
     transportsData: {
-      dependencyTree: data.tree,
-      dependencyNodes: data.nodes,
+      dependencyTree: data.dependencyTree,
+      dependencyNodes: data.dependencyNodes,
     },
   };
 };

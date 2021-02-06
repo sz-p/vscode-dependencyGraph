@@ -54,7 +54,6 @@ export interface DependencyNode {
   analysed: boolean;
   functions: FunctionInformation[] | [];
   extension: string;
-  absolutePath: string;
   relativePath: string;
   children: string[];
 }

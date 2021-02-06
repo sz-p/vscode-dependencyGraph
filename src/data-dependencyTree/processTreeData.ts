@@ -20,7 +20,6 @@ export const dependenciesTreeDataToTransportsData = function (
       language: dependencyTreeNode.language,
       lines: dependencyTreeNode.lines,
       analysed: dependencyTreeNode.analysed,
-      absolutePath: dependencyTreeNode.absolutePath,
       relativePath: dependencyTreeNode.relativePath,
       fileDescription: dependencyTreeNode.fileDescription,
       functions: dependencyTreeNode.functions,
@@ -69,7 +68,8 @@ export const dependenciesTreeDataToTransportsData = function (
 };
 export const transportsDataToDependenciesTreeData = function (
   dependencyTree: DependencyTree,
-  dependencyNodes: DependencyNodes
+  dependencyNodes: DependencyNodes,
+  dirPath: string
 ): DependencyTreeData {
   let dependencyTreeData = {} as DependencyTreeData;
 
@@ -97,7 +97,7 @@ export const transportsDataToDependenciesTreeData = function (
     dependencyTreeData.analysed = nodesData.analysed;
     dependencyTreeData.functions = nodesData.functions;
     dependencyTreeData.extension = nodesData.extension;
-    dependencyTreeData.absolutePath = nodesData.absolutePath;
+    dependencyTreeData.absolutePath = dirPath + nodesData.relativePath;
     dependencyTreeData.relativePath = nodesData.relativePath;
     dependencyTreeData.children = [] as DependencyTreeData[];
 
