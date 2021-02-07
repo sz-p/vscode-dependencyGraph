@@ -119,6 +119,9 @@ export const openWebView = function (
   }
   postMessageCatchError({
     key: MESSAGE_DEPENDENCY_TREE_DATA,
-    value: global.dependencyTreeData?.transportsData,
+    value: {
+      data: global.dependencyTreeData?.transportsData,
+      folderPath,
+    },
   });
 };
