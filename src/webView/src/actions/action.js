@@ -6,7 +6,6 @@ const returnParams = function (Params) {
 };
 const getDependenciesTreeData = function (Params) {
   try {
-    console.log(Params);
     const data = transportsDataToDependenciesTreeData(
       Params.data.value.data.dependencyTree,
       Params.data.value.data.dependencyNodes,
