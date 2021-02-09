@@ -100,6 +100,15 @@ export const transportsDataToDependenciesTreeData = function (
       dependencyTree: DependencyTree;
       dependencyTreeData: DependencyTreeData;
     };
+    //TODO change circularStructure name
+    if (dependencyTree.name === "circularStructure") {
+      dependencyTreeData.name = dependencyTree.name;
+      dependencyTreeData.fileID = dependencyTree.fileID;
+      dependencyTreeData.nodeID = dependencyTree.nodeID;
+      dependencyTreeData.ancestors = dependencyTree.ancestors;
+      dependencyTreeData.type = dependencyTree.name;
+      continue;
+    }
     const nodesData = dependencyNodes[dependencyTree.fileID];
 
     dependencyTreeData.name = dependencyTree.name;
