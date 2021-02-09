@@ -149,8 +149,7 @@ export class D3Tree {
     const stack = [this.data];
     while (stack.length) {
       const node = stack.pop();
-      const id = node.ancestors.concat(node.absolutePath).join();
-      node.id = id;
+      node.id = node.nodeID;
       if (node.children && node.children.length) {
         stack.push(...node.children);
       }
@@ -384,7 +383,7 @@ export class D3Tree {
     let temp = this.root;
     let updateSource = null;
     let updateTarget = null;
-    data.ancestors.push(data.absolutePath);
+    data.ancestors.push(data.fileID);
     // find child by node's ancestors
     for (let i = 0; i < data.ancestors.length; i++) {
       // children is not hash table so here is a loop
@@ -398,7 +397,7 @@ export class D3Tree {
         temp._children = tempChildren;
       }
       for (let j = 0; j < temp.children.length; j++) {
-        if (temp.children[j].data.absolutePath === data.ancestors[i]) {
+        if (temp.children[j].data.fileID === data.ancestors[i]) {
           temp = temp.children[j];
           updateTarget = temp;
           if (temp && !temp.children) {

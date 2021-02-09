@@ -115,7 +115,8 @@ export const getDependencyTreeData = (
     dependencyTree: tree,
   } = dependenciesTreeDataToTransportsData(
     dp as DependencyTreeData,
-    dependencyNodes
+    dependencyNodes,
+    folderPath
   );
   if (!dp) {
     onError(NO_DEPENDENCY);
