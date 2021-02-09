@@ -61,9 +61,12 @@ export const getDependencyTreeData = (
   postMessage ? statusMsgGetFolderPath.postSuccess() : null;
 
   const setting = getAllSettingFromSettingFile();
-  let mainFilePath = JSON.parse(
-    JSON.stringify(setting[SETTING_KEY_ENTRY_FILE_PATH])
-  );
+  let mainFilePath = undefined;
+  if (setting && setting[SETTING_KEY_ENTRY_FILE_PATH]) {
+    mainFilePath = JSON.parse(
+      JSON.stringify(setting[SETTING_KEY_ENTRY_FILE_PATH])
+    );
+  }
   if (!mainFilePath) {
     // find package.json and main file
     const packageJsonPath = getPackageJsonPath(folderPath);
@@ -80,12 +83,20 @@ export const getDependencyTreeData = (
     postMessage ? statusMsgGetEntryFile.postError() : null;
     return undefined;
   }
+  setSetting(SETTING_KEY_ENTRY_FILE_PATH, mainFilePath);
   postMessage ? statusMsgGetEntryFile.postSuccess() : null;
-
-  let resolveExtensions = JSON.parse(
-    JSON.stringify(setting[SETTING_KEY_RESOLVE_EXTENSIONS])
-  );
-  let alias = JSON.parse(JSON.stringify(setting[SETTING_KEY_ALIAS]));
+  let resolveExtensions = undefined;
+  let alias = undefined;
+  if (setting && setting[SETTING_KEY_RESOLVE_EXTENSIONS]) {
+    resolveExtensions = JSON.parse(
+      JSON.stringify(setting[SETTING_KEY_RESOLVE_EXTENSIONS])
+    );
+  }
+  if (setting && setting[SETTING_KEY_ALIAS]) {
+    alias = JSON.parse(JSON.stringify(setting[SETTING_KEY_ALIAS]));
+  } else {
+    setSetting(SETTING_KEY_ALIAS, {});
+  }
   for (let key in alias) {
     alias[key] = path.join(folderPath, alias[key]);
   }
