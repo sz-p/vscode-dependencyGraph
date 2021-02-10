@@ -38,6 +38,7 @@
 [x] fix: fix resolve path
 [x] feat: get saved data status
 
+[ ] fix: click circularStructure node error
 [ ] feat: remove absolute path in DependencyTreeData
 [ ] feat: setting page command view
 [ ] fix: fix dependencyTree loaded error
