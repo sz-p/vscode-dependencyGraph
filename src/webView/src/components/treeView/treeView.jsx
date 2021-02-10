@@ -37,6 +37,7 @@ const treeView = function (props) {
   }, [dependencyTreeData, assetsBaseURL]);
   useEffect(() => {
     if (focusOn) focusOnNode(focusOn.fileData);
+    console.log(focusOn);
   }, [focusOn]);
   const viewStatus = gotDependencyTreeData ? "treeView" : "treeView hidden";
   return <div className={viewStatus} ref={chartArea}></div>;
