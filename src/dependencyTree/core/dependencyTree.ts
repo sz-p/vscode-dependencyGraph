@@ -173,7 +173,10 @@ export class DependencyTree {
         this.parseRule,
         this.parsers
       );
-      this.dependencyHash[absolutePath] = cloneDeep(dependencyNode);
+      // if not set dependencyNode in dependencyHash before
+      // will not found analysed node
+      this.dependencyHash[absolutePath] = dependencyNode;
+
       for (let i = 0; i < children.length; i++) {
         const childrenPath = children[i];
         if (!pathExists(childrenPath)) {
@@ -217,6 +220,8 @@ export class DependencyTree {
         }
         dependencyNode.children.push(dependencyChildren);
       }
+      // cloneDeep
+      // this.dependencyHash[absolutePath] = cloneDeep(dependencyNode);
     }
     return {
       dependencyTree: this.dependencyTreeData,
