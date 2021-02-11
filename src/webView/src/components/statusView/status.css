@@ -17,3 +17,9 @@
   top: 29px;
   float: right;
 }
+
+.ms-MessageBar--success,
+.ms-MessageBar--error {
+  background: var(--vscode-debugToolBar-background);
+  color: var(--font-color);
+}

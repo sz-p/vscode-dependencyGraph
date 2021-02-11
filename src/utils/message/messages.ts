@@ -28,6 +28,7 @@ export const msgGetActiveThemeKind = new MessagePoster(
   MSG.MESSAGE_GET_ACTIVE_THEME_KIND,
   getActiveTheme()
 );
+export const msgGetSavedData = new MessagePoster(MSG.MESSAGE_IS_SAVED_DATA, true);
 export const postSetting = function (setting: object) {
   const poster = new MessagePoster(MSG.MESSAGE_GET_ENTRY_FILE, setting);
   poster.post();

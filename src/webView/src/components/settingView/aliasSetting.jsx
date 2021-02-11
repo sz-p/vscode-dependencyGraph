@@ -38,7 +38,6 @@ const aliasSetting = function (props) {
           path: setting[SETTING_KEY_ALIAS][key],
         });
       }
-      console.log(_aliasItemState);
       setAliasItemState(_aliasItemState);
     }
   }, [setting]);

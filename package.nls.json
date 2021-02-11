@@ -2,7 +2,7 @@
   "framegraph.title": "FrameGraph",
   "framegraph.entryFilePath": "The absolute path of the entry file to be analyzed",
   "framegraph.folderPath": "The files folder path",
-  "framegraph.openPage": "Open view page",
+  "framegraph.reOpenView": "Reopen webview",
   "framegraph.refresh": "Refresh dependencies data",
   "framegraph.framegraphTreeView": "FrameGraph",
   "framegraph.DependencyTree": "DependencyTree",

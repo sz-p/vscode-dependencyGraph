@@ -1,5 +1,6 @@
 export const initialState = {
   showSetting: false,
+  savedData: false,
   activeThemeKind: undefined,
   selectedNode: undefined,
   language: undefined,

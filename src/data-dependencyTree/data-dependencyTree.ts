@@ -30,6 +30,7 @@ import {
   statusMsgGetEntryFile,
   statusMsgGetFolderPath,
   statusMsgGetPackageJsonPath,
+  msgGetSavedData,
 } from "../utils/message/messages";
 import { setData, getData } from "../utils/data/data";
 import {
@@ -39,9 +40,18 @@ import {
 } from "../utils/setting/settingKey";
 
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
+import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
 export const getDependencyTreeData = (
   postMessage?: boolean
-): DependencyTreeData | undefined => {
+):
+  | {
+      dependencyTreeData: DependencyTreeData;
+      transportsData: {
+        dependencyTree: DependencyTree;
+        dependencyNodes: DependencyNodes;
+      };
+    }
+  | undefined => {
   // find folder Path catch path sendStatus
   const folderPath = getCurrentFolderPath();
   if (!folderPath || !pathExists(folderPath)) {
@@ -52,7 +62,12 @@ export const getDependencyTreeData = (
   postMessage ? statusMsgGetFolderPath.postSuccess() : null;
 
   const setting = getAllSettingFromSettingFile();
-  let mainFilePath = setting[SETTING_KEY_ENTRY_FILE_PATH];
+  let mainFilePath = undefined;
+  if (setting && setting[SETTING_KEY_ENTRY_FILE_PATH]) {
+    mainFilePath = JSON.parse(
+      JSON.stringify(setting[SETTING_KEY_ENTRY_FILE_PATH])
+    );
+  }
   if (!mainFilePath) {
     // find package.json and main file
     const packageJsonPath = getPackageJsonPath(folderPath);
@@ -69,10 +84,20 @@ export const getDependencyTreeData = (
     postMessage ? statusMsgGetEntryFile.postError() : null;
     return undefined;
   }
+  setSetting(SETTING_KEY_ENTRY_FILE_PATH, mainFilePath);
   postMessage ? statusMsgGetEntryFile.postSuccess() : null;
-
-  let resolveExtensions = setting[SETTING_KEY_RESOLVE_EXTENSIONS];
-  let alias = setting[SETTING_KEY_ALIAS];
+  let resolveExtensions = undefined;
+  let alias = undefined;
+  if (setting && setting[SETTING_KEY_RESOLVE_EXTENSIONS]) {
+    resolveExtensions = JSON.parse(
+      JSON.stringify(setting[SETTING_KEY_RESOLVE_EXTENSIONS])
+    );
+  }
+  if (setting && setting[SETTING_KEY_ALIAS]) {
+    alias = JSON.parse(JSON.stringify(setting[SETTING_KEY_ALIAS]));
+  } else {
+    setSetting(SETTING_KEY_ALIAS, {});
+  }
   for (let key in alias) {
     alias[key] = path.join(folderPath, alias[key]);
   }
@@ -83,6 +108,7 @@ export const getDependencyTreeData = (
   postSetting(setting);
   let dpDataFromFile = getData();
   if (dpDataFromFile) {
+    msgGetSavedData.post();
     return dpDataFromFile;
   }
   const { dependencyTree: dp, dependencyNodes } = getDependencyTree(
@@ -101,15 +127,19 @@ export const getDependencyTreeData = (
     dependencyTree: tree,
   } = dependenciesTreeDataToTransportsData(
     dp as DependencyTreeData,
-    dependencyNodes
+    dependencyNodes,
+    folderPath
   );
-  const data = { nodes, tree };
-  setData(data);
   if (!dp) {
     onError(NO_DEPENDENCY);
     postMessage ? statusMsgGetDependencyProcessData.postError() : null;
   }
   postMessage ? statusMsgGetDependencyProcessData.postSuccess() : null;
-
-  return dp as DependencyTreeData;
+  return {
+    dependencyTreeData: dp as DependencyTreeData,
+    transportsData: {
+      dependencyTree: tree,
+      dependencyNodes: nodes,
+    },
+  };
 };

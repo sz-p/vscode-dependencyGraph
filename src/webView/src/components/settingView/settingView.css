@@ -45,7 +45,7 @@
   margin-left: 15px;
 }
 .setting-resolveList-title {
-  background: var(--vscode-activityBar-background);
+  background: var(--vscode-badge-background);
 }
 .setting-resolveList-title-item {
   display: inline-block;
@@ -83,7 +83,7 @@
   font-size: 14px;
   font-weight: 600;
   text-align: center;
-  background: var(--vscode-dropdown-background);
+  background: var(--vscode-debugToolBar-background);
   line-height: 32px;
 }
 .setting-resolveList-detail-item {

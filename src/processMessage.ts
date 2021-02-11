@@ -19,11 +19,15 @@ const actionSetSetting = async function (msg: Msg) {
 const actionOpenFile = function (msg: Msg) {
   vscode.commands.executeCommand("framegraph.openFileInView", msg.value);
 };
+const actionSaveData = function (msg: Msg) {
+  vscode.commands.executeCommand("framegraph.saveData");
+};
 const messageCase = () => {
   return new Map([
     [MESSAGES.MESSAGE_OPEN_FILE_FROM_WEBVIEW, actionOpenFile],
     [MESSAGES.MESSAGE_OPEN_FOLDER, actionOpenFolder],
     [MESSAGES.MESSAGE_SET_SETTING, actionSetSetting],
+    [MESSAGES.MESSAGE_SAVE_DATA, actionSaveData],
   ]);
 };
 

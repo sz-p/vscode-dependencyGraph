@@ -2,6 +2,7 @@ import {
   MESSAGE_OPEN_FOLDER,
   MESSAGE_SET_SETTING,
   MESSAGE_OPEN_FILE_FROM_WEBVIEW,
+  MESSAGE_SAVE_DATA,
 } from "../../../utils/message/messagesKeys";
 class Msg {
   constructor(key, value, description) {
@@ -16,6 +17,7 @@ class Msg {
   }
 }
 export const msgOpenFolder = new Msg(MESSAGE_OPEN_FOLDER, true);
+export const msgSaveData = new Msg(MESSAGE_SAVE_DATA, true);
 export const msgSetSetting = (key, value) =>
   new Msg(MESSAGE_SET_SETTING, { key, value });
 export const msgOpenFileInView = (value) =>
