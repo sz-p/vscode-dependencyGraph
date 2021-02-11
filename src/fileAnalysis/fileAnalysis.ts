@@ -1,5 +1,5 @@
-import { DependencyTreeData } from "../dependencyTree/index.d";
-import { DependencyTreeData as DTD } from "../data-dependencyTree/dependencyTreeData.d";
+import { DependencyTreeData, DependencyHash } from "../dependencyTree/index.d";
+import { DependencyTreeData as DTD, DependencyNodes } from "../data-dependencyTree/dependencyTreeData.d";
 import {
   onGotJsAST,
   onGotJsCircularStructureNode,
@@ -48,14 +48,15 @@ export const onGotFileString = function (
 };
 
 export const onGotCircularStructureNode = function (
-  dependencyNode: DependencyTreeData
+  dependencyNode: DependencyTreeData,
+  dependencyNodeHash: DependencyHash
 ) {
   switch (dependencyNode.extension) {
     case ".js":
     case ".ts":
     case ".jsx":
     case ".vue":
-      onGotJsCircularStructureNode(dependencyNode as DTD);
+      onGotJsCircularStructureNode(dependencyNode as DTD, dependencyNodeHash);
   }
 };
 export const onGotAST = function (

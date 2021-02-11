@@ -5,7 +5,7 @@ import {
 import { getFunctionInformation } from "./getFunctionInformation";
 import { i18n } from "../../i18n/i18n";
 import { getFileIconNameByFileName } from "../../utils/fileIcons/getFileIcon";
-
+import { DependencyHash } from "../../dependencyTree/index.d"
 import { visit } from "recast";
 import {
   CIRCULAR_STRUCTURE_NODE_INTRODUCTION,
@@ -31,7 +31,8 @@ export const onGotJsAST = function (
 };
 
 export const onGotJsCircularStructureNode = function (
-  dependencyNode: DependencyTreeData
+  dependencyNode: DependencyTreeData,
+  dependencyNodeHash: DependencyHash
 ) {
   const circularStructureNode = dependencyNode.children[0];
   circularStructureNode.type = getFileIconNameByFileName(circularStructureNode.name);
@@ -40,4 +41,5 @@ export const onGotJsCircularStructureNode = function (
     introduction: i18n.getText(CIRCULAR_STRUCTURE_NODE_INTRODUCTION),
     description: i18n.getText(CIRCULAR_STRUCTURE_NODE_DESCRIPTION),
   };
+  dependencyNodeHash[circularStructureNode.name] = circularStructureNode;
 };

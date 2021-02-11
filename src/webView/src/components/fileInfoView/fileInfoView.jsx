@@ -49,9 +49,8 @@ const fileInfoView = function (props) {
         <div className="fileInfoView-titleBar-titleLabel">{name}</div>
         <div
           style={{
-            background: `url(${assetsBaseURL}/webview/edit-${
-              activeThemeKind ? activeThemeKind.toLocaleLowerCase() : "dark"
-            }.svg) center center / contain no-repeat`,
+            background: `url(${assetsBaseURL}/webview/edit-${activeThemeKind ? activeThemeKind.toLocaleLowerCase() : "dark"
+              }.svg) center center / contain no-repeat`,
           }}
           onClick={() => {
             msgOpenFileInView(selectedNode.absolutePath).post();
