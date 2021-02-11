@@ -90,6 +90,7 @@ export class FileIcons {
 export const fileIcons: FileIcons = {
   defaultIcon: { name: "file" },
   icons: [
+    { name: "circularStructure", fileNames: ["circularStructure"] },
     { name: "html", fileExtensions: ["htm", "xhtml", "html_vm", "asp"] },
     {
       name: "pug",
