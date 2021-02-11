@@ -201,6 +201,11 @@ export class DependencyTree {
             dependencyChildren = cloneDeep(this.dependencyHash[childrenPath]);
             this.triggerGetOldDependencyTreeNode(dependencyChildren);
           }
+          const dependencyChildrenAncestors = [].concat(
+            ancestors as []
+          ) as string[];
+          dependencyChildrenAncestors.push(absolutePath);
+          dependencyChildren.ancestors = dependencyChildrenAncestors;
         }
         // find new node
         else {
