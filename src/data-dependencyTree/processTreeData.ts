@@ -30,6 +30,8 @@ export const dependenciesTreeDataToTransportsData = function (
 ): { dependencyTree: DependencyTree; dependencyNodes: DependencyNodes } {
   let dependencyNodes = {} as DependencyNodes;
   let dependencyTree = {} as DependencyTree;
+  // change DependencyHash to DependencyNodes (change the hash table key from absolutePath to relativePath md5)
+  // set fileID
   for (let key in dependencyTreeNodes) {
     const dependencyTreeNode = dependencyTreeNodes[key] as DependencyTreeData;
     const md5Hash = getFileID(dependencyTreeNode);
@@ -58,6 +60,8 @@ export const dependenciesTreeDataToTransportsData = function (
   let dependencyTreeDataHashTable = [
     { node: dependencyTreeData, tree: dependencyTree },
   ];
+  // create DependencyTree by DependencyNodes and DependencyTreeData
+  // set nodeID
   while (dependencyTreeDataHashTable.length) {
     let { node, tree } = dependencyTreeDataHashTable.pop() as {
       node: DependencyTreeData;
@@ -100,15 +104,6 @@ export const transportsDataToDependenciesTreeData = function (
       dependencyTree: DependencyTree;
       dependencyTreeData: DependencyTreeData;
     };
-    //TODO change circularStructure name
-    if (dependencyTree.name === "circularStructure") {
-      dependencyTreeData.name = dependencyTree.name;
-      dependencyTreeData.fileID = dependencyTree.fileID;
-      dependencyTreeData.nodeID = dependencyTree.nodeID;
-      dependencyTreeData.ancestors = dependencyTree.ancestors;
-      dependencyTreeData.type = dependencyTree.name;
-      continue;
-    }
     const nodesData = dependencyNodes[dependencyTree.fileID];
 
     dependencyTreeData.name = dependencyTree.name;

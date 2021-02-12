@@ -79,9 +79,9 @@ export class DependencyTree {
       this.options.onGetOldDependencyTreeNode(dependencyNode);
     }
   }
-  private triggerGetCircularStructureNode(dependencyNode: DependencyTreeData) {
+  private triggerGetCircularStructureNode(dependencyNode: DependencyTreeData, dependencyHash: DependencyHash) {
     if (typeof this.options.onGotCircularStructureNode === "function") {
-      this.options.onGotCircularStructureNode(dependencyNode);
+      this.options.onGotCircularStructureNode(dependencyNode, dependencyHash);
     }
   }
   /**
@@ -196,7 +196,7 @@ export class DependencyTree {
               childrenPath,
               this.dependencyHash
             );
-            this.triggerGetCircularStructureNode(dependencyChildren);
+            this.triggerGetCircularStructureNode(dependencyChildren, this.dependencyHash);
           } else {
             dependencyChildren = cloneDeep(this.dependencyHash[childrenPath]);
             this.triggerGetOldDependencyTreeNode(dependencyChildren);

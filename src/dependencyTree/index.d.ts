@@ -9,7 +9,8 @@ export interface DependencyTreeOptions {
   onGetNewDependencyTreeNode?: (dependencyNode: DependencyTreeData) => void;
   onGetOldDependencyTreeNode?: (dependencyNode: DependencyTreeData) => void;
   onGotCircularStructureNode?: (
-    circularStructureNode: DependencyTreeData
+    circularStructureNode: DependencyTreeData,
+    dependencyHash: DependencyHash
   ) => void;
   onGotAST?: (
     dependencyNode: DependencyTreeData,
