@@ -5,7 +5,7 @@ const actionsCase = () => {
   const change_getDataStatus = (state, action) => {
     const data = action.payload.data;
     let newState = undefined;
-    if (data.value === "error") {
+    if (data.value === "error" || data.value.status === "error") {
       newState = Object.assign({}, state, {
         getDataStatus: data.value,
         gotDependencyTreeData: false,
@@ -18,16 +18,16 @@ const actionsCase = () => {
     return newState;
   };
   const setDependencyTreeData = (state, action) => {
-    const data = action.payload.data;
+    const data = action.payload;
     let newState = undefined;
-    if (data.value) {
+    if (data) {
       newState = Object.assign({}, state, {
-        dependencyTreeData: data.value,
+        dependencyTreeData: data,
         gotDependencyTreeData: true,
       });
     } else {
       newState = Object.assign({}, state, {
-        dependencyTreeData: data.value,
+        dependencyTreeData: undefined,
         gotDependencyTreeData: false,
       });
     }
@@ -97,6 +97,13 @@ const actionsCase = () => {
     });
     return newState;
   };
+  const getSavedData = (state, action) => {
+    const data = action.payload.data;
+    const newState = Object.assign({}, state, {
+      savedData: true,
+    });
+    return newState;
+  };
   return new Map([
     [type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus],
     [type.TYPE_SET_DEPENDENCIES_TREE_DATA, setDependencyTreeData],
@@ -109,6 +116,7 @@ const actionsCase = () => {
     [type.TYPE_SELECT_NODE, selectNode],
     [type.TYPE_CHANGE_SETTING_STATUS, changeSettingStatus],
     [type.TYPE_GET_ENTRY_FILE, getEntryFile],
+    [type.TYPE_GET_SAVED_DATA, getSavedData],
   ]);
 };
 export const reducer = function (state = initialState, action) {

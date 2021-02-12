@@ -9,9 +9,9 @@ import {
   MESSAGE_FOCUS_ON_NODE,
   MESSAGE_UPDATE_WEBVIEW,
 } from "./utils/message/messagesKeys";
+import { msgGetSavedData } from "./utils/message/messages";
 import * as stringRandom from "string-random";
-
-let message = 0;
+import { setData } from "./utils/data/data";
 
 export const command_createView = vscode.commands.registerCommand(
   "framegraph.createView",
@@ -36,7 +36,9 @@ export const command_focusOnNode = vscode.commands.registerCommand(
 export const command_reOpenView = vscode.commands.registerCommand(
   "framegraph.reOpenView",
   (fileName, fileData) => {
-    reOpenWebView(global.dependencyTreeData);
+    if (global.dependencyTreeData) {
+      reOpenWebView(global.dependencyTreeData.dependencyTreeData);
+    }
   }
 );
 export const command_refreshFile = vscode.commands.registerCommand(
@@ -51,13 +53,16 @@ export const command_refreshFile = vscode.commands.registerCommand(
         value: stringRandom(),
       });
     }
-    global.dependencyTreeData = getDependencyTreeData(postMessage);
-    renderTreeView(global.dependencyTreeData);
-    if (global.webViewPanel) {
-      postMessageCatchError({
-        key: MESSAGE_DEPENDENCY_TREE_DATA,
-        value: global.dependencyTreeData,
-      });
+    const data = getDependencyTreeData(postMessage);
+    if (data) {
+      global.dependencyTreeData = data;
+      renderTreeView(global.dependencyTreeData.dependencyTreeData);
+      if (global.webViewPanel) {
+        postMessageCatchError({
+          key: MESSAGE_DEPENDENCY_TREE_DATA,
+          value: data.transportsData,
+        });
+      }
     }
   }
 );
@@ -77,4 +82,22 @@ export const command_openFile = vscode.commands.registerCommand(
     });
   }
 );
-export const allCommands = [command_createView, command_reOpenView];
+
+export const command_saveData = vscode.commands.registerCommand(
+  "framegraph.saveData",
+  () => {
+    if (global?.dependencyTreeData?.transportsData) {
+      setData(global.dependencyTreeData.transportsData);
+      if (global.webViewPanel) {
+        msgGetSavedData.post();
+      }
+    } else {
+      //TODO no data error
+    }
+  }
+);
+export const allCommands = [
+  command_createView,
+  command_reOpenView,
+  command_saveData,
+];

@@ -20,10 +20,10 @@ export function activate(context: vscode.ExtensionContext) {
   global.dependencyTreeData = dependencyTreeData;
 
   // openWebView
-  openWebView(dependencyTreeData);
+  openWebView(dependencyTreeData?.dependencyTreeData);
 
   // render tree view
-  renderTreeView(dependencyTreeData);
+  renderTreeView(dependencyTreeData?.dependencyTreeData);
 
   // init commands
   allCommands.forEach((command) => {

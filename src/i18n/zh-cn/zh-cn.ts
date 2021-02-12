@@ -12,6 +12,7 @@ zhcn[errorKey.NO_DEPENDENCY] = "无文件依赖";
 zhcn[errorKey.NO_DEPENDENCY_TREE_DATA] = "无文件依赖数据";
 zhcn[errorKey.GET_AST_FAILED] = "获取AST语法树失败";
 
+zhcn[types.WAITING_DATA] = "正在等待数据...";
 zhcn[types.CONFIRM] = "确认";
 zhcn[types.ADD] = "添加";
 zhcn[types.DELETE] = "删除";
@@ -20,8 +21,18 @@ zhcn[types.SUCCESS] = "成功";
 zhcn[types.FAILED] = "失败";
 
 zhcn[types.SETTING] = "设置";
+zhcn[types.COMMAND] = "命令";
 zhcn[types.SAVE] = "保存";
+
+zhcn[types.SAVE_DATA] = "保存数据";
+zhcn[types.SAVE_DATA_TOOLTIP] =
+  "保存数据后下次将会默认读取已有数据，要更新数据请点击更新数据按钮。";
 zhcn[types.EXPORT] = "导出";
+zhcn[types.UPDATE_DATA] = "更新数据";
+zhcn[types.UPDATE_DATA_TOOLTIP] = "未保存数据时、更新数据会保存数据。";
+zhcn[types.EXPORT_SVG] = "导出SVG";
+zhcn[types.EXPORT_PNG] = "导出PNG";
+zhcn[types.EXPORT_TOOLTIP] = "导出";
 
 zhcn[types.CIRCULAR_STRUCTURE_NODE_INTRODUCTION] = "环形结构";
 zhcn[types.CIRCULAR_STRUCTURE_NODE_DESCRIPTION] =

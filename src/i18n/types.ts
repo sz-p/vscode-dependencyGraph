@@ -6,8 +6,17 @@ export const SUCCESS = "SUCCESS";
 export const FAILED = "FAILED";
 
 export const SETTING = "SETTING";
+export const COMMAND = "COMMAND";
 export const SAVE = "SAVE";
 export const EXPORT = "EXPORT";
+
+export const SAVE_DATA = "SAVE_DATA";
+export const SAVE_DATA_TOOLTIP = "SAVE_DATA_TOOLTIP";
+export const UPDATE_DATA = "UPDATE_DATA";
+export const UPDATE_DATA_TOOLTIP = "UPDATE_DATA_TOOLTIP";
+export const EXPORT_SVG = "EXPORT_SVG";
+export const EXPORT_PNG = "EXPORT_PNG";
+export const EXPORT_TOOLTIP = "EXPORT_TOOLTIP";
 
 export const FOLDER = "FOLDER";
 export const OPEN_FOLDER = "OPEN_FOLDER";
@@ -19,6 +28,7 @@ export const RESOLVE_ALIAS = "RESOLVE_ALIAS";
 export const NO_RESOLVE_ALIAS = "NO_RESOLVE__ALIAS";
 export const RESOLVE_PATH = "RESOLVE_PATH";
 
+export const WAITING_DATA = "WAITING_DATA";
 export const FILE_LINES = "FILE_LINES";
 export const FILE_TYPE = "FILE_TYPE";
 export const INTRODUCTION = "INTRODUCTION";

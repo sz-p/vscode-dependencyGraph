@@ -1,0 +1,12 @@
+.waitingView {
+  margin-top: 20px;
+}
+.ms-Spinner-label {
+  color: var(--vscode-editor-foreground);
+}
+.ms-Spinner-circle {
+  border-top-color: var(--vscode-editor-foreground);
+  border-right-color: var(--vscode-debugToolBar-background);
+  border-bottom-color: var(--vscode-debugToolBar-background);
+  border-left-color: var(--vscode-debugToolBar-background);
+}
