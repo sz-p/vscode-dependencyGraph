@@ -1,0 +1,2847 @@
+{
+  "%DIR-PATH%index.js": {
+    "absolutePath": "%DIR-PATH%index.js",
+    "ancestors": [],
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%index.css",
+        "ancestors": [
+          "%DIR-PATH%index.js"
+        ],
+        "extension": ".css",
+        "name": "index.css",
+        "relativePath": "index.css",
+        "children": [],
+        "fileDescription": {},
+        "type": "css",
+        "language": "css"
+      },
+      {
+        "absolutePath": "%DIR-PATH%App.js",
+        "ancestors": [
+          "%DIR-PATH%index.js"
+        ],
+        "extension": ".js",
+        "name": "App.js",
+        "relativePath": "App.js",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%App.css",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js"
+            ],
+            "extension": ".css",
+            "name": "App.css",
+            "relativePath": "App.css",
+            "children": [],
+            "fileDescription": {},
+            "type": "css",
+            "language": "css"
+          },
+          {
+            "absolutePath": "%DIR-PATH%pages\\index\\index.jsx",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js"
+            ],
+            "extension": ".jsx",
+            "name": "index.jsx",
+            "relativePath": "pages\\index\\index.jsx",
+            "children": [
+              {
+                "absolutePath": "%DIR-PATH%pages\\index\\index.scss",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%pages\\index\\index.jsx"
+                ],
+                "extension": ".scss",
+                "name": "index.scss",
+                "relativePath": "pages\\index\\index.scss",
+                "children": [],
+                "fileDescription": {},
+                "type": "sass",
+                "language": "css"
+              },
+              {
+                "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.jsx",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%pages\\index\\index.jsx"
+                ],
+                "extension": ".jsx",
+                "name": "force-2d.jsx",
+                "relativePath": "components\\force-2d\\force-2d.jsx",
+                "children": [
+                  {
+                    "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+                    "ancestors": [
+                      "%DIR-PATH%index.js",
+                      "%DIR-PATH%App.js",
+                      "%DIR-PATH%pages\\index\\index.jsx",
+                      "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+                    ],
+                    "extension": ".scss",
+                    "name": "force-2d.scss",
+                    "relativePath": "components\\force-2d\\force-2d.scss",
+                    "children": [],
+                    "fileDescription": {},
+                    "type": "sass",
+                    "language": "css"
+                  },
+                  {
+                    "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+                    "ancestors": [
+                      "%DIR-PATH%index.js",
+                      "%DIR-PATH%App.js",
+                      "%DIR-PATH%pages\\index\\index.jsx",
+                      "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+                    ],
+                    "extension": ".js",
+                    "name": "colorlist.js",
+                    "relativePath": "components\\datas\\colorlist.js",
+                    "children": [],
+                    "fileDescription": {},
+                    "type": "javascript",
+                    "language": "javascript",
+                    "analysed": true,
+                    "lines": 117,
+                    "functions": []
+                  }
+                ],
+                "fileDescription": {},
+                "type": "react",
+                "language": "javascript",
+                "analysed": true,
+                "lines": 134,
+                "functions": [
+                  {
+                    "arrowFunction": false,
+                    "params": [
+                      {
+                        "name": "props"
+                      }
+                    ],
+                    "name": "Force2D",
+                    "kind": "function",
+                    "loc": {
+                      "start": {
+                        "line": 11,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 122,
+                        "column": 1
+                      }
+                    },
+                    "export": false,
+                    "code": "function Force2D(props) {}"
+                  },
+                  {
+                    "arrowFunction": true,
+                    "params": [
+                      {
+                        "name": "state"
+                      }
+                    ],
+                    "name": "mapStateToProps",
+                    "kind": "const",
+                    "loc": {
+                      "start": {
+                        "line": 123,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 131,
+                        "column": 2
+                      }
+                    },
+                    "code": "const mapStateToProps = state => {};",
+                    "export": false
+                  }
+                ]
+              },
+              {
+                "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.jsx",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%pages\\index\\index.jsx"
+                ],
+                "extension": ".jsx",
+                "name": "force-3d.jsx",
+                "relativePath": "components\\force-3d\\force-3d.jsx",
+                "children": [
+                  {
+                    "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+                    "ancestors": [
+                      "%DIR-PATH%index.js",
+                      "%DIR-PATH%App.js",
+                      "%DIR-PATH%pages\\index\\index.jsx",
+                      "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+                    ],
+                    "extension": ".scss",
+                    "name": "force-3d.scss",
+                    "relativePath": "components\\force-3d\\force-3d.scss",
+                    "children": [],
+                    "fileDescription": {},
+                    "type": "sass",
+                    "language": "css"
+                  },
+                  {
+                    "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+                    "ancestors": [
+                      "%DIR-PATH%index.js",
+                      "%DIR-PATH%App.js",
+                      "%DIR-PATH%pages\\index\\index.jsx",
+                      "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+                    ],
+                    "extension": ".ts",
+                    "name": "showdemohandle.ts",
+                    "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+                    "children": [],
+                    "fileDescription": {},
+                    "type": "typescript",
+                    "language": "file"
+                  }
+                ],
+                "fileDescription": {},
+                "type": "react",
+                "language": "javascript",
+                "analysed": true,
+                "lines": 35,
+                "functions": [
+                  {
+                    "arrowFunction": false,
+                    "params": [
+                      {
+                        "name": "props"
+                      }
+                    ],
+                    "name": "Force3D",
+                    "kind": "function",
+                    "loc": {
+                      "start": {
+                        "line": 7,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 23,
+                        "column": 1
+                      }
+                    },
+                    "export": false,
+                    "code": "function Force3D(props) {}"
+                  },
+                  {
+                    "arrowFunction": true,
+                    "params": [
+                      {
+                        "name": "state"
+                      }
+                    ],
+                    "name": "mapStateToProps",
+                    "kind": "const",
+                    "loc": {
+                      "start": {
+                        "line": 24,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 2
+                      }
+                    },
+                    "code": "const mapStateToProps = state => {};",
+                    "export": false
+                  }
+                ]
+              }
+            ],
+            "fileDescription": {},
+            "type": "react",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 29,
+            "functions": [
+              {
+                "arrowFunction": false,
+                "params": [
+                  {
+                    "name": "props"
+                  }
+                ],
+                "name": "IndexPage",
+                "kind": "function",
+                "loc": {
+                  "start": {
+                    "line": 9,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 17,
+                    "column": 1
+                  }
+                },
+                "export": false,
+                "code": "function IndexPage(props) {}"
+              },
+              {
+                "arrowFunction": true,
+                "params": [
+                  {
+                    "name": "state"
+                  }
+                ],
+                "name": "mapStateToProps",
+                "kind": "const",
+                "loc": {
+                  "start": {
+                    "line": 18,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 26,
+                    "column": 2
+                  }
+                },
+                "code": "const mapStateToProps = state => {};",
+                "export": false
+              }
+            ]
+          },
+          {
+            "absolutePath": "%DIR-PATH%components\\controller\\controller.jsx",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js"
+            ],
+            "extension": ".jsx",
+            "name": "controller.jsx",
+            "relativePath": "components\\controller\\controller.jsx",
+            "children": [
+              {
+                "absolutePath": "%DIR-PATH%App.js",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%components\\controller\\controller.jsx"
+                ],
+                "extension": ".js",
+                "name": "App.js",
+                "relativePath": "App.js",
+                "children": [
+                  {
+                    "name": "circularStructure",
+                    "fileID": "circularStructure",
+                    "circularStructure": true,
+                    "absolutePath": "circularStructure",
+                    "relativePath": "circularStructure",
+                    "extension": "",
+                    "ancestors": [
+                      "%DIR-PATH%index.js",
+                      "%DIR-PATH%App.js"
+                    ],
+                    "children": [],
+                    "type": "circularStructure",
+                    "analysed": false,
+                    "fileDescription": {
+                      "introduction": "Circular Structure",
+                      "description": "Loop dependence \\n The previous node was existed in dependence chain"
+                    }
+                  }
+                ],
+                "fileDescription": {},
+                "type": "javascript",
+                "language": "javascript",
+                "analysed": true,
+                "lines": 40,
+                "functions": [
+                  {
+                    "arrowFunction": false,
+                    "params": [],
+                    "name": "createLocalStore",
+                    "kind": "const",
+                    "loc": {
+                      "start": {
+                        "line": 17,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 23,
+                        "column": 2
+                      }
+                    },
+                    "code": "const createLocalStore = function() {};",
+                    "export": false
+                  },
+                  {
+                    "arrowFunction": false,
+                    "params": [],
+                    "name": "App",
+                    "kind": "function",
+                    "loc": {
+                      "start": {
+                        "line": 26,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 37,
+                        "column": 1
+                      }
+                    },
+                    "export": false,
+                    "code": "function App() {}"
+                  }
+                ]
+              },
+              {
+                "absolutePath": "%DIR-PATH%actions\\action.js",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%components\\controller\\controller.jsx"
+                ],
+                "extension": ".js",
+                "name": "action.js",
+                "relativePath": "actions\\action.js",
+                "children": [
+                  {
+                    "absolutePath": "%DIR-PATH%actions\\actionType.js",
+                    "ancestors": [
+                      "%DIR-PATH%index.js",
+                      "%DIR-PATH%App.js",
+                      "%DIR-PATH%components\\controller\\controller.jsx",
+                      "%DIR-PATH%actions\\action.js"
+                    ],
+                    "extension": ".js",
+                    "name": "actionType.js",
+                    "relativePath": "actions\\actionType.js",
+                    "children": [],
+                    "fileDescription": {},
+                    "type": "javascript",
+                    "language": "javascript",
+                    "analysed": true,
+                    "lines": 3,
+                    "functions": []
+                  }
+                ],
+                "fileDescription": {},
+                "type": "redux-action",
+                "language": "javascript",
+                "analysed": true,
+                "lines": 13,
+                "functions": [
+                  {
+                    "arrowFunction": false,
+                    "params": [
+                      {
+                        "name": "params"
+                      }
+                    ],
+                    "name": "returnMessage",
+                    "kind": "const",
+                    "loc": {
+                      "start": {
+                        "line": 8,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 10,
+                        "column": 2
+                      }
+                    },
+                    "code": "const returnMessage = function(params) {};",
+                    "export": false
+                  },
+                  {
+                    "arrowFunction": true,
+                    "params": [
+                      {
+                        "name": "params"
+                      }
+                    ],
+                    "name": "change_data",
+                    "kind": "const",
+                    "loc": {
+                      "start": {
+                        "line": 11,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 11,
+                        "column": 93
+                      }
+                    },
+                    "code": "export const change_data = params => createAction(type.change_data, returnMessage)(params);",
+                    "export": true
+                  },
+                  {
+                    "arrowFunction": true,
+                    "params": [
+                      {
+                        "name": "params"
+                      }
+                    ],
+                    "name": "change_dimension",
+                    "kind": "const",
+                    "loc": {
+                      "start": {
+                        "line": 12,
+                        "column": 0
+                      },
+                      "end": {
+                        "line": 12,
+                        "column": 103
+                      }
+                    },
+                    "code": "export const change_dimension = params => createAction(type.change_dimension, returnMessage)(params);",
+                    "export": true
+                  }
+                ]
+              }
+            ],
+            "fileDescription": {},
+            "type": "react",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 31,
+            "functions": [
+              {
+                "arrowFunction": false,
+                "params": [],
+                "name": "Controller",
+                "kind": "function",
+                "loc": {
+                  "start": {
+                    "line": 7,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 27,
+                    "column": 1
+                  }
+                },
+                "export": false,
+                "code": "function Controller() {}"
+              }
+            ]
+          },
+          {
+            "absolutePath": "%DIR-PATH%reducers\\reducers.js",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js"
+            ],
+            "extension": ".js",
+            "name": "reducers.js",
+            "relativePath": "reducers\\reducers.js",
+            "children": [
+              {
+                "absolutePath": "%DIR-PATH%actions\\actionType.js",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%reducers\\reducers.js"
+                ],
+                "extension": ".js",
+                "name": "actionType.js",
+                "relativePath": "actions\\actionType.js",
+                "children": [],
+                "fileDescription": {},
+                "type": "javascript",
+                "language": "javascript",
+                "analysed": true,
+                "lines": 3,
+                "functions": []
+              },
+              {
+                "absolutePath": "%DIR-PATH%reducers\\initialState.js",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%reducers\\reducers.js"
+                ],
+                "extension": ".js",
+                "name": "initialState.js",
+                "relativePath": "reducers\\initialState.js",
+                "children": [
+                  {
+                    "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+                    "ancestors": [
+                      "%DIR-PATH%index.js",
+                      "%DIR-PATH%App.js",
+                      "%DIR-PATH%reducers\\reducers.js",
+                      "%DIR-PATH%reducers\\initialState.js"
+                    ],
+                    "extension": ".json",
+                    "name": "football.json",
+                    "relativePath": "components\\datas\\football.json",
+                    "children": [],
+                    "fileDescription": {},
+                    "type": "json",
+                    "language": "file"
+                  }
+                ],
+                "fileDescription": {},
+                "type": "javascript",
+                "language": "javascript",
+                "analysed": true,
+                "lines": 7,
+                "functions": []
+              },
+              {
+                "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%reducers\\reducers.js"
+                ],
+                "extension": ".json",
+                "name": "football.json",
+                "relativePath": "components\\datas\\football.json",
+                "children": [],
+                "fileDescription": {},
+                "type": "json",
+                "language": "file"
+              },
+              {
+                "absolutePath": "%DIR-PATH%components\\datas\\blOcksForce.json",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%reducers\\reducers.js"
+                ],
+                "extension": ".json",
+                "name": "blOcksForce.json",
+                "relativePath": "components\\datas\\blOcksForce.json",
+                "children": [],
+                "fileDescription": {},
+                "type": "json",
+                "language": "file"
+              },
+              {
+                "absolutePath": "%DIR-PATH%components\\datas\\zachary.json",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%reducers\\reducers.js"
+                ],
+                "extension": ".json",
+                "name": "zachary.json",
+                "relativePath": "components\\datas\\zachary.json",
+                "children": [],
+                "fileDescription": {},
+                "type": "json",
+                "language": "file"
+              }
+            ],
+            "fileDescription": {},
+            "type": "redux-reducer",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 48,
+            "functions": [
+              {
+                "arrowFunction": true,
+                "params": [],
+                "name": "actionsCase",
+                "kind": "const",
+                "loc": {
+                  "start": {
+                    "line": 13,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 37,
+                    "column": 2
+                  }
+                },
+                "code": "const actionsCase = () => {};",
+                "export": false
+              },
+              {
+                "arrowFunction": false,
+                "params": [
+                  {
+                    "name": "action"
+                  }
+                ],
+                "name": "reducer",
+                "kind": "function",
+                "loc": {
+                  "start": {
+                    "line": 38,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 45,
+                    "column": 1
+                  }
+                },
+                "export": false,
+                "code": "function reducer(state = initialState, action) {}"
+              }
+            ]
+          }
+        ],
+        "fileDescription": {},
+        "type": "javascript",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 40,
+        "functions": [
+          {
+            "arrowFunction": false,
+            "params": [],
+            "name": "createLocalStore",
+            "kind": "const",
+            "loc": {
+              "start": {
+                "line": 17,
+                "column": 0
+              },
+              "end": {
+                "line": 23,
+                "column": 2
+              }
+            },
+            "code": "const createLocalStore = function() {};",
+            "export": false
+          },
+          {
+            "arrowFunction": false,
+            "params": [],
+            "name": "App",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 26,
+                "column": 0
+              },
+              "end": {
+                "line": 37,
+                "column": 1
+              }
+            },
+            "export": false,
+            "code": "function App() {}"
+          }
+        ]
+      },
+      {
+        "absolutePath": "%DIR-PATH%serviceWorker.js",
+        "ancestors": [
+          "%DIR-PATH%index.js"
+        ],
+        "extension": ".js",
+        "name": "serviceWorker.js",
+        "relativePath": "serviceWorker.js",
+        "children": [],
+        "fileDescription": {},
+        "type": "javascript",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 136,
+        "functions": [
+          {
+            "arrowFunction": false,
+            "params": [
+              {
+                "name": "config"
+              }
+            ],
+            "name": "register",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 0
+              },
+              "end": {
+                "line": 55,
+                "column": 1
+              }
+            },
+            "export": true,
+            "code": "export function register(config) {}"
+          },
+          {
+            "arrowFunction": false,
+            "params": [
+              {
+                "name": "swUrl"
+              },
+              {
+                "name": "config"
+              }
+            ],
+            "name": "registerValidSW",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 57,
+                "column": 0
+              },
+              "end": {
+                "line": 99,
+                "column": 1
+              }
+            },
+            "export": false,
+            "code": "function registerValidSW(swUrl, config) {}"
+          },
+          {
+            "arrowFunction": false,
+            "params": [
+              {
+                "name": "swUrl"
+              },
+              {
+                "name": "config"
+              }
+            ],
+            "name": "checkValidServiceWorker",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 101,
+                "column": 0
+              },
+              "end": {
+                "line": 127,
+                "column": 1
+              }
+            },
+            "export": false,
+            "code": "function checkValidServiceWorker(swUrl, config) {}"
+          },
+          {
+            "arrowFunction": false,
+            "params": [],
+            "name": "unregister",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 129,
+                "column": 0
+              },
+              "end": {
+                "line": 135,
+                "column": 1
+              }
+            },
+            "export": true,
+            "code": "export function unregister() {}"
+          }
+        ]
+      }
+    ],
+    "extension": ".js",
+    "name": "index.js",
+    "relativePath": "index.js",
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 13,
+    "functions": []
+  },
+  "%DIR-PATH%index.css": {
+    "absolutePath": "%DIR-PATH%index.css",
+    "ancestors": [
+      "%DIR-PATH%index.js"
+    ],
+    "extension": ".css",
+    "name": "index.css",
+    "relativePath": "index.css",
+    "children": [],
+    "fileDescription": {},
+    "type": "css",
+    "language": "css"
+  },
+  "%DIR-PATH%App.js": {
+    "absolutePath": "%DIR-PATH%App.js",
+    "ancestors": [
+      "%DIR-PATH%index.js"
+    ],
+    "extension": ".js",
+    "name": "App.js",
+    "relativePath": "App.js",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%App.css",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js"
+        ],
+        "extension": ".css",
+        "name": "App.css",
+        "relativePath": "App.css",
+        "children": [],
+        "fileDescription": {},
+        "type": "css",
+        "language": "css"
+      },
+      {
+        "absolutePath": "%DIR-PATH%pages\\index\\index.jsx",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js"
+        ],
+        "extension": ".jsx",
+        "name": "index.jsx",
+        "relativePath": "pages\\index\\index.jsx",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%pages\\index\\index.scss",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%pages\\index\\index.jsx"
+            ],
+            "extension": ".scss",
+            "name": "index.scss",
+            "relativePath": "pages\\index\\index.scss",
+            "children": [],
+            "fileDescription": {},
+            "type": "sass",
+            "language": "css"
+          },
+          {
+            "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.jsx",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%pages\\index\\index.jsx"
+            ],
+            "extension": ".jsx",
+            "name": "force-2d.jsx",
+            "relativePath": "components\\force-2d\\force-2d.jsx",
+            "children": [
+              {
+                "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%pages\\index\\index.jsx",
+                  "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+                ],
+                "extension": ".scss",
+                "name": "force-2d.scss",
+                "relativePath": "components\\force-2d\\force-2d.scss",
+                "children": [],
+                "fileDescription": {},
+                "type": "sass",
+                "language": "css"
+              },
+              {
+                "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%pages\\index\\index.jsx",
+                  "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+                ],
+                "extension": ".js",
+                "name": "colorlist.js",
+                "relativePath": "components\\datas\\colorlist.js",
+                "children": [],
+                "fileDescription": {},
+                "type": "javascript",
+                "language": "javascript",
+                "analysed": true,
+                "lines": 117,
+                "functions": []
+              }
+            ],
+            "fileDescription": {},
+            "type": "react",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 134,
+            "functions": [
+              {
+                "arrowFunction": false,
+                "params": [
+                  {
+                    "name": "props"
+                  }
+                ],
+                "name": "Force2D",
+                "kind": "function",
+                "loc": {
+                  "start": {
+                    "line": 11,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 122,
+                    "column": 1
+                  }
+                },
+                "export": false,
+                "code": "function Force2D(props) {}"
+              },
+              {
+                "arrowFunction": true,
+                "params": [
+                  {
+                    "name": "state"
+                  }
+                ],
+                "name": "mapStateToProps",
+                "kind": "const",
+                "loc": {
+                  "start": {
+                    "line": 123,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 131,
+                    "column": 2
+                  }
+                },
+                "code": "const mapStateToProps = state => {};",
+                "export": false
+              }
+            ]
+          },
+          {
+            "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.jsx",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%pages\\index\\index.jsx"
+            ],
+            "extension": ".jsx",
+            "name": "force-3d.jsx",
+            "relativePath": "components\\force-3d\\force-3d.jsx",
+            "children": [
+              {
+                "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%pages\\index\\index.jsx",
+                  "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+                ],
+                "extension": ".scss",
+                "name": "force-3d.scss",
+                "relativePath": "components\\force-3d\\force-3d.scss",
+                "children": [],
+                "fileDescription": {},
+                "type": "sass",
+                "language": "css"
+              },
+              {
+                "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%pages\\index\\index.jsx",
+                  "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+                ],
+                "extension": ".ts",
+                "name": "showdemohandle.ts",
+                "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+                "children": [],
+                "fileDescription": {},
+                "type": "typescript",
+                "language": "file"
+              }
+            ],
+            "fileDescription": {},
+            "type": "react",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 35,
+            "functions": [
+              {
+                "arrowFunction": false,
+                "params": [
+                  {
+                    "name": "props"
+                  }
+                ],
+                "name": "Force3D",
+                "kind": "function",
+                "loc": {
+                  "start": {
+                    "line": 7,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 1
+                  }
+                },
+                "export": false,
+                "code": "function Force3D(props) {}"
+              },
+              {
+                "arrowFunction": true,
+                "params": [
+                  {
+                    "name": "state"
+                  }
+                ],
+                "name": "mapStateToProps",
+                "kind": "const",
+                "loc": {
+                  "start": {
+                    "line": 24,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 33,
+                    "column": 2
+                  }
+                },
+                "code": "const mapStateToProps = state => {};",
+                "export": false
+              }
+            ]
+          }
+        ],
+        "fileDescription": {},
+        "type": "react",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 29,
+        "functions": [
+          {
+            "arrowFunction": false,
+            "params": [
+              {
+                "name": "props"
+              }
+            ],
+            "name": "IndexPage",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 0
+              },
+              "end": {
+                "line": 17,
+                "column": 1
+              }
+            },
+            "export": false,
+            "code": "function IndexPage(props) {}"
+          },
+          {
+            "arrowFunction": true,
+            "params": [
+              {
+                "name": "state"
+              }
+            ],
+            "name": "mapStateToProps",
+            "kind": "const",
+            "loc": {
+              "start": {
+                "line": 18,
+                "column": 0
+              },
+              "end": {
+                "line": 26,
+                "column": 2
+              }
+            },
+            "code": "const mapStateToProps = state => {};",
+            "export": false
+          }
+        ]
+      },
+      {
+        "absolutePath": "%DIR-PATH%components\\controller\\controller.jsx",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js"
+        ],
+        "extension": ".jsx",
+        "name": "controller.jsx",
+        "relativePath": "components\\controller\\controller.jsx",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%App.js",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%components\\controller\\controller.jsx"
+            ],
+            "extension": ".js",
+            "name": "App.js",
+            "relativePath": "App.js",
+            "children": [
+              {
+                "name": "circularStructure",
+                "fileID": "circularStructure",
+                "circularStructure": true,
+                "absolutePath": "circularStructure",
+                "relativePath": "circularStructure",
+                "extension": "",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js"
+                ],
+                "children": [],
+                "type": "circularStructure",
+                "analysed": false,
+                "fileDescription": {
+                  "introduction": "Circular Structure",
+                  "description": "Loop dependence \\n The previous node was existed in dependence chain"
+                }
+              }
+            ],
+            "fileDescription": {},
+            "type": "javascript",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 40,
+            "functions": [
+              {
+                "arrowFunction": false,
+                "params": [],
+                "name": "createLocalStore",
+                "kind": "const",
+                "loc": {
+                  "start": {
+                    "line": 17,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 2
+                  }
+                },
+                "code": "const createLocalStore = function() {};",
+                "export": false
+              },
+              {
+                "arrowFunction": false,
+                "params": [],
+                "name": "App",
+                "kind": "function",
+                "loc": {
+                  "start": {
+                    "line": 26,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 37,
+                    "column": 1
+                  }
+                },
+                "export": false,
+                "code": "function App() {}"
+              }
+            ]
+          },
+          {
+            "absolutePath": "%DIR-PATH%actions\\action.js",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%components\\controller\\controller.jsx"
+            ],
+            "extension": ".js",
+            "name": "action.js",
+            "relativePath": "actions\\action.js",
+            "children": [
+              {
+                "absolutePath": "%DIR-PATH%actions\\actionType.js",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%components\\controller\\controller.jsx",
+                  "%DIR-PATH%actions\\action.js"
+                ],
+                "extension": ".js",
+                "name": "actionType.js",
+                "relativePath": "actions\\actionType.js",
+                "children": [],
+                "fileDescription": {},
+                "type": "javascript",
+                "language": "javascript",
+                "analysed": true,
+                "lines": 3,
+                "functions": []
+              }
+            ],
+            "fileDescription": {},
+            "type": "redux-action",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 13,
+            "functions": [
+              {
+                "arrowFunction": false,
+                "params": [
+                  {
+                    "name": "params"
+                  }
+                ],
+                "name": "returnMessage",
+                "kind": "const",
+                "loc": {
+                  "start": {
+                    "line": 8,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 2
+                  }
+                },
+                "code": "const returnMessage = function(params) {};",
+                "export": false
+              },
+              {
+                "arrowFunction": true,
+                "params": [
+                  {
+                    "name": "params"
+                  }
+                ],
+                "name": "change_data",
+                "kind": "const",
+                "loc": {
+                  "start": {
+                    "line": 11,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 93
+                  }
+                },
+                "code": "export const change_data = params => createAction(type.change_data, returnMessage)(params);",
+                "export": true
+              },
+              {
+                "arrowFunction": true,
+                "params": [
+                  {
+                    "name": "params"
+                  }
+                ],
+                "name": "change_dimension",
+                "kind": "const",
+                "loc": {
+                  "start": {
+                    "line": 12,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 12,
+                    "column": 103
+                  }
+                },
+                "code": "export const change_dimension = params => createAction(type.change_dimension, returnMessage)(params);",
+                "export": true
+              }
+            ]
+          }
+        ],
+        "fileDescription": {},
+        "type": "react",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 31,
+        "functions": [
+          {
+            "arrowFunction": false,
+            "params": [],
+            "name": "Controller",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 0
+              },
+              "end": {
+                "line": 27,
+                "column": 1
+              }
+            },
+            "export": false,
+            "code": "function Controller() {}"
+          }
+        ]
+      },
+      {
+        "absolutePath": "%DIR-PATH%reducers\\reducers.js",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js"
+        ],
+        "extension": ".js",
+        "name": "reducers.js",
+        "relativePath": "reducers\\reducers.js",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%actions\\actionType.js",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%reducers\\reducers.js"
+            ],
+            "extension": ".js",
+            "name": "actionType.js",
+            "relativePath": "actions\\actionType.js",
+            "children": [],
+            "fileDescription": {},
+            "type": "javascript",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 3,
+            "functions": []
+          },
+          {
+            "absolutePath": "%DIR-PATH%reducers\\initialState.js",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%reducers\\reducers.js"
+            ],
+            "extension": ".js",
+            "name": "initialState.js",
+            "relativePath": "reducers\\initialState.js",
+            "children": [
+              {
+                "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+                "ancestors": [
+                  "%DIR-PATH%index.js",
+                  "%DIR-PATH%App.js",
+                  "%DIR-PATH%reducers\\reducers.js",
+                  "%DIR-PATH%reducers\\initialState.js"
+                ],
+                "extension": ".json",
+                "name": "football.json",
+                "relativePath": "components\\datas\\football.json",
+                "children": [],
+                "fileDescription": {},
+                "type": "json",
+                "language": "file"
+              }
+            ],
+            "fileDescription": {},
+            "type": "javascript",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 7,
+            "functions": []
+          },
+          {
+            "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%reducers\\reducers.js"
+            ],
+            "extension": ".json",
+            "name": "football.json",
+            "relativePath": "components\\datas\\football.json",
+            "children": [],
+            "fileDescription": {},
+            "type": "json",
+            "language": "file"
+          },
+          {
+            "absolutePath": "%DIR-PATH%components\\datas\\blOcksForce.json",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%reducers\\reducers.js"
+            ],
+            "extension": ".json",
+            "name": "blOcksForce.json",
+            "relativePath": "components\\datas\\blOcksForce.json",
+            "children": [],
+            "fileDescription": {},
+            "type": "json",
+            "language": "file"
+          },
+          {
+            "absolutePath": "%DIR-PATH%components\\datas\\zachary.json",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%reducers\\reducers.js"
+            ],
+            "extension": ".json",
+            "name": "zachary.json",
+            "relativePath": "components\\datas\\zachary.json",
+            "children": [],
+            "fileDescription": {},
+            "type": "json",
+            "language": "file"
+          }
+        ],
+        "fileDescription": {},
+        "type": "redux-reducer",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 48,
+        "functions": [
+          {
+            "arrowFunction": true,
+            "params": [],
+            "name": "actionsCase",
+            "kind": "const",
+            "loc": {
+              "start": {
+                "line": 13,
+                "column": 0
+              },
+              "end": {
+                "line": 37,
+                "column": 2
+              }
+            },
+            "code": "const actionsCase = () => {};",
+            "export": false
+          },
+          {
+            "arrowFunction": false,
+            "params": [
+              {
+                "name": "action"
+              }
+            ],
+            "name": "reducer",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 0
+              },
+              "end": {
+                "line": 45,
+                "column": 1
+              }
+            },
+            "export": false,
+            "code": "function reducer(state = initialState, action) {}"
+          }
+        ]
+      }
+    ],
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 40,
+    "functions": [
+      {
+        "arrowFunction": false,
+        "params": [],
+        "name": "createLocalStore",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 17,
+            "column": 0
+          },
+          "end": {
+            "line": 23,
+            "column": 2
+          }
+        },
+        "code": "const createLocalStore = function() {};",
+        "export": false
+      },
+      {
+        "arrowFunction": false,
+        "params": [],
+        "name": "App",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 26,
+            "column": 0
+          },
+          "end": {
+            "line": 37,
+            "column": 1
+          }
+        },
+        "export": false,
+        "code": "function App() {}"
+      }
+    ]
+  },
+  "%DIR-PATH%serviceWorker.js": {
+    "absolutePath": "%DIR-PATH%serviceWorker.js",
+    "ancestors": [
+      "%DIR-PATH%index.js"
+    ],
+    "extension": ".js",
+    "name": "serviceWorker.js",
+    "relativePath": "serviceWorker.js",
+    "children": [],
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 136,
+    "functions": [
+      {
+        "arrowFunction": false,
+        "params": [
+          {
+            "name": "config"
+          }
+        ],
+        "name": "register",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 23,
+            "column": 0
+          },
+          "end": {
+            "line": 55,
+            "column": 1
+          }
+        },
+        "export": true,
+        "code": "export function register(config) {}"
+      },
+      {
+        "arrowFunction": false,
+        "params": [
+          {
+            "name": "swUrl"
+          },
+          {
+            "name": "config"
+          }
+        ],
+        "name": "registerValidSW",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 57,
+            "column": 0
+          },
+          "end": {
+            "line": 99,
+            "column": 1
+          }
+        },
+        "export": false,
+        "code": "function registerValidSW(swUrl, config) {}"
+      },
+      {
+        "arrowFunction": false,
+        "params": [
+          {
+            "name": "swUrl"
+          },
+          {
+            "name": "config"
+          }
+        ],
+        "name": "checkValidServiceWorker",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 101,
+            "column": 0
+          },
+          "end": {
+            "line": 127,
+            "column": 1
+          }
+        },
+        "export": false,
+        "code": "function checkValidServiceWorker(swUrl, config) {}"
+      },
+      {
+        "arrowFunction": false,
+        "params": [],
+        "name": "unregister",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 129,
+            "column": 0
+          },
+          "end": {
+            "line": 135,
+            "column": 1
+          }
+        },
+        "export": true,
+        "code": "export function unregister() {}"
+      }
+    ]
+  },
+  "%DIR-PATH%App.css": {
+    "absolutePath": "%DIR-PATH%App.css",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js"
+    ],
+    "extension": ".css",
+    "name": "App.css",
+    "relativePath": "App.css",
+    "children": [],
+    "fileDescription": {},
+    "type": "css",
+    "language": "css"
+  },
+  "%DIR-PATH%pages\\index\\index.jsx": {
+    "absolutePath": "%DIR-PATH%pages\\index\\index.jsx",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js"
+    ],
+    "extension": ".jsx",
+    "name": "index.jsx",
+    "relativePath": "pages\\index\\index.jsx",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%pages\\index\\index.scss",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%pages\\index\\index.jsx"
+        ],
+        "extension": ".scss",
+        "name": "index.scss",
+        "relativePath": "pages\\index\\index.scss",
+        "children": [],
+        "fileDescription": {},
+        "type": "sass",
+        "language": "css"
+      },
+      {
+        "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.jsx",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%pages\\index\\index.jsx"
+        ],
+        "extension": ".jsx",
+        "name": "force-2d.jsx",
+        "relativePath": "components\\force-2d\\force-2d.jsx",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%pages\\index\\index.jsx",
+              "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+            ],
+            "extension": ".scss",
+            "name": "force-2d.scss",
+            "relativePath": "components\\force-2d\\force-2d.scss",
+            "children": [],
+            "fileDescription": {},
+            "type": "sass",
+            "language": "css"
+          },
+          {
+            "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%pages\\index\\index.jsx",
+              "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+            ],
+            "extension": ".js",
+            "name": "colorlist.js",
+            "relativePath": "components\\datas\\colorlist.js",
+            "children": [],
+            "fileDescription": {},
+            "type": "javascript",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 117,
+            "functions": []
+          }
+        ],
+        "fileDescription": {},
+        "type": "react",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 134,
+        "functions": [
+          {
+            "arrowFunction": false,
+            "params": [
+              {
+                "name": "props"
+              }
+            ],
+            "name": "Force2D",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 11,
+                "column": 0
+              },
+              "end": {
+                "line": 122,
+                "column": 1
+              }
+            },
+            "export": false,
+            "code": "function Force2D(props) {}"
+          },
+          {
+            "arrowFunction": true,
+            "params": [
+              {
+                "name": "state"
+              }
+            ],
+            "name": "mapStateToProps",
+            "kind": "const",
+            "loc": {
+              "start": {
+                "line": 123,
+                "column": 0
+              },
+              "end": {
+                "line": 131,
+                "column": 2
+              }
+            },
+            "code": "const mapStateToProps = state => {};",
+            "export": false
+          }
+        ]
+      },
+      {
+        "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.jsx",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%pages\\index\\index.jsx"
+        ],
+        "extension": ".jsx",
+        "name": "force-3d.jsx",
+        "relativePath": "components\\force-3d\\force-3d.jsx",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%pages\\index\\index.jsx",
+              "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+            ],
+            "extension": ".scss",
+            "name": "force-3d.scss",
+            "relativePath": "components\\force-3d\\force-3d.scss",
+            "children": [],
+            "fileDescription": {},
+            "type": "sass",
+            "language": "css"
+          },
+          {
+            "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%pages\\index\\index.jsx",
+              "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+            ],
+            "extension": ".ts",
+            "name": "showdemohandle.ts",
+            "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+            "children": [],
+            "fileDescription": {},
+            "type": "typescript",
+            "language": "file"
+          }
+        ],
+        "fileDescription": {},
+        "type": "react",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 35,
+        "functions": [
+          {
+            "arrowFunction": false,
+            "params": [
+              {
+                "name": "props"
+              }
+            ],
+            "name": "Force3D",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 0
+              },
+              "end": {
+                "line": 23,
+                "column": 1
+              }
+            },
+            "export": false,
+            "code": "function Force3D(props) {}"
+          },
+          {
+            "arrowFunction": true,
+            "params": [
+              {
+                "name": "state"
+              }
+            ],
+            "name": "mapStateToProps",
+            "kind": "const",
+            "loc": {
+              "start": {
+                "line": 24,
+                "column": 0
+              },
+              "end": {
+                "line": 33,
+                "column": 2
+              }
+            },
+            "code": "const mapStateToProps = state => {};",
+            "export": false
+          }
+        ]
+      }
+    ],
+    "fileDescription": {},
+    "type": "react",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 29,
+    "functions": [
+      {
+        "arrowFunction": false,
+        "params": [
+          {
+            "name": "props"
+          }
+        ],
+        "name": "IndexPage",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 9,
+            "column": 0
+          },
+          "end": {
+            "line": 17,
+            "column": 1
+          }
+        },
+        "export": false,
+        "code": "function IndexPage(props) {}"
+      },
+      {
+        "arrowFunction": true,
+        "params": [
+          {
+            "name": "state"
+          }
+        ],
+        "name": "mapStateToProps",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 18,
+            "column": 0
+          },
+          "end": {
+            "line": 26,
+            "column": 2
+          }
+        },
+        "code": "const mapStateToProps = state => {};",
+        "export": false
+      }
+    ]
+  },
+  "%DIR-PATH%components\\controller\\controller.jsx": {
+    "absolutePath": "%DIR-PATH%components\\controller\\controller.jsx",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js"
+    ],
+    "extension": ".jsx",
+    "name": "controller.jsx",
+    "relativePath": "components\\controller\\controller.jsx",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%App.js",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%components\\controller\\controller.jsx"
+        ],
+        "extension": ".js",
+        "name": "App.js",
+        "relativePath": "App.js",
+        "children": [
+          {
+            "name": "circularStructure",
+            "fileID": "circularStructure",
+            "circularStructure": true,
+            "absolutePath": "circularStructure",
+            "relativePath": "circularStructure",
+            "extension": "",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js"
+            ],
+            "children": [],
+            "type": "circularStructure",
+            "analysed": false,
+            "fileDescription": {
+              "introduction": "Circular Structure",
+              "description": "Loop dependence \\n The previous node was existed in dependence chain"
+            }
+          }
+        ],
+        "fileDescription": {},
+        "type": "javascript",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 40,
+        "functions": [
+          {
+            "arrowFunction": false,
+            "params": [],
+            "name": "createLocalStore",
+            "kind": "const",
+            "loc": {
+              "start": {
+                "line": 17,
+                "column": 0
+              },
+              "end": {
+                "line": 23,
+                "column": 2
+              }
+            },
+            "code": "const createLocalStore = function() {};",
+            "export": false
+          },
+          {
+            "arrowFunction": false,
+            "params": [],
+            "name": "App",
+            "kind": "function",
+            "loc": {
+              "start": {
+                "line": 26,
+                "column": 0
+              },
+              "end": {
+                "line": 37,
+                "column": 1
+              }
+            },
+            "export": false,
+            "code": "function App() {}"
+          }
+        ]
+      },
+      {
+        "absolutePath": "%DIR-PATH%actions\\action.js",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%components\\controller\\controller.jsx"
+        ],
+        "extension": ".js",
+        "name": "action.js",
+        "relativePath": "actions\\action.js",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%actions\\actionType.js",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%components\\controller\\controller.jsx",
+              "%DIR-PATH%actions\\action.js"
+            ],
+            "extension": ".js",
+            "name": "actionType.js",
+            "relativePath": "actions\\actionType.js",
+            "children": [],
+            "fileDescription": {},
+            "type": "javascript",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 3,
+            "functions": []
+          }
+        ],
+        "fileDescription": {},
+        "type": "redux-action",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 13,
+        "functions": [
+          {
+            "arrowFunction": false,
+            "params": [
+              {
+                "name": "params"
+              }
+            ],
+            "name": "returnMessage",
+            "kind": "const",
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 0
+              },
+              "end": {
+                "line": 10,
+                "column": 2
+              }
+            },
+            "code": "const returnMessage = function(params) {};",
+            "export": false
+          },
+          {
+            "arrowFunction": true,
+            "params": [
+              {
+                "name": "params"
+              }
+            ],
+            "name": "change_data",
+            "kind": "const",
+            "loc": {
+              "start": {
+                "line": 11,
+                "column": 0
+              },
+              "end": {
+                "line": 11,
+                "column": 93
+              }
+            },
+            "code": "export const change_data = params => createAction(type.change_data, returnMessage)(params);",
+            "export": true
+          },
+          {
+            "arrowFunction": true,
+            "params": [
+              {
+                "name": "params"
+              }
+            ],
+            "name": "change_dimension",
+            "kind": "const",
+            "loc": {
+              "start": {
+                "line": 12,
+                "column": 0
+              },
+              "end": {
+                "line": 12,
+                "column": 103
+              }
+            },
+            "code": "export const change_dimension = params => createAction(type.change_dimension, returnMessage)(params);",
+            "export": true
+          }
+        ]
+      }
+    ],
+    "fileDescription": {},
+    "type": "react",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 31,
+    "functions": [
+      {
+        "arrowFunction": false,
+        "params": [],
+        "name": "Controller",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 0
+          },
+          "end": {
+            "line": 27,
+            "column": 1
+          }
+        },
+        "export": false,
+        "code": "function Controller() {}"
+      }
+    ]
+  },
+  "%DIR-PATH%reducers\\reducers.js": {
+    "absolutePath": "%DIR-PATH%reducers\\reducers.js",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js"
+    ],
+    "extension": ".js",
+    "name": "reducers.js",
+    "relativePath": "reducers\\reducers.js",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%actions\\actionType.js",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%reducers\\reducers.js"
+        ],
+        "extension": ".js",
+        "name": "actionType.js",
+        "relativePath": "actions\\actionType.js",
+        "children": [],
+        "fileDescription": {},
+        "type": "javascript",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 3,
+        "functions": []
+      },
+      {
+        "absolutePath": "%DIR-PATH%reducers\\initialState.js",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%reducers\\reducers.js"
+        ],
+        "extension": ".js",
+        "name": "initialState.js",
+        "relativePath": "reducers\\initialState.js",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+            "ancestors": [
+              "%DIR-PATH%index.js",
+              "%DIR-PATH%App.js",
+              "%DIR-PATH%reducers\\reducers.js",
+              "%DIR-PATH%reducers\\initialState.js"
+            ],
+            "extension": ".json",
+            "name": "football.json",
+            "relativePath": "components\\datas\\football.json",
+            "children": [],
+            "fileDescription": {},
+            "type": "json",
+            "language": "file"
+          }
+        ],
+        "fileDescription": {},
+        "type": "javascript",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 7,
+        "functions": []
+      },
+      {
+        "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%reducers\\reducers.js"
+        ],
+        "extension": ".json",
+        "name": "football.json",
+        "relativePath": "components\\datas\\football.json",
+        "children": [],
+        "fileDescription": {},
+        "type": "json",
+        "language": "file"
+      },
+      {
+        "absolutePath": "%DIR-PATH%components\\datas\\blOcksForce.json",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%reducers\\reducers.js"
+        ],
+        "extension": ".json",
+        "name": "blOcksForce.json",
+        "relativePath": "components\\datas\\blOcksForce.json",
+        "children": [],
+        "fileDescription": {},
+        "type": "json",
+        "language": "file"
+      },
+      {
+        "absolutePath": "%DIR-PATH%components\\datas\\zachary.json",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%reducers\\reducers.js"
+        ],
+        "extension": ".json",
+        "name": "zachary.json",
+        "relativePath": "components\\datas\\zachary.json",
+        "children": [],
+        "fileDescription": {},
+        "type": "json",
+        "language": "file"
+      }
+    ],
+    "fileDescription": {},
+    "type": "redux-reducer",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 48,
+    "functions": [
+      {
+        "arrowFunction": true,
+        "params": [],
+        "name": "actionsCase",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 13,
+            "column": 0
+          },
+          "end": {
+            "line": 37,
+            "column": 2
+          }
+        },
+        "code": "const actionsCase = () => {};",
+        "export": false
+      },
+      {
+        "arrowFunction": false,
+        "params": [
+          {
+            "name": "action"
+          }
+        ],
+        "name": "reducer",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 38,
+            "column": 0
+          },
+          "end": {
+            "line": 45,
+            "column": 1
+          }
+        },
+        "export": false,
+        "code": "function reducer(state = initialState, action) {}"
+      }
+    ]
+  },
+  "%DIR-PATH%actions\\actionType.js": {
+    "absolutePath": "%DIR-PATH%actions\\actionType.js",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%reducers\\reducers.js"
+    ],
+    "extension": ".js",
+    "name": "actionType.js",
+    "relativePath": "actions\\actionType.js",
+    "children": [],
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 3,
+    "functions": []
+  },
+  "%DIR-PATH%reducers\\initialState.js": {
+    "absolutePath": "%DIR-PATH%reducers\\initialState.js",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%reducers\\reducers.js"
+    ],
+    "extension": ".js",
+    "name": "initialState.js",
+    "relativePath": "reducers\\initialState.js",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%reducers\\reducers.js",
+          "%DIR-PATH%reducers\\initialState.js"
+        ],
+        "extension": ".json",
+        "name": "football.json",
+        "relativePath": "components\\datas\\football.json",
+        "children": [],
+        "fileDescription": {},
+        "type": "json",
+        "language": "file"
+      }
+    ],
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 7,
+    "functions": []
+  },
+  "%DIR-PATH%components\\datas\\football.json": {
+    "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%reducers\\reducers.js"
+    ],
+    "extension": ".json",
+    "name": "football.json",
+    "relativePath": "components\\datas\\football.json",
+    "children": [],
+    "fileDescription": {},
+    "type": "json",
+    "language": "file"
+  },
+  "%DIR-PATH%components\\datas\\blOcksForce.json": {
+    "absolutePath": "%DIR-PATH%components\\datas\\blOcksForce.json",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%reducers\\reducers.js"
+    ],
+    "extension": ".json",
+    "name": "blOcksForce.json",
+    "relativePath": "components\\datas\\blOcksForce.json",
+    "children": [],
+    "fileDescription": {},
+    "type": "json",
+    "language": "file"
+  },
+  "%DIR-PATH%components\\datas\\zachary.json": {
+    "absolutePath": "%DIR-PATH%components\\datas\\zachary.json",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%reducers\\reducers.js"
+    ],
+    "extension": ".json",
+    "name": "zachary.json",
+    "relativePath": "components\\datas\\zachary.json",
+    "children": [],
+    "fileDescription": {},
+    "type": "json",
+    "language": "file"
+  },
+  "circularStructure": {
+    "name": "circularStructure",
+    "fileID": "circularStructure",
+    "circularStructure": true,
+    "absolutePath": "circularStructure",
+    "relativePath": "circularStructure",
+    "extension": "",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js"
+    ],
+    "children": [],
+    "type": "circularStructure",
+    "analysed": false,
+    "fileDescription": {
+      "introduction": "Circular Structure",
+      "description": "Loop dependence \\n The previous node was existed in dependence chain"
+    }
+  },
+  "%DIR-PATH%actions\\action.js": {
+    "absolutePath": "%DIR-PATH%actions\\action.js",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%components\\controller\\controller.jsx"
+    ],
+    "extension": ".js",
+    "name": "action.js",
+    "relativePath": "actions\\action.js",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%actions\\actionType.js",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%components\\controller\\controller.jsx",
+          "%DIR-PATH%actions\\action.js"
+        ],
+        "extension": ".js",
+        "name": "actionType.js",
+        "relativePath": "actions\\actionType.js",
+        "children": [],
+        "fileDescription": {},
+        "type": "javascript",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 3,
+        "functions": []
+      }
+    ],
+    "fileDescription": {},
+    "type": "redux-action",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 13,
+    "functions": [
+      {
+        "arrowFunction": false,
+        "params": [
+          {
+            "name": "params"
+          }
+        ],
+        "name": "returnMessage",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 8,
+            "column": 0
+          },
+          "end": {
+            "line": 10,
+            "column": 2
+          }
+        },
+        "code": "const returnMessage = function(params) {};",
+        "export": false
+      },
+      {
+        "arrowFunction": true,
+        "params": [
+          {
+            "name": "params"
+          }
+        ],
+        "name": "change_data",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 11,
+            "column": 0
+          },
+          "end": {
+            "line": 11,
+            "column": 93
+          }
+        },
+        "code": "export const change_data = params => createAction(type.change_data, returnMessage)(params);",
+        "export": true
+      },
+      {
+        "arrowFunction": true,
+        "params": [
+          {
+            "name": "params"
+          }
+        ],
+        "name": "change_dimension",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 12,
+            "column": 0
+          },
+          "end": {
+            "line": 12,
+            "column": 103
+          }
+        },
+        "code": "export const change_dimension = params => createAction(type.change_dimension, returnMessage)(params);",
+        "export": true
+      }
+    ]
+  },
+  "%DIR-PATH%pages\\index\\index.scss": {
+    "absolutePath": "%DIR-PATH%pages\\index\\index.scss",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%pages\\index\\index.jsx"
+    ],
+    "extension": ".scss",
+    "name": "index.scss",
+    "relativePath": "pages\\index\\index.scss",
+    "children": [],
+    "fileDescription": {},
+    "type": "sass",
+    "language": "css"
+  },
+  "%DIR-PATH%components\\force-2d\\force-2d.jsx": {
+    "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.jsx",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%pages\\index\\index.jsx"
+    ],
+    "extension": ".jsx",
+    "name": "force-2d.jsx",
+    "relativePath": "components\\force-2d\\force-2d.jsx",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%pages\\index\\index.jsx",
+          "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+        ],
+        "extension": ".scss",
+        "name": "force-2d.scss",
+        "relativePath": "components\\force-2d\\force-2d.scss",
+        "children": [],
+        "fileDescription": {},
+        "type": "sass",
+        "language": "css"
+      },
+      {
+        "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%pages\\index\\index.jsx",
+          "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+        ],
+        "extension": ".js",
+        "name": "colorlist.js",
+        "relativePath": "components\\datas\\colorlist.js",
+        "children": [],
+        "fileDescription": {},
+        "type": "javascript",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 117,
+        "functions": []
+      }
+    ],
+    "fileDescription": {},
+    "type": "react",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 134,
+    "functions": [
+      {
+        "arrowFunction": false,
+        "params": [
+          {
+            "name": "props"
+          }
+        ],
+        "name": "Force2D",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 11,
+            "column": 0
+          },
+          "end": {
+            "line": 122,
+            "column": 1
+          }
+        },
+        "export": false,
+        "code": "function Force2D(props) {}"
+      },
+      {
+        "arrowFunction": true,
+        "params": [
+          {
+            "name": "state"
+          }
+        ],
+        "name": "mapStateToProps",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 123,
+            "column": 0
+          },
+          "end": {
+            "line": 131,
+            "column": 2
+          }
+        },
+        "code": "const mapStateToProps = state => {};",
+        "export": false
+      }
+    ]
+  },
+  "%DIR-PATH%components\\force-3d\\force-3d.jsx": {
+    "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.jsx",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%pages\\index\\index.jsx"
+    ],
+    "extension": ".jsx",
+    "name": "force-3d.jsx",
+    "relativePath": "components\\force-3d\\force-3d.jsx",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%pages\\index\\index.jsx",
+          "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+        ],
+        "extension": ".scss",
+        "name": "force-3d.scss",
+        "relativePath": "components\\force-3d\\force-3d.scss",
+        "children": [],
+        "fileDescription": {},
+        "type": "sass",
+        "language": "css"
+      },
+      {
+        "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+        "ancestors": [
+          "%DIR-PATH%index.js",
+          "%DIR-PATH%App.js",
+          "%DIR-PATH%pages\\index\\index.jsx",
+          "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+        ],
+        "extension": ".ts",
+        "name": "showdemohandle.ts",
+        "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+        "children": [],
+        "fileDescription": {},
+        "type": "typescript",
+        "language": "file"
+      }
+    ],
+    "fileDescription": {},
+    "type": "react",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 35,
+    "functions": [
+      {
+        "arrowFunction": false,
+        "params": [
+          {
+            "name": "props"
+          }
+        ],
+        "name": "Force3D",
+        "kind": "function",
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 0
+          },
+          "end": {
+            "line": 23,
+            "column": 1
+          }
+        },
+        "export": false,
+        "code": "function Force3D(props) {}"
+      },
+      {
+        "arrowFunction": true,
+        "params": [
+          {
+            "name": "state"
+          }
+        ],
+        "name": "mapStateToProps",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 24,
+            "column": 0
+          },
+          "end": {
+            "line": 33,
+            "column": 2
+          }
+        },
+        "code": "const mapStateToProps = state => {};",
+        "export": false
+      }
+    ]
+  },
+  "%DIR-PATH%components\\force-3d\\force-3d.scss": {
+    "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%pages\\index\\index.jsx",
+      "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+    ],
+    "extension": ".scss",
+    "name": "force-3d.scss",
+    "relativePath": "components\\force-3d\\force-3d.scss",
+    "children": [],
+    "fileDescription": {},
+    "type": "sass",
+    "language": "css"
+  },
+  "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts": {
+    "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%pages\\index\\index.jsx",
+      "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+    ],
+    "extension": ".ts",
+    "name": "showdemohandle.ts",
+    "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+    "children": [],
+    "fileDescription": {},
+    "type": "typescript",
+    "language": "file"
+  },
+  "%DIR-PATH%components\\force-2d\\force-2d.scss": {
+    "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%pages\\index\\index.jsx",
+      "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+    ],
+    "extension": ".scss",
+    "name": "force-2d.scss",
+    "relativePath": "components\\force-2d\\force-2d.scss",
+    "children": [],
+    "fileDescription": {},
+    "type": "sass",
+    "language": "css"
+  },
+  "%DIR-PATH%components\\datas\\colorlist.js": {
+    "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+    "ancestors": [
+      "%DIR-PATH%index.js",
+      "%DIR-PATH%App.js",
+      "%DIR-PATH%pages\\index\\index.jsx",
+      "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+    ],
+    "extension": ".js",
+    "name": "colorlist.js",
+    "relativePath": "components\\datas\\colorlist.js",
+    "children": [],
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 117,
+    "functions": []
+  }
+}
