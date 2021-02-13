@@ -1,107 +1,107 @@
 {
-  "%DIR-PATH%index.js": {
-    "absolutePath": "%DIR-PATH%index.js",
+  "%DIR-PATH%\\src\\index.js": {
+    "absolutePath": "%DIR-PATH%\\src\\index.js",
     "ancestors": [],
     "children": [
       {
-        "absolutePath": "%DIR-PATH%index.css",
+        "absolutePath": "%DIR-PATH%\\src\\index.css",
         "ancestors": [
-          "%DIR-PATH%index.js"
+          "%DIR-PATH%\\src\\index.js"
         ],
         "extension": ".css",
         "name": "index.css",
-        "relativePath": "index.css",
+        "relativePath": "\\src\\index.css",
         "children": [],
         "fileDescription": {},
         "type": "css",
         "language": "css"
       },
       {
-        "absolutePath": "%DIR-PATH%App.js",
+        "absolutePath": "%DIR-PATH%\\src\\App.js",
         "ancestors": [
-          "%DIR-PATH%index.js"
+          "%DIR-PATH%\\src\\index.js"
         ],
         "extension": ".js",
         "name": "App.js",
-        "relativePath": "App.js",
+        "relativePath": "\\src\\App.js",
         "children": [
           {
-            "absolutePath": "%DIR-PATH%App.css",
+            "absolutePath": "%DIR-PATH%\\src\\App.css",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js"
             ],
             "extension": ".css",
             "name": "App.css",
-            "relativePath": "App.css",
+            "relativePath": "\\src\\App.css",
             "children": [],
             "fileDescription": {},
             "type": "css",
             "language": "css"
           },
           {
-            "absolutePath": "%DIR-PATH%pages\\index\\index.jsx",
+            "absolutePath": "%DIR-PATH%\\src\\pages\\index\\index.jsx",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js"
             ],
             "extension": ".jsx",
             "name": "index.jsx",
-            "relativePath": "pages\\index\\index.jsx",
+            "relativePath": "\\src\\pages\\index\\index.jsx",
             "children": [
               {
-                "absolutePath": "%DIR-PATH%pages\\index\\index.scss",
+                "absolutePath": "%DIR-PATH%\\src\\pages\\index\\index.scss",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%pages\\index\\index.jsx"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\pages\\index\\index.jsx"
                 ],
                 "extension": ".scss",
                 "name": "index.scss",
-                "relativePath": "pages\\index\\index.scss",
+                "relativePath": "\\src\\pages\\index\\index.scss",
                 "children": [],
                 "fileDescription": {},
                 "type": "sass",
                 "language": "css"
               },
               {
-                "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.jsx",
+                "absolutePath": "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%pages\\index\\index.jsx"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\pages\\index\\index.jsx"
                 ],
                 "extension": ".jsx",
                 "name": "force-2d.jsx",
-                "relativePath": "components\\force-2d\\force-2d.jsx",
+                "relativePath": "\\src\\components\\force-2d\\force-2d.jsx",
                 "children": [
                   {
-                    "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+                    "absolutePath": "%DIR-PATH%\\src\\components\\force-2d\\force-2d.scss",
                     "ancestors": [
-                      "%DIR-PATH%index.js",
-                      "%DIR-PATH%App.js",
-                      "%DIR-PATH%pages\\index\\index.jsx",
-                      "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+                      "%DIR-PATH%\\src\\index.js",
+                      "%DIR-PATH%\\src\\App.js",
+                      "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                      "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
                     ],
                     "extension": ".scss",
                     "name": "force-2d.scss",
-                    "relativePath": "components\\force-2d\\force-2d.scss",
+                    "relativePath": "\\src\\components\\force-2d\\force-2d.scss",
                     "children": [],
                     "fileDescription": {},
                     "type": "sass",
                     "language": "css"
                   },
                   {
-                    "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+                    "absolutePath": "%DIR-PATH%\\src\\components\\datas\\colorlist.js",
                     "ancestors": [
-                      "%DIR-PATH%index.js",
-                      "%DIR-PATH%App.js",
-                      "%DIR-PATH%pages\\index\\index.jsx",
-                      "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+                      "%DIR-PATH%\\src\\index.js",
+                      "%DIR-PATH%\\src\\App.js",
+                      "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                      "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
                     ],
                     "extension": ".js",
                     "name": "colorlist.js",
-                    "relativePath": "components\\datas\\colorlist.js",
+                    "relativePath": "\\src\\components\\datas\\colorlist.js",
                     "children": [],
                     "fileDescription": {},
                     "type": "javascript",
@@ -164,43 +164,43 @@
                 ]
               },
               {
-                "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.jsx",
+                "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%pages\\index\\index.jsx"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\pages\\index\\index.jsx"
                 ],
                 "extension": ".jsx",
                 "name": "force-3d.jsx",
-                "relativePath": "components\\force-3d\\force-3d.jsx",
+                "relativePath": "\\src\\components\\force-3d\\force-3d.jsx",
                 "children": [
                   {
-                    "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+                    "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\force-3d.scss",
                     "ancestors": [
-                      "%DIR-PATH%index.js",
-                      "%DIR-PATH%App.js",
-                      "%DIR-PATH%pages\\index\\index.jsx",
-                      "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+                      "%DIR-PATH%\\src\\index.js",
+                      "%DIR-PATH%\\src\\App.js",
+                      "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                      "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
                     ],
                     "extension": ".scss",
                     "name": "force-3d.scss",
-                    "relativePath": "components\\force-3d\\force-3d.scss",
+                    "relativePath": "\\src\\components\\force-3d\\force-3d.scss",
                     "children": [],
                     "fileDescription": {},
                     "type": "sass",
                     "language": "css"
                   },
                   {
-                    "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+                    "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
                     "ancestors": [
-                      "%DIR-PATH%index.js",
-                      "%DIR-PATH%App.js",
-                      "%DIR-PATH%pages\\index\\index.jsx",
-                      "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+                      "%DIR-PATH%\\src\\index.js",
+                      "%DIR-PATH%\\src\\App.js",
+                      "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                      "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
                     ],
                     "extension": ".ts",
                     "name": "showdemohandle.ts",
-                    "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+                    "relativePath": "\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
                     "children": [],
                     "fileDescription": {},
                     "type": "typescript",
@@ -313,25 +313,25 @@
             ]
           },
           {
-            "absolutePath": "%DIR-PATH%components\\controller\\controller.jsx",
+            "absolutePath": "%DIR-PATH%\\src\\components\\controller\\controller.jsx",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js"
             ],
             "extension": ".jsx",
             "name": "controller.jsx",
-            "relativePath": "components\\controller\\controller.jsx",
+            "relativePath": "\\src\\components\\controller\\controller.jsx",
             "children": [
               {
-                "absolutePath": "%DIR-PATH%App.js",
+                "absolutePath": "%DIR-PATH%\\src\\App.js",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%components\\controller\\controller.jsx"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\components\\controller\\controller.jsx"
                 ],
                 "extension": ".js",
                 "name": "App.js",
-                "relativePath": "App.js",
+                "relativePath": "\\src\\App.js",
                 "children": [
                   {
                     "name": "circularStructure",
@@ -341,8 +341,8 @@
                     "relativePath": "circularStructure",
                     "extension": "",
                     "ancestors": [
-                      "%DIR-PATH%index.js",
-                      "%DIR-PATH%App.js"
+                      "%DIR-PATH%\\src\\index.js",
+                      "%DIR-PATH%\\src\\App.js"
                     ],
                     "children": [],
                     "type": "circularStructure",
@@ -398,27 +398,27 @@
                 ]
               },
               {
-                "absolutePath": "%DIR-PATH%actions\\action.js",
+                "absolutePath": "%DIR-PATH%\\src\\actions\\action.js",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%components\\controller\\controller.jsx"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\components\\controller\\controller.jsx"
                 ],
                 "extension": ".js",
                 "name": "action.js",
-                "relativePath": "actions\\action.js",
+                "relativePath": "\\src\\actions\\action.js",
                 "children": [
                   {
-                    "absolutePath": "%DIR-PATH%actions\\actionType.js",
+                    "absolutePath": "%DIR-PATH%\\src\\actions\\actionType.js",
                     "ancestors": [
-                      "%DIR-PATH%index.js",
-                      "%DIR-PATH%App.js",
-                      "%DIR-PATH%components\\controller\\controller.jsx",
-                      "%DIR-PATH%actions\\action.js"
+                      "%DIR-PATH%\\src\\index.js",
+                      "%DIR-PATH%\\src\\App.js",
+                      "%DIR-PATH%\\src\\components\\controller\\controller.jsx",
+                      "%DIR-PATH%\\src\\actions\\action.js"
                     ],
                     "extension": ".js",
                     "name": "actionType.js",
-                    "relativePath": "actions\\actionType.js",
+                    "relativePath": "\\src\\actions\\actionType.js",
                     "children": [],
                     "fileDescription": {},
                     "type": "javascript",
@@ -530,25 +530,25 @@
             ]
           },
           {
-            "absolutePath": "%DIR-PATH%reducers\\reducers.js",
+            "absolutePath": "%DIR-PATH%\\src\\reducers\\reducers.js",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js"
             ],
             "extension": ".js",
             "name": "reducers.js",
-            "relativePath": "reducers\\reducers.js",
+            "relativePath": "\\src\\reducers\\reducers.js",
             "children": [
               {
-                "absolutePath": "%DIR-PATH%actions\\actionType.js",
+                "absolutePath": "%DIR-PATH%\\src\\actions\\actionType.js",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%reducers\\reducers.js"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\reducers\\reducers.js"
                 ],
                 "extension": ".js",
                 "name": "actionType.js",
-                "relativePath": "actions\\actionType.js",
+                "relativePath": "\\src\\actions\\actionType.js",
                 "children": [],
                 "fileDescription": {},
                 "type": "javascript",
@@ -558,27 +558,27 @@
                 "functions": []
               },
               {
-                "absolutePath": "%DIR-PATH%reducers\\initialState.js",
+                "absolutePath": "%DIR-PATH%\\src\\reducers\\initialState.js",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%reducers\\reducers.js"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\reducers\\reducers.js"
                 ],
                 "extension": ".js",
                 "name": "initialState.js",
-                "relativePath": "reducers\\initialState.js",
+                "relativePath": "\\src\\reducers\\initialState.js",
                 "children": [
                   {
-                    "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+                    "absolutePath": "%DIR-PATH%\\src\\components\\datas\\football.json",
                     "ancestors": [
-                      "%DIR-PATH%index.js",
-                      "%DIR-PATH%App.js",
-                      "%DIR-PATH%reducers\\reducers.js",
-                      "%DIR-PATH%reducers\\initialState.js"
+                      "%DIR-PATH%\\src\\index.js",
+                      "%DIR-PATH%\\src\\App.js",
+                      "%DIR-PATH%\\src\\reducers\\reducers.js",
+                      "%DIR-PATH%\\src\\reducers\\initialState.js"
                     ],
                     "extension": ".json",
                     "name": "football.json",
-                    "relativePath": "components\\datas\\football.json",
+                    "relativePath": "\\src\\components\\datas\\football.json",
                     "children": [],
                     "fileDescription": {},
                     "type": "json",
@@ -593,45 +593,45 @@
                 "functions": []
               },
               {
-                "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+                "absolutePath": "%DIR-PATH%\\src\\components\\datas\\football.json",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%reducers\\reducers.js"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\reducers\\reducers.js"
                 ],
                 "extension": ".json",
                 "name": "football.json",
-                "relativePath": "components\\datas\\football.json",
+                "relativePath": "\\src\\components\\datas\\football.json",
                 "children": [],
                 "fileDescription": {},
                 "type": "json",
                 "language": "file"
               },
               {
-                "absolutePath": "%DIR-PATH%components\\datas\\blOcksForce.json",
+                "absolutePath": "%DIR-PATH%\\src\\components\\datas\\blOcksForce.json",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%reducers\\reducers.js"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\reducers\\reducers.js"
                 ],
                 "extension": ".json",
                 "name": "blOcksForce.json",
-                "relativePath": "components\\datas\\blOcksForce.json",
+                "relativePath": "\\src\\components\\datas\\blOcksForce.json",
                 "children": [],
                 "fileDescription": {},
                 "type": "json",
                 "language": "file"
               },
               {
-                "absolutePath": "%DIR-PATH%components\\datas\\zachary.json",
+                "absolutePath": "%DIR-PATH%\\src\\components\\datas\\zachary.json",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%reducers\\reducers.js"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\reducers\\reducers.js"
                 ],
                 "extension": ".json",
                 "name": "zachary.json",
-                "relativePath": "components\\datas\\zachary.json",
+                "relativePath": "\\src\\components\\datas\\zachary.json",
                 "children": [],
                 "fileDescription": {},
                 "type": "json",
@@ -732,13 +732,13 @@
         ]
       },
       {
-        "absolutePath": "%DIR-PATH%serviceWorker.js",
+        "absolutePath": "%DIR-PATH%\\src\\serviceWorker.js",
         "ancestors": [
-          "%DIR-PATH%index.js"
+          "%DIR-PATH%\\src\\index.js"
         ],
         "extension": ".js",
         "name": "serviceWorker.js",
-        "relativePath": "serviceWorker.js",
+        "relativePath": "\\src\\serviceWorker.js",
         "children": [],
         "fileDescription": {},
         "type": "javascript",
@@ -841,7 +841,7 @@
     ],
     "extension": ".js",
     "name": "index.js",
-    "relativePath": "index.js",
+    "relativePath": "\\src\\index.js",
     "fileDescription": {},
     "type": "javascript",
     "language": "javascript",
@@ -849,105 +849,105 @@
     "lines": 13,
     "functions": []
   },
-  "%DIR-PATH%index.css": {
-    "absolutePath": "%DIR-PATH%index.css",
+  "%DIR-PATH%\\src\\index.css": {
+    "absolutePath": "%DIR-PATH%\\src\\index.css",
     "ancestors": [
-      "%DIR-PATH%index.js"
+      "%DIR-PATH%\\src\\index.js"
     ],
     "extension": ".css",
     "name": "index.css",
-    "relativePath": "index.css",
+    "relativePath": "\\src\\index.css",
     "children": [],
     "fileDescription": {},
     "type": "css",
     "language": "css"
   },
-  "%DIR-PATH%App.js": {
-    "absolutePath": "%DIR-PATH%App.js",
+  "%DIR-PATH%\\src\\App.js": {
+    "absolutePath": "%DIR-PATH%\\src\\App.js",
     "ancestors": [
-      "%DIR-PATH%index.js"
+      "%DIR-PATH%\\src\\index.js"
     ],
     "extension": ".js",
     "name": "App.js",
-    "relativePath": "App.js",
+    "relativePath": "\\src\\App.js",
     "children": [
       {
-        "absolutePath": "%DIR-PATH%App.css",
+        "absolutePath": "%DIR-PATH%\\src\\App.css",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js"
         ],
         "extension": ".css",
         "name": "App.css",
-        "relativePath": "App.css",
+        "relativePath": "\\src\\App.css",
         "children": [],
         "fileDescription": {},
         "type": "css",
         "language": "css"
       },
       {
-        "absolutePath": "%DIR-PATH%pages\\index\\index.jsx",
+        "absolutePath": "%DIR-PATH%\\src\\pages\\index\\index.jsx",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js"
         ],
         "extension": ".jsx",
         "name": "index.jsx",
-        "relativePath": "pages\\index\\index.jsx",
+        "relativePath": "\\src\\pages\\index\\index.jsx",
         "children": [
           {
-            "absolutePath": "%DIR-PATH%pages\\index\\index.scss",
+            "absolutePath": "%DIR-PATH%\\src\\pages\\index\\index.scss",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%pages\\index\\index.jsx"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\pages\\index\\index.jsx"
             ],
             "extension": ".scss",
             "name": "index.scss",
-            "relativePath": "pages\\index\\index.scss",
+            "relativePath": "\\src\\pages\\index\\index.scss",
             "children": [],
             "fileDescription": {},
             "type": "sass",
             "language": "css"
           },
           {
-            "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.jsx",
+            "absolutePath": "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%pages\\index\\index.jsx"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\pages\\index\\index.jsx"
             ],
             "extension": ".jsx",
             "name": "force-2d.jsx",
-            "relativePath": "components\\force-2d\\force-2d.jsx",
+            "relativePath": "\\src\\components\\force-2d\\force-2d.jsx",
             "children": [
               {
-                "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+                "absolutePath": "%DIR-PATH%\\src\\components\\force-2d\\force-2d.scss",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%pages\\index\\index.jsx",
-                  "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                  "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
                 ],
                 "extension": ".scss",
                 "name": "force-2d.scss",
-                "relativePath": "components\\force-2d\\force-2d.scss",
+                "relativePath": "\\src\\components\\force-2d\\force-2d.scss",
                 "children": [],
                 "fileDescription": {},
                 "type": "sass",
                 "language": "css"
               },
               {
-                "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+                "absolutePath": "%DIR-PATH%\\src\\components\\datas\\colorlist.js",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%pages\\index\\index.jsx",
-                  "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                  "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
                 ],
                 "extension": ".js",
                 "name": "colorlist.js",
-                "relativePath": "components\\datas\\colorlist.js",
+                "relativePath": "\\src\\components\\datas\\colorlist.js",
                 "children": [],
                 "fileDescription": {},
                 "type": "javascript",
@@ -1010,43 +1010,43 @@
             ]
           },
           {
-            "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.jsx",
+            "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%pages\\index\\index.jsx"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\pages\\index\\index.jsx"
             ],
             "extension": ".jsx",
             "name": "force-3d.jsx",
-            "relativePath": "components\\force-3d\\force-3d.jsx",
+            "relativePath": "\\src\\components\\force-3d\\force-3d.jsx",
             "children": [
               {
-                "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+                "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\force-3d.scss",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%pages\\index\\index.jsx",
-                  "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                  "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
                 ],
                 "extension": ".scss",
                 "name": "force-3d.scss",
-                "relativePath": "components\\force-3d\\force-3d.scss",
+                "relativePath": "\\src\\components\\force-3d\\force-3d.scss",
                 "children": [],
                 "fileDescription": {},
                 "type": "sass",
                 "language": "css"
               },
               {
-                "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+                "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%pages\\index\\index.jsx",
-                  "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                  "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
                 ],
                 "extension": ".ts",
                 "name": "showdemohandle.ts",
-                "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+                "relativePath": "\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
                 "children": [],
                 "fileDescription": {},
                 "type": "typescript",
@@ -1159,25 +1159,25 @@
         ]
       },
       {
-        "absolutePath": "%DIR-PATH%components\\controller\\controller.jsx",
+        "absolutePath": "%DIR-PATH%\\src\\components\\controller\\controller.jsx",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js"
         ],
         "extension": ".jsx",
         "name": "controller.jsx",
-        "relativePath": "components\\controller\\controller.jsx",
+        "relativePath": "\\src\\components\\controller\\controller.jsx",
         "children": [
           {
-            "absolutePath": "%DIR-PATH%App.js",
+            "absolutePath": "%DIR-PATH%\\src\\App.js",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%components\\controller\\controller.jsx"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\components\\controller\\controller.jsx"
             ],
             "extension": ".js",
             "name": "App.js",
-            "relativePath": "App.js",
+            "relativePath": "\\src\\App.js",
             "children": [
               {
                 "name": "circularStructure",
@@ -1187,8 +1187,8 @@
                 "relativePath": "circularStructure",
                 "extension": "",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js"
                 ],
                 "children": [],
                 "type": "circularStructure",
@@ -1244,27 +1244,27 @@
             ]
           },
           {
-            "absolutePath": "%DIR-PATH%actions\\action.js",
+            "absolutePath": "%DIR-PATH%\\src\\actions\\action.js",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%components\\controller\\controller.jsx"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\components\\controller\\controller.jsx"
             ],
             "extension": ".js",
             "name": "action.js",
-            "relativePath": "actions\\action.js",
+            "relativePath": "\\src\\actions\\action.js",
             "children": [
               {
-                "absolutePath": "%DIR-PATH%actions\\actionType.js",
+                "absolutePath": "%DIR-PATH%\\src\\actions\\actionType.js",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%components\\controller\\controller.jsx",
-                  "%DIR-PATH%actions\\action.js"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\components\\controller\\controller.jsx",
+                  "%DIR-PATH%\\src\\actions\\action.js"
                 ],
                 "extension": ".js",
                 "name": "actionType.js",
-                "relativePath": "actions\\actionType.js",
+                "relativePath": "\\src\\actions\\actionType.js",
                 "children": [],
                 "fileDescription": {},
                 "type": "javascript",
@@ -1376,25 +1376,25 @@
         ]
       },
       {
-        "absolutePath": "%DIR-PATH%reducers\\reducers.js",
+        "absolutePath": "%DIR-PATH%\\src\\reducers\\reducers.js",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js"
         ],
         "extension": ".js",
         "name": "reducers.js",
-        "relativePath": "reducers\\reducers.js",
+        "relativePath": "\\src\\reducers\\reducers.js",
         "children": [
           {
-            "absolutePath": "%DIR-PATH%actions\\actionType.js",
+            "absolutePath": "%DIR-PATH%\\src\\actions\\actionType.js",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%reducers\\reducers.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\reducers\\reducers.js"
             ],
             "extension": ".js",
             "name": "actionType.js",
-            "relativePath": "actions\\actionType.js",
+            "relativePath": "\\src\\actions\\actionType.js",
             "children": [],
             "fileDescription": {},
             "type": "javascript",
@@ -1404,27 +1404,27 @@
             "functions": []
           },
           {
-            "absolutePath": "%DIR-PATH%reducers\\initialState.js",
+            "absolutePath": "%DIR-PATH%\\src\\reducers\\initialState.js",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%reducers\\reducers.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\reducers\\reducers.js"
             ],
             "extension": ".js",
             "name": "initialState.js",
-            "relativePath": "reducers\\initialState.js",
+            "relativePath": "\\src\\reducers\\initialState.js",
             "children": [
               {
-                "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+                "absolutePath": "%DIR-PATH%\\src\\components\\datas\\football.json",
                 "ancestors": [
-                  "%DIR-PATH%index.js",
-                  "%DIR-PATH%App.js",
-                  "%DIR-PATH%reducers\\reducers.js",
-                  "%DIR-PATH%reducers\\initialState.js"
+                  "%DIR-PATH%\\src\\index.js",
+                  "%DIR-PATH%\\src\\App.js",
+                  "%DIR-PATH%\\src\\reducers\\reducers.js",
+                  "%DIR-PATH%\\src\\reducers\\initialState.js"
                 ],
                 "extension": ".json",
                 "name": "football.json",
-                "relativePath": "components\\datas\\football.json",
+                "relativePath": "\\src\\components\\datas\\football.json",
                 "children": [],
                 "fileDescription": {},
                 "type": "json",
@@ -1439,45 +1439,45 @@
             "functions": []
           },
           {
-            "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+            "absolutePath": "%DIR-PATH%\\src\\components\\datas\\football.json",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%reducers\\reducers.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\reducers\\reducers.js"
             ],
             "extension": ".json",
             "name": "football.json",
-            "relativePath": "components\\datas\\football.json",
+            "relativePath": "\\src\\components\\datas\\football.json",
             "children": [],
             "fileDescription": {},
             "type": "json",
             "language": "file"
           },
           {
-            "absolutePath": "%DIR-PATH%components\\datas\\blOcksForce.json",
+            "absolutePath": "%DIR-PATH%\\src\\components\\datas\\blOcksForce.json",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%reducers\\reducers.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\reducers\\reducers.js"
             ],
             "extension": ".json",
             "name": "blOcksForce.json",
-            "relativePath": "components\\datas\\blOcksForce.json",
+            "relativePath": "\\src\\components\\datas\\blOcksForce.json",
             "children": [],
             "fileDescription": {},
             "type": "json",
             "language": "file"
           },
           {
-            "absolutePath": "%DIR-PATH%components\\datas\\zachary.json",
+            "absolutePath": "%DIR-PATH%\\src\\components\\datas\\zachary.json",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%reducers\\reducers.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\reducers\\reducers.js"
             ],
             "extension": ".json",
             "name": "zachary.json",
-            "relativePath": "components\\datas\\zachary.json",
+            "relativePath": "\\src\\components\\datas\\zachary.json",
             "children": [],
             "fileDescription": {},
             "type": "json",
@@ -1577,14 +1577,14 @@
       }
     ]
   },
-  "%DIR-PATH%serviceWorker.js": {
-    "absolutePath": "%DIR-PATH%serviceWorker.js",
+  "%DIR-PATH%\\src\\serviceWorker.js": {
+    "absolutePath": "%DIR-PATH%\\src\\serviceWorker.js",
     "ancestors": [
-      "%DIR-PATH%index.js"
+      "%DIR-PATH%\\src\\index.js"
     ],
     "extension": ".js",
     "name": "serviceWorker.js",
-    "relativePath": "serviceWorker.js",
+    "relativePath": "\\src\\serviceWorker.js",
     "children": [],
     "fileDescription": {},
     "type": "javascript",
@@ -1684,83 +1684,83 @@
       }
     ]
   },
-  "%DIR-PATH%App.css": {
-    "absolutePath": "%DIR-PATH%App.css",
+  "%DIR-PATH%\\src\\App.css": {
+    "absolutePath": "%DIR-PATH%\\src\\App.css",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js"
     ],
     "extension": ".css",
     "name": "App.css",
-    "relativePath": "App.css",
+    "relativePath": "\\src\\App.css",
     "children": [],
     "fileDescription": {},
     "type": "css",
     "language": "css"
   },
-  "%DIR-PATH%pages\\index\\index.jsx": {
-    "absolutePath": "%DIR-PATH%pages\\index\\index.jsx",
+  "%DIR-PATH%\\src\\pages\\index\\index.jsx": {
+    "absolutePath": "%DIR-PATH%\\src\\pages\\index\\index.jsx",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js"
     ],
     "extension": ".jsx",
     "name": "index.jsx",
-    "relativePath": "pages\\index\\index.jsx",
+    "relativePath": "\\src\\pages\\index\\index.jsx",
     "children": [
       {
-        "absolutePath": "%DIR-PATH%pages\\index\\index.scss",
+        "absolutePath": "%DIR-PATH%\\src\\pages\\index\\index.scss",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%pages\\index\\index.jsx"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\pages\\index\\index.jsx"
         ],
         "extension": ".scss",
         "name": "index.scss",
-        "relativePath": "pages\\index\\index.scss",
+        "relativePath": "\\src\\pages\\index\\index.scss",
         "children": [],
         "fileDescription": {},
         "type": "sass",
         "language": "css"
       },
       {
-        "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.jsx",
+        "absolutePath": "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%pages\\index\\index.jsx"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\pages\\index\\index.jsx"
         ],
         "extension": ".jsx",
         "name": "force-2d.jsx",
-        "relativePath": "components\\force-2d\\force-2d.jsx",
+        "relativePath": "\\src\\components\\force-2d\\force-2d.jsx",
         "children": [
           {
-            "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+            "absolutePath": "%DIR-PATH%\\src\\components\\force-2d\\force-2d.scss",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%pages\\index\\index.jsx",
-              "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+              "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
             ],
             "extension": ".scss",
             "name": "force-2d.scss",
-            "relativePath": "components\\force-2d\\force-2d.scss",
+            "relativePath": "\\src\\components\\force-2d\\force-2d.scss",
             "children": [],
             "fileDescription": {},
             "type": "sass",
             "language": "css"
           },
           {
-            "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+            "absolutePath": "%DIR-PATH%\\src\\components\\datas\\colorlist.js",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%pages\\index\\index.jsx",
-              "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+              "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
             ],
             "extension": ".js",
             "name": "colorlist.js",
-            "relativePath": "components\\datas\\colorlist.js",
+            "relativePath": "\\src\\components\\datas\\colorlist.js",
             "children": [],
             "fileDescription": {},
             "type": "javascript",
@@ -1823,43 +1823,43 @@
         ]
       },
       {
-        "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.jsx",
+        "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%pages\\index\\index.jsx"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\pages\\index\\index.jsx"
         ],
         "extension": ".jsx",
         "name": "force-3d.jsx",
-        "relativePath": "components\\force-3d\\force-3d.jsx",
+        "relativePath": "\\src\\components\\force-3d\\force-3d.jsx",
         "children": [
           {
-            "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+            "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\force-3d.scss",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%pages\\index\\index.jsx",
-              "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+              "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
             ],
             "extension": ".scss",
             "name": "force-3d.scss",
-            "relativePath": "components\\force-3d\\force-3d.scss",
+            "relativePath": "\\src\\components\\force-3d\\force-3d.scss",
             "children": [],
             "fileDescription": {},
             "type": "sass",
             "language": "css"
           },
           {
-            "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+            "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%pages\\index\\index.jsx",
-              "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+              "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
             ],
             "extension": ".ts",
             "name": "showdemohandle.ts",
-            "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+            "relativePath": "\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
             "children": [],
             "fileDescription": {},
             "type": "typescript",
@@ -1971,26 +1971,26 @@
       }
     ]
   },
-  "%DIR-PATH%components\\controller\\controller.jsx": {
-    "absolutePath": "%DIR-PATH%components\\controller\\controller.jsx",
+  "%DIR-PATH%\\src\\components\\controller\\controller.jsx": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\controller\\controller.jsx",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js"
     ],
     "extension": ".jsx",
     "name": "controller.jsx",
-    "relativePath": "components\\controller\\controller.jsx",
+    "relativePath": "\\src\\components\\controller\\controller.jsx",
     "children": [
       {
-        "absolutePath": "%DIR-PATH%App.js",
+        "absolutePath": "%DIR-PATH%\\src\\App.js",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%components\\controller\\controller.jsx"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\components\\controller\\controller.jsx"
         ],
         "extension": ".js",
         "name": "App.js",
-        "relativePath": "App.js",
+        "relativePath": "\\src\\App.js",
         "children": [
           {
             "name": "circularStructure",
@@ -2000,8 +2000,8 @@
             "relativePath": "circularStructure",
             "extension": "",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js"
             ],
             "children": [],
             "type": "circularStructure",
@@ -2057,27 +2057,27 @@
         ]
       },
       {
-        "absolutePath": "%DIR-PATH%actions\\action.js",
+        "absolutePath": "%DIR-PATH%\\src\\actions\\action.js",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%components\\controller\\controller.jsx"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\components\\controller\\controller.jsx"
         ],
         "extension": ".js",
         "name": "action.js",
-        "relativePath": "actions\\action.js",
+        "relativePath": "\\src\\actions\\action.js",
         "children": [
           {
-            "absolutePath": "%DIR-PATH%actions\\actionType.js",
+            "absolutePath": "%DIR-PATH%\\src\\actions\\actionType.js",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%components\\controller\\controller.jsx",
-              "%DIR-PATH%actions\\action.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\components\\controller\\controller.jsx",
+              "%DIR-PATH%\\src\\actions\\action.js"
             ],
             "extension": ".js",
             "name": "actionType.js",
-            "relativePath": "actions\\actionType.js",
+            "relativePath": "\\src\\actions\\actionType.js",
             "children": [],
             "fileDescription": {},
             "type": "javascript",
@@ -2188,26 +2188,26 @@
       }
     ]
   },
-  "%DIR-PATH%reducers\\reducers.js": {
-    "absolutePath": "%DIR-PATH%reducers\\reducers.js",
+  "%DIR-PATH%\\src\\reducers\\reducers.js": {
+    "absolutePath": "%DIR-PATH%\\src\\reducers\\reducers.js",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js"
     ],
     "extension": ".js",
     "name": "reducers.js",
-    "relativePath": "reducers\\reducers.js",
+    "relativePath": "\\src\\reducers\\reducers.js",
     "children": [
       {
-        "absolutePath": "%DIR-PATH%actions\\actionType.js",
+        "absolutePath": "%DIR-PATH%\\src\\actions\\actionType.js",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%reducers\\reducers.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\reducers\\reducers.js"
         ],
         "extension": ".js",
         "name": "actionType.js",
-        "relativePath": "actions\\actionType.js",
+        "relativePath": "\\src\\actions\\actionType.js",
         "children": [],
         "fileDescription": {},
         "type": "javascript",
@@ -2217,27 +2217,27 @@
         "functions": []
       },
       {
-        "absolutePath": "%DIR-PATH%reducers\\initialState.js",
+        "absolutePath": "%DIR-PATH%\\src\\reducers\\initialState.js",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%reducers\\reducers.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\reducers\\reducers.js"
         ],
         "extension": ".js",
         "name": "initialState.js",
-        "relativePath": "reducers\\initialState.js",
+        "relativePath": "\\src\\reducers\\initialState.js",
         "children": [
           {
-            "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+            "absolutePath": "%DIR-PATH%\\src\\components\\datas\\football.json",
             "ancestors": [
-              "%DIR-PATH%index.js",
-              "%DIR-PATH%App.js",
-              "%DIR-PATH%reducers\\reducers.js",
-              "%DIR-PATH%reducers\\initialState.js"
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\App.js",
+              "%DIR-PATH%\\src\\reducers\\reducers.js",
+              "%DIR-PATH%\\src\\reducers\\initialState.js"
             ],
             "extension": ".json",
             "name": "football.json",
-            "relativePath": "components\\datas\\football.json",
+            "relativePath": "\\src\\components\\datas\\football.json",
             "children": [],
             "fileDescription": {},
             "type": "json",
@@ -2252,45 +2252,45 @@
         "functions": []
       },
       {
-        "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+        "absolutePath": "%DIR-PATH%\\src\\components\\datas\\football.json",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%reducers\\reducers.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\reducers\\reducers.js"
         ],
         "extension": ".json",
         "name": "football.json",
-        "relativePath": "components\\datas\\football.json",
+        "relativePath": "\\src\\components\\datas\\football.json",
         "children": [],
         "fileDescription": {},
         "type": "json",
         "language": "file"
       },
       {
-        "absolutePath": "%DIR-PATH%components\\datas\\blOcksForce.json",
+        "absolutePath": "%DIR-PATH%\\src\\components\\datas\\blOcksForce.json",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%reducers\\reducers.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\reducers\\reducers.js"
         ],
         "extension": ".json",
         "name": "blOcksForce.json",
-        "relativePath": "components\\datas\\blOcksForce.json",
+        "relativePath": "\\src\\components\\datas\\blOcksForce.json",
         "children": [],
         "fileDescription": {},
         "type": "json",
         "language": "file"
       },
       {
-        "absolutePath": "%DIR-PATH%components\\datas\\zachary.json",
+        "absolutePath": "%DIR-PATH%\\src\\components\\datas\\zachary.json",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%reducers\\reducers.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\reducers\\reducers.js"
         ],
         "extension": ".json",
         "name": "zachary.json",
-        "relativePath": "components\\datas\\zachary.json",
+        "relativePath": "\\src\\components\\datas\\zachary.json",
         "children": [],
         "fileDescription": {},
         "type": "json",
@@ -2345,16 +2345,16 @@
       }
     ]
   },
-  "%DIR-PATH%actions\\actionType.js": {
-    "absolutePath": "%DIR-PATH%actions\\actionType.js",
+  "%DIR-PATH%\\src\\actions\\actionType.js": {
+    "absolutePath": "%DIR-PATH%\\src\\actions\\actionType.js",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%reducers\\reducers.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\reducers\\reducers.js"
     ],
     "extension": ".js",
     "name": "actionType.js",
-    "relativePath": "actions\\actionType.js",
+    "relativePath": "\\src\\actions\\actionType.js",
     "children": [],
     "fileDescription": {},
     "type": "javascript",
@@ -2363,28 +2363,28 @@
     "lines": 3,
     "functions": []
   },
-  "%DIR-PATH%reducers\\initialState.js": {
-    "absolutePath": "%DIR-PATH%reducers\\initialState.js",
+  "%DIR-PATH%\\src\\reducers\\initialState.js": {
+    "absolutePath": "%DIR-PATH%\\src\\reducers\\initialState.js",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%reducers\\reducers.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\reducers\\reducers.js"
     ],
     "extension": ".js",
     "name": "initialState.js",
-    "relativePath": "reducers\\initialState.js",
+    "relativePath": "\\src\\reducers\\initialState.js",
     "children": [
       {
-        "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+        "absolutePath": "%DIR-PATH%\\src\\components\\datas\\football.json",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%reducers\\reducers.js",
-          "%DIR-PATH%reducers\\initialState.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\reducers\\reducers.js",
+          "%DIR-PATH%\\src\\reducers\\initialState.js"
         ],
         "extension": ".json",
         "name": "football.json",
-        "relativePath": "components\\datas\\football.json",
+        "relativePath": "\\src\\components\\datas\\football.json",
         "children": [],
         "fileDescription": {},
         "type": "json",
@@ -2398,46 +2398,46 @@
     "lines": 7,
     "functions": []
   },
-  "%DIR-PATH%components\\datas\\football.json": {
-    "absolutePath": "%DIR-PATH%components\\datas\\football.json",
+  "%DIR-PATH%\\src\\components\\datas\\football.json": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\datas\\football.json",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%reducers\\reducers.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\reducers\\reducers.js"
     ],
     "extension": ".json",
     "name": "football.json",
-    "relativePath": "components\\datas\\football.json",
+    "relativePath": "\\src\\components\\datas\\football.json",
     "children": [],
     "fileDescription": {},
     "type": "json",
     "language": "file"
   },
-  "%DIR-PATH%components\\datas\\blOcksForce.json": {
-    "absolutePath": "%DIR-PATH%components\\datas\\blOcksForce.json",
+  "%DIR-PATH%\\src\\components\\datas\\blOcksForce.json": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\datas\\blOcksForce.json",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%reducers\\reducers.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\reducers\\reducers.js"
     ],
     "extension": ".json",
     "name": "blOcksForce.json",
-    "relativePath": "components\\datas\\blOcksForce.json",
+    "relativePath": "\\src\\components\\datas\\blOcksForce.json",
     "children": [],
     "fileDescription": {},
     "type": "json",
     "language": "file"
   },
-  "%DIR-PATH%components\\datas\\zachary.json": {
-    "absolutePath": "%DIR-PATH%components\\datas\\zachary.json",
+  "%DIR-PATH%\\src\\components\\datas\\zachary.json": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\datas\\zachary.json",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%reducers\\reducers.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\reducers\\reducers.js"
     ],
     "extension": ".json",
     "name": "zachary.json",
-    "relativePath": "components\\datas\\zachary.json",
+    "relativePath": "\\src\\components\\datas\\zachary.json",
     "children": [],
     "fileDescription": {},
     "type": "json",
@@ -2451,8 +2451,8 @@
     "relativePath": "circularStructure",
     "extension": "",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js"
     ],
     "children": [],
     "type": "circularStructure",
@@ -2462,28 +2462,28 @@
       "description": "Loop dependence \\n The previous node was existed in dependence chain"
     }
   },
-  "%DIR-PATH%actions\\action.js": {
-    "absolutePath": "%DIR-PATH%actions\\action.js",
+  "%DIR-PATH%\\src\\actions\\action.js": {
+    "absolutePath": "%DIR-PATH%\\src\\actions\\action.js",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%components\\controller\\controller.jsx"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\components\\controller\\controller.jsx"
     ],
     "extension": ".js",
     "name": "action.js",
-    "relativePath": "actions\\action.js",
+    "relativePath": "\\src\\actions\\action.js",
     "children": [
       {
-        "absolutePath": "%DIR-PATH%actions\\actionType.js",
+        "absolutePath": "%DIR-PATH%\\src\\actions\\actionType.js",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%components\\controller\\controller.jsx",
-          "%DIR-PATH%actions\\action.js"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\components\\controller\\controller.jsx",
+          "%DIR-PATH%\\src\\actions\\action.js"
         ],
         "extension": ".js",
         "name": "actionType.js",
-        "relativePath": "actions\\actionType.js",
+        "relativePath": "\\src\\actions\\actionType.js",
         "children": [],
         "fileDescription": {},
         "type": "javascript",
@@ -2567,59 +2567,59 @@
       }
     ]
   },
-  "%DIR-PATH%pages\\index\\index.scss": {
-    "absolutePath": "%DIR-PATH%pages\\index\\index.scss",
+  "%DIR-PATH%\\src\\pages\\index\\index.scss": {
+    "absolutePath": "%DIR-PATH%\\src\\pages\\index\\index.scss",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%pages\\index\\index.jsx"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\pages\\index\\index.jsx"
     ],
     "extension": ".scss",
     "name": "index.scss",
-    "relativePath": "pages\\index\\index.scss",
+    "relativePath": "\\src\\pages\\index\\index.scss",
     "children": [],
     "fileDescription": {},
     "type": "sass",
     "language": "css"
   },
-  "%DIR-PATH%components\\force-2d\\force-2d.jsx": {
-    "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.jsx",
+  "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%pages\\index\\index.jsx"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\pages\\index\\index.jsx"
     ],
     "extension": ".jsx",
     "name": "force-2d.jsx",
-    "relativePath": "components\\force-2d\\force-2d.jsx",
+    "relativePath": "\\src\\components\\force-2d\\force-2d.jsx",
     "children": [
       {
-        "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+        "absolutePath": "%DIR-PATH%\\src\\components\\force-2d\\force-2d.scss",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%pages\\index\\index.jsx",
-          "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+          "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
         ],
         "extension": ".scss",
         "name": "force-2d.scss",
-        "relativePath": "components\\force-2d\\force-2d.scss",
+        "relativePath": "\\src\\components\\force-2d\\force-2d.scss",
         "children": [],
         "fileDescription": {},
         "type": "sass",
         "language": "css"
       },
       {
-        "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+        "absolutePath": "%DIR-PATH%\\src\\components\\datas\\colorlist.js",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%pages\\index\\index.jsx",
-          "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+          "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
         ],
         "extension": ".js",
         "name": "colorlist.js",
-        "relativePath": "components\\datas\\colorlist.js",
+        "relativePath": "\\src\\components\\datas\\colorlist.js",
         "children": [],
         "fileDescription": {},
         "type": "javascript",
@@ -2681,44 +2681,44 @@
       }
     ]
   },
-  "%DIR-PATH%components\\force-3d\\force-3d.jsx": {
-    "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.jsx",
+  "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%pages\\index\\index.jsx"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\pages\\index\\index.jsx"
     ],
     "extension": ".jsx",
     "name": "force-3d.jsx",
-    "relativePath": "components\\force-3d\\force-3d.jsx",
+    "relativePath": "\\src\\components\\force-3d\\force-3d.jsx",
     "children": [
       {
-        "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+        "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\force-3d.scss",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%pages\\index\\index.jsx",
-          "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+          "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
         ],
         "extension": ".scss",
         "name": "force-3d.scss",
-        "relativePath": "components\\force-3d\\force-3d.scss",
+        "relativePath": "\\src\\components\\force-3d\\force-3d.scss",
         "children": [],
         "fileDescription": {},
         "type": "sass",
         "language": "css"
       },
       {
-        "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+        "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
         "ancestors": [
-          "%DIR-PATH%index.js",
-          "%DIR-PATH%App.js",
-          "%DIR-PATH%pages\\index\\index.jsx",
-          "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\App.js",
+          "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+          "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
         ],
         "extension": ".ts",
         "name": "showdemohandle.ts",
-        "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+        "relativePath": "\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
         "children": [],
         "fileDescription": {},
         "type": "typescript",
@@ -2777,65 +2777,65 @@
       }
     ]
   },
-  "%DIR-PATH%components\\force-3d\\force-3d.scss": {
-    "absolutePath": "%DIR-PATH%components\\force-3d\\force-3d.scss",
+  "%DIR-PATH%\\src\\components\\force-3d\\force-3d.scss": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\force-3d.scss",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%pages\\index\\index.jsx",
-      "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+      "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
     ],
     "extension": ".scss",
     "name": "force-3d.scss",
-    "relativePath": "components\\force-3d\\force-3d.scss",
+    "relativePath": "\\src\\components\\force-3d\\force-3d.scss",
     "children": [],
     "fileDescription": {},
     "type": "sass",
     "language": "css"
   },
-  "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts": {
-    "absolutePath": "%DIR-PATH%components\\force-3d\\demoHandle\\showdemohandle.ts",
+  "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%pages\\index\\index.jsx",
-      "%DIR-PATH%components\\force-3d\\force-3d.jsx"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+      "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx"
     ],
     "extension": ".ts",
     "name": "showdemohandle.ts",
-    "relativePath": "components\\force-3d\\demoHandle\\showdemohandle.ts",
+    "relativePath": "\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
     "children": [],
     "fileDescription": {},
     "type": "typescript",
     "language": "file"
   },
-  "%DIR-PATH%components\\force-2d\\force-2d.scss": {
-    "absolutePath": "%DIR-PATH%components\\force-2d\\force-2d.scss",
+  "%DIR-PATH%\\src\\components\\force-2d\\force-2d.scss": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\force-2d\\force-2d.scss",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%pages\\index\\index.jsx",
-      "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+      "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
     ],
     "extension": ".scss",
     "name": "force-2d.scss",
-    "relativePath": "components\\force-2d\\force-2d.scss",
+    "relativePath": "\\src\\components\\force-2d\\force-2d.scss",
     "children": [],
     "fileDescription": {},
     "type": "sass",
     "language": "css"
   },
-  "%DIR-PATH%components\\datas\\colorlist.js": {
-    "absolutePath": "%DIR-PATH%components\\datas\\colorlist.js",
+  "%DIR-PATH%\\src\\components\\datas\\colorlist.js": {
+    "absolutePath": "%DIR-PATH%\\src\\components\\datas\\colorlist.js",
     "ancestors": [
-      "%DIR-PATH%index.js",
-      "%DIR-PATH%App.js",
-      "%DIR-PATH%pages\\index\\index.jsx",
-      "%DIR-PATH%components\\force-2d\\force-2d.jsx"
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\App.js",
+      "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+      "%DIR-PATH%\\src\\components\\force-2d\\force-2d.jsx"
     ],
     "extension": ".js",
     "name": "colorlist.js",
-    "relativePath": "components\\datas\\colorlist.js",
+    "relativePath": "\\src\\components\\datas\\colorlist.js",
     "children": [],
     "fileDescription": {},
     "type": "javascript",
