@@ -7,7 +7,7 @@ import {
   onGotCircularStructureNode,
   onGotFileString,
 } from "../../../src/fileAnalysis/fileAnalysis";
-import { dependenciesTreeDataToTransportsData } from "../../../src/data-dependencyTree/processTreeData"
+import { dependenciesTreeDataToTransportsData, transportsDataToDependenciesTreeData } from "../../../src/data-dependencyTree/processTreeData"
 import { DependencyTreeData } from "../../../src/data-dependencyTree/dependencyTreeData";
 
 const resolveExtensions = defaultOptions.resolveExtensions;
@@ -54,7 +54,19 @@ export const getSavedDataByCompute = function (testCase: string, folderPath: str
     }
   );
   const data = dependenciesTreeDataToTransportsData(dt as DependencyTreeData, dn, folderPath)
-  fs.writeFileSync(path.resolve(__dirname, `./${testCase}/savedData/savedData2.json`), JSON.stringify(data));
   return JSON.stringify(data);
-  // return data;
+}
+
+export const getWebViewDataFromFile = function (testCase: string) {
+  const dependencyTreeData = fs.readFileSync(path.resolve(__dirname, `./${testCase}/webViewData/webViewData.json`)).toString();
+  return dependencyTreeData;
+}
+
+export const getWebViewDataByCompute = function (testCase: string, folderPath: string) {
+  const dirPathString = JSON.stringify(folderPath).replace(/"/g, "").replace(/\\/g, "\\\\");
+  const replaceDirPathReg = new RegExp(dirPathString, 'g')
+
+  const { dependencyTree, dependencyNodes } = JSON.parse(fs.readFileSync(path.resolve(__dirname, `./${testCase}/savedData/savedData.json`)).toString());
+  const dependencyTreeData = transportsDataToDependenciesTreeData(dependencyTree, dependencyNodes, folderPath)
+  return JSON.stringify(dependencyTreeData, null, 2).replace(replaceDirPathReg, "%DIR-PATH%")
 }
