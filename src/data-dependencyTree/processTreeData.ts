@@ -8,7 +8,7 @@ const getFileID = function (dependencyTreeData: DependencyTreeData) {
 };
 const getNodeID = function (dependencyTreeData: DependencyTreeData) {
   let ancestors = [].concat(dependencyTreeData.ancestors as []) as string[];
-  ancestors.push(dependencyTreeData.absolutePath);
+  ancestors.push(dependencyTreeData.relativePath);
   return md5(ancestors.toString());
 };
 const getAncestors = function (
@@ -68,12 +68,12 @@ export const dependenciesTreeDataToTransportsData = function (
       tree: DependencyTree;
     };
     tree.name = node.name;
+    tree.ancestors = getAncestors(node, dirPath);
+    node.ancestors = tree.ancestors;
     tree.fileID = getFileID(node);
     node.fileID = tree.fileID;
     tree.nodeID = getNodeID(node);
     node.nodeID = tree.nodeID;
-    tree.ancestors = getAncestors(node, dirPath);
-    node.ancestors = tree.ancestors;
     tree.children = [] as DependencyTree[];
     for (let i = 0; i < node.children.length; i++) {
       let treeChild = {} as DependencyTree;
@@ -84,7 +84,7 @@ export const dependenciesTreeDataToTransportsData = function (
       });
     }
   }
-  return { dependencyNodes, dependencyTree };
+  return { dependencyTree, dependencyNodes };
 };
 export const transportsDataToDependenciesTreeData = function (
   dependencyTree: DependencyTree,
