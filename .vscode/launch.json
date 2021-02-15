@@ -18,21 +18,6 @@
         "${workspaceFolder}/outWebView/**/*.js"
 			],
 			// "preLaunchTask": "${defaultBuildTask}"
-		},
-		{
-			"name": "Extension Tests",
-			"type": "extensionHost",
-			"request": "launch",
-			"runtimeExecutable": "${execPath}",
-			"args": [
-				"--extensionDevelopmentPath=${workspaceFolder}",
-				"--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
-			],
-			"outFiles": [
-        "${workspaceFolder}/outExtension/**/*.js",
-        "${workspaceFolder}/outWebView/**/*.js"
-			],
-			// "preLaunchTask": "${defaultBuildTask}"
 		}
 	]
 }
