@@ -12,7 +12,7 @@ import {
 import { msgGetSavedData } from "./utils/message/messages";
 import * as stringRandom from "string-random";
 import { setData } from "./utils/data/data";
-
+import { getCurrentFolderPath } from "./utils/utils"
 export const command_createView = vscode.commands.registerCommand(
   "framegraph.createView",
   () => {
@@ -46,6 +46,7 @@ export const command_refreshFile = vscode.commands.registerCommand(
   (fileName, fileData) => {
     // no catch error may be webview is closed
     let postMessage = false;
+    let refresh = true;
     if (global.webViewPanel) {
       postMessage = true;
       postMessageCatchError({
@@ -53,14 +54,14 @@ export const command_refreshFile = vscode.commands.registerCommand(
         value: stringRandom(),
       });
     }
-    const data = getDependencyTreeData(postMessage);
+    const data = getDependencyTreeData(postMessage, refresh);
     if (data) {
       global.dependencyTreeData = data;
       renderTreeView(global.dependencyTreeData.dependencyTreeData);
       if (global.webViewPanel) {
         postMessageCatchError({
           key: MESSAGE_DEPENDENCY_TREE_DATA,
-          value: data.transportsData,
+          value: { data: data.transportsData, folderPath: getCurrentFolderPath() },
         });
       }
     }
