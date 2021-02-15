@@ -30,12 +30,12 @@ export const getDataFromDataFile = function (): any {
 
 export const getData = function ():
   | {
-      dependencyTreeData: DependencyTreeData;
-      transportsData: {
-        dependencyTree: DependencyTree;
-        dependencyNodes: DependencyNodes;
-      };
-    }
+    dependencyTreeData: DependencyTreeData;
+    transportsData: {
+      dependencyTree: DependencyTree;
+      dependencyNodes: DependencyNodes;
+    };
+  }
   | false {
   let dp = {} as DependencyTreeData;
   const data = getDataFromDataFile();
@@ -70,3 +70,9 @@ export const setData = function (value: any): boolean {
     return false;
   }
 };
+export const isSavedData = function (dirPath?: string): boolean {
+  if (!dirPath) dirPath = getCurrentFolderPath();
+  const DataFilePath = dirPath + "/.framegraph/data.json";
+  if (!pathExists(DataFilePath)) return false;
+  return true;
+}

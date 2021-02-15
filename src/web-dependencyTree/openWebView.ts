@@ -27,12 +27,13 @@ import {
   msgGetLanguage,
   msgGetActiveThemeKind,
   postSetting,
+  msgGetSavedData
 } from "../utils/message/messages";
 
 import { pathExists } from "../utils/utils";
 import { onError } from "../utils/error/onError";
 import { GET_DEPENDENCY_TREE_FAIL } from "../utils/error/errorKey";
-
+import { isSavedData } from "../utils/data/data";
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
  * @param {*} templatePath 相对于插件根目录的html文件绝对路径
@@ -88,6 +89,9 @@ export const reOpenWebView = function (
       statusMsgGetFolderPath.postSuccess();
     } else {
       statusMsgGetFolderPath.postError();
+    }
+    if (isSavedData()) {
+      msgGetSavedData.post();
     }
     if (
       entryFilePath &&
