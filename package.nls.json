@@ -6,5 +6,6 @@
   "framegraph.refresh": "Refresh dependencies data",
   "framegraph.framegraphTreeView": "FrameGraph",
   "framegraph.DependencyTree": "DependencyTree",
-  "framegraph.openFileInView": "Edit"
+  "framegraph.openFileInView": "Edit",
+  "framegraph.upDateData": "Update Data"
 }

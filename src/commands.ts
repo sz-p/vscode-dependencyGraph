@@ -24,6 +24,41 @@ export const command_createView = vscode.commands.registerCommand(
 // 	postMessageCatchError({ key: 'postMessageTest', value: message++ });
 // });
 
+const refreshFile = () => {
+  // no catch error may be webview is closed
+  let postMessage = false;
+  let refresh = true;
+  if (global.webViewPanel) {
+    postMessage = true;
+    postMessageCatchError({
+      key: MESSAGE_UPDATE_WEBVIEW,
+      value: stringRandom(),
+    });
+  }
+  const data = getDependencyTreeData(postMessage, refresh);
+  if (data) {
+    global.dependencyTreeData = data;
+    renderTreeView(global.dependencyTreeData.dependencyTreeData);
+    if (global.webViewPanel) {
+      postMessageCatchError({
+        key: MESSAGE_DEPENDENCY_TREE_DATA,
+        value: { data: data.transportsData, folderPath: getCurrentFolderPath() },
+      });
+    }
+  }
+}
+
+const saveData = () => {
+  if (global?.dependencyTreeData?.transportsData) {
+    setData(global.dependencyTreeData.transportsData);
+    if (global.webViewPanel) {
+      msgGetSavedData.post();
+    }
+  } else {
+    //TODO no data error
+  }
+}
+
 export const command_focusOnNode = vscode.commands.registerCommand(
   "framegraph.focusOnNode",
   (fileName, fileData) => {
@@ -43,29 +78,7 @@ export const command_reOpenView = vscode.commands.registerCommand(
 );
 export const command_refreshFile = vscode.commands.registerCommand(
   "framegraph.refreshFile",
-  (fileName, fileData) => {
-    // no catch error may be webview is closed
-    let postMessage = false;
-    let refresh = true;
-    if (global.webViewPanel) {
-      postMessage = true;
-      postMessageCatchError({
-        key: MESSAGE_UPDATE_WEBVIEW,
-        value: stringRandom(),
-      });
-    }
-    const data = getDependencyTreeData(postMessage, refresh);
-    if (data) {
-      global.dependencyTreeData = data;
-      renderTreeView(global.dependencyTreeData.dependencyTreeData);
-      if (global.webViewPanel) {
-        postMessageCatchError({
-          key: MESSAGE_DEPENDENCY_TREE_DATA,
-          value: { data: data.transportsData, folderPath: getCurrentFolderPath() },
-        });
-      }
-    }
-  }
+  refreshFile
 );
 // TODO function overload
 export const command_openFile = vscode.commands.registerCommand(
@@ -86,19 +99,18 @@ export const command_openFile = vscode.commands.registerCommand(
 
 export const command_saveData = vscode.commands.registerCommand(
   "framegraph.saveData",
+  saveData
+);
+export const command_upDateData = vscode.commands.registerCommand(
+  "framegraph.upDateData",
   () => {
-    if (global?.dependencyTreeData?.transportsData) {
-      setData(global.dependencyTreeData.transportsData);
-      if (global.webViewPanel) {
-        msgGetSavedData.post();
-      }
-    } else {
-      //TODO no data error
-    }
+    refreshFile();
+    saveData();
   }
 );
 export const allCommands = [
   command_createView,
   command_reOpenView,
   command_saveData,
+  command_upDateData
 ];
