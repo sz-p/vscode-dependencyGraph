@@ -42,15 +42,16 @@ import {
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
 export const getDependencyTreeData = (
-  postMessage?: boolean
+  postMessage?: boolean,
+  refresh?: boolean
 ):
   | {
-      dependencyTreeData: DependencyTreeData;
-      transportsData: {
-        dependencyTree: DependencyTree;
-        dependencyNodes: DependencyNodes;
-      };
-    }
+    dependencyTreeData: DependencyTreeData;
+    transportsData: {
+      dependencyTree: DependencyTree;
+      dependencyNodes: DependencyNodes;
+    };
+  }
   | undefined => {
   // find folder Path catch path sendStatus
   const folderPath = getCurrentFolderPath();
@@ -107,7 +108,7 @@ export const getDependencyTreeData = (
   }
   postSetting(setting);
   let dpDataFromFile = getData();
-  if (dpDataFromFile) {
+  if (dpDataFromFile && !refresh) {
     msgGetSavedData.post();
     return dpDataFromFile;
   }
