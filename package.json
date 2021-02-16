@@ -72,6 +72,11 @@
         "icon": "$(refresh)"
       },
       {
+        "command": "framegraph.upDateData",
+        "title": "%framegraph.upDateData%",
+        "icon": "$(refresh)"
+      },
+      {
         "command": "framegraph.createView",
         "title": "Open page"
       },

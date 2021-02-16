@@ -6,5 +6,6 @@
   "framegraph.refresh": "刷新依赖树",
   "framegraph.framegraphTreeView": "架构图",
   "framegraph.DependencyTree": "依赖树",
-  "framegraph.openFileInView": "编辑"
+  "framegraph.openFileInView": "编辑",
+  "framegraph.upDateData": "更新数据"
 }
