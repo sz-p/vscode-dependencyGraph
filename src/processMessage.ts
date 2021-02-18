@@ -4,7 +4,7 @@ import { Msg } from "./utils/message/message";
 import { setSetting } from "./utils/setting/setting";
 import { onError } from "./utils/error/onError";
 import { NO_FOLDER } from "./utils/error/errorKey";
-
+import { exportSvg, exportPng } from "./utils/data/svgAndPng";
 const actionOpenFolder = function (msg: Msg) {
   vscode.commands.executeCommand("workbench.action.files.openFolder");
 };
@@ -16,6 +16,12 @@ const actionSetSetting = async function (msg: Msg) {
   }
   vscode.commands.executeCommand("framegraph.refreshFile");
 };
+const actionExportSvg = function (msg: Msg) {
+  exportSvg(msg.value)
+}
+const actionExportPng = function (msg: Msg) {
+  exportPng(msg.value)
+}
 const actionOpenFile = function (msg: Msg) {
   vscode.commands.executeCommand("framegraph.openFileInView", msg.value);
 };
@@ -31,7 +37,9 @@ const messageCase = () => {
     [MESSAGES.MESSAGE_OPEN_FOLDER, actionOpenFolder],
     [MESSAGES.MESSAGE_SET_SETTING, actionSetSetting],
     [MESSAGES.MESSAGE_SAVE_DATA, actionSaveData],
-    [MESSAGES.MESSAGE_UPDATE_DATA, actionUpDateData]
+    [MESSAGES.MESSAGE_UPDATE_DATA, actionUpDateData],
+    [MESSAGES.MESSAGE_EXPORT_SVG, actionExportSvg],
+    [MESSAGES.MESSAGE_EXPORT_PNG, actionExportPng]
   ]);
 };
 
