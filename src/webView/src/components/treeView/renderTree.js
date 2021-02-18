@@ -76,6 +76,7 @@ export class D3Tree {
         .append("svg")
         .attr("width", this.width)
         .attr("height", this.height)
+        .attr("id","treeViewSvgBox")
         .on("click", () => {
           store.dispatch(action_selectNode({}));
         });
@@ -83,6 +84,7 @@ export class D3Tree {
     if (!this.svg) {
       this.svg = this.svgBox
         .append("g")
+        .attr("id","treeViewSvg")
         .attr(
           "transform",
           "translate(" +

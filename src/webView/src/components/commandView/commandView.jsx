@@ -8,7 +8,7 @@ import {
 } from "office-ui-fabric-react";
 // import { , , IContextualMenuProps, IIconProps } from 'office-ui-fabric-react';
 import { msgSaveData, msgUpDateData } from "../../utils/messages";
-
+import { exportSvg, exportPng } from "./exportHandle";
 import { TooltipHost } from "office-ui-fabric-react/lib/Tooltip";
 import { i18n } from "../../../../i18n/i18n";
 import {
@@ -29,9 +29,6 @@ const hostStyles = {
 };
 function _getMenu(props) {
   return <ContextualMenu {...props} />;
-}
-function _onMenuClick(ev) {
-  console.log(ev);
 }
 const commandView = function (props) {
   const tooltipId_saveData = useId("tooltipId_saveData");
@@ -72,12 +69,12 @@ const commandView = function (props) {
       {
         key: "svg",
         text: TEXT_EXPORT_SVG,
-        // iconProps: { iconName: "Mail" },
+        onClick: exportSvg
       },
       {
         key: "png",
         text: TEXT_EXPORT_PNG,
-        // iconProps: { iconName: "Calendar" },
+        onClick: exportPng
       },
     ],
     directionalHintFixed: true,
@@ -133,7 +130,6 @@ const commandView = function (props) {
             iconProps={{ iconName: "Export" }}
             menuProps={menuProps}
             menuAs={_getMenu}
-            onMenuClick={_onMenuClick}
             allowDisabledFocus
           />
         </TooltipHost>
