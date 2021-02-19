@@ -20,7 +20,9 @@ const resolveSetting = function (props) {
   let [TEXT_SET_CONFIRM, SET_CONFIRM] = useState();
   useEffect(() => {
     if (setting && setting[SETTING_KEY_RESOLVE_EXTENSIONS]) {
-      setResolveExtensionStatus(setting[SETTING_KEY_RESOLVE_EXTENSIONS]);
+      setResolveExtensionStatus(
+        setting[SETTING_KEY_RESOLVE_EXTENSIONS].toString()
+      );
     }
   }, [setting]);
   useEffect(() => {

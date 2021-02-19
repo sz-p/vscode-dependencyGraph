@@ -1,36 +1,62 @@
 import * as MESSAGES from "./utils/message/messagesKeys";
 import * as vscode from "vscode";
-import { Msg } from "./utils/message/message";
+import { Msg } from "./utils/message/message.d";
 import { setSetting } from "./utils/setting/setting";
 import { onError } from "./utils/error/onError";
 import { NO_FOLDER } from "./utils/error/errorKey";
 import { exportSvg, exportPng } from "./utils/data/svgAndPng";
+import { msgRunCommandStatus } from "./utils/message/messages";
+import { SETTING_KEY_ENTRY_FILE_PATH } from "./utils/setting/settingKey";
 const actionOpenFolder = function (msg: Msg) {
   vscode.commands.executeCommand("workbench.action.files.openFolder");
 };
 const actionSetSetting = async function (msg: Msg) {
   try {
     await setSetting(msg.value.key, msg.value.value);
+    msgRunCommandStatus("setting", msg.value.key, true).post();
   } catch (e) {
+    msgRunCommandStatus("setting", msg.value.key, false).post();
     onError(NO_FOLDER, e);
   }
-  vscode.commands.executeCommand("framegraph.refreshFile");
+  if (msg.value.key === SETTING_KEY_ENTRY_FILE_PATH) {
+    vscode.commands.executeCommand("framegraph.refreshFile");
+  }
 };
-const actionExportSvg = function (msg: Msg) {
-  exportSvg(msg.value)
-}
-const actionExportPng = function (msg: Msg) {
-  exportPng(msg.value)
-}
+const actionExportSvg = async function (msg: Msg) {
+  try {
+    await exportSvg(msg.value);
+    msgRunCommandStatus("command", msg.key, true).post();
+  } catch (e) {
+    msgRunCommandStatus("command", msg.key, false).post();
+  }
+};
+const actionExportPng = async function (msg: Msg) {
+  try {
+    await exportPng(msg.value);
+    msgRunCommandStatus("command", msg.key, true).post();
+  } catch (e) {
+    msgRunCommandStatus("command", msg.key, false).post();
+  }
+};
 const actionOpenFile = function (msg: Msg) {
   vscode.commands.executeCommand("framegraph.openFileInView", msg.value);
 };
-const actionSaveData = function (msg: Msg) {
-  vscode.commands.executeCommand("framegraph.saveData");
+const actionSaveData = async function (msg: Msg) {
+  try {
+    await vscode.commands.executeCommand("framegraph.saveData");
+    msgRunCommandStatus("command", msg.key, true).post();
+  } catch (e) {
+    msgRunCommandStatus("command", msg.key, false).post();
+  }
 };
-const actionUpDateData = function (msg: Msg) {
-  vscode.commands.executeCommand("framegraph.upDateData");
-}
+const actionUpDateData = async function (msg: Msg) {
+  try {
+    await vscode.commands.executeCommand("framegraph.upDateData");
+    msgRunCommandStatus("command", msg.key, true).post();
+  } catch (e) {
+    msgRunCommandStatus("command", msg.key, false).post();
+  }
+};
 const messageCase = () => {
   return new Map([
     [MESSAGES.MESSAGE_OPEN_FILE_FROM_WEBVIEW, actionOpenFile],
@@ -39,7 +65,7 @@ const messageCase = () => {
     [MESSAGES.MESSAGE_SAVE_DATA, actionSaveData],
     [MESSAGES.MESSAGE_UPDATE_DATA, actionUpDateData],
     [MESSAGES.MESSAGE_EXPORT_SVG, actionExportSvg],
-    [MESSAGES.MESSAGE_EXPORT_PNG, actionExportPng]
+    [MESSAGES.MESSAGE_EXPORT_PNG, actionExportPng],
   ]);
 };
 

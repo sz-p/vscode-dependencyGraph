@@ -7,6 +7,7 @@
 }
 .settingView {
   margin: 20px auto 0px auto;
+  height: calc(100% - 20px);
   position: absolute;
   width: 100%;
   max-width: 800px;
