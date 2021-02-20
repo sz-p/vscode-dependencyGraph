@@ -65,3 +65,8 @@ export const action_getSavedData = createAction(
   type.TYPE_GET_SAVED_DATA,
   returnParams
 );
+
+export const action_getRunCommandStatus = createAction(
+  type.TYPE_GET_RUN_COMMAND_STATUS,
+  returnParams
+);

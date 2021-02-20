@@ -13,4 +13,5 @@ export const initialState = {
   getDataFailed: undefined,
   focusOn: undefined,
   viewHash: undefined,
+  commandSettingStatus: {},
 };

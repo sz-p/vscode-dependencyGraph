@@ -44,7 +44,7 @@ zhcn[types.OPEN_FOLDER] = "打开文件夹";
 zhcn[types.ENTRY_FILE] = "入口文件";
 zhcn[types.SET_ENTRY_FILE] = "设置入口文件";
 zhcn[types.RESOLVE_EXTENSIONS] = "被解析文件的后缀名";
-zhcn[types.RESOLVE_ALIAS] = "别名";
+zhcn[types.RESOLVE_ALIAS] = "路径别名";
 zhcn[types.NO_RESOLVE_ALIAS] = "无路径别名";
 zhcn[types.RESOLVE_PATH] = "被解析文件的路径";
 

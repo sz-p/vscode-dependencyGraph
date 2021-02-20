@@ -12,6 +12,7 @@ import { AliasSetting } from "./aliasSetting";
 import { i18n } from "../../../../i18n/i18n";
 import { SETTING } from "../../../../i18n/types";
 import { CommandView } from "../commandView/commandView";
+import { SettingCommandStatusView } from "../settingCommandStatusView/settingCommandStatusView";
 const settingView = function (props) {
   const { showSetting, language } = props;
   let [TEXT_SETTING, SET_TEXT_SETTING] = useState();
@@ -37,6 +38,7 @@ const settingView = function (props) {
         <ResolveSetting />
         <AliasSetting />
         <CommandView />
+        <SettingCommandStatusView />
       </div>
     </div>
   );

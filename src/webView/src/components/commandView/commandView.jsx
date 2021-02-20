@@ -69,12 +69,12 @@ const commandView = function (props) {
       {
         key: "svg",
         text: TEXT_EXPORT_SVG,
-        onClick: exportSvg
+        onClick: exportSvg,
       },
       {
         key: "png",
         text: TEXT_EXPORT_PNG,
-        onClick: exportPng
+        onClick: exportPng,
       },
     ],
     directionalHintFixed: true,
@@ -100,22 +100,22 @@ const commandView = function (props) {
             />
           </TooltipHost>
         ) : (
-            <TooltipHost
-              // content={TEXT_UPDATE_DATA_TOOLTIP}
-              id={tooltipId_updateData}
-              calloutProps={calloutProps}
-              styles={hostStyles}
-            >
-              <PrimaryButton
-                style={{ width: "100%" }}
-                className="commandView-button commandView-button-update"
-                text={TEXT_UPDATE_DATA}
-                onClick={() => {
-                  msgUpDateData.post();
-                }}
-              />
-            </TooltipHost>
-          )}
+          <TooltipHost
+            // content={TEXT_UPDATE_DATA_TOOLTIP}
+            id={tooltipId_updateData}
+            calloutProps={calloutProps}
+            styles={hostStyles}
+          >
+            <PrimaryButton
+              style={{ width: "100%" }}
+              className="commandView-button commandView-button-update"
+              text={TEXT_UPDATE_DATA}
+              onClick={() => {
+                msgUpDateData.post();
+              }}
+            />
+          </TooltipHost>
+        )}
 
         <TooltipHost
           // content={TEXT_UPDATE_DATA_TOOLTIP}
