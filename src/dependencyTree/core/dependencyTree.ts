@@ -79,7 +79,10 @@ export class DependencyTree {
       this.options.onGetOldDependencyTreeNode(dependencyNode);
     }
   }
-  private triggerGetCircularStructureNode(dependencyNode: DependencyTreeData, dependencyHash: DependencyHash) {
+  private triggerGetCircularStructureNode(
+    dependencyNode: DependencyTreeData,
+    dependencyHash: DependencyHash
+  ) {
     if (typeof this.options.onGotCircularStructureNode === "function") {
       this.options.onGotCircularStructureNode(dependencyNode, dependencyHash);
     }
@@ -120,6 +123,25 @@ export class DependencyTree {
     );
     circularStructureNode.children = [circularStructureNodeChild];
     return circularStructureNode;
+  }
+  private reSetAnalysedNodesAncestors(
+    absolutePath: string,
+    ancestors: string[],
+    dependencyChildren: DependencyTreeData
+  ) {
+    let nodeDeep = ancestors.length;
+    const dependencyChildrenAncestors = [].concat(ancestors as []) as string[];
+    dependencyChildrenAncestors.push(absolutePath);
+    dependencyChildren.ancestors = dependencyChildrenAncestors;
+    // if node have children reset children's ancestors
+    let stack = [].concat(
+      dependencyChildren.children as []
+    ) as DependencyTreeData[];
+    while (stack.length) {
+      let node = stack.pop() as DependencyTreeData;
+      node.ancestors.splice(nodeDeep, 0, absolutePath);
+      stack = stack.concat(node.children);
+    }
   }
   registerParser(key: string, parser: Parser) {
     this.parsers[key] = parser;
@@ -196,16 +218,19 @@ export class DependencyTree {
               childrenPath,
               this.dependencyHash
             );
-            this.triggerGetCircularStructureNode(dependencyChildren, this.dependencyHash);
+            this.triggerGetCircularStructureNode(
+              dependencyChildren,
+              this.dependencyHash
+            );
           } else {
             dependencyChildren = cloneDeep(this.dependencyHash[childrenPath]);
             this.triggerGetOldDependencyTreeNode(dependencyChildren);
           }
-          const dependencyChildrenAncestors = [].concat(
-            ancestors as []
-          ) as string[];
-          dependencyChildrenAncestors.push(absolutePath);
-          dependencyChildren.ancestors = dependencyChildrenAncestors;
+          this.reSetAnalysedNodesAncestors(
+            absolutePath,
+            ancestors,
+            dependencyChildren
+          );
         }
         // find new node
         else {

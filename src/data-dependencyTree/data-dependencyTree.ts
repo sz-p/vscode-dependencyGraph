@@ -1,4 +1,3 @@
-import * as md5 from "md5";
 import * as path from "path";
 import { defaultOptions } from "../dependencyTree/core/defaultOptions";
 import { DependencyTreeData } from "./dependencyTreeData";
