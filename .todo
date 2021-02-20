@@ -38,18 +38,21 @@
 [x] fix: fix resolve path
 [x] feat: get saved data status
 [x] fix: click circularStructure node error
+[x] feat: remove absolute path in DependencyTreeData
+[x] feat: setting page command view
+[x] fix: click tree view node open webview node error
+[x] feat: save file node
+[x] feat: post message after set setting or run command
 
-[ ] feat: remove absolute path in DependencyTreeData
-[ ] feat: setting page command view
+[ ] feat: webview show waiting message after set setting or run command
 [ ] fix: fix dependencyTree loaded error
-[ ] fix: click tree view node open webview node error
-
+[ ] fix: get dependencyTree error
+[ ] fix: fix export view position error
 
 [ ] feat: update one file
 [ ] feat: webview data read
 [ ] feat: webview data save
-[ ] feat: save file node
-[ ] feat: if main of package.json is unequal with config use main
+~~[ ] feat: if main of package.json is unequal with config use main~~
 
 TODO
 ~~[ ] feat: monaco editor highlight(can not use monaco language server in webview https://github.com/microsoft/vscode/issues/87282)~~
