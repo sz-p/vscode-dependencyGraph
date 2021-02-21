@@ -341,7 +341,8 @@
                   "extension": "",
                   "ancestors": [
                     "%DIR-PATH%\\src\\index.js",
-                    "%DIR-PATH%\\src\\App.js"
+                    "%DIR-PATH%\\src\\App.js",
+                    "%DIR-PATH%\\src\\components\\controller\\controller.jsx"
                   ],
                   "children": [],
                   "type": "circularStructure",
