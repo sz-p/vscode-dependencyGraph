@@ -1,0 +1,141 @@
+{
+  "absolutePath": "%DIR-PATH%\\src\\index.js",
+  "ancestors": [],
+  "children": [
+    {
+      "absolutePath": "%DIR-PATH%\\src\\middleNode.js",
+      "ancestors": [
+        "%DIR-PATH%\\src\\index.js"
+      ],
+      "extension": ".js",
+      "name": "middleNode.js",
+      "relativePath": "\\src\\middleNode.js",
+      "children": [
+        {
+          "absolutePath": "%DIR-PATH%\\src\\sameLeaf\\a.js",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\middleNode.js"
+          ],
+          "extension": ".js",
+          "name": "a.js",
+          "relativePath": "\\src\\sameLeaf\\a.js",
+          "children": [
+            {
+              "absolutePath": "%DIR-PATH%\\src\\sameLeaf\\b.js",
+              "ancestors": [
+                "%DIR-PATH%\\src\\index.js",
+                "%DIR-PATH%\\src\\middleNode.js",
+                "%DIR-PATH%\\src\\sameLeaf\\a.js"
+              ],
+              "extension": ".js",
+              "name": "b.js",
+              "relativePath": "\\src\\sameLeaf\\b.js",
+              "children": [
+                {
+                  "absolutePath": "%DIR-PATH%\\src\\sameLeaf\\c.js",
+                  "ancestors": [
+                    "%DIR-PATH%\\src\\index.js",
+                    "%DIR-PATH%\\src\\middleNode.js",
+                    "%DIR-PATH%\\src\\sameLeaf\\a.js",
+                    "%DIR-PATH%\\src\\sameLeaf\\b.js"
+                  ],
+                  "extension": ".js",
+                  "name": "c.js",
+                  "relativePath": "\\src\\sameLeaf\\c.js",
+                  "children": [],
+                  "fileDescription": {},
+                  "type": "javascript",
+                  "language": "javascript",
+                  "analysed": true,
+                  "lines": 1,
+                  "functions": []
+                }
+              ],
+              "fileDescription": {},
+              "type": "javascript",
+              "language": "javascript",
+              "analysed": true,
+              "lines": 2,
+              "functions": []
+            }
+          ],
+          "fileDescription": {},
+          "type": "javascript",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 2,
+          "functions": []
+        }
+      ],
+      "fileDescription": {},
+      "type": "javascript",
+      "language": "javascript",
+      "analysed": true,
+      "lines": 1,
+      "functions": []
+    },
+    {
+      "absolutePath": "%DIR-PATH%\\src\\sameLeaf\\a.js",
+      "ancestors": [
+        "%DIR-PATH%\\src\\index.js"
+      ],
+      "extension": ".js",
+      "name": "a.js",
+      "relativePath": "\\src\\sameLeaf\\a.js",
+      "children": [
+        {
+          "absolutePath": "%DIR-PATH%\\src\\sameLeaf\\b.js",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\sameLeaf\\a.js"
+          ],
+          "extension": ".js",
+          "name": "b.js",
+          "relativePath": "\\src\\sameLeaf\\b.js",
+          "children": [
+            {
+              "absolutePath": "%DIR-PATH%\\src\\sameLeaf\\c.js",
+              "ancestors": [
+                "%DIR-PATH%\\src\\index.js",
+                "%DIR-PATH%\\src\\sameLeaf\\a.js",
+                "%DIR-PATH%\\src\\sameLeaf\\b.js"
+              ],
+              "extension": ".js",
+              "name": "c.js",
+              "relativePath": "\\src\\sameLeaf\\c.js",
+              "children": [],
+              "fileDescription": {},
+              "type": "javascript",
+              "language": "javascript",
+              "analysed": true,
+              "lines": 1,
+              "functions": []
+            }
+          ],
+          "fileDescription": {},
+          "type": "javascript",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 2,
+          "functions": []
+        }
+      ],
+      "fileDescription": {},
+      "type": "javascript",
+      "language": "javascript",
+      "analysed": true,
+      "lines": 2,
+      "functions": []
+    }
+  ],
+  "extension": ".js",
+  "name": "index.js",
+  "relativePath": "\\src\\index.js",
+  "fileDescription": {},
+  "type": "javascript",
+  "language": "javascript",
+  "analysed": true,
+  "lines": 3,
+  "functions": []
+}

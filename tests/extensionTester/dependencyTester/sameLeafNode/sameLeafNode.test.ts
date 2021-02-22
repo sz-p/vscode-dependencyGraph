@@ -12,20 +12,21 @@ const {
   dependencyTreeData,
   dependencyNodesData,
   folderPath,
-} = getDependencyTreeDataFromFile("realProject");
+} = getDependencyTreeDataFromFile("sameLeafNode");
 const { dependencyTree, dependencyNodes } = getDependencyTreeDataByCompute(
   folderPath,
   mainFilePath
 );
-const savedDataFromFile = getSavedDataFromFile("realProject");
+const savedDataFromFile = getSavedDataFromFile("sameLeafNode");
 const savedDataByCompute = getSavedDataByCompute(
-  "realProject",
+  "sameLeafNode",
   folderPath,
   mainFilePath
 );
-const readData = getWebViewDataByCompute("realProject", folderPath);
-const webViewData = getWebViewDataFromFile("realProject");
-describe("dependencyTree(real project): get dependencyTree data", function () {
+const readData = getWebViewDataByCompute("sameLeafNode", folderPath);
+const webViewData = getWebViewDataFromFile("sameLeafNode");
+
+describe("dependencyTree(same leaf node): get dependencyTree data", function () {
   it("dependencyNodesData", function () {
     expect(dependencyNodesData).to.equal(dependencyNodes);
   });
@@ -34,13 +35,13 @@ describe("dependencyTree(real project): get dependencyTree data", function () {
   });
 });
 
-describe("dependencyTree(real project): get saved data", function () {
+describe("dependencyTree(same leaf node): get saved data", function () {
   it("jsonString", function () {
     expect(savedDataFromFile).to.equal(savedDataByCompute);
   });
 });
 
-describe("dependencyTree(real project): get webView data", function () {
+describe("dependencyTree(same leaf node): get webView data", function () {
   it("dependencyTreeData", function () {
     expect(readData).to.equal(webViewData);
   });
