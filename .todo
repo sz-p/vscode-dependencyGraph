@@ -46,8 +46,8 @@
 [x] fix: get dependencyTree(same leaf node) error
 [X] fix: fix export view position error
 
+[ ] refactor: move resolver to single file
 [ ] feat: webview show waiting message after set setting or run command
-[ ] fix: fix dependencyTree loaded error
 [ ] fix: refresh file not resend data to webview
 [ ] fix: move ancestors from dependencyNodesHash
 
@@ -58,6 +58,8 @@
 
 TODO
 ~~[ ] feat: monaco editor highlight(can not use monaco language server in webview https://github.com/microsoft/vscode/issues/87282)~~
+~~[ ] fix: fix dependencyTree loaded error(no node_modules)~~
+
 [ ] fix: open multiple webview send message error(always send, but not get don't know why)
 [ ] fix: resend activeThemeKind(when changed theme kind get kind error)(get the kind is previous kind don't know why)
 
