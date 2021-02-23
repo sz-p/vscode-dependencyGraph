@@ -44,10 +44,10 @@
 [x] feat: save file node
 [x] feat: post message after set setting or run command
 [x] fix: get dependencyTree(same leaf node) error
+[X] fix: fix export view position error
 
 [ ] feat: webview show waiting message after set setting or run command
 [ ] fix: fix dependencyTree loaded error
-[ ] fix: fix export view position error
 [ ] fix: refresh file not resend data to webview
 [ ] fix: move ancestors from dependencyNodesHash
 

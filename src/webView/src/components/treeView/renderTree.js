@@ -183,7 +183,7 @@ export class D3Tree {
   appendNodeIcon() {
     this.nodeDom
       .append("svg:image")
-      .attr("class", "node")
+      .attr("class", "image")
       .attr("xlink:href", (d) => {
         return this.ASSETS_BASE_URL + "/icons/" + d.data.type + ".svg";
       })
@@ -245,7 +245,7 @@ export class D3Tree {
   }
   enterNodeIcon() {
     this.nodeEnter
-      .select("image.node")
+      .select("image.image")
       .transition()
       .duration(this.DURATION_TIME)
       .attr("x", () => -this.ICON_SIZE / 2)
