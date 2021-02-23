@@ -14,6 +14,7 @@ import {
 } from "../../../../i18n/types";
 import { msgSetSetting } from "../../utils/messages";
 import { SETTING_KEY_ALIAS } from "../../../../utils/setting/settingKey";
+import { action_getCommandWaitingStatus } from "../../actions/action";
 const addIcon = { iconName: "Add" };
 const deleteIcon = { iconName: "Delete" };
 const aliasSetting = function (props) {
@@ -157,7 +158,10 @@ const aliasSetting = function (props) {
       <PrimaryButton
         className="settingView-button"
         text={TEXT_SET_CONFIRM}
-        onClick={() => setAlias()}
+        onClick={() => {
+          props.dispatch(action_getCommandWaitingStatus(SETTING_KEY_ALIAS));
+          setAlias();
+        }}
       />
     </div>
   );

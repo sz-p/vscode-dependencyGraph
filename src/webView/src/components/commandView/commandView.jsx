@@ -21,8 +21,15 @@ import {
   EXPORT_SVG,
   EXPORT_PNG,
 } from "../../../../i18n/types";
+import {
+  MESSAGE_SAVE_DATA,
+  MESSAGE_UPDATE_DATA,
+  MESSAGE_EXPORT_SVG,
+  MESSAGE_EXPORT_PNG,
+} from "../../../../utils/message/messagesKeys";
 import { useId } from "@uifabric/react-hooks";
 import "./commandView.css";
+import { action_getCommandWaitingStatus } from "../../actions/action";
 const calloutProps = { gapSpace: 0 };
 const hostStyles = {
   root: { display: "inline-block", width: "18%", marginRight: "20px" },
@@ -69,12 +76,18 @@ const commandView = function (props) {
       {
         key: "svg",
         text: TEXT_EXPORT_SVG,
-        onClick: exportSvg,
+        onClick: () => {
+          props.dispatch(action_getCommandWaitingStatus(MESSAGE_EXPORT_SVG));
+          exportSvg();
+        },
       },
       {
         key: "png",
         text: TEXT_EXPORT_PNG,
-        onClick: exportPng,
+        onClick: () => {
+          props.dispatch(action_getCommandWaitingStatus(MESSAGE_EXPORT_PNG));
+          exportPng();
+        },
       },
     ],
     directionalHintFixed: true,
@@ -95,6 +108,9 @@ const commandView = function (props) {
               className="commandView-button commandView-button-save"
               text={TEXT_SAVE_DATA}
               onClick={() => {
+                props.dispatch(
+                  action_getCommandWaitingStatus(MESSAGE_SAVE_DATA)
+                );
                 msgSaveData.post();
               }}
             />
@@ -111,6 +127,9 @@ const commandView = function (props) {
               className="commandView-button commandView-button-update"
               text={TEXT_UPDATE_DATA}
               onClick={() => {
+                props.dispatch(
+                  action_getCommandWaitingStatus(MESSAGE_UPDATE_DATA)
+                );
                 msgUpDateData.post();
               }}
             />

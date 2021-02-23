@@ -16,6 +16,17 @@ const getDependenciesTreeData = function (Params) {
     return false;
   }
 };
+const getCommandWaitingStatus = function (key) {
+  return {
+    data: {
+      value: {
+        type: "waiting",
+        key: key,
+        value: true,
+      },
+    },
+  };
+};
 export const action_changeGetDataStatus = createAction(
   type.TYPE_CHANGE_GET_DATA_STATUS,
   returnParams
@@ -69,4 +80,9 @@ export const action_getSavedData = createAction(
 export const action_getRunCommandStatus = createAction(
   type.TYPE_GET_RUN_COMMAND_STATUS,
   returnParams
+);
+
+export const action_getCommandWaitingStatus = createAction(
+  type.TYPE_GET_RUN_COMMAND_STATUS,
+  getCommandWaitingStatus
 );

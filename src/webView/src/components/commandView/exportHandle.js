@@ -66,7 +66,6 @@ export const exportSvg = function () {
     });
 };
 export const exportPng = function () {
-  console.log("exportPng");
   const { svgDom, svgNode, newWith, newHeight, transform } = beforeExport();
   svgAsPngUri(svgDom, getOptions(newHeight, newWith))
     .then((uri) => {

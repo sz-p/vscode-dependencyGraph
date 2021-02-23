@@ -19,7 +19,8 @@
 }
 
 .ms-MessageBar--success,
-.ms-MessageBar--error {
+.ms-MessageBar--error,
+.ms-MessageBar {
   background: var(--vscode-debugToolBar-background);
   color: var(--font-color);
 }

@@ -2,6 +2,7 @@ export const CONFIRM = "CONFIRM";
 export const ADD = "ADD";
 export const DELETE = "DELETE";
 
+export const WAITING = "WAITING";
 export const SUCCESS = "SUCCESS";
 export const FAILED = "FAILED";
 

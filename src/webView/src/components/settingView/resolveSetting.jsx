@@ -7,6 +7,7 @@ import { i18n } from "../../../../i18n/i18n";
 import { RESOLVE_EXTENSIONS, CONFIRM } from "../../../../i18n/types";
 import { msgSetSetting } from "../../utils/messages";
 import { SETTING_KEY_RESOLVE_EXTENSIONS } from "../../../../utils/setting/settingKey";
+import { action_getCommandWaitingStatus } from "../../actions/action";
 const setResolveExtensions = function (resolveExtensions) {
   msgSetSetting(
     SETTING_KEY_RESOLVE_EXTENSIONS,
@@ -45,7 +46,12 @@ const resolveSetting = function (props) {
       <PrimaryButton
         className="settingView-button"
         text={TEXT_SET_CONFIRM}
-        onClick={() => setResolveExtensions(resolveExtensions)}
+        onClick={() => {
+          props.dispatch(
+            action_getCommandWaitingStatus(SETTING_KEY_RESOLVE_EXTENSIONS)
+          );
+          setResolveExtensions(resolveExtensions);
+        }}
       />
     </div>
   );

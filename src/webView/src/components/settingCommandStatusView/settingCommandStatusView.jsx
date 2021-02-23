@@ -17,6 +17,7 @@ import {
   ENTRY_FILE,
   RESOLVE_EXTENSIONS,
   RESOLVE_ALIAS,
+  WAITING,
 } from "../../../../i18n/types";
 import { i18n } from "../../../../i18n/i18n";
 import {
@@ -72,14 +73,19 @@ const settingCommandStatusView = function (props) {
           messageText + i18n.getText(SETTING) + i18n.getText(RESOLVE_ALIAS);
         break;
     }
-    messageText = messageText + " ";
-    switch (commandSettingStatus.value) {
-      case true:
-        messageText = messageText + i18n.getText(SUCCESS);
-        break;
-      case false:
-        messageText = messageText + i18n.getText(FAILED);
-        break;
+    if (commandSettingStatus.type === "waiting") {
+      messageBarType = undefined;
+      messageText = i18n.getText(WAITING) + messageText;
+    } else {
+      messageText = messageText + " ";
+      switch (commandSettingStatus.value) {
+        case true:
+          messageText = messageText + i18n.getText(SUCCESS);
+          break;
+        case false:
+          messageText = messageText + i18n.getText(FAILED);
+          break;
+      }
     }
     setMessageData({ messageBarType, messageText });
   }, [commandSettingStatus]);
