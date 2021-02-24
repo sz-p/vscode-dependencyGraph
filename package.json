@@ -101,7 +101,7 @@
     "watch:WebView": "node ./src/webView/scripts/watch.js",
     "build:Extension": "node ./scripts/build.js",
     "build:WebView": "node ./src/webView/scripts/build.js",
-    "test": "ts-mocha -p ./tsconfig.json tests/**/*.test.ts tests/**/*.test.js"
+    "test": "ts-mocha -p ./tests/tsconfig.testing.json tests/**/*.test.ts tests/**/*.test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -142,6 +142,7 @@
     "enhanced-resolve": "5.4.0",
     "file-loader": "^6.1.1",
     "get-dependency-tree": "^4.0.1",
+    "jsdom": "^16.4.0",
     "lodash": "^4.17.20",
     "md5": "^2.3.0",
     "monaco-editor": "^0.21.2",
