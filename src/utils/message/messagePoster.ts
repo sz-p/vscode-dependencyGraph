@@ -3,9 +3,9 @@ import { onError } from "../error/onError";
 import { NO_WEBVIEW_PANEL } from "../error/errorKey";
 import { StatusKey } from "../../data-dependencyTree/statusType";
 import { MsgKey, MESSAGE_GET_DATA_STATUS } from "./messagesKeys";
-const postMessage = function (msg: Msg) {
+const postMessage = async function (msg: Msg) {
   if (global.webViewPanel) {
-    global.webViewPanel.webview.postMessage(msg);
+    await global.webViewPanel.webview.postMessage(msg);
   } else {
     onError(NO_WEBVIEW_PANEL);
   }

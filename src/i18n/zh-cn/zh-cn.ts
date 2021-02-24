@@ -16,6 +16,7 @@ zhcn[types.WAITING_DATA] = "正在等待数据...";
 zhcn[types.CONFIRM] = "确认";
 zhcn[types.ADD] = "添加";
 zhcn[types.DELETE] = "删除";
+zhcn[types.WAITING] = "等待";
 
 zhcn[types.SUCCESS] = "成功";
 zhcn[types.FAILED] = "失败";

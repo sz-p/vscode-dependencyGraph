@@ -11,6 +11,8 @@ const actionOpenFolder = function (msg: Msg) {
   vscode.commands.executeCommand("workbench.action.files.openFolder");
 };
 const actionSetSetting = async function (msg: Msg) {
+  // don't get message from client from web view click
+  // msgRunCommandStatus("waiting", msg.value.key, true).post();
   try {
     await setSetting(msg.value.key, msg.value.value);
     msgRunCommandStatus("setting", msg.value.key, true).post();
@@ -23,6 +25,8 @@ const actionSetSetting = async function (msg: Msg) {
   }
 };
 const actionExportSvg = async function (msg: Msg) {
+  // don't get message from client from web view click
+  // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
     await exportSvg(msg.value);
     msgRunCommandStatus("command", msg.key, true).post();
@@ -31,6 +35,8 @@ const actionExportSvg = async function (msg: Msg) {
   }
 };
 const actionExportPng = async function (msg: Msg) {
+  // don't get message from client from web view click
+  // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
     await exportPng(msg.value);
     msgRunCommandStatus("command", msg.key, true).post();
@@ -42,6 +48,8 @@ const actionOpenFile = function (msg: Msg) {
   vscode.commands.executeCommand("framegraph.openFileInView", msg.value);
 };
 const actionSaveData = async function (msg: Msg) {
+  // don't get message from client from web view click
+  // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
     await vscode.commands.executeCommand("framegraph.saveData");
     msgRunCommandStatus("command", msg.key, true).post();
@@ -50,6 +58,8 @@ const actionSaveData = async function (msg: Msg) {
   }
 };
 const actionUpDateData = async function (msg: Msg) {
+  // don't get message from client from web view click
+  // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
     await vscode.commands.executeCommand("framegraph.upDateData");
     msgRunCommandStatus("command", msg.key, true).post();

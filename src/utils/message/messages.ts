@@ -29,7 +29,7 @@ export const msgGetActiveThemeKind = new MessagePoster(
   getActiveTheme()
 );
 export const msgRunCommandStatus = (
-  type: "setting" | "command",
+  type: "setting" | "command" | "waiting",
   key: string,
   value: boolean
 ) => new MessagePoster(MSG.MESSAGE_RUN_COMMAND_STATUS, { type, key, value });

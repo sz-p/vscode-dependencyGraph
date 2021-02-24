@@ -45,9 +45,9 @@
 [x] feat: post message after set setting or run command
 [x] fix: get dependencyTree(same leaf node) error
 [X] fix: fix export view position error
+[x] feat: webview show waiting message after set setting or run command
 
 [ ] refactor: move resolver to single file
-[ ] feat: webview show waiting message after set setting or run command
 [ ] fix: refresh file not resend data to webview
 [ ] fix: move ancestors from dependencyNodesHash
 

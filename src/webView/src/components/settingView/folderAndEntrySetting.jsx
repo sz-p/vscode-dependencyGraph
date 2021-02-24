@@ -12,6 +12,7 @@ import {
 } from "../../../../i18n/types";
 import { msgOpenFolder, msgSetSetting } from "../../utils/messages";
 import { SETTING_KEY_ENTRY_FILE_PATH } from "../../../../utils/setting/settingKey";
+import { action_getCommandWaitingStatus } from "../../actions/action";
 const openFolder = function () {
   msgOpenFolder.post();
 };
@@ -79,7 +80,12 @@ const folderAndEntry = function (props) {
         <PrimaryButton
           className="settingView-button"
           text={TEXT_SET_ENTRY_FILE}
-          onClick={() => setEntryFile(entryFilePath)}
+          onClick={() => {
+            props.dispatch(
+              action_getCommandWaitingStatus(SETTING_KEY_ENTRY_FILE_PATH)
+            );
+            setEntryFile(entryFilePath);
+          }}
         />
       </div>
     </div>
