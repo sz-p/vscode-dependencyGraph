@@ -21,7 +21,14 @@ const collapse = function (d) {
 };
 
 export class D3Tree {
-  constructor() {
+  constructor(newWindow) {
+		if (newWindow) {
+			this.window = newWindow;
+			this.isBrowser = false;
+		} else {
+			this.window = window;
+      this.isBrowser = true;
+		}
     this.initStaticVariables();
   }
   resize() {
@@ -48,11 +55,11 @@ export class D3Tree {
       width: 100,
       height: 200,
     };
-    this.NODE_HIGHLIGHT_COLOR = getComputedStyle(
-      document.documentElement
+    this.NODE_HIGHLIGHT_COLOR = this.window.getComputedStyle(
+      this.window.document.documentElement
     ).getPropertyValue("--vscode-editorLightBulb-foreground");
-    this.DEFAULT_TEXT_COLOR = getComputedStyle(
-      document.documentElement
+    this.DEFAULT_TEXT_COLOR = this.window.getComputedStyle(
+      this.window.document.documentElement
     ).getPropertyValue("--vscode-editor-foreground");
     this.options = {
       PADDING: this.PADDING,
@@ -97,7 +104,7 @@ export class D3Tree {
     }
   }
   initZoom() {
-    if (!this.zoom) {
+    if (!this.zoom && this.isBrowser) {
       const zoomed = () => {
         const transform = d3.event.transform;
         this.svg.attr("transform", transform);
@@ -134,7 +141,9 @@ export class D3Tree {
     this.root = d3.hierarchy(this.data, (d) => d.children);
     this.root.x0 = 0;
     this.root.y0 = 0;
-    this.root.children.forEach(collapse);
+    if(this.root.children){
+      this.root.children.forEach(collapse);
+    }
   }
   init(dom, data, assetsBaseURL, activeThemeKind) {
     this.initDom(dom);
