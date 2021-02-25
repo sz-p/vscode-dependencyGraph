@@ -35,3 +35,19 @@ export const getCurrentFolderPath = function (): string | undefined {
     return undefined;
   }
 };
+
+/**
+ * only used on vscode.window.showInformationMessage
+ *
+ * @returns Promise<unknown>
+ */
+export const thenAbleWithTimeout = (
+  prom: Promise<void>,
+  time: number
+): Promise<unknown> => {
+  let timer: NodeJS.Timeout;
+  return Promise.race([
+    prom,
+    new Promise((_r) => (timer = setTimeout(_r, time))),
+  ]).finally(() => clearTimeout(timer));
+};
