@@ -12,7 +12,10 @@ import {
 import { msgGetSavedData } from "./utils/message/messages";
 import * as stringRandom from "string-random";
 import { setData } from "./utils/data/data";
-import { getCurrentFolderPath } from "./utils/utils"
+import { getCurrentFolderPath, thenAbleWithTimeout } from "./utils/utils";
+import { showMessage } from "./utils/showMessage";
+import { START_UPDATE_DATA, UPDATED_DATA } from "./i18n/types";
+import { i18n } from "./i18n/i18n";
 export const command_createView = vscode.commands.registerCommand(
   "framegraph.createView",
   () => {
@@ -42,11 +45,14 @@ const refreshFile = () => {
     if (global.webViewPanel) {
       postMessageCatchError({
         key: MESSAGE_DEPENDENCY_TREE_DATA,
-        value: { data: data.transportsData, folderPath: getCurrentFolderPath() },
+        value: {
+          data: data.transportsData,
+          folderPath: getCurrentFolderPath(),
+        },
       });
     }
   }
-}
+};
 
 const saveData = () => {
   if (global?.dependencyTreeData?.transportsData) {
@@ -57,7 +63,7 @@ const saveData = () => {
   } else {
     //TODO no data error
   }
-}
+};
 
 export const command_focusOnNode = vscode.commands.registerCommand(
   "framegraph.focusOnNode",
@@ -108,9 +114,19 @@ export const command_upDateData = vscode.commands.registerCommand(
     saveData();
   }
 );
+export const command_saveDataWithMessage = vscode.commands.registerCommand(
+  "framegraph.refreshFileWithMessage",
+  async () => {
+    await thenAbleWithTimeout(showMessage(i18n.getText(START_UPDATE_DATA)), 0);
+    refreshFile();
+    showMessage(i18n.getText(UPDATED_DATA));
+  }
+);
+
 export const allCommands = [
   command_createView,
   command_reOpenView,
   command_saveData,
-  command_upDateData
+  command_upDateData,
+  command_saveDataWithMessage,
 ];

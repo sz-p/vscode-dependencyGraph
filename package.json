@@ -44,7 +44,7 @@
           "group": "navigation@2"
         },
         {
-          "command": "framegraph.refreshFile",
+          "command": "framegraph.refreshFileWithMessage",
           "when": "view == framegraphExplorer-DependencyTree",
           "group": "navigation@1"
         }
@@ -68,6 +68,11 @@
       },
       {
         "command": "framegraph.refreshFile",
+        "title": "%framegraph.refresh%",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "framegraph.refreshFileWithMessage",
         "title": "%framegraph.refresh%",
         "icon": "$(refresh)"
       },
