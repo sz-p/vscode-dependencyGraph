@@ -47,8 +47,9 @@
 [X] fix: fix export view position error
 [x] feat: webview show waiting message after set setting or run command
 [x] fix:  get dependencyTree only one node error
+[x] fix: fileInfoVIew FiletypeWidth
 
-[ ] fix: fileInfoVIew FiletypeWidth
+[ ] feat: show start refresh Data message
 [ ] feat: view setting treeNode padding x,y
 [ ] refactor: move resolver to single file
 [ ] fix: refresh file not resend data to webview
