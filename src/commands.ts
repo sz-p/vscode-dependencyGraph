@@ -27,7 +27,7 @@ export const command_createView = vscode.commands.registerCommand(
 // 	postMessageCatchError({ key: 'postMessageTest', value: message++ });
 // });
 
-const refreshFile = () => {
+const refreshFile = async () => {
   // no catch error may be webview is closed
   let postMessage = false;
   let refresh = true;
@@ -38,7 +38,7 @@ const refreshFile = () => {
       value: stringRandom(),
     });
   }
-  const data = getDependencyTreeData(postMessage, refresh);
+  const data = await getDependencyTreeData(postMessage, refresh);
   if (data) {
     global.dependencyTreeData = data;
     renderTreeView(global.dependencyTreeData.dependencyTreeData);
