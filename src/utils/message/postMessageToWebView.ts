@@ -2,14 +2,14 @@ import { NO_WEBVIEW_PANEL } from "../error/errorKey";
 import { onError } from "../error/onError";
 
 import { Msg } from "./message";
-export const postMessage = function (msg: Msg) {
+export const postMessage = async function (msg: Msg) {
   if (global.webViewPanel) {
-    global.webViewPanel.webview.postMessage(msg);
+    await global.webViewPanel.webview.postMessage(msg);
   }
 };
-export const postMessageCatchError = function (msg: Msg) {
+export const postMessageCatchError = async function (msg: Msg) {
   if (global.webViewPanel) {
-    global.webViewPanel.webview.postMessage(msg);
+    await global.webViewPanel.webview.postMessage(msg);
   } else {
     onError(NO_WEBVIEW_PANEL);
   }
