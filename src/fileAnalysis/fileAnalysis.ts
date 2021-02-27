@@ -1,5 +1,8 @@
 import { DependencyTreeData, DependencyHash } from "../dependencyTree/index.d";
-import { DependencyTreeData as DTD, DependencyNodes } from "../data-dependencyTree/dependencyTreeData.d";
+import {
+  DependencyTreeData as DTD,
+  DependencyNodes,
+} from "../data-dependencyTree/dependencyTreeData.d";
 import {
   onGotJsAST,
   onGotJsCircularStructureNode,
@@ -7,8 +10,8 @@ import {
 import { getFileIconNameByFileName } from "../utils/fileIcons/getFileIcon";
 import { setFileLanguage } from "./setFileLanguage";
 
-const getIntroduction = function (codeString: string) {
-  const reg = /@introduction (.*)\n/;
+export const getIntroduction = function (codeString: string) {
+  const reg = /@introduction (.*)(\r)?\n/i;
   const result = codeString.match(reg);
   if (result) {
     return result[1].replace("\r", "");
@@ -16,8 +19,8 @@ const getIntroduction = function (codeString: string) {
     return undefined;
   }
 };
-const getDescription = function (codeString: string) {
-  const reg = /@description (.*)\n/;
+export const getDescription = function (codeString: string) {
+  const reg = /@description (.*)(\r)?\n/i;
   const result = codeString.match(reg);
   if (result) {
     return result[1].replace("\r", "");
