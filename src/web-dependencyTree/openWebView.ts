@@ -27,7 +27,7 @@ import {
   msgGetLanguage,
   msgGetActiveThemeKind,
   postSetting,
-  msgGetSavedData
+  msgGetSavedData,
 } from "../utils/message/messages";
 
 import { pathExists } from "../utils/utils";
@@ -67,6 +67,8 @@ export const createView = function (): void {
     global.webViewPanel.onDidDispose(() => {
       global.webViewPanel = undefined;
     });
+    //TODO resolve post message function
+    msgGetLanguage.post();
   }
 };
 
