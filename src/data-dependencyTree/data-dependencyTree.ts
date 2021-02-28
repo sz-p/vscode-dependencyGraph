@@ -40,26 +40,19 @@ import {
 
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
-export const getDependencyTreeData = (
+export const getDependencyTreeData = async (
   postMessage?: boolean,
   refresh?: boolean
 ):
-  | {
-    dependencyTreeData: DependencyTreeData;
-    transportsData: {
-      dependencyTree: DependencyTree;
-      dependencyNodes: DependencyNodes;
-    };
-  }
-  | undefined => {
+  Promise<{ dependencyTreeData: DependencyTreeData; transportsData: { dependencyTree: DependencyTree; dependencyNodes: DependencyNodes; }; } | undefined> => {
   // find folder Path catch path sendStatus
   const folderPath = getCurrentFolderPath();
   if (!folderPath || !pathExists(folderPath)) {
     onError(NO_FOLDER);
-    postMessage ? statusMsgGetFolderPath.postError() : null;
+    postMessage ? await statusMsgGetFolderPath.postError() : null;
     return undefined;
   }
-  postMessage ? statusMsgGetFolderPath.postSuccess() : null;
+  postMessage ? await statusMsgGetFolderPath.postSuccess() : null;
 
   const setting = getAllSettingFromSettingFile();
   let mainFilePath = undefined;
@@ -73,19 +66,19 @@ export const getDependencyTreeData = (
     const packageJsonPath = getPackageJsonPath(folderPath);
     if (!packageJsonPath) {
       onError(NO_PACKAGE_JSON);
-      postMessage ? statusMsgGetPackageJsonPath.postError() : null;
+      postMessage ? await statusMsgGetPackageJsonPath.postError() : null;
       return undefined;
     }
-    postMessage ? statusMsgGetPackageJsonPath.postSuccess() : null;
+    postMessage ? await statusMsgGetPackageJsonPath.postSuccess() : null;
     mainFilePath = getMainFilePath(folderPath, packageJsonPath);
   }
   if (!mainFilePath || !pathExists(path.join(folderPath, mainFilePath))) {
     onError(NO_MAIN_FILE);
-    postMessage ? statusMsgGetEntryFile.postError() : null;
+    postMessage ? await statusMsgGetEntryFile.postError() : null;
     return undefined;
   }
   setSetting(SETTING_KEY_ENTRY_FILE_PATH, mainFilePath);
-  postMessage ? statusMsgGetEntryFile.postSuccess() : null;
+  postMessage ? await statusMsgGetEntryFile.postSuccess() : null;
   let resolveExtensions = undefined;
   let alias = undefined;
   if (setting && setting[SETTING_KEY_RESOLVE_EXTENSIONS]) {
@@ -132,9 +125,9 @@ export const getDependencyTreeData = (
   );
   if (!dp) {
     onError(NO_DEPENDENCY);
-    postMessage ? statusMsgGetDependencyProcessData.postError() : null;
+    postMessage ? await statusMsgGetDependencyProcessData.postError() : null;
   }
-  postMessage ? statusMsgGetDependencyProcessData.postSuccess() : null;
+  postMessage ? await statusMsgGetDependencyProcessData.postSuccess() : null;
   return {
     dependencyTreeData: dp as DependencyTreeData,
     transportsData: {

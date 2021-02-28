@@ -6,7 +6,12 @@ import { allCommands } from "./commands";
 import { renderTreeView } from "./view-dependencyTree/renderTreeView";
 import { openWebView } from "./web-dependencyTree/openWebView";
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
+  // init commands
+  allCommands.forEach((command) => {
+    context.subscriptions.push(command);
+  });
+
   // webView need catch getDependencyTreeData status create web view first
 
   // just create webView panel
@@ -15,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
   createView();
 
   // get dependency tree data
-  const dependencyTreeData = getDependencyTreeData(true);
+  const dependencyTreeData = await getDependencyTreeData(true);
 
   global.dependencyTreeData = dependencyTreeData;
 
@@ -25,10 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
   // render tree view
   renderTreeView(dependencyTreeData?.dependencyTreeData);
 
-  // init commands
-  allCommands.forEach((command) => {
-    context.subscriptions.push(command);
-  });
+
 }
 
 // this method is called when your extension is deactivated

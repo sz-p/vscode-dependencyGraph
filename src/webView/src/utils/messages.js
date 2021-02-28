@@ -15,8 +15,8 @@ class Msg {
 			description: description
 		};
 	}
-	post() {
-		window.vscode.postMessage(this.msg);
+	async post() {
+		await window.vscode.postMessage(this.msg);
 	}
 }
 export const msgOpenFolder = new Msg(MESSAGE_OPEN_FOLDER, true);
