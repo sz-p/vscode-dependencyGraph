@@ -23,8 +23,8 @@ export class MessagePoster {
       description: description,
     };
   }
-  post() {
-    postMessage(this.msg);
+  async post() {
+    await postMessage(this.msg);
   }
 }
 export class StatusMessagePoster {
@@ -46,12 +46,12 @@ export class StatusMessagePoster {
       description: description,
     };
   }
-  postSuccess() {
+  async postSuccess() {
     this.msg.value.status = "success";
-    postMessage(this.msg);
+    await postMessage(this.msg);
   }
-  postError() {
+  async postError() {
     this.msg.value.status = "error";
-    postMessage(this.msg);
+    await postMessage(this.msg);
   }
 }
