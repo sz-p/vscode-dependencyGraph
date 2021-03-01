@@ -1,5 +1,6 @@
 .vscode/**
 .vscode-test/**
+.framegraph/**
 out/test/**
 src/**
 tests/**
