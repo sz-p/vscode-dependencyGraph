@@ -67,9 +67,29 @@ export const createView = function (): void {
     global.webViewPanel.onDidDispose(() => {
       global.webViewPanel = undefined;
     });
-    //TODO resolve post message function
-    msgGetLanguage.post();
+    postNecessaryMessageWhenCreateView();
   }
+};
+
+/**
+ * post necessary message when createView
+ *
+ * language
+ * folderPath
+ * theme kind
+ * baseWebViewUri
+ *
+ */
+export const postNecessaryMessageWhenCreateView = function (): void {
+  // post language
+  msgGetLanguage.post();
+  const folderPath = getCurrentFolderPath();
+  postMessageCatchError({ key: MESSAGE_FOLDER_PATH, value: folderPath });
+  msgGetActiveThemeKind.post();
+  postMessageCatchError({
+    key: MESSAGE_ASSETS_BASE_URL,
+    value: getBaseWebViewUri(),
+  });
 };
 
 export const reOpenWebView = function (
@@ -111,13 +131,6 @@ export const openWebView = function (
   dependencyTreeData: DependencyTreeData | undefined
 ) {
   const folderPath = getCurrentFolderPath();
-  msgGetLanguage.post();
-  msgGetActiveThemeKind.post();
-  postMessageCatchError({
-    key: MESSAGE_ASSETS_BASE_URL,
-    value: getBaseWebViewUri(),
-  });
-  postMessageCatchError({ key: MESSAGE_FOLDER_PATH, value: folderPath });
   if (!dependencyTreeData || !Object.keys(dependencyTreeData).length) {
     onError(GET_DEPENDENCY_TREE_FAIL);
     statusMsgGetDependencyData.postError();
