@@ -14,10 +14,11 @@ const getDependencyTree = function (
   dp.registerParser("noDependenceParser", DependencyTree.noDependenceParser);
   dp.registerParser("cssParser", DependencyTree.cssParser);
   dp.registerParser("generalCssParser", DependencyTree.generalCssParser);
+  dp.registerParser("tsParser", DependencyTree.tsParser);
 
-  dp.registerParseRule(".json", 'noDependenceParser');
+  dp.registerParseRule(".json", "noDependenceParser");
 
-  dp.registerParseRule(".vue", 'vueParser');
+  dp.registerParseRule(".vue", "vueParser");
 
   dp.registerParseRule(".css", "generalCssParser");
   dp.registerParseRule(".less", "generalCssParser");
@@ -25,9 +26,9 @@ const getDependencyTree = function (
   dp.registerParseRule(".scss", "generalCssParser");
 
   dp.registerParseRule(".js", "generalJsParser");
-  dp.registerParseRule(".ts", "generalJsParser");
+  dp.registerParseRule(".ts", "tsParser");
   dp.registerParseRule(".jsx", "generalJsParser");
-  dp.registerParseRule(".tsx", "generalJsParser");
+  dp.registerParseRule(".tsx", "tsParser");
 
   return dp.parse(folderPath, entryPath);
 };
