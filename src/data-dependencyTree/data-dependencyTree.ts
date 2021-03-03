@@ -43,8 +43,16 @@ import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
 export const getDependencyTreeData = async (
   postMessage?: boolean,
   refresh?: boolean
-):
-  Promise<{ dependencyTreeData: DependencyTreeData; transportsData: { dependencyTree: DependencyTree; dependencyNodes: DependencyNodes; }; } | undefined> => {
+): Promise<
+  | {
+      dependencyTreeData: DependencyTreeData;
+      transportsData: {
+        dependencyTree: DependencyTree;
+        dependencyNodes: DependencyNodes;
+      };
+    }
+  | undefined
+> => {
   // find folder Path catch path sendStatus
   const folderPath = getCurrentFolderPath();
   if (!folderPath || !pathExists(folderPath)) {
