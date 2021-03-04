@@ -50,8 +50,11 @@
 [x] fix: fileInfoVIew FiletypeWidth
 [x] feat: show start refresh Data message
 
-[ ] feat: view setting treeNode padding x,y
-[ ] refactor: move resolver to single file
+[ ] fix: dependency tree get ts file error
+[ ] fix: webview file description code box height
+[ ] feat: dependency tree get required node
+[ ] fix: dependency tree get ts file error
+[ ] fix: r: move resolver to single file
 [ ] fix: refresh file not resend data to webview
 [ ] fix: move ancestors from dependencyNodesHash
 
