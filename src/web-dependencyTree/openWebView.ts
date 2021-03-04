@@ -5,7 +5,6 @@ import * as vscode from "vscode";
 import * as paths from "../paths";
 import * as path from "path";
 import * as fs from "fs";
-// const htmlText = require('./index.html');
 import { webViewHTMLPath } from "../paths";
 import { getBaseWebViewUri } from "../utils/getWebViewUri";
 import { postMessageCatchError } from "../utils/message/postMessageToWebView";
@@ -34,6 +33,7 @@ import { pathExists } from "../utils/utils";
 import { onError } from "../utils/error/onError";
 import { GET_DEPENDENCY_TREE_FAIL } from "../utils/error/errorKey";
 import { isSavedData } from "../utils/data/data";
+
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
  * @param {*} templatePath 相对于插件根目录的html文件绝对路径
