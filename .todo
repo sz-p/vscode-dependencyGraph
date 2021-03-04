@@ -49,13 +49,14 @@
 [x] fix:  get dependencyTree only one node error
 [x] fix: fileInfoVIew FiletypeWidth
 [x] feat: show start refresh Data message
+[x] fix: dependency tree get ts file error
 
+[ ] fix: dependency tree get aboveFatherNode error(have test case)
 [ ] refactor: move dependencyTree to package
-[ ] fix: dependency tree get ts file error
 [ ] fix: webview file description code box height
 [ ] feat: dependency tree get required node
 [ ] fix: dependency tree get ts file error
-[ ] fix: r: move resolver to single file
+[ ] fix: move resolver to single file
 [ ] fix: refresh file not resend data to webview
 [ ] fix: move ancestors from dependencyNodesHash
 
