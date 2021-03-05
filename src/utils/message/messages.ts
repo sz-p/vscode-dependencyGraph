@@ -3,7 +3,6 @@ import { getActiveTheme } from "../setting/setting";
 import * as STATUS from "../../data-dependencyTree/statusType";
 import * as MSG from "./messagesKeys";
 import * as vscode from "vscode";
-
 export const statusMsgGetFolderPath = new StatusMessagePoster(
   STATUS.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER
 );
