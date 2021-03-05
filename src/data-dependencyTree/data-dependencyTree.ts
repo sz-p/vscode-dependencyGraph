@@ -12,7 +12,7 @@ import {
   getAllSettingFromSettingFile,
   setSetting,
 } from "../utils/setting/setting";
-import { getCurrentFolderPath } from "../utils/utils";
+import { getCurrentFolderPath, pathExists } from "../utils/utils";
 import { getDependencyTree } from "../dependencyTree/index";
 import { getMainFilePath, getPackageJsonPath } from "./dependencyTreeMethods";
 import { onError } from "../utils/error/onError";
@@ -21,7 +21,6 @@ import {
   onGotCircularStructureNode,
   onGotFileString,
 } from "../fileAnalysis/fileAnalysis";
-import { pathExists } from "../utils/utils";
 import {
   postSetting,
   statusMsgGetDependencyData,
