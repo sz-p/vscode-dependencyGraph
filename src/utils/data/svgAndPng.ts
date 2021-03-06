@@ -1,3 +1,8 @@
+/**
+ * @introduction svg & png module
+ *
+ * @description save svg or png file to local
+ */
 import * as fs from "fs";
 import {
   getCurrentFolderPath,

@@ -1,3 +1,8 @@
+/**
+ * @introduction Data module
+ *
+ * @description read or set data to local
+ */
 import * as fs from "fs";
 import {
   getCurrentFolderPath,
@@ -10,7 +15,9 @@ import {
   DependencyTree,
   DependencyNodes,
 } from "../../data-dependencyTree/dependencyTreeData.d";
-import * as path from "path";
+/**
+ * create extension files directory before setData
+ */
 const createDir = function (): void {
   const dirPath = getCurrentFolderPath();
   fs.mkdirSync(dirPath + "/.framegraph");
@@ -30,12 +37,12 @@ export const getDataFromDataFile = function (): any {
 
 export const getData = function ():
   | {
-    dependencyTreeData: DependencyTreeData;
-    transportsData: {
-      dependencyTree: DependencyTree;
-      dependencyNodes: DependencyNodes;
-    };
-  }
+      dependencyTreeData: DependencyTreeData;
+      transportsData: {
+        dependencyTree: DependencyTree;
+        dependencyNodes: DependencyNodes;
+      };
+    }
   | false {
   let dp = {} as DependencyTreeData;
   const data = getDataFromDataFile();
@@ -75,4 +82,4 @@ export const isSavedData = function (dirPath?: string): boolean {
   const DataFilePath = dirPath + "/.framegraph/data.json";
   if (!isPathExists(DataFilePath)) return false;
   return true;
-}
+};

@@ -1,3 +1,8 @@
+/**
+ * @introduction Show error module
+ *
+ * @description show extension error
+ */
 import { ErrorKey } from "./errorKey";
 import { showMessage } from "../showMessage";
 import { i18n } from "../../i18n/i18n";
