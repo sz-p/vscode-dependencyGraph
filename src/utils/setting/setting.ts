@@ -3,14 +3,19 @@
  *
  * @description get setting \n set setting
  */
+import * as vscode from "vscode";
+import * as path from "path";
 import * as fs from "fs";
 import {
   getCurrentFolderPath,
   pathExists,
   getObjectFromJsonFile,
 } from "../utils";
-import * as vscode from "vscode";
-import { SETTING_KEY_ENTRY_FILE_PATH } from "./settingKey";
+import {
+  SETTING_KEY_ENTRY_FILE_PATH,
+  SETTING_KEY_ALIAS,
+  SETTING_KEY_RESOLVE_EXTENSIONS,
+} from "./settingKey";
 
 const createDir = function (): void {
   const dirPath = getCurrentFolderPath();
@@ -59,6 +64,29 @@ export const getEntryFileRelativePath = function (): string | false {
 };
 export const setEntryFileRelativePath = function (value: string) {
   return setSetting(SETTING_KEY_ENTRY_FILE_PATH, value);
+};
+
+export const getAliasKey = function (): {
+  [key: string]: string;
+} {
+  const alias = getSetting(SETTING_KEY_ALIAS);
+  const folderPath = getCurrentFolderPath() as string;
+  for (let key in alias) {
+    alias[key] = path.join(folderPath, alias[key]);
+  }
+  return alias;
+};
+
+export const setAliasKey = function (value: object) {
+  return setSetting(SETTING_KEY_ALIAS, value);
+};
+
+export const getResolveExtension = function (): string[] | undefined {
+  return getSetting(SETTING_KEY_RESOLVE_EXTENSIONS);
+};
+
+export const setResolveExtension = function (value: string[] | undefined) {
+  return setSetting(SETTING_KEY_RESOLVE_EXTENSIONS, value);
 };
 
 export const getActiveTheme = function () {
