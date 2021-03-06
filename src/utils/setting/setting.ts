@@ -1,3 +1,8 @@
+/**
+ * @introduction setting module
+ *
+ * @description get setting \n set setting
+ */
 import * as fs from "fs";
 import {
   getCurrentFolderPath,

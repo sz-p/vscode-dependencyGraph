@@ -1,3 +1,8 @@
+/**
+ * @introduction MsgKey
+ *
+ * @description the message key between webview and extension
+ */
 type Opaque<Type, Token = unknown> = Type & { readonly __TYPE__: Token };
 export type MsgKey = Opaque<string, "MsgKey">;
 export const MESSAGE_GET_DATA_STATUS = "MESSAGE_GET_DATA_STATUS" as MsgKey;

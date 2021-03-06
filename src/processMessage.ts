@@ -1,3 +1,8 @@
+/**
+ * @introduction process webview messages
+ *
+ * @description get webview message.\n processing command or setting
+ */
 import * as MESSAGES from "./utils/message/messagesKeys";
 import * as vscode from "vscode";
 import { Msg } from "./utils/message/message.d";
@@ -7,9 +12,25 @@ import { NO_FOLDER } from "./utils/error/errorKey";
 import { exportSvg, exportPng } from "./utils/data/svgAndPng";
 import { msgRunCommandStatus } from "./utils/message/messages";
 import { SETTING_KEY_ENTRY_FILE_PATH } from "./utils/setting/settingKey";
+
+/**
+ * get command open folder
+ *
+ * @param {Msg} msg
+ */
 const actionOpenFolder = function (msg: Msg) {
   vscode.commands.executeCommand("workbench.action.files.openFolder");
 };
+
+/**
+ * get command set entry file
+ *
+ * @param {Msg} msg
+ */
+const actionOpenFile = function (msg: Msg) {
+  vscode.commands.executeCommand("framegraph.openFileInView", msg.value);
+};
+
 const actionSetSetting = async function (msg: Msg) {
   // don't get message from client from web view click
   // msgRunCommandStatus("waiting", msg.value.key, true).post();
@@ -43,9 +64,6 @@ const actionExportPng = async function (msg: Msg) {
   } catch (e) {
     msgRunCommandStatus("command", msg.key, false).post();
   }
-};
-const actionOpenFile = function (msg: Msg) {
-  vscode.commands.executeCommand("framegraph.openFileInView", msg.value);
 };
 const actionSaveData = async function (msg: Msg) {
   // don't get message from client from web view click
