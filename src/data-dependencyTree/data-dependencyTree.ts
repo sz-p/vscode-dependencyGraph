@@ -10,7 +10,12 @@ import {
 } from "../utils/error/errorKey";
 import {
   getAllSettingFromSettingFile,
-  setSetting,
+  setEntryFileRelativePath,
+  setAliasKey,
+  setResolveExtension,
+  getAliasKey,
+  getResolveExtension,
+  getEntryFileRelativePath,
 } from "../utils/setting/setting";
 import { getCurrentFolderPath, pathExists } from "../utils/utils";
 import { getDependencyTree } from "../dependencyTree/index";
@@ -31,11 +36,6 @@ import {
   msgGetSavedData,
 } from "../utils/message/messages";
 import { setData, getData } from "../utils/data/data";
-import {
-  SETTING_KEY_ALIAS,
-  SETTING_KEY_ENTRY_FILE_PATH,
-  SETTING_KEY_RESOLVE_EXTENSIONS,
-} from "../utils/setting/settingKey";
 
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
@@ -62,12 +62,7 @@ export const getDependencyTreeData = async (
   postMessage ? await statusMsgGetFolderPath.postSuccess() : null;
 
   const setting = getAllSettingFromSettingFile();
-  let mainFilePath = undefined;
-  if (setting && setting[SETTING_KEY_ENTRY_FILE_PATH]) {
-    mainFilePath = JSON.parse(
-      JSON.stringify(setting[SETTING_KEY_ENTRY_FILE_PATH])
-    );
-  }
+  let mainFilePath = getEntryFileRelativePath();
   if (!mainFilePath) {
     // find package.json and main file
     const packageJsonPath = getPackageJsonPath(folderPath);
@@ -84,26 +79,16 @@ export const getDependencyTreeData = async (
     postMessage ? await statusMsgGetEntryFile.postError() : null;
     return undefined;
   }
-  setSetting(SETTING_KEY_ENTRY_FILE_PATH, mainFilePath);
+  setEntryFileRelativePath(mainFilePath);
   postMessage ? await statusMsgGetEntryFile.postSuccess() : null;
-  let resolveExtensions = undefined;
-  let alias = undefined;
-  if (setting && setting[SETTING_KEY_RESOLVE_EXTENSIONS]) {
-    resolveExtensions = JSON.parse(
-      JSON.stringify(setting[SETTING_KEY_RESOLVE_EXTENSIONS])
-    );
-  }
-  if (setting && setting[SETTING_KEY_ALIAS]) {
-    alias = JSON.parse(JSON.stringify(setting[SETTING_KEY_ALIAS]));
-  } else {
-    setSetting(SETTING_KEY_ALIAS, {});
-  }
-  for (let key in alias) {
-    alias[key] = path.join(folderPath, alias[key]);
+  let resolveExtensions = getResolveExtension();
+  let alias = getAliasKey();
+  if (!alias) {
+    setAliasKey({});
   }
   if (!resolveExtensions) {
     resolveExtensions = defaultOptions.resolveExtensions;
-    setSetting(SETTING_KEY_RESOLVE_EXTENSIONS, resolveExtensions);
+    setResolveExtension(resolveExtensions);
   }
   postSetting(setting);
   let dpDataFromFile = getData();
