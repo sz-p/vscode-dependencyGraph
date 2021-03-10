@@ -29,7 +29,7 @@ import {
   msgGetSavedData,
 } from "../utils/message/messages";
 
-import { pathExists } from "../utils/utils";
+import { isPathExists } from "../utils/utils";
 import { onError } from "../utils/error/onError";
 import { GET_DEPENDENCY_TREE_FAIL } from "../utils/error/errorKey";
 import { isSavedData } from "../utils/data/data";
@@ -107,7 +107,7 @@ export const reOpenWebView = function (
     const folderPath = getCurrentFolderPath();
     const setting = getAllSettingFromSettingFile();
     let entryFilePath = setting[SETTING_KEY_ENTRY_FILE_PATH];
-    if (folderPath && pathExists(folderPath)) {
+    if (folderPath && isPathExists(folderPath)) {
       statusMsgGetFolderPath.postSuccess();
     } else {
       statusMsgGetFolderPath.postError();
@@ -117,7 +117,7 @@ export const reOpenWebView = function (
     }
     if (
       entryFilePath &&
-      pathExists(path.join(folderPath as string, entryFilePath))
+      isPathExists(path.join(folderPath as string, entryFilePath))
     ) {
       statusMsgGetEntryFile.postSuccess();
       postSetting(setting);

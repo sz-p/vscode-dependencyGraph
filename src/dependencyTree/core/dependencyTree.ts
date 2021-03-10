@@ -16,7 +16,7 @@ import { parser as tsParser } from "../parsers/generalTsParser/generalTsParser";
 import { parser as cssParser } from "../parsers/cssParser/cssParser";
 import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
 import { parser as generalCssParser } from "../parsers/generalCssParser/generalCssParser";
-import { pathExists, isDirectory } from "../utils/utils";
+import { isPathExists, isDirectory } from "../utils/utils";
 export class DependencyTree {
   options: DependencyTreeOptions;
   parsers: Parsers;
@@ -174,7 +174,7 @@ export class DependencyTree {
 
       let { absolutePath, ancestors } = dependencyNode;
 
-      if (!pathExists(absolutePath)) {
+      if (!isPathExists(absolutePath)) {
         console.error(`file does not exist: ${absolutePath}`);
         continue;
       }
@@ -202,7 +202,7 @@ export class DependencyTree {
 
       for (let i = 0; i < children.length; i++) {
         const childrenPath = children[i];
-        if (!pathExists(childrenPath)) {
+        if (!isPathExists(childrenPath)) {
           console.error(`file does not exist: ${childrenPath}`);
           continue;
         }

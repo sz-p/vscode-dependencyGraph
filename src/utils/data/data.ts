@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import {
   getCurrentFolderPath,
-  pathExists,
+  isPathExists,
   getObjectFromJsonFile,
 } from "../utils";
 import { DependencyTreeData } from "../../data-dependencyTree/dependencyTreeData.d";
@@ -61,7 +61,7 @@ export const getData = function ():
 
 export const setData = function (value: any): boolean {
   const dirPath = getCurrentFolderPath();
-  if (!pathExists(dirPath + "/.framegraph")) createDir();
+  if (!isPathExists(dirPath + "/.framegraph")) createDir();
   let Data = value;
   try {
     fs.writeFileSync(getDataFilePath() as string, JSON.stringify(Data));
@@ -73,6 +73,6 @@ export const setData = function (value: any): boolean {
 export const isSavedData = function (dirPath?: string): boolean {
   if (!dirPath) dirPath = getCurrentFolderPath();
   const DataFilePath = dirPath + "/.framegraph/data.json";
-  if (!pathExists(DataFilePath)) return false;
+  if (!isPathExists(DataFilePath)) return false;
   return true;
 }
