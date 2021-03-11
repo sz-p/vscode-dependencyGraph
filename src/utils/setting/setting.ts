@@ -8,7 +8,7 @@ import * as path from "path";
 import * as fs from "fs";
 import {
   getCurrentFolderPath,
-  pathExists,
+  isPathExists,
   getObjectFromJsonFile,
 } from "../utils";
 import {
@@ -42,7 +42,7 @@ const getSetting = function (settingKey: string): any {
 
 export const setSetting = function (settingKey: string, value: any): boolean {
   const dirPath = getCurrentFolderPath();
-  if (!pathExists(dirPath + "/.framegraph")) createDir();
+  if (!isPathExists(dirPath + "/.framegraph")) createDir();
   let setting = getAllSettingFromSettingFile();
   if (!setting) {
     setting = {};

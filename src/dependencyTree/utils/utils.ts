@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-export const pathExists = function (p: string): boolean {
+export const isPathExists = function (p: string): boolean {
   try {
     fs.accessSync(p);
   } catch (err) {

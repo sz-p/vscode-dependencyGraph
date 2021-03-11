@@ -17,7 +17,7 @@ import {
   getResolveExtension,
   getEntryFileRelativePath,
 } from "../utils/setting/setting";
-import { getCurrentFolderPath, pathExists } from "../utils/utils";
+import { getCurrentFolderPath, isPathExists } from "../utils/utils";
 import { getDependencyTree } from "../dependencyTree/index";
 import { getMainFilePath, getPackageJsonPath } from "./dependencyTreeMethods";
 import { onError } from "../utils/error/onError";
@@ -95,7 +95,7 @@ class statusCallBack {
  */
 const checkFolderPath = function (): false | string {
   const folderPath = getCurrentFolderPath();
-  if (!folderPath || !pathExists(folderPath)) {
+  if (!folderPath || !isPathExists(folderPath)) {
     return false;
   }
   return folderPath;
@@ -115,7 +115,7 @@ const checkMainFilePath = function (folderPath: string): string {
     }
     mainFilePath = getMainFilePath(folderPath, packageJsonPath);
   }
-  if (!mainFilePath || !pathExists(path.join(folderPath, mainFilePath))) {
+  if (!mainFilePath || !isPathExists(path.join(folderPath, mainFilePath))) {
     return NO_MAIN_FILE;
   }
   setEntryFileRelativePath(mainFilePath);

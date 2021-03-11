@@ -9,7 +9,7 @@ import * as vscode from "vscode";
  * @param {string} p
  * @returns {boolean}
  */
-const pathExists = function (p: string): boolean {
+export const isPathExists = function (p: string): boolean {
   try {
     fs.accessSync(p);
   } catch (err) {
@@ -23,8 +23,8 @@ const pathExists = function (p: string): boolean {
  * @param {string} filePath
  * @returns {*}
  */
-const getObjectFromJsonFile = function (filePath: string): any {
-  if (!pathExists(filePath)) return false;
+ export const getObjectFromJsonFile = function (filePath: string): any {
+  if (!isPathExists(filePath)) return false;
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 };
 

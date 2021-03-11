@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import {
   getCurrentFolderPath,
-  pathExists
+  isPathExists
 } from "../utils";
 import * as stringRandom from "string-random";
 
@@ -12,7 +12,7 @@ const createDir = function (): void {
 export const exportSvg = function (value: any): string | undefined {
   try {
     const dirPath = getCurrentFolderPath();
-    if (!pathExists(dirPath + "/.framegraph")) createDir();
+    if (!isPathExists(dirPath + "/.framegraph")) createDir();
     const fileName = `framegraph.${stringRandom(8)}.svg`
     fs.writeFileSync(dirPath + '/.framegraph/' + fileName as string, value);
     return '/.framegraph/' + fileName
@@ -24,7 +24,7 @@ export const exportSvg = function (value: any): string | undefined {
 export const exportPng = function (value: any) {
   try {
     const dirPath = getCurrentFolderPath();
-    if (!pathExists(dirPath + "/.framegraph")) createDir();
+    if (!isPathExists(dirPath + "/.framegraph")) createDir();
     let Data = value.replace(/^data:image\/\w+;base64,/, "");
     const fileName = `framegraph.${stringRandom(8)}.png`
     const dataBuffer = Buffer.from(Data, 'base64');
