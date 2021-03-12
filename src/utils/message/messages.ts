@@ -1,5 +1,5 @@
 import { MessagePoster, StatusMessagePoster } from "./messagePoster";
-import { getActiveTheme } from "../setting/setting";
+import { getActiveTheme } from "../fileSystem/setting";
 import * as STATUS from "../../data-dependencyTree/statusType";
 import * as MSG from "./messagesKeys";
 import * as vscode from "vscode";

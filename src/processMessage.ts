@@ -6,12 +6,12 @@
 import * as MESSAGES from "./utils/message/messagesKeys";
 import * as vscode from "vscode";
 import { Msg } from "./utils/message/message.d";
-import { setSetting } from "./utils/setting/setting";
+import { setSetting } from "./utils/fileSystem/setting";
+import { SETTING_KEY_ENTRY_FILE_PATH } from "./utils/fileSystem/settingKey";
 import { onError } from "./utils/error/onError";
 import { NO_FOLDER } from "./utils/error/errorKey";
-import { exportSvg, exportPng } from "./utils/data/svgAndPng";
+import { exportSvg, exportPng } from "./utils/fileSystem/svgAndPng";
 import { msgRunCommandStatus } from "./utils/message/messages";
-import { SETTING_KEY_ENTRY_FILE_PATH } from "./utils/setting/settingKey";
 
 /**
  * get command open folder

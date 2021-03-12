@@ -4,6 +4,18 @@
 import * as fs from "fs";
 import * as vscode from "vscode";
 
+export const beforeSetDataToLocal = function (): void {
+  const dirPath = getCurrentFolderPath();
+  if (!isPathExists(dirPath + "/.framegraph")) createLocalFileDir();
+};
+/**
+ * create local files dir
+ */
+export const createLocalFileDir = function (): void {
+  const dirPath = getCurrentFolderPath();
+  fs.mkdirSync(dirPath + "/.framegraph");
+};
+
 export const isPathExists = function (p: string): boolean {
   try {
     fs.accessSync(p);
@@ -21,7 +33,11 @@ export const isPathExists = function (p: string): boolean {
  */
 export const getObjectFromJsonFile = function (
   filePath: string
-): false | object {
+):
+  | {
+      [key: string]: any;
+    }
+  | false {
   if (!isPathExists(filePath)) return false;
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 };

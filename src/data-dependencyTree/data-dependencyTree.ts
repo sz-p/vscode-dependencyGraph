@@ -16,7 +16,7 @@ import {
   getAliasKey,
   getResolveExtension,
   getEntryFileRelativePath,
-} from "../utils/setting/setting";
+} from "../utils/fileSystem/setting";
 import { getCurrentFolderPath, isPathExists } from "../utils/utils";
 import { getDependencyTree } from "../dependencyTree/index";
 import { getMainFilePath, getPackageJsonPath } from "./dependencyTreeMethods";
@@ -35,7 +35,7 @@ import {
   statusMsgGetPackageJsonPath,
   msgGetSavedData,
 } from "../utils/message/messages";
-import { setData, getData } from "../utils/data/data";
+import { setData, getData } from "../utils/fileSystem/data";
 
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";

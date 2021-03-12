@@ -13,7 +13,7 @@ import {
   NO_RESOLVE_ALIAS,
 } from "../../../../i18n/types";
 import { msgSetSetting } from "../../utils/messages";
-import { SETTING_KEY_ALIAS } from "../../../../utils/setting/settingKey";
+import { SETTING_KEY_ALIAS } from "../../../../utils/fileSystem/settingKey";
 import { action_getCommandWaitingStatus } from "../../actions/action";
 const addIcon = { iconName: "Add" };
 const deleteIcon = { iconName: "Delete" };

@@ -11,7 +11,7 @@ import {
   SET_ENTRY_FILE,
 } from "../../../../i18n/types";
 import { msgOpenFolder, msgSetSetting } from "../../utils/messages";
-import { SETTING_KEY_ENTRY_FILE_PATH } from "../../../../utils/setting/settingKey";
+import { SETTING_KEY_ENTRY_FILE_PATH } from "../../../../utils/fileSystem/settingKey";
 import { action_getCommandWaitingStatus } from "../../actions/action";
 const openFolder = function () {
   msgOpenFolder.post();

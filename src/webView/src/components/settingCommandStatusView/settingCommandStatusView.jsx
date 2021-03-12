@@ -30,7 +30,7 @@ import {
   SETTING_KEY_ENTRY_FILE_PATH,
   SETTING_KEY_RESOLVE_EXTENSIONS,
   SETTING_KEY_ALIAS,
-} from "../../../../utils/setting/settingKey";
+} from "../../../../utils/fileSystem/settingKey";
 const settingCommandStatusView = function (props) {
   const { language, commandSettingStatus, activeThemeKind } = props;
   let [messageData, setMessageData] = useState({});

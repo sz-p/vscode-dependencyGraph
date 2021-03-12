@@ -1,27 +1,21 @@
 /**
  * @introduction setting module
  *
- * @description get setting \n set setting
+ * @description get setting from setting file \n set setting to local
  */
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
 import {
   getCurrentFolderPath,
-  isPathExists,
   getObjectFromJsonFile,
+  beforeSetDataToLocal,
 } from "../utils";
 import {
   SETTING_KEY_ENTRY_FILE_PATH,
-  SETTING_KEY_ALIAS,
   SETTING_KEY_RESOLVE_EXTENSIONS,
+  SETTING_KEY_ALIAS,
 } from "./settingKey";
-
-const createDir = function (): void {
-  const dirPath = getCurrentFolderPath();
-  fs.mkdirSync(dirPath + "/.framegraph");
-};
-
 const getSettingFilePath = function (): string | false {
   const dirPath = getCurrentFolderPath();
   if (!dirPath) return false;
@@ -41,8 +35,7 @@ const getSetting = function (settingKey: string): any {
 };
 
 export const setSetting = function (settingKey: string, value: any): boolean {
-  const dirPath = getCurrentFolderPath();
-  if (!isPathExists(dirPath + "/.framegraph")) createDir();
+  beforeSetDataToLocal();
   let setting = getAllSettingFromSettingFile();
   if (!setting) {
     setting = {};
