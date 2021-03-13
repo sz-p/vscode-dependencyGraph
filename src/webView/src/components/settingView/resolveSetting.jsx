@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { i18n } from "../../../../i18n/i18n";
 import { RESOLVE_EXTENSIONS, CONFIRM } from "../../../../i18n/types";
 import { msgSetSetting } from "../../utils/messages";
-import { SETTING_KEY_RESOLVE_EXTENSIONS } from "../../../../utils/setting/settingKey";
+import { SETTING_KEY_RESOLVE_EXTENSIONS } from "../../../../utils/fileSystem/settingKey";
 import { action_getCommandWaitingStatus } from "../../actions/action";
 const setResolveExtensions = function (resolveExtensions) {
   msgSetSetting(

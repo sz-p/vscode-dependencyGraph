@@ -16,8 +16,10 @@ import {
 import { DependencyTreeData } from "../data-dependencyTree/dependencyTreeData";
 import { createWebviewPanel } from "../initExtension";
 import { getCurrentFolderPath } from "../utils/utils";
-import { getAllSettingFromSettingFile } from "../utils/setting/setting";
-import { SETTING_KEY_ENTRY_FILE_PATH } from "../utils/setting/settingKey";
+import {
+  getAllSettingFromSettingFile,
+  SETTING_KEY_ENTRY_FILE_PATH,
+} from "../utils/fileSystem/setting";
 
 import {
   statusMsgGetFolderPath,
@@ -32,7 +34,7 @@ import {
 import { isPathExists } from "../utils/utils";
 import { onError } from "../utils/error/onError";
 import { GET_DEPENDENCY_TREE_FAIL } from "../utils/error/errorKey";
-import { isSavedData } from "../utils/data/data";
+import { isSavedData } from "../utils/fileSystem/data";
 
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容

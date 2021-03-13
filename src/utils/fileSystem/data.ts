@@ -8,20 +8,14 @@ import {
   getCurrentFolderPath,
   isPathExists,
   getObjectFromJsonFile,
+  beforeSetDataToLocal,
 } from "../utils";
-import { DependencyTreeData } from "../../data-dependencyTree/dependencyTreeData.d";
+import { DependencyTreeData } from "../../data-dependencyTree/dependencyTreeData";
 import { transportsDataToDependenciesTreeData } from "../../data-dependencyTree/processTreeData";
 import {
   DependencyTree,
   DependencyNodes,
-} from "../../data-dependencyTree/dependencyTreeData.d";
-/**
- * create extension files directory before setData
- */
-const createDir = function (): void {
-  const dirPath = getCurrentFolderPath();
-  fs.mkdirSync(dirPath + "/.framegraph");
-};
+} from "../../data-dependencyTree/dependencyTreeData";
 
 const getDataFilePath = function (): string | false {
   const dirPath = getCurrentFolderPath();
@@ -67,8 +61,7 @@ export const getData = function ():
 };
 
 export const setData = function (value: any): boolean {
-  const dirPath = getCurrentFolderPath();
-  if (!isPathExists(dirPath + "/.framegraph")) createDir();
+  beforeSetDataToLocal();
   let Data = value;
   try {
     fs.writeFileSync(getDataFilePath() as string, JSON.stringify(Data));
@@ -77,6 +70,7 @@ export const setData = function (value: any): boolean {
     return false;
   }
 };
+
 export const isSavedData = function (dirPath?: string): boolean {
   if (!dirPath) dirPath = getCurrentFolderPath();
   const DataFilePath = dirPath + "/.framegraph/data.json";
