@@ -1,3 +1,8 @@
+/**
+ * @introduction i18n module
+ *
+ * @description get i18 text by text key
+ */
 import { zhcn } from "./zh-cn/zh-cn";
 import { engl } from "./en-gl/en-gl";
 export class I18n {
