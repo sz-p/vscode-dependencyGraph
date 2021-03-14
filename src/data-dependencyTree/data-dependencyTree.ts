@@ -1,13 +1,7 @@
 import * as path from "path";
 import { defaultOptions } from "../dependencyTree/core/defaultOptions";
 import { DependencyTreeData } from "./dependencyTreeData";
-import {
-  GET_DEPENDENCY_TREE_FAIL,
-  NO_DEPENDENCY,
-  NO_FOLDER,
-  NO_MAIN_FILE,
-  NO_PACKAGE_JSON,
-} from "../utils/error/errorKey";
+import { NO_MAIN_FILE, NO_PACKAGE_JSON } from "../utils/error/errorKey";
 import {
   getAllSettingFromSettingFile,
   setEntryFileRelativePath,
@@ -20,76 +14,19 @@ import {
 import { getCurrentFolderPath, isPathExists } from "../utils/utils";
 import { getDependencyTree } from "../dependencyTree/index";
 import { getMainFilePath, getPackageJsonPath } from "./dependencyTreeMethods";
-import { onError } from "../utils/error/onError";
 import {
   onGotAST,
   onGotCircularStructureNode,
   onGotFileString,
 } from "../fileAnalysis/fileAnalysis";
-import {
-  postSetting,
-  statusMsgGetDependencyData,
-  statusMsgGetDependencyProcessData,
-  statusMsgGetEntryFile,
-  statusMsgGetFolderPath,
-  statusMsgGetPackageJsonPath,
-  msgGetSavedData,
-} from "../utils/message/messages";
+import { postSetting } from "../utils/message/messages";
 import { setData, getData } from "../utils/fileSystem/data";
-
+import { StatusCallBack } from "./statusCallBack";
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
 
-class statusCallBack {
-  private readonly postMessage;
-  constructor(postMessage: boolean | undefined) {
-    if (postMessage === undefined) {
-      this.postMessage = true;
-    }
-    this.postMessage = postMessage;
-  }
-  async checkFolderPathSuccess() {
-    this.postMessage ? await statusMsgGetFolderPath.postSuccess() : null;
-  }
-  async checkFolderPathError() {
-    onError(NO_FOLDER);
-    this.postMessage ? await statusMsgGetFolderPath.postError() : null;
-  }
-  async checkPackageJsonError() {
-    onError(NO_PACKAGE_JSON);
-    this.postMessage ? await statusMsgGetPackageJsonPath.postError() : null;
-  }
-  async checkPackageJsonSuccess() {
-    this.postMessage ? await statusMsgGetPackageJsonPath.postSuccess() : null;
-  }
-  async checkMainFileError() {
-    onError(NO_MAIN_FILE);
-    this.postMessage ? await statusMsgGetEntryFile.postError() : null;
-  }
-  async checkMainFileSuccess() {
-    this.postMessage ? await statusMsgGetEntryFile.postSuccess() : null;
-  }
-  async checkGetDataFromFileError() {
-    // onError(NO_MAIN_FILE);
-    // this.postMessage ? await msgGetSavedData.post() : null;
-  }
-  async checkGetDataFromFileSuccess() {
-    this.postMessage ? await msgGetSavedData.post() : null;
-  }
-  async checkGetDataFromAnalyserError() {
-    onError(NO_DEPENDENCY);
-    this.postMessage
-      ? await statusMsgGetDependencyProcessData.postError()
-      : null;
-  }
-  async checkGetDataFromAnalyserSuccess() {
-    this.postMessage
-      ? await statusMsgGetDependencyProcessData.postSuccess()
-      : null;
-  }
-}
 /**
- * Check whether the folder is open
+ * Check whether the folder was opened
  *
  * @returns {boolean}
  */
@@ -140,7 +77,12 @@ const checkDataFromFile = function ():
   let dpDataFromFile = getData();
   return dpDataFromFile || false;
 };
-
+/**
+ * check data from getDependencyTree
+ *
+ * @param {boolean} [refresh]
+ * @returns
+ */
 const checkDataFromAnalyser = function (
   folderPath: string,
   mainFilePath: string,
@@ -182,8 +124,8 @@ const checkDataFromAnalyser = function (
 };
 
 export const getDependencyTreeData = async (
-  postMessage?: boolean,
-  refresh?: boolean
+  refresh?: boolean,
+  statusCallBack?: StatusCallBack
 ): Promise<
   | {
       dependencyTreeData: DependencyTreeData;
@@ -194,25 +136,24 @@ export const getDependencyTreeData = async (
     }
   | undefined
 > => {
-  const scb = new statusCallBack(postMessage);
   const setting = getAllSettingFromSettingFile();
   const folderPath = checkFolderPath();
   if (!folderPath) {
-    scb.checkFolderPathError();
+    statusCallBack ? statusCallBack.checkFolderPathError() : null;
     return undefined;
   } else {
-    scb.checkFolderPathSuccess();
+    statusCallBack ? statusCallBack.checkFolderPathSuccess() : null;
   }
   const mainFilePath = checkMainFilePath(folderPath);
   if (mainFilePath === NO_PACKAGE_JSON) {
-    scb.checkPackageJsonError();
+    statusCallBack ? statusCallBack.checkPackageJsonError() : null;
     return undefined;
   } else if (mainFilePath === NO_MAIN_FILE) {
-    scb.checkPackageJsonSuccess();
-    scb.checkMainFileError();
+    statusCallBack ? statusCallBack.checkPackageJsonSuccess() : null;
+    statusCallBack ? statusCallBack.checkMainFileError() : null;
   } else {
-    scb.checkPackageJsonSuccess();
-    scb.checkMainFileSuccess();
+    statusCallBack ? statusCallBack.checkPackageJsonSuccess() : null;
+    statusCallBack ? statusCallBack.checkMainFileSuccess() : null;
   }
   let resolveExtensions = getResolveExtension();
   let alias = getAliasKey();
@@ -228,7 +169,7 @@ export const getDependencyTreeData = async (
   if (!dpDataFromFile) {
   } else {
     if (!refresh) {
-      scb.checkGetDataFromFileSuccess();
+      statusCallBack ? statusCallBack.checkGetDataFromFileSuccess() : null;
       return dpDataFromFile;
     }
   }
@@ -239,10 +180,10 @@ export const getDependencyTreeData = async (
     resolveExtensions
   );
   if (!dataFromAnalyser) {
-    scb.checkGetDataFromAnalyserError();
+    statusCallBack ? statusCallBack.checkGetDataFromAnalyserError() : null;
   } else {
     const { dp, tree, nodes } = dataFromAnalyser;
-    scb.checkGetDataFromAnalyserSuccess();
+    statusCallBack ? statusCallBack.checkGetDataFromAnalyserSuccess() : null;
     return {
       dependencyTreeData: dp,
       transportsData: {
