@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { getDependencyTreeData } from "./data-dependencyTree/data-dependencyTree";
+import { StatusCallBack } from "./data-dependencyTree/statusCallBack";
 import { createView } from "./web-dependencyTree/openWebView";
 import { postMessageCatchError } from "./utils/message/postMessageToWebView";
 import { reOpenWebView } from "./web-dependencyTree/openWebView";
@@ -38,7 +39,8 @@ const refreshFile = async () => {
       value: stringRandom(),
     });
   }
-  const data = await getDependencyTreeData(postMessage, refresh);
+  const scb = new StatusCallBack(postMessage);
+  const data = await getDependencyTreeData(refresh, scb);
   if (data) {
     global.dependencyTreeData = data;
     renderTreeView(global.dependencyTreeData.dependencyTreeData);

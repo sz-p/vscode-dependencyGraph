@@ -6,6 +6,7 @@
 import * as vscode from "vscode";
 import { initExtension } from "./initExtension";
 import { getDependencyTreeData } from "./data-dependencyTree/data-dependencyTree";
+import { StatusCallBack } from "./data-dependencyTree/statusCallBack";
 import { createView } from "./web-dependencyTree/openWebView";
 import { allCommands } from "./commands";
 import { renderTreeView } from "./view-dependencyTree/renderTreeView";
@@ -22,9 +23,9 @@ export async function activate(context: vscode.ExtensionContext) {
   initExtension();
   // create webView content
   createView();
-
+  const scb = new StatusCallBack(true);
   // get dependency tree data
-  const dependencyTreeData = await getDependencyTreeData(true);
+  const dependencyTreeData = await getDependencyTreeData(false, scb);
 
   global.dependencyTreeData = dependencyTreeData;
 
