@@ -6,7 +6,7 @@
 import * as vscode from "vscode";
 import { initExtension } from "./initExtension";
 import { getDependencyTreeData } from "./data-dependencyTree/data-dependencyTree";
-import { StatusCallBack } from "./data-dependencyTree/statusCallBack";
+import { StatusCallBack } from "./data-dependencyTree/getDataStatusCallBack";
 import { createView } from "./web-dependencyTree/openWebView";
 import { allCommands } from "./commands";
 import { renderTreeView } from "./view-dependencyTree/renderTreeView";

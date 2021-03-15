@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getDependencyTreeData } from "./data-dependencyTree/data-dependencyTree";
-import { StatusCallBack } from "./data-dependencyTree/statusCallBack";
+import { StatusCallBack } from "./data-dependencyTree/getDataStatusCallBack";
 import { createView } from "./web-dependencyTree/openWebView";
 import { postMessageCatchError } from "./utils/message/postMessageToWebView";
 import { reOpenWebView } from "./web-dependencyTree/openWebView";

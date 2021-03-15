@@ -1,3 +1,8 @@
+/**
+ * @introduction get dependency tree data
+ *
+ * @description analyse file dependency by DependencyTreeData \n process data ready to send
+ */
 import * as path from "path";
 import { defaultOptions } from "../dependencyTree/core/defaultOptions";
 import { DependencyTreeData } from "./dependencyTreeData";
@@ -21,7 +26,7 @@ import {
 } from "../fileAnalysis/fileAnalysis";
 import { postSetting } from "../utils/message/messages";
 import { setData, getData } from "../utils/fileSystem/data";
-import { StatusCallBack } from "./statusCallBack";
+import { StatusCallBack } from "./getDataStatusCallBack";
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
 
@@ -122,7 +127,22 @@ const checkDataFromAnalyser = function (
     return { dp: dp as DependencyTreeData, nodes, tree };
   }
 };
-
+/**
+ * getDependencyTreeData
+ *
+ * @param {boolean} [refresh]
+ * @param {StatusCallBack} [statusCallBack]
+ * @returns {(Promise<
+ *   | {
+ *       dependencyTreeData: DependencyTreeData;
+ *       transportsData: {
+ *         dependencyTree: DependencyTree;
+ *         dependencyNodes: DependencyNodes;
+ *       };
+ *     }
+ *   | undefined
+ * >)}
+ */
 export const getDependencyTreeData = async (
   refresh?: boolean,
   statusCallBack?: StatusCallBack
