@@ -1,3 +1,8 @@
+/**
+ * @introduction process dependency tree data
+ *
+ * @description mini the data size \n change 'DependencyTreeData' to DependencyTree & DependencyNodes
+ */
 import * as md5 from "md5";
 import { DependencyHash } from "../dependencyTree/index.d";
 import { DependencyTreeData } from "./dependencyTreeData.d";

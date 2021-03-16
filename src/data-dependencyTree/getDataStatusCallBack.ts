@@ -1,3 +1,8 @@
+/**
+ * @introduction get dependency tree data callback
+ *
+ * @description sen status\data to webview
+ */
 import {
   statusMsgGetDependencyProcessData,
   statusMsgGetEntryFile,
@@ -12,7 +17,6 @@ import {
   NO_PACKAGE_JSON,
 } from "../utils/error/errorKey";
 import { onError } from "../utils/error/onError";
-
 export class StatusCallBack {
   private readonly postMessage;
   constructor(postMessage: boolean | undefined) {
