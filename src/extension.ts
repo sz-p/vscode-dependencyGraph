@@ -7,11 +7,9 @@ import * as vscode from "vscode";
 import { initExtension } from "./initExtension";
 import { getDependencyTreeData } from "./data-dependencyTree/data-dependencyTree";
 import { StatusCallBack } from "./data-dependencyTree/getDataStatusCallBack";
-import { createView } from "./web-dependencyTree/openWebView";
+import { createView, openWebView } from "./web-dependencyTree/openWebView";
 import { allCommands } from "./commands";
 import { renderTreeView } from "./view-dependencyTree/renderTreeView";
-import { openWebView } from "./web-dependencyTree/openWebView";
-
 // this method is called when your extension is started
 export async function activate(context: vscode.ExtensionContext) {
   // init commands
