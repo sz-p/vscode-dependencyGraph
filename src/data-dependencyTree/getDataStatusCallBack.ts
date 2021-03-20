@@ -18,7 +18,7 @@ import {
 } from "../utils/error/errorKey";
 import { onError } from "../utils/error/onError";
 export class StatusCallBack {
-  private readonly postMessage;
+  private readonly postMessage: boolean | undefined;
   constructor(postMessage: boolean | undefined) {
     if (postMessage === undefined) {
       this.postMessage = true;
