@@ -28,18 +28,15 @@ const readData = getWebViewDataByCompute("realProject", folderPath);
 const webViewData = getWebViewDataFromFile("realProject");
 describe("dependencyTree(real project): get dependencyTree data", function () {
   it("dependencyNodesData", function () {
-    // setDataToFile("./dependencyNodes.json", dependencyNodes)
     expect(dependencyNodesData.length).to.equal(dependencyNodes.length);
   });
   it("dependencyTreeData", function () {
-    // setDataToFile("./dependencyTree.json", dependencyTree)
     expect(dependencyTreeData.length).to.equal(dependencyTree.length);
   });
 });
 
 describe("dependencyTree(real project): get saved data", function () {
   it("jsonString", function () {
-    // setDataToFile("./savedDataByCompute.json", savedDataByCompute)
     expect(savedDataFromFile.length).to.equal(savedDataByCompute.length);
   });
 });

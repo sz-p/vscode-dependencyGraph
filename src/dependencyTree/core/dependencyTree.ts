@@ -208,7 +208,6 @@ export class DependencyTree {
 
     const dependencyList = [this.dependencyTreeData];
     while (dependencyList.length) {
-      console.time("while dependencyNode");
       const dependencyNode = dependencyList.pop();
       if (!dependencyNode) throw new Error("Error no dependencyNode");
 
@@ -228,7 +227,6 @@ export class DependencyTree {
         );
         continue;
       }
-      console.time("parse file")
       const children = parser(
         dependencyNode,
         absolutePath,
@@ -237,7 +235,6 @@ export class DependencyTree {
         this.parseRule,
         this.parsers
       );
-      console.timeEnd("parse file")
       // if not set dependencyNode in dependencyHash before
       // will not found analysed node
       this.dependencyHash[absolutePath] = dependencyNode;
@@ -266,18 +263,14 @@ export class DependencyTree {
               this.dependencyHash
             );
           } else {
-            console.time("cloneDeep")
             dependencyChildren = cloneDeep(this.dependencyHash[childrenPath]);
-            console.timeEnd("cloneDeep")
             this.triggerGetOldDependencyTreeNode(dependencyChildren);
           }
-          console.time("reSetAnalysedNodesAncestors")
           this.reSetAnalysedNodesAncestors(
             absolutePath,
             ancestors,
             dependencyChildren
           );
-          console.timeEnd("reSetAnalysedNodesAncestors")
           // not analysed
           if (!dependencyChildren.name) {
             dependencyChildren = this.getNewNode(absolutePath, ancestors, childrenPath, dependencyList)
@@ -289,7 +282,6 @@ export class DependencyTree {
         }
         dependencyNode.children.push(dependencyChildren);
       }
-      console.timeEnd("while dependencyNode")
       // cloneDeep
       // this.dependencyHash[absolutePath] = cloneDeep(dependencyNode);
     }
