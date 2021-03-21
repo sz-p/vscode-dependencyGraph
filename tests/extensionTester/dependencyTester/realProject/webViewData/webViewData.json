@@ -378,10 +378,119 @@
                   "fileDescription": {},
                   "type": "typescript",
                   "language": "file",
+                  "lines": 176,
+                  "analysed": true,
+                  "functions": [
+                    {
+                      "arrowFunction": false,
+                      "params": [
+                        {
+                          "name": "container"
+                        },
+                        {
+                          "name": "data"
+                        }
+                      ]
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": true,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": true,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": true,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": true,
+                      "params": []
+                    }
+                  ],
                   "extension": ".ts",
                   "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
                   "relativePath": "\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "force-layout.ts",
+                      "fileID": "bcea8ce0335f07418440c743419d3723",
+                      "nodeID": "069c3aa825971bebfa21b37b00412874",
+                      "ancestors": [
+                        "43351ecb56f3a7e10f80143f717fe4ea",
+                        "413433565442f533b995159558e9c9dd",
+                        "ad82d0a7eca6129330779b017961cb43",
+                        "bd762cfa73f2e5948efc12450b63c1c4",
+                        "95b87d3a0a4cbb6328ffc180e79d3e24"
+                      ],
+                      "fileDescription": {},
+                      "type": "typescript",
+                      "language": "file",
+                      "lines": 11,
+                      "analysed": true,
+                      "functions": [
+                        {
+                          "arrowFunction": false,
+                          "params": [
+                            {
+                              "name": "data"
+                            }
+                          ]
+                        }
+                      ],
+                      "extension": ".ts",
+                      "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\force-layout.ts",
+                      "relativePath": "\\src\\components\\force-3d\\demoHandle\\force-layout.ts",
+                      "children": []
+                    },
+                    {
+                      "name": "colorlist.js",
+                      "fileID": "f3882fa367acf2f844b7a8abe1bc25b3",
+                      "nodeID": "9f7b24541bdd037ba6985da361250252",
+                      "ancestors": [
+                        "43351ecb56f3a7e10f80143f717fe4ea",
+                        "413433565442f533b995159558e9c9dd",
+                        "ad82d0a7eca6129330779b017961cb43",
+                        "bd762cfa73f2e5948efc12450b63c1c4",
+                        "95b87d3a0a4cbb6328ffc180e79d3e24"
+                      ],
+                      "fileDescription": {},
+                      "type": "javascript",
+                      "language": "javascript",
+                      "lines": 117,
+                      "analysed": true,
+                      "functions": [],
+                      "extension": ".js",
+                      "absolutePath": "%DIR-PATH%\\src\\components\\datas\\colorlist.js",
+                      "relativePath": "\\src\\components\\datas\\colorlist.js",
+                      "children": []
+                    }
+                  ]
                 }
               ]
             }

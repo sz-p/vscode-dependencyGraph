@@ -38,6 +38,9 @@ export const getDependencyTreeDataFromFile = function (testCase: string) {
   const folderPath = path.join(__dirname, `./${testCase}/files`);
   return { dependencyTreeData, dependencyNodesData, folderPath };
 };
+export const setDataToFile = function (_path: string, dataString: string) {
+  fs.writeFileSync(path.join(__dirname, _path), dataString)
+}
 export const getDependencyTreeDataByCompute = function (
   folderPath: string,
   mainFilePath: string
