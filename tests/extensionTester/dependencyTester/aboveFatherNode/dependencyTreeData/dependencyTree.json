@@ -1,0 +1,103 @@
+{
+  "absolutePath": "%DIR-PATH%\\src\\index.js",
+  "ancestors": [],
+  "children": [
+    {
+      "absolutePath": "%DIR-PATH%\\src\\data-dependencyTree.ts",
+      "ancestors": [
+        "%DIR-PATH%\\src\\index.js"
+      ],
+      "extension": ".ts",
+      "name": "data-dependencyTree.ts",
+      "relativePath": "\\src\\data-dependencyTree.ts",
+      "children": [
+        {
+          "absolutePath": "%DIR-PATH%\\src\\utils.ts",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\data-dependencyTree.ts"
+          ],
+          "extension": ".ts",
+          "name": "utils.ts",
+          "relativePath": "\\src\\utils.ts",
+          "children": [],
+          "fileDescription": {},
+          "type": "typescript",
+          "language": "file",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        },
+        {
+          "absolutePath": "%DIR-PATH%\\src\\setting.ts",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\data-dependencyTree.ts"
+          ],
+          "extension": ".ts",
+          "name": "setting.ts",
+          "relativePath": "\\src\\setting.ts",
+          "children": [
+            {
+              "absolutePath": "%DIR-PATH%\\src\\utils.ts",
+              "ancestors": [
+                "%DIR-PATH%\\src\\index.js",
+                "%DIR-PATH%\\src\\data-dependencyTree.ts",
+                "%DIR-PATH%\\src\\setting.ts"
+              ],
+              "extension": ".ts",
+              "name": "utils.ts",
+              "relativePath": "\\src\\utils.ts",
+              "children": [],
+              "fileDescription": {},
+              "type": "typescript",
+              "language": "file",
+              "analysed": true,
+              "lines": 1,
+              "functions": []
+            },
+            {
+              "absolutePath": "%DIR-PATH%\\src\\settingKey.ts",
+              "ancestors": [
+                "%DIR-PATH%\\src\\index.js",
+                "%DIR-PATH%\\src\\data-dependencyTree.ts",
+                "%DIR-PATH%\\src\\setting.ts"
+              ],
+              "extension": ".ts",
+              "name": "settingKey.ts",
+              "relativePath": "\\src\\settingKey.ts",
+              "children": [],
+              "fileDescription": {},
+              "type": "typescript",
+              "language": "file",
+              "analysed": true,
+              "lines": 1,
+              "functions": []
+            }
+          ],
+          "fileDescription": {},
+          "type": "typescript",
+          "language": "file",
+          "analysed": true,
+          "lines": 3,
+          "functions": []
+        }
+      ],
+      "fileDescription": {},
+      "type": "typescript",
+      "language": "file",
+      "analysed": true,
+      "lines": 3,
+      "functions": []
+    }
+  ],
+  "extension": ".js",
+  "name": "index.js",
+  "relativePath": "\\src\\index.js",
+  "fileDescription": {},
+  "type": "javascript",
+  "language": "javascript",
+  "analysed": true,
+  "lines": 2,
+  "functions": []
+}
