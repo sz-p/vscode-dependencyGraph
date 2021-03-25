@@ -51,10 +51,12 @@
 [x] feat: show start refresh Data message
 [x] fix: dependency tree get ts file error
 [x] fix: webview file description code box height
+[x] fix: dependency tree get aboveFatherNode error(have test case)
+[x] feat: add update data error message
 
-[ ] feat: add update data error message
+[ ] feat: local massage add type
+[ ] feat: change 'main file' text to 'entry file'
 [ ] feat: functionBox do not show undefined parameters again
-[ ] fix: dependency tree get aboveFatherNode error(have test case)
 [ ] refactor: move dependencyTree to package
 [ ] feat: dependency tree get required node
 [ ] fix: dependency tree get ts file error
