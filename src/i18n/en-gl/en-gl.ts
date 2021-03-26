@@ -32,6 +32,7 @@ engl[types.EXPORT] = "Export";
 engl[types.UPDATE_DATA] = "Update data";
 engl[types.START_UPDATE_DATA] = "Start update data";
 engl[types.UPDATED_DATA] = "Data updated";
+engl[types.UPDATE_DATA_FAILED] = "Update data failed";
 engl[types.UPDATE_DATA_TOOLTIP] =
   "Update data will save data when data not saved";
 engl[types.EXPORT_SVG] = "Export SVG";

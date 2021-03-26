@@ -32,6 +32,7 @@ zhcn[types.EXPORT] = "导出";
 zhcn[types.UPDATE_DATA] = "更新数据";
 zhcn[types.START_UPDATE_DATA] = "更新数据";
 zhcn[types.UPDATED_DATA] = "数据更新完毕";
+zhcn[types.UPDATE_DATA_FAILED] = "更新数据失败";
 zhcn[types.UPDATE_DATA_TOOLTIP] = "未保存数据时、更新数据会保存数据。";
 zhcn[types.EXPORT_SVG] = "导出SVG";
 zhcn[types.EXPORT_PNG] = "导出PNG";

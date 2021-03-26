@@ -12,10 +12,10 @@ import {
 } from "./utils/message/messagesKeys";
 import { msgGetSavedData } from "./utils/message/messages";
 import * as stringRandom from "string-random";
-import { setData } from "./utils/fileSystem/data";
+import { setData, isSavedData } from "./utils/fileSystem/data";
 import { getCurrentFolderPath, thenAbleWithTimeout } from "./utils/utils";
 import { showMessage } from "./utils/showMessage";
-import { START_UPDATE_DATA, UPDATED_DATA } from "./i18n/types";
+import { START_UPDATE_DATA, UPDATED_DATA, UPDATE_DATA_FAILED } from "./i18n/types";
 import { i18n } from "./i18n/i18n";
 export const command_createView = vscode.commands.registerCommand(
   "framegraph.createView",
@@ -28,7 +28,7 @@ export const command_createView = vscode.commands.registerCommand(
 // 	postMessageCatchError({ key: 'postMessageTest', value: message++ });
 // });
 
-const refreshFile = async () => {
+const refreshFile = async (): Promise<boolean> => {
   // no catch error may be webview is closed
   let postMessage = false;
   let refresh = true;
@@ -40,7 +40,13 @@ const refreshFile = async () => {
     });
   }
   const scb = new StatusCallBack(postMessage);
-  const data = await getDependencyTreeData(refresh, scb);
+  let data = undefined;
+  try {
+    data = await getDependencyTreeData(refresh, scb);
+  }
+  catch (e) {
+    return false
+  }
   if (data) {
     global.dependencyTreeData = data;
     renderTreeView(global.dependencyTreeData.dependencyTreeData);
@@ -53,6 +59,9 @@ const refreshFile = async () => {
         },
       });
     }
+    return true;
+  } else {
+    return false;
   }
 };
 
@@ -120,8 +129,19 @@ export const command_saveDataWithMessage = vscode.commands.registerCommand(
   "framegraph.refreshFileWithMessage",
   async () => {
     await thenAbleWithTimeout(showMessage(i18n.getText(START_UPDATE_DATA)), 0);
-    refreshFile();
-    showMessage(i18n.getText(UPDATED_DATA));
+    try {
+      if (await refreshFile()) {
+        showMessage(i18n.getText(UPDATED_DATA));
+        if (isSavedData()) {
+          saveData();
+        }
+      } else {
+        showMessage(i18n.getText(UPDATE_DATA_FAILED));
+      }
+    }
+    catch (e) {
+      showMessage(i18n.getText(UPDATE_DATA_FAILED));
+    }
   }
 );
 

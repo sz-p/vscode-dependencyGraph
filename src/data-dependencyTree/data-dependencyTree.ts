@@ -72,12 +72,12 @@ const checkMainFilePath = function (folderPath: string): string {
  */
 const checkDataFromFile = function ():
   | {
-      dependencyTreeData: DependencyTreeData;
-      transportsData: {
-        dependencyTree: DependencyTree;
-        dependencyNodes: DependencyNodes;
-      };
-    }
+    dependencyTreeData: DependencyTreeData;
+    transportsData: {
+      dependencyTree: DependencyTree;
+      dependencyNodes: DependencyNodes;
+    };
+  }
   | false {
   let dpDataFromFile = getData();
   return dpDataFromFile || false;
@@ -97,10 +97,10 @@ const checkDataFromAnalyser = function (
   resolveExtensions: string[] | undefined
 ):
   | {
-      dp: DependencyTreeData;
-      nodes: DependencyNodes;
-      tree: DependencyTree;
-    }
+    dp: DependencyTreeData;
+    nodes: DependencyNodes;
+    tree: DependencyTree;
+  }
   | false {
   const { dependencyTree: dp, dependencyNodes } = getDependencyTree(
     path.join(folderPath, mainFilePath),
@@ -113,19 +113,24 @@ const checkDataFromAnalyser = function (
       onGotCircularStructureNode,
     }
   );
-  const {
-    dependencyNodes: nodes,
-    dependencyTree: tree,
-  } = dependenciesTreeDataToTransportsData(
-    dp as DependencyTreeData,
-    dependencyNodes,
-    folderPath
-  );
-  if (!dp) {
+  try {
+    const {
+      dependencyNodes: nodes,
+      dependencyTree: tree,
+    } = dependenciesTreeDataToTransportsData(
+      dp as DependencyTreeData,
+      dependencyNodes,
+      folderPath
+    );
+    if (!dp) {
+      return false;
+    } else {
+      return { dp: dp as DependencyTreeData, nodes, tree };
+    }
+  } catch (e) {
     return false;
-  } else {
-    return { dp: dp as DependencyTreeData, nodes, tree };
   }
+
 };
 /**
  * getDependencyTreeData
@@ -148,12 +153,12 @@ export const getDependencyTreeData = async (
   statusCallBack?: StatusCallBack
 ): Promise<
   | {
-      dependencyTreeData: DependencyTreeData;
-      transportsData: {
-        dependencyTree: DependencyTree;
-        dependencyNodes: DependencyNodes;
-      };
-    }
+    dependencyTreeData: DependencyTreeData;
+    transportsData: {
+      dependencyTree: DependencyTree;
+      dependencyNodes: DependencyNodes;
+    };
+  }
   | undefined
 > => {
   const setting = getAllSettingFromSettingFile();
