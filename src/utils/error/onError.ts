@@ -20,7 +20,7 @@ export const onError = function (
   if (message) {
     messageText = messageText + `<br/>` + message;
   }
-  showMessage(messageText);
+  showMessage(messageText, 'error');
   if (callback) {
     callback(callbackArg);
   }

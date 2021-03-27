@@ -136,11 +136,11 @@ export const command_saveDataWithMessage = vscode.commands.registerCommand(
           saveData();
         }
       } else {
-        showMessage(i18n.getText(UPDATE_DATA_FAILED));
+        showMessage(i18n.getText(UPDATE_DATA_FAILED), "error");
       }
     }
     catch (e) {
-      showMessage(i18n.getText(UPDATE_DATA_FAILED));
+      showMessage(i18n.getText(UPDATE_DATA_FAILED), "error");
     }
   }
 );

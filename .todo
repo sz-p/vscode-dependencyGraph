@@ -53,8 +53,9 @@
 [x] fix: webview file description code box height
 [x] fix: dependency tree get aboveFatherNode error(have test case)
 [x] feat: add update data error message
+[x] feat: local massage add type
 
-[ ] feat: local massage add type
+[ ] fix: no main file error called error
 [ ] feat: change 'main file' text to 'entry file'
 [ ] feat: functionBox do not show undefined parameters again
 [ ] refactor: move dependencyTree to package
