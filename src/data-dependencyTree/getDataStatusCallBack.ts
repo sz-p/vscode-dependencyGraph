@@ -13,7 +13,7 @@ import {
 import {
   NO_DEPENDENCY,
   NO_FOLDER,
-  NO_MAIN_FILE,
+  NO_ENTRY_FILE,
   NO_PACKAGE_JSON,
 } from "../utils/error/errorKey";
 import { onError } from "../utils/error/onError";
@@ -40,14 +40,14 @@ export class StatusCallBack {
     this.postMessage ? await statusMsgGetPackageJsonPath.postSuccess() : null;
   }
   async checkMainFileError() {
-    onError(NO_MAIN_FILE);
+    onError(NO_ENTRY_FILE);
     this.postMessage ? await statusMsgGetEntryFile.postError() : null;
   }
   async checkMainFileSuccess() {
     this.postMessage ? await statusMsgGetEntryFile.postSuccess() : null;
   }
   async checkGetDataFromFileError() {
-    // onError(NO_MAIN_FILE);
+    // onError(NO_ENTRY_FILE);
     // this.postMessage ? await msgGetSavedData.post() : null;
   }
   async checkGetDataFromFileSuccess() {

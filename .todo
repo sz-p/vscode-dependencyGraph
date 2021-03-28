@@ -54,13 +54,13 @@
 [x] fix: dependency tree get aboveFatherNode error(have test case)
 [x] feat: add update data error message
 [x] feat: local massage add type
+[x] fix: dependency tree get ts file error
+[x] fix: no main file error called error
+[x] feat: change 'main file' text to 'entry file'
 
-[ ] fix: no main file error called error
-[ ] feat: change 'main file' text to 'entry file'
 [ ] feat: functionBox do not show undefined parameters again
 [ ] refactor: move dependencyTree to package
 [ ] feat: dependency tree get required node
-[ ] fix: dependency tree get ts file error
 [ ] fix: move resolver to single file
 [ ] fix: refresh file not resend data to webview
 [ ] fix: move ancestors from dependencyNodesHash

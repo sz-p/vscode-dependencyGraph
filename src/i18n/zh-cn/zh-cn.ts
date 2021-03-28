@@ -5,7 +5,7 @@ export const zhcn = {} as any;
 
 zhcn[errorKey.NO_FOLDER] = "工作区内无文件夹";
 zhcn[errorKey.NO_PACKAGE_JSON] = "未发现 PackageJson";
-zhcn[errorKey.NO_MAIN_FILE] = "未发现 MainFile";
+zhcn[errorKey.NO_ENTRY_FILE] = "未发现 MainFile";
 zhcn[errorKey.GET_DEPENDENCY_TREE_FAIL] = "获取文件依赖树失败";
 zhcn[errorKey.NO_WEBVIEW_PANEL] = "无WebView页面";
 zhcn[errorKey.NO_DEPENDENCY] = "无文件依赖";

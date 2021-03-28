@@ -6,7 +6,7 @@
 import * as path from "path";
 import { defaultOptions } from "../dependencyTree/core/defaultOptions";
 import { DependencyTreeData } from "./dependencyTreeData";
-import { NO_MAIN_FILE, NO_PACKAGE_JSON } from "../utils/error/errorKey";
+import { NO_ENTRY_FILE, NO_PACKAGE_JSON } from "../utils/error/errorKey";
 import {
   getAllSettingFromSettingFile,
   setEntryFileRelativePath,
@@ -58,7 +58,7 @@ const checkMainFilePath = function (folderPath: string): string {
     mainFilePath = getMainFilePath(folderPath, packageJsonPath);
   }
   if (!mainFilePath || !isPathExists(path.join(folderPath, mainFilePath))) {
-    return NO_MAIN_FILE;
+    return NO_ENTRY_FILE;
   }
   setEntryFileRelativePath(mainFilePath);
   return mainFilePath;
@@ -173,7 +173,7 @@ export const getDependencyTreeData = async (
   if (mainFilePath === NO_PACKAGE_JSON) {
     statusCallBack ? statusCallBack.checkPackageJsonError() : null;
     return undefined;
-  } else if (mainFilePath === NO_MAIN_FILE) {
+  } else if (mainFilePath === NO_ENTRY_FILE) {
     statusCallBack ? statusCallBack.checkPackageJsonSuccess() : null;
     statusCallBack ? statusCallBack.checkMainFileError() : null;
   } else {
