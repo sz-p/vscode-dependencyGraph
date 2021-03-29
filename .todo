@@ -57,8 +57,10 @@
 [x] fix: dependency tree get ts file error
 [x] fix: no main file error called error
 [x] feat: change 'main file' text to 'entry file'
+[x] feat: functionBox do not show undefined parameters again
 
-[ ] feat: functionBox do not show undefined parameters again
+[ ] feat: fileInfoView title add icon
+[ ] feat: change name framegraph to dependency graph
 [ ] refactor: move dependencyTree to package
 [ ] feat: dependency tree get required node
 [ ] fix: move resolver to single file

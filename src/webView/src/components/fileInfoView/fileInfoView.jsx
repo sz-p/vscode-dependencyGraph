@@ -69,32 +69,39 @@ const fileInfoView = function (props) {
         </div>
       </div>
       <div className="fileInfoView-fileDescription">
-        <div className="fileInfoView-fileDescription-title">
-          {i18n.getText(INTRODUCTION)}:
-        </div>
-        <div
-          className="fileInfoView-fileDescription-view"
-          dangerouslySetInnerHTML={{ __html: introduction }}
-        ></div>
-        <div className="fileInfoView-fileDescription-title">
-          {i18n.getText(DESCRIPTION)}:
-        </div>
-        <div
-          className="fileInfoView-fileDescription-view"
-          dangerouslySetInnerHTML={{ __html: description }}
-        ></div>
+        {
+          introduction ?
+            <><div className="fileInfoView-fileDescription-title">
+              {i18n.getText(INTRODUCTION)}:
+            </div>
+              <div
+                className="fileInfoView-fileDescription-view"
+                dangerouslySetInnerHTML={{ __html: introduction }}
+              ></div></> : null
+        }
+        {
+          description ? <><div className="fileInfoView-fileDescription-title">
+            {i18n.getText(DESCRIPTION)}:
+          </div>
+            <div
+              className="fileInfoView-fileDescription-view"
+              dangerouslySetInnerHTML={{ __html: description }}
+            ></div></> : null
+        }
       </div>
-      <div className="fileInfoView-functionBox">
-        <div className="fileInfoView-functionBox-title">
-          {i18n.getText(METHODS)}:
+      {
+        functions && functions.length ? <div className="fileInfoView-functionBox">
+          <div className="fileInfoView-functionBox-title">
+            {i18n.getText(METHODS)}:
         </div>
-        <FunctionsBox
-          analysed={analysed}
-          type={type}
-          activeThemeKind={activeThemeKind}
-          functionsList={functions}
-        />
-      </div>
+          <FunctionsBox
+            analysed={analysed}
+            type={type}
+            activeThemeKind={activeThemeKind}
+            functionsList={functions}
+          />
+        </div> : null
+      }
     </div>
   );
 };
