@@ -39,6 +39,7 @@ const fileInfoView = function (props) {
     fileDescription,
     functions,
   } = selectedNode;
+  console.log(selectedNode);
   let { introduction, description } = fileDescription;
   introduction ? (introduction = introduction.replace(/\\n/g, "</br>")) : null;
   description ? (description = description.replace(/\\n/g, "</br>")) : null;
@@ -46,7 +47,10 @@ const fileInfoView = function (props) {
     <div ref={dom} className={className}>
       <ResizeBar onResize={resizeBox} onResizeEnd={resizeEnd} />
       <div className="fileInfoView-titleBar">
-        <div className="fileInfoView-titleBar-titleLabel">{name}</div>
+        <div className="fileInfoView-titleBar-titleLabel">
+          <div className="fileInfoView-titleBar-labelIcon" style={{
+            background: `url(${assetsBaseURL}/icons/${type}.svg) center center / contain no-repeat`,
+          }}></div><div className="fileInfoView-titleBar-labelText">{name}</div></div>
         <div
           style={{
             background: `url(${assetsBaseURL}/webview/edit-${activeThemeKind ? activeThemeKind.toLocaleLowerCase() : "dark"
