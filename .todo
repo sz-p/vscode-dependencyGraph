@@ -60,9 +60,9 @@
 [x] feat: functionBox do not show undefined parameters again
 [x] feat: fileInfoView title add icon
 
+[ ] feat: dependency tree get required node
 [ ] feat: change name framegraph to dependency graph
 [ ] refactor: move dependencyTree to package
-[ ] feat: dependency tree get required node
 [ ] fix: move resolver to single file
 [ ] fix: refresh file not resend data to webview
 [ ] fix: move ancestors from dependencyNodesHash
