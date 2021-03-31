@@ -59,8 +59,8 @@
 [x] feat: change 'main file' text to 'entry file'
 [x] feat: functionBox do not show undefined parameters again
 [x] feat: fileInfoView title add icon
+[x] feat: dependency tree get required node
 
-[ ] feat: dependency tree get required node
 [ ] feat: change name framegraph to dependency graph
 [ ] refactor: move dependencyTree to package
 [ ] fix: move resolver to single file

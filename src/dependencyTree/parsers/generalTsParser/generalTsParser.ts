@@ -31,14 +31,13 @@ export const parser: Parser = function (
   }
   triggerOnGotAST(dependencyNode, absolutePath, options, ast);
   const { resolveExtensions, alias } = options;
+  const resolve = Resolve.create.sync({
+    extensions: resolveExtensions,
+    alias: alias,
+  });
   visit(ast, {
     visitImportDeclaration(nodePath) {
       if (typeof nodePath.node.source.value !== "string") return false;
-
-      const resolve = Resolve.create.sync({
-        extensions: resolveExtensions,
-        alias: alias,
-      });
       let dependencyPath = undefined;
       try {
         dependencyPath = resolve(dirName, nodePath.node.source.value);
@@ -56,11 +55,31 @@ export const parser: Parser = function (
       return false;
     },
     visitIdentifier(nodePath) {
-      if (nodePath.name !== "require") {
-        return false;
+      let dependencyPath = undefined;
+      const node = nodePath.value;
+      // try to find require identifier node
+      if (nodePath.name === 'callee' && node && node.name === "require") {
+        // try to find expression
+        if (nodePath.parent?.name === 'expression' && nodePath.parent?.value?.type === 'CallExpression') {
+          const expressionNode = nodePath.parent.value;
+          if (expressionNode.arguments?.length && expressionNode.arguments[0]?.type === "StringLiteral") {
+            const expressionArgument = expressionNode.arguments[0];
+            try {
+              dependencyPath = resolve(dirName, expressionArgument.value);
+            } catch (e) {
+              resolveChildrenNodeError(expressionArgument.value, absolutePath);
+              return false;
+            }
+            if (typeof dependencyPath === "string") {
+              if (dependencyPath.includes("node_modules")) {
+                return false;
+              }
+              dependencies.push(dependencyPath);
+            }
+          }
+        }
       } else {
-        //TODO get require file
-        console.log("require");
+        return false;
       }
       return false;
     },
