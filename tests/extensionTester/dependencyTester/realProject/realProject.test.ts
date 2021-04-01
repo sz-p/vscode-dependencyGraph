@@ -43,7 +43,7 @@ describe("dependencyTree(real project): get saved data", function () {
 
 describe("dependencyTree(real project): get webView data", function () {
   it("dependencyTreeData", function () {
-    setDataToFile("./readData.json", readData)
+    // setDataToFile("./readData.json", readData)
     expect(readData.length).to.equal(webViewData.length);
   });
 });
