@@ -1,7 +1,6 @@
 .fileInfoView {
-  display: grid;
-  grid-template-rows: auto auto auto 1fr;
-  grid-template-columns: 100%;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   background: var(--vscode-breadcrumbPicker-background);
   width: 297px;
@@ -82,13 +81,14 @@
 .fileInfoView-functionBox {
   padding: 0px 20px;
   flex: 1;
+  overflow: hidden;
 }
 .fileInfoView-functionBox-title {
   line-height: 35px;
 }
 .fileInfoView-functionBox-function {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50px);
 }
 .function-comment {
   color: var(--vscode-charts-green);
