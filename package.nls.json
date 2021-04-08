@@ -1,11 +1,11 @@
 {
-  "framegraph.title": "FrameGraph",
-  "framegraph.entryFilePath": "The absolute path of the entry file to be analyzed",
-  "framegraph.folderPath": "The files folder path",
-  "framegraph.reOpenView": "Reopen webview",
-  "framegraph.refresh": "Refresh dependencies data",
-  "framegraph.framegraphTreeView": "FrameGraph",
-  "framegraph.DependencyTree": "DependencyTree",
-  "framegraph.openFileInView": "Edit",
-  "framegraph.upDateData": "Update Data"
+  "dependencygraph.title": "DependencyGraph",
+  "dependencygraph.entryFilePath": "The absolute path of the entry file to be analyzed",
+  "dependencygraph.folderPath": "The files folder path",
+  "dependencygraph.reOpenView": "Reopen webview",
+  "dependencygraph.refresh": "Refresh dependencies data",
+  "dependencygraph.dependencygraphTreeView": "DependencyGraph",
+  "dependencygraph.dependencyTree": "DependencyTree",
+  "dependencygraph.openFileInView": "Edit",
+  "dependencygraph.upDateData": "Update Data"
 }

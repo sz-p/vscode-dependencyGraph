@@ -20,7 +20,7 @@ import {
 const getDataFilePath = function (): string | false {
   const dirPath = getCurrentFolderPath();
   if (!dirPath) return false;
-  return dirPath + "/.framegraph/data.json";
+  return dirPath + "/.dependencygraph/data.json";
 };
 
 export const getDataFromDataFile = function (): any {
@@ -73,7 +73,7 @@ export const setData = function (value: any): boolean {
 
 export const isSavedData = function (dirPath?: string): boolean {
   if (!dirPath) dirPath = getCurrentFolderPath();
-  const DataFilePath = dirPath + "/.framegraph/data.json";
+  const DataFilePath = dirPath + "/.dependencygraph/data.json";
   if (!isPathExists(DataFilePath)) return false;
   return true;
 };

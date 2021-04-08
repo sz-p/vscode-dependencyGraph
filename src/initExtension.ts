@@ -14,7 +14,7 @@ import { FRAME_GRAPH_WEBVIEW } from "./i18n/types";
  */
 export const createWebviewPanel = function (): void {
   global.webViewPanel = vscode.window.createWebviewPanel(
-    "framegraph-view",
+    "dependencygraph-view",
     i18n.getText(FRAME_GRAPH_WEBVIEW),
     vscode.ViewColumn.One,
     {

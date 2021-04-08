@@ -1,11 +1,11 @@
 {
-  "framegraph.title": "FrameGraph",
-  "framegraph.entryFilePath": "待分析的入口文件绝对路径",
-  "framegraph.folderPath": "文件夹路径",
-  "framegraph.reOpenView": "打开视图页面",
-  "framegraph.refresh": "刷新依赖树",
-  "framegraph.framegraphTreeView": "架构图",
-  "framegraph.DependencyTree": "依赖树",
-  "framegraph.openFileInView": "编辑",
-  "framegraph.upDateData": "更新数据"
+  "dependencygraph.title": "DependencyGraph",
+  "dependencygraph.entryFilePath": "待分析的入口文件绝对路径",
+  "dependencygraph.folderPath": "文件夹路径",
+  "dependencygraph.reOpenView": "打开视图页面",
+  "dependencygraph.refresh": "刷新依赖树",
+  "dependencygraph.dependencygraphTreeView": "依赖树图",
+  "dependencygraph.dependencyTree": "依赖树",
+  "dependencygraph.openFileInView": "编辑",
+  "dependencygraph.upDateData": "更新数据"
 }

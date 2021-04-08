@@ -1,9 +1,9 @@
 {
-  "name": "framegraph",
-  "displayName": "framegraph",
-  "description": "A plugin for vscode to view your project's frame graph",
-  "icon": "assets/framegraph.png",
-  "version": "0.1.8",
+  "name": "dependencygraph",
+  "displayName": "dependencygraph",
+  "description": "A plugin for vscode to view your project's dependency graph",
+  "icon": "assets/dependencygraph.png",
+  "version": "0.1.9",
   "license": "MIT",
   "engines": {
     "vscode": "^1.41.0"
@@ -12,87 +12,88 @@
     "Other"
   ],
   "activationEvents": [
-    "onView:framegraphExplorer-DependencyTree"
+    "onView:dependencygraphExplorer-DependencyTree"
   ],
-  "repository": "https://github.com/sz-p/vscode-framegraph",
-  "homepage": "https://github.com/sz-p/vscode-framegraph",
-  "bugs": "https://github.com/sz-p/vscode-framegraph/issues",
+  "repository": "https://github.com/sz-p/vscode-dependencyGraph",
+  "homepage": "https://github.com/sz-p/vscode-dependencyGraph",
+  "bugs": "https://github.com/sz-p/vscode-dependencyGraph/issues",
   "main": "./outExtension/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "framegraph",
-          "title": "%framegraph.framegraphTreeView%",
-          "icon": "assets/framegraph.svg"
+          "id": "dependencygraph",
+          "title": "%dependencygraph.dependencygraphTreeView%",
+          "icon": "assets/dependencygraph.svg"
         }
       ]
     },
     "views": {
-      "framegraph": [
+      "dependencygraph": [
         {
-          "id": "framegraphExplorer-DependencyTree",
-          "name": "%framegraph.DependencyTree%"
+          "id": "dependencygraphExplorer-DependencyTree",
+          "name": "%dependencygraph.dependencyTree%"
         }
       ]
     },
     "menus": {
       "view/title": [
         {
-          "command": "framegraph.reOpenView",
-          "when": "view == framegraphExplorer-DependencyTree",
+          "command": "dependencygraph.reOpenView",
+          "when": "view == dependencygraphExplorer-DependencyTree",
           "group": "navigation@2"
         },
         {
-          "command": "framegraph.refreshFileWithMessage",
-          "when": "view == framegraphExplorer-DependencyTree",
+          "command": "dependencygraph.refreshFileWithMessage",
+          "when": "view == dependencygraphExplorer-DependencyTree",
           "group": "navigation@1"
         }
       ],
       "view/item/context": [
         {
-          "command": "framegraph.openFileInView",
+          "command": "dependencygraph.openFileInView",
+          "when": "view == dependencygraphExplorer-DependencyTree",
           "group": "inline"
         }
       ]
     },
     "commands": [
       {
-        "command": "framegraph.openFileInView",
-        "title": "%framegraph.openFileInView%",
+        "command": "dependencygraph.openFileInView",
+        "title": "%dependencygraph.openFileInView%",
         "icon": "$(edit)"
       },
       {
-        "command": "framegraph.saveData",
-        "title": "save framegraph Data"
+        "command": "dependencygraph.saveData",
+        "title": "save dependencygraph Data"
       },
       {
-        "command": "framegraph.refreshFile",
-        "title": "%framegraph.refresh%",
+        "command": "dependencygraph.refreshFile",
+        "title": "%dependencygraph.refresh%",
         "icon": "$(refresh)"
       },
       {
-        "command": "framegraph.refreshFileWithMessage",
-        "title": "%framegraph.refresh%",
+        "command": "dependencygraph.refreshFileWithMessage",
+        "title": "%dependencygraph.refresh%",
         "icon": "$(refresh)"
       },
       {
-        "command": "framegraph.upDateData",
-        "title": "%framegraph.upDateData%",
+        "command": "dependencygraph.upDateData",
+        "title": "%dependencygraph.upDateData%",
         "icon": "$(refresh)"
       },
       {
-        "command": "framegraph.createView",
+        "command": "dependencygraph.createView",
         "title": "Open page"
       },
       {
-        "command": "framegraph.reOpenView",
-        "title": "%framegraph.reOpenView%",
+        "command": "dependencygraph.reOpenView",
+        "title": "%dependencygraph.reOpenView%",
         "icon": "$(browser)"
       },
       {
-        "command": "framegraph.postMessage",
-        "title": "Post message to framegraph webView"
+        "command": "dependencygraph.postMessage",
+        "title": "Post message to dependencygraph webView"
       }
     ]
   },
@@ -144,7 +145,7 @@
     "cssom": "^0.4.4",
     "d3": "^5.16.0",
     "dependency-tree": "^7.2.1",
-    "enhanced-resolve": "5.4.0",
+    "enhanced-resolve": "5.8.0",
     "file-loader": "^6.1.1",
     "get-dependency-tree": "^4.0.1",
     "jsdom": "^16.4.0",

@@ -6,14 +6,14 @@ import * as vscode from "vscode";
 
 export const beforeSetDataToLocal = function (): void {
   const dirPath = getCurrentFolderPath();
-  if (!isPathExists(dirPath + "/.framegraph")) createLocalFileDir();
+  if (!isPathExists(dirPath + "/.dependencygraph")) createLocalFileDir();
 };
 /**
  * create local files dir
  */
 export const createLocalFileDir = function (): void {
   const dirPath = getCurrentFolderPath();
-  fs.mkdirSync(dirPath + "/.framegraph");
+  fs.mkdirSync(dirPath + "/.dependencygraph");
 };
 
 export const isPathExists = function (p: string): boolean {

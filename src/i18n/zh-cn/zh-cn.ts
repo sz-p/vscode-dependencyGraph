@@ -42,7 +42,7 @@ zhcn[types.CIRCULAR_STRUCTURE_NODE_INTRODUCTION] = "环形结构";
 zhcn[types.CIRCULAR_STRUCTURE_NODE_DESCRIPTION] =
   "循环依赖 \\n 在引用链上存在上一个节点";
 
-zhcn[types.FRAME_GRAPH_WEBVIEW] = "架构图插件视图页面";
+zhcn[types.FRAME_GRAPH_WEBVIEW] = "依赖树图插件视图页面";
 zhcn[types.FOLDER] = "文件夹";
 zhcn[types.OPEN_FOLDER] = "打开文件夹";
 zhcn[types.ENTRY_FILE] = "入口文件";

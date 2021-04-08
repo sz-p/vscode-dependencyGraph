@@ -18,7 +18,7 @@ import { showMessage } from "./utils/showMessage";
 import { START_UPDATE_DATA, UPDATED_DATA, UPDATE_DATA_FAILED } from "./i18n/types";
 import { i18n } from "./i18n/i18n";
 export const command_createView = vscode.commands.registerCommand(
-  "framegraph.createView",
+  "dependencygraph.createView",
   () => {
     createView();
   }
@@ -77,7 +77,7 @@ const saveData = () => {
 };
 
 export const command_focusOnNode = vscode.commands.registerCommand(
-  "framegraph.focusOnNode",
+  "dependencygraph.focusOnNode",
   (fileName, fileData) => {
     postMessageCatchError({
       key: MESSAGE_FOCUS_ON_NODE,
@@ -86,7 +86,7 @@ export const command_focusOnNode = vscode.commands.registerCommand(
   }
 );
 export const command_reOpenView = vscode.commands.registerCommand(
-  "framegraph.reOpenView",
+  "dependencygraph.reOpenView",
   (fileName, fileData) => {
     if (global.dependencyTreeData) {
       reOpenWebView(global.dependencyTreeData.dependencyTreeData);
@@ -94,12 +94,12 @@ export const command_reOpenView = vscode.commands.registerCommand(
   }
 );
 export const command_refreshFile = vscode.commands.registerCommand(
-  "framegraph.refreshFile",
+  "dependencygraph.refreshFile",
   refreshFile
 );
 // TODO function overload
 export const command_openFile = vscode.commands.registerCommand(
-  "framegraph.openFileInView",
+  "dependencygraph.openFileInView",
   (absoluteFilePath) => {
     let _absolutePath = undefined;
     if (typeof absoluteFilePath === "string") {
@@ -115,18 +115,18 @@ export const command_openFile = vscode.commands.registerCommand(
 );
 
 export const command_saveData = vscode.commands.registerCommand(
-  "framegraph.saveData",
+  "dependencygraph.saveData",
   saveData
 );
 export const command_upDateData = vscode.commands.registerCommand(
-  "framegraph.upDateData",
+  "dependencygraph.upDateData",
   () => {
     refreshFile();
     saveData();
   }
 );
 export const command_saveDataWithMessage = vscode.commands.registerCommand(
-  "framegraph.refreshFileWithMessage",
+  "dependencygraph.refreshFileWithMessage",
   async () => {
     await thenAbleWithTimeout(showMessage(i18n.getText(START_UPDATE_DATA)), 0);
     try {

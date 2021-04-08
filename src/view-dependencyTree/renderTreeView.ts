@@ -16,7 +16,7 @@ export const renderTreeView = function (
         ancestors: [],
       } as unknown) as DependencyTreeData);
   vscode.window.registerTreeDataProvider(
-    "framegraphExplorer-DependencyTree",
+    "dependencygraphExplorer-DependencyTree",
     new DependenciesTreeProvider(DTD)
   );
 };

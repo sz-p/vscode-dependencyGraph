@@ -11,7 +11,7 @@ export function renderTreeItem(data: DependencyTreeData): vscode.TreeItem {
   treeItem.tooltip = data.relativePath;
   treeItem.iconPath = getFileIconPathByFileType(data.type);
   treeItem.command = {
-    command: "framegraph.focusOnNode",
+    command: "dependencygraph.focusOnNode",
     title: "focusOnNode",
     arguments: [data.name, data],
   };

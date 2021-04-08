@@ -28,7 +28,7 @@ const actionOpenFolder = function (msg: Msg) {
  * @param {Msg} msg
  */
 const actionOpenFile = function (msg: Msg) {
-  vscode.commands.executeCommand("framegraph.openFileInView", msg.value);
+  vscode.commands.executeCommand("dependencygraph.openFileInView", msg.value);
 };
 
 const actionSetSetting = async function (msg: Msg) {
@@ -42,7 +42,7 @@ const actionSetSetting = async function (msg: Msg) {
     onError(NO_FOLDER, e);
   }
   if (msg.value.key === SETTING_KEY_ENTRY_FILE_PATH) {
-    vscode.commands.executeCommand("framegraph.refreshFile");
+    vscode.commands.executeCommand("dependencygraph.refreshFile");
   }
 };
 const actionExportSvg = async function (msg: Msg) {
@@ -69,7 +69,7 @@ const actionSaveData = async function (msg: Msg) {
   // don't get message from client from web view click
   // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
-    await vscode.commands.executeCommand("framegraph.saveData");
+    await vscode.commands.executeCommand("dependencygraph.saveData");
     msgRunCommandStatus("command", msg.key, true).post();
   } catch (e) {
     msgRunCommandStatus("command", msg.key, false).post();
@@ -79,7 +79,7 @@ const actionUpDateData = async function (msg: Msg) {
   // don't get message from client from web view click
   // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
-    await vscode.commands.executeCommand("framegraph.upDateData");
+    await vscode.commands.executeCommand("dependencygraph.upDateData");
     msgRunCommandStatus("command", msg.key, true).post();
   } catch (e) {
     msgRunCommandStatus("command", msg.key, false).post();

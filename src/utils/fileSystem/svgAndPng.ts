@@ -10,16 +10,16 @@ import * as stringRandom from "string-random";
 const getExportFilePath = function (fileName: string): string | false {
   const dirPath = getCurrentFolderPath();
   if (!dirPath) return false;
-  return dirPath + "/.framegraph/" + fileName;
+  return dirPath + "/.dependencygraph/" + fileName;
 };
 
 export const exportSvg = function (value: any): string | undefined {
   try {
     beforeSetDataToLocal();
-    const fileName = `framegraph.${stringRandom(8)}.svg`;
+    const fileName = `dependencygraph.${stringRandom(8)}.svg`;
     const filePath = getExportFilePath(fileName);
     fs.writeFileSync(filePath as string, value);
-    return "/.framegraph/" + fileName;
+    return "/.dependencygraph/" + fileName;
   } catch (e) {
     return undefined;
   }
@@ -28,11 +28,11 @@ export const exportPng = function (value: any) {
   try {
     beforeSetDataToLocal();
     let Data = value.replace(/^data:image\/\w+;base64,/, "");
-    const fileName = `framegraph.${stringRandom(8)}.png`;
+    const fileName = `dependencygraph.${stringRandom(8)}.png`;
     const dataBuffer = Buffer.from(Data, "base64");
     const filePath = getExportFilePath(fileName);
     fs.writeFileSync(filePath as string, dataBuffer);
-    return "/.framegraph/" + fileName;
+    return "/.dependencygraph/" + fileName;
   } catch (e) {
     return undefined;
   }

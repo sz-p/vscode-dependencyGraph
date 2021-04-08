@@ -3,7 +3,7 @@ A extension for vscode to view code's dependency graph.
 
 > is not available now
 
-![framegraph-screenshot](https://github.com/sz-p/vscode-framegraph/blob/master/doc/framegraph.gif)
+![DependencyGraph-screenshot](https://github.com/sz-p/vscode-dependencygraph/blob/master/doc/dependencygraph.gif)
 
 
 ## ⭐️ Show Your Support

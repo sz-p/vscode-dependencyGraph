@@ -19,7 +19,7 @@ import {
 const getSettingFilePath = function (): string | false {
   const dirPath = getCurrentFolderPath();
   if (!dirPath) return false;
-  return dirPath + "/.framegraph/setting.json";
+  return dirPath + "/.dependencygraph/setting.json";
 };
 
 export const getAllSettingFromSettingFile = function (): any {

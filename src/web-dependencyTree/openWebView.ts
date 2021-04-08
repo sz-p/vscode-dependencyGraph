@@ -61,7 +61,7 @@ function getWebViewContent(templatePath: string) {
  */
 export const createView = function (): void {
   if (global.webViewPanel) {
-    global.webViewPanel.iconPath = vscode.Uri.file(paths.framegraphPNG);
+    global.webViewPanel.iconPath = vscode.Uri.file(paths.dependencygraphPNG);
     global.webViewPanel.webview.html = getWebViewContent(webViewHTMLPath);
     global.webViewPanel.onDidDispose(() => {
       global.webViewPanel = undefined;
