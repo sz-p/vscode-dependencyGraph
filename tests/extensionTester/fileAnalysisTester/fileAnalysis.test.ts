@@ -4,7 +4,7 @@ import {
   getIntroduction,
   getDescription,
 } from "../../../src/fileAnalysis/fileAnalysis";
-import { expect } from "chai";
+import { expect } from '../../chai';
 const getCodeString = function (testCase: string) {
   return fs
     .readFileSync(path.resolve(__dirname, `./data/${testCase}.js`))
