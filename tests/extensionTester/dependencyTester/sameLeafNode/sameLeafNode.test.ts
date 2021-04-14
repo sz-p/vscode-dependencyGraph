@@ -6,7 +6,7 @@ import {
   getSavedDataByCompute,
   getWebViewDataFromFile,
 } from "../utils";
-import { expect } from '../../../chai';
+import { expect } from 'chai';
 const mainFilePath = "./src/index.js";
 const {
   dependencyTreeData,
@@ -28,21 +28,21 @@ const webViewData = getWebViewDataFromFile("sameLeafNode");
 
 describe("dependencyTree(same leaf node): get dependencyTree data", function () {
   it("dependencyNodesData", function () {
-    expect(dependencyNodesData).to.equal(dependencyNodes);
+    expect(dependencyNodesData.length).to.equal(dependencyNodes.length);
   });
   it("dependencyTreeData", function () {
-    expect(dependencyTreeData).to.equal(dependencyTree);
+    expect(dependencyTreeData.length).to.equal(dependencyTree.length);
   });
 });
 
 describe("dependencyTree(same leaf node): get saved data", function () {
   it("jsonString", function () {
-    expect(savedDataFromFile).to.equal(savedDataByCompute);
+    expect(savedDataFromFile.length).to.equal(savedDataByCompute.length);
   });
 });
 
 describe("dependencyTree(same leaf node): get webView data", function () {
   it("dependencyTreeData", function () {
-    expect(readData).to.equal(webViewData);
+    expect(readData.length).to.equal(webViewData.length);
   });
 });
