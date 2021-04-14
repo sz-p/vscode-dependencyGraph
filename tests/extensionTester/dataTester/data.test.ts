@@ -1,5 +1,5 @@
 import { isSavedData } from "../../../src/utils/data/data";
-import { expect } from 'chai';
+import { expect } from '../../chai';
 import * as path from "path";
 
 // base on "vscode" can't be test
