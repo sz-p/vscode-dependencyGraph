@@ -52,6 +52,7 @@
 [x] fix: dependency tree get ts file error
 [x] fix: webview file description code box height
 
+[ ] feat: add update data error message
 [ ] feat: functionBox do not show undefined parameters again
 [ ] fix: dependency tree get aboveFatherNode error(have test case)
 [ ] refactor: move dependencyTree to package
