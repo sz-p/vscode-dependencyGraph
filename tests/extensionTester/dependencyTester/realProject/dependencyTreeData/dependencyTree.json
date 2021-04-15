@@ -200,10 +200,115 @@
                   "extension": ".ts",
                   "name": "showdemohandle.ts",
                   "relativePath": "\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts",
-                  "children": [],
+                  "children": [
+                    {
+                      "absolutePath": "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\force-layout.ts",
+                      "ancestors": [
+                        "%DIR-PATH%\\src\\index.js",
+                        "%DIR-PATH%\\src\\App.js",
+                        "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                        "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx",
+                        "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts"
+                      ],
+                      "extension": ".ts",
+                      "name": "force-layout.ts",
+                      "relativePath": "\\src\\components\\force-3d\\demoHandle\\force-layout.ts",
+                      "children": [],
+                      "fileDescription": {},
+                      "type": "typescript",
+                      "language": "file",
+                      "analysed": true,
+                      "lines": 11,
+                      "functions": [
+                        {
+                          "arrowFunction": false,
+                          "params": [
+                            {
+                              "name": "data"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "absolutePath": "%DIR-PATH%\\src\\components\\datas\\colorlist.js",
+                      "ancestors": [
+                        "%DIR-PATH%\\src\\index.js",
+                        "%DIR-PATH%\\src\\App.js",
+                        "%DIR-PATH%\\src\\pages\\index\\index.jsx",
+                        "%DIR-PATH%\\src\\components\\force-3d\\force-3d.jsx",
+                        "%DIR-PATH%\\src\\components\\force-3d\\demoHandle\\showdemohandle.ts"
+                      ],
+                      "extension": ".js",
+                      "name": "colorlist.js",
+                      "relativePath": "\\src\\components\\datas\\colorlist.js",
+                      "children": [],
+                      "fileDescription": {},
+                      "type": "javascript",
+                      "language": "javascript",
+                      "analysed": true,
+                      "lines": 117,
+                      "functions": []
+                    }
+                  ],
                   "fileDescription": {},
                   "type": "typescript",
-                  "language": "file"
+                  "language": "file",
+                  "analysed": true,
+                  "lines": 176,
+                  "functions": [
+                    {
+                      "arrowFunction": false,
+                      "params": [
+                        {
+                          "name": "container"
+                        },
+                        {
+                          "name": "data"
+                        }
+                      ]
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": false,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": true,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": true,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": true,
+                      "params": []
+                    },
+                    {
+                      "arrowFunction": true,
+                      "params": []
+                    }
+                  ]
                 }
               ],
               "fileDescription": {},

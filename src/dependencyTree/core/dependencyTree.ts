@@ -125,6 +125,15 @@ export class DependencyTree {
     circularStructureNode.children = [circularStructureNodeChild];
     return circularStructureNode;
   }
+  /**
+   * reset analysed node ancestor
+   *
+   * @private
+   * @param {string} absolutePath
+   * @param {string[]} ancestors
+   * @param {DependencyTreeData} dependencyChildren
+   * @memberof DependencyTree
+   */
   private reSetAnalysedNodesAncestors(
     absolutePath: string,
     ancestors: string[],
@@ -135,15 +144,45 @@ export class DependencyTree {
     dependencyChildrenAncestors.push(absolutePath);
     dependencyChildren.ancestors = dependencyChildrenAncestors;
     // if node have children reset children's ancestors
-    let stack = [].concat(
-      dependencyChildren.children as []
-    ) as DependencyTreeData[];
-    while (stack.length) {
-      let node = stack.pop() as DependencyTreeData;
-      node.ancestors.splice(nodeDeep, 0, absolutePath);
-      stack = stack.concat(node.children);
+    if (dependencyChildren.children) {
+      let stack = [].concat(
+        dependencyChildren.children as []
+      ) as DependencyTreeData[];
+      while (stack.length) {
+        let node = stack.pop() as DependencyTreeData;
+        node.ancestors.splice(nodeDeep, 0, absolutePath);
+        stack = stack.concat(node.children);
+      }
     }
   }
+  /**
+   *
+   *
+   * @private
+   * @param {string} absolutePath
+   * @param {string[]} ancestors
+   * @param {string} childrenPath
+   * @param {DependencyTreeData[]} dependencyList
+   * @return {*}  {DependencyTreeData}
+   * @memberof DependencyTree
+   */
+  private getNewNode(absolutePath: string, ancestors: string[], childrenPath: string, dependencyList: DependencyTreeData[]): DependencyTreeData {
+    const dependencyChildrenAncestors = [].concat(
+      ancestors as []
+    ) as string[];
+    dependencyChildrenAncestors.push(absolutePath);
+    const dependencyChildren = {
+      absolutePath: childrenPath,
+      ancestors: dependencyChildrenAncestors as string[],
+    } as DependencyTreeData;
+    this.triggerGetNewDependencyTreeNode(dependencyChildren);
+    dependencyList.push(dependencyChildren);
+    this.dependencyHash[
+      childrenPath
+    ] = dependencyChildren as DependencyTreeData;
+    return dependencyChildren;
+  }
+
   registerParser(key: string, parser: Parser) {
     this.parsers[key] = parser;
   }
@@ -210,10 +249,10 @@ export class DependencyTree {
         let dependencyChildren = undefined;
         // old node; node was analysed
         if (this.dependencyHash[childrenPath]) {
-          if (!this.dependencyHash[childrenPath].name) {
-            // import a file from the same file twice will cloneDeep a not analyzed dependencyChildren
-            continue;
-          }
+          // if (!this.dependencyHash[childrenPath].name) {
+          //   // import a file from the same file twice will cloneDeep a not analyzed dependencyChildren
+          //   continue;
+          // }
           if (this.isCircularStructure(childrenPath, ancestors)) {
             dependencyChildren = this.getCircularStructureNode(
               childrenPath,
@@ -232,22 +271,14 @@ export class DependencyTree {
             ancestors,
             dependencyChildren
           );
+          // not analysed
+          if (!dependencyChildren.name) {
+            dependencyChildren = this.getNewNode(absolutePath, ancestors, childrenPath, dependencyList)
+          }
         }
         // find new node
         else {
-          const dependencyChildrenAncestors = [].concat(
-            ancestors as []
-          ) as string[];
-          dependencyChildrenAncestors.push(absolutePath);
-          dependencyChildren = {
-            absolutePath: childrenPath,
-            ancestors: dependencyChildrenAncestors as string[],
-          } as DependencyTreeData;
-          this.triggerGetNewDependencyTreeNode(dependencyChildren);
-          dependencyList.push(dependencyChildren);
-          this.dependencyHash[
-            childrenPath
-          ] = dependencyChildren as DependencyTreeData;
+          dependencyChildren = this.getNewNode(absolutePath, ancestors, childrenPath, dependencyList)
         }
         dependencyNode.children.push(dependencyChildren);
       }
