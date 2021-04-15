@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
 import * as fs from 'fs';
 import * as path from 'path';
-import { expect } from '../../chai';
+import { expect } from 'chai';
 import { D3Tree } from '../../../src/webView/src/components/treeView/renderTree.js';
 import { defineGetClientRectsToDiv } from "../utils";
 const htmlTemplate = fs.readFileSync(path.resolve(__dirname, `./htmlTemplate.html`)).toString();

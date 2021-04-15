@@ -106,7 +106,7 @@
     "watch:WebView": "node ./src/webView/scripts/watch.js",
     "build:Extension": "node ./scripts/build.js",
     "build:WebView": "node ./src/webView/scripts/build.js",
-    "test": "ts-mocha -p ./tests/tsconfig.testing.json tests/**/*.test1.ts tests/**/*.test.js"
+    "test": "ts-mocha -p ./tests/tsconfig.testing.json tests/**/*.test.ts tests/**/*.test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
