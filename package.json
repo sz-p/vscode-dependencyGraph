@@ -3,7 +3,7 @@
   "displayName": "dependencygraph",
   "description": "A plugin for vscode to view your project's dependency graph",
   "icon": "assets/dependencygraph.png",
-  "version": "0.1.9",
+  "version": "1.0.0-alpha",
   "license": "MIT",
   "engines": {
     "vscode": "^1.41.0"
