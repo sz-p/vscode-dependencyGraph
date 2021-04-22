@@ -1,7 +1,11 @@
-![DependencyGraph-screenshot](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/dependencyGraph.gif)
 
-<p align="middle" ><img src="https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/logoWithText.svg"/></p>
-<h2 align="middle">Dependency Graph</h2>
+<p align="middle" ><img src="./doc/logoWithText.svg"/></p>
+
+![DependencyGraph-screenshot](./doc/dependencyGraph.gif)
+
+## 📝简介
+
+一个用来查看项目文件依赖的VsCode插件
 
 ## 🔥 功能
 * **Draggable** refers to the ability to drag and move targets.
@@ -11,6 +15,10 @@
 ### 离线安装
 
 ## 🚀 使用
+
+## 📝 已支持的文件
+
+## 📝原理
 
 ## 🔧 开发
 
