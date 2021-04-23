@@ -1,7 +1,6 @@
+<p align="middle" ><img src="https://img.sz-p.cn/logowithtext.png"/></p>
 
-<p align="middle" ><img src="./doc/logoWithText.svg"/></p>
-
-![DependencyGraph-screenshot](./doc/dependencyGraph.gif)
+![DependencyGraph-screenshot](https://img.sz-p.cn/dependencyGraph.gif)
 
 ## 📝简介
 
@@ -12,7 +11,19 @@
 ## ⚙️ 安装
 ### 扩展市场
 
+在扩展市场搜索`dependencygraph`，下载如图所示的插件即可。
+![install-from-marketplace](./doc/insteall-from-marketplace.png)
+
 ### 离线安装
+
+[下载.vsix文件](https://marketplace.visualstudio.com/items?itemName=sz-p.dependencygraph)
+
+![download-vsix](./doc/download-vsix.png)
+
+使用`.vsix`文件离线安装插件
+
+![instell-from-vsix](./doc/instell-from-vsix.png)
+
 
 ## 🚀 使用
 
