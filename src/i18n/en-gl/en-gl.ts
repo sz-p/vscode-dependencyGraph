@@ -43,7 +43,7 @@ engl[types.CIRCULAR_STRUCTURE_NODE_INTRODUCTION] = "Circular Structure";
 engl[types.CIRCULAR_STRUCTURE_NODE_DESCRIPTION] =
   "Loop dependence \\n The previous node was existed in dependence chain";
 
-engl[types.FRAME_GRAPH_WEBVIEW] = "Dependence graph view page";
+engl[types.FRAME_GRAPH_WEBVIEW] = "Dependence Graph";
 engl[types.FOLDER] = "Folder";
 engl[types.OPEN_FOLDER] = "Open folder";
 engl[types.ENTRY_FILE] = "Entry file";
