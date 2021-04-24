@@ -1,14 +1,22 @@
-<p align="middle" ><img src="https://img.sz-p.cn/logowithtext.png"/></p>
+<p align="middle" ><img src="./doc/logowithtext.png"/></p>
 
-![DependencyGraph-screenshot](https://img.sz-p.cn/dependencyGraph.gif)
+<p align='center'>
+English | <a href="./README-zh-CN.md">简体中文</a>
+</p>
 
 ## 📝 Introduction
 
 A plugin for vscode to view your project's dependency graph
 
+![DependencyGraph-screenshot](./doc/dependencyGraph.gif)
+
 ## 🔥 Features
 
-* **Show dependency tree** 
+* **Show dependency graph** show dependency graph by analyze the entry file.
+* **Save dependency tree data** save dependency tree data to local json file.
+* **Export dependency graph img** export dependency graph's `svg` or `png`.
+* **Extract basic information from file** extract file's`type,line count,introduction,description` for display.
+* **Extract function and comment from code file** extract code file's`function` and `comment` for display.
 
 ## ⚙️ Installation
 
@@ -24,19 +32,65 @@ Search `dependencygraph` in extensions marketplace, download the extension in th
 
 ![download-vsix](./doc/download-vsix.png)
 
-use `.vsix` file install extension offline
+Use `.vsix` file install extension offline
 
 ![instell-from-vsix](./doc/instell-from-vsix.png)
 
 ## 🚀 How to use
 
-## 📝  Supported file
+### Set entry file path
+
+### Set resolve or alias
+
+### Set file information and description
+
+文件`简介`及`注释`以一下方式在文件中书写，即可被插件识别。
+
+```js
+/**
+ * @introduction This is introduction
+ *
+ * @description This is description\n this sentences will show 
+ */
+```
+## 📝 Supported file
+
+| File type | .js  | .ts  | .jsx | .tsx | .vue | .scss | .less | .sass | .py  | .php | .go  |
+| -------- | ---- | ---- | ---- | ---- | ---- | ----- | ----- | ----- | ---- | ---- | ---- |
+| Support status | ✅    | ✅    | ✅    | ✅    | ✅    | ✅     | ✅     | ✅     |      |      |      |
 
 ## 📝 How it work
 
+1. Read entry file as string, get `introduction` and `description` by `regular expression`.
+2. Use [babel parser](https://github.com/babel/babel/tree/main/packages/babel-parser) to get code file's `AST`. get file dependencies by `import` and `require` value from analyze `AST`.
+3. Use [enhanced-resolve](https://github.com/webpack/enhanced-resolve) to get dependencies absolute path by values of `import` and `require` and file's absolute path. set dependencies absolute path to file queue
+4. Analyze file queue to get whole dependency tree
+
+##  🌌 Target 
+
+To build a graph like `visual studio class view` for developer to view and analyze `dependency tree` or `module relationship`
+
+![visual-studio-class-view](./doc/visual-studio-class-view.png)
+
 ## 🔧  Develop
 
+### `yarn install`
+
+install necessary dependency packages.
+
+### `yarn watch`
+
+watch file change and build file.
+
+### `F5`
+
+press `F5` in vscode to start dev process.
+
 ## 🚦 Testing
+
+### `yarn test`
+
+You can find test case in [tests](https://github.com/sz-p/vscode-dependencyGraph/tree/master/tests). use `yarn test` to start testing
 
 ## ⭐️ Show Your Support
 Please give a ⭐️ if this project helped you!

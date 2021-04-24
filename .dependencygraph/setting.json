@@ -1,6 +1,8 @@
 {
   "entryFilePath": "src\\extension.ts",
-  "alias": {},
+  "alias": {
+    "@": "./src"
+  },
   "resolveExtensions": [
     ".js",
     ".jsx",
