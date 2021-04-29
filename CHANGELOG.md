@@ -1,3 +1,12 @@
+## [1.0.2](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.0.1...v1.0.2) (2021-04-30)
+
+
+### Bug Fixes
+
+* update readme change readme url ([b932dce](https://github.com/sz-p/vscode-dependencyGraph/commit/b932dcebfcba4ad880a455d2486b39b16faca64a))
+
+
+
 ## [1.0.1](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.0.0...v1.0.1) (2021-04-30)
 
 
