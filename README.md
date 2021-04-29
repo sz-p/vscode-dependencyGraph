@@ -1,7 +1,7 @@
 <p align="middle" ><img src="https://github.com/sz-p/vscode-dependencyGraph/raw/HEAD/doc/logowithtext.png"/></p>
 
 <p align='center'>
-English | <a href="https://github.com/sz-p/vscode-dependencyGraph/raw/HEAD/README-zh-CN.md">简体中文</a>
+English | <a href="https://github.com/sz-p/vscode-dependencyGraph/blob/master/README-zh-CN.md">简体中文</a>
 </p>
 
 ## 📝 Introduction
