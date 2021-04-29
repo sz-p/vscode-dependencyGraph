@@ -1,15 +1,15 @@
 
-<p align="middle" ><img src="./doc/logowithtext.png"/></p>
+<p align="middle" ><img src="https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/logowithtext.png"/></p>
 
 <p align='center'>
-<a href="./README.md">English</a> | 简体中文
+<a href="https://github.com/sz-p/vscode-dependencyGraph/blob/master/README.md">English</a> | 简体中文
 </p>
 
 ## 📝简介
 
 一个用来查看项目文件依赖的VsCode插件。
 
-![DependencyGraph-screenshot](./doc/dependencyGraph.gif)
+![DependencyGraph-screenshot](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/dependencyGraph.gif)
 
 ## 🔥 功能
 
@@ -22,17 +22,17 @@
 ### 扩展市场
 
 在扩展市场搜索`dependencygraph`，下载如图所示的插件即可。
-![install-from-marketplace](./doc/insteall-from-marketplace.png)
+![install-from-marketplace](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/insteall-from-marketplace.png)
 
 ### 离线安装
 
 [下载.vsix文件](https://marketplace.visualstudio.com/items?itemName=sz-p.dependencygraph)
 
-![download-vsix](./doc/download-vsix.png)
+![download-vsix](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/download-vsix.png)
 
 使用`.vsix`文件离线安装插件
 
-![instell-from-vsix](./doc/instell-from-vsix.png)
+![instell-from-vsix](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/instell-from-vsix.png)
 
 
 ## 🚀 使用
@@ -41,11 +41,11 @@
 
 可在`画板`中通过`GUI`的方式设置。
 
-![setting-entry-file](./doc/setting-entry-file-gui.png)
+![setting-entry-file](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/setting-entry-file-gui.png)
 
 可在`设置文件`中通过`配置属性`的方式设置(设置文件路径为`.dependencygraph/setting.json`)。
 
-![setting-entry-file](./doc/setting-entry-file-settingfile.png)
+![setting-entry-file](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/setting-entry-file-settingfile.png)
 
 ### 设置路径别名及被解析文件
 
@@ -53,13 +53,13 @@
 
 解析文件类型以`,`分割直接往后累加即可。路径别名手动添加后注意要确认。
 
-![setting-alias](./doc/setting-alias.png)
+![setting-alias](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/setting-alias.png)
 
 可在`设置文件`中通过`配置属性`的方式设置(设置文件路径为`.dependencygraph/setting.json`)。
 
 解析文件类型为一个数组，可直接添加，路径别名为一个对象以`key` `value`的形式做映射。
 
-![setting-alias-settingfile](./doc/setting-alias-settingfile.png)
+![setting-alias-settingfile](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/setting-alias-settingfile.png)
 
 ### 设置文件简介及描述
 
@@ -90,7 +90,7 @@
 
 最终视图形成类似于`visual studio class view`的分析页面,帮助开发者查看和分析`文件依赖`和`模块关系`。
 
-![visual-studio-class-view](./doc/visual-studio-class-view.png)
+![visual-studio-class-view](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/visual-studio-class-view.png)
 
 ## 🔧 开发
 

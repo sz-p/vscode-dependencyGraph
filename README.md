@@ -1,14 +1,14 @@
-<p align="middle" ><img src="./doc/logowithtext.png"/></p>
+<p align="middle" ><img src="https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/logowithtext.png"/></p>
 
 <p align='center'>
-English | <a href="./README-zh-CN.md">简体中文</a>
+English | <a href="https://github.com/sz-p/vscode-dependencyGraph/blob/master/README-zh-CN.md">简体中文</a>
 </p>
 
 ## 📝 Introduction
 
 A plugin for vscode to view your project's dependency graph
 
-![DependencyGraph-screenshot](./doc/dependencyGraph.gif)
+![DependencyGraph-screenshot](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/dependencyGraph.gif)
 
 ## 🔥 Features
 
@@ -24,17 +24,17 @@ A plugin for vscode to view your project's dependency graph
 
 Search `dependencygraph` in extensions marketplace, download the extension in the following figure.
 
-![install-from-marketplace](./doc/insteall-from-marketplace.png)
+![install-from-marketplace](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/insteall-from-marketplace.png)
 
 ### From .vsix file
 
 [download .vsix file](https://marketplace.visualstudio.com/items?itemName=sz-p.dependencygraph)
 
-![download-vsix](./doc/download-vsix.png)
+![download-vsix](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/download-vsix.png)
 
 Use `.vsix` file install extension offline.
 
-![instell-from-vsix](./doc/instell-from-vsix.png)
+![instell-from-vsix](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/instell-from-vsix.png)
 
 ## 🚀 How to use
 
@@ -42,11 +42,11 @@ Use `.vsix` file install extension offline.
 
 Set entry file path in `webview`.
 
-![setting-entry-file](./doc/setting-entry-file-gui.png)
+![setting-entry-file](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/setting-entry-file-gui.png)
 
 Set entry file path in setting file(setting file path is `.dependencygraph/setting.json`).
 
-![setting-entry-file](./doc/setting-entry-file-settingfile.png)
+![setting-entry-file](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/setting-entry-file-settingfile.png)
 
 ### Set resolve or alias
 
@@ -54,11 +54,11 @@ Set `Resolve extensions` or `Resolve alias` in `webview`.
 
 Add `Resolve alias` in input box, split by `,`. set `Resolve alias` and `Resolve path` click insert button to add item and don't forget click `Confirm`.
 
-![setting-alias](./doc/setting-alias.png)
+![setting-alias](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/setting-alias.png)
 
 Set `Resolve extensions` or `Resolve alias` in setting file(setting file path is `.dependencygraph/setting.json`).
 
-![setting-alias-settingfile](./doc/setting-alias-settingfile.png)
+![setting-alias-settingfile](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/setting-alias-settingfile.png)
 
 ### Set file information and description
 
@@ -89,7 +89,7 @@ The extension recognizes `information` and `description` what is written in the 
 
 To build a graph like `visual studio class view` for developer to view and analyze `dependency tree` or `module relationship`.
 
-![visual-studio-class-view](./doc/visual-studio-class-view.png)
+![visual-studio-class-view](https://github.com/sz-p/vscode-dependencyGraph/blob/master/doc/visual-studio-class-view.png)
 
 ## 🔧  Develop
 
