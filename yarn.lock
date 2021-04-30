@@ -5693,6 +5693,11 @@ requirejs@^2.3.5:
   resolved "https://registry.npm.taobao.org/requirejs/download/requirejs-2.3.6.tgz#e5093d9601c2829251258c0b9445d4d19fa9e7c9"
   integrity sha1-5Qk9lgHCgpJRJYwLlEXU0Z+p58k=
 
+reset-commit-date@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.nlark.com/reset-commit-date/download/reset-commit-date-1.0.0.tgz#52b7fc7b14030744f9243b9963803f0cedde9640"
+  integrity sha1-Urf8exQDB0T5JDuZY4A/DO3elkA=
+
 resize-observer-polyfill@^1.5.1:
   version "1.5.1"
   resolved "https://registry.npm.taobao.org/resize-observer-polyfill/download/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
