@@ -1,6 +1,16 @@
 
 <p align="middle" ><img src="https://github.com/sz-p/vscode-dependencyGraph/raw/HEAD/doc/logowithtext.png"/></p>
 
+<p align="center">
+  <a href="https://marketplace.visualstudio.com/items?itemName=sz-p.dependencygraph" title="Check it out on the Visual Studio Marketplace">
+    <img src="https://vsmarketplacebadge.apphb.com/version/sz-p.dependencygraph.svg" alt="Visual Studio Marketplace" style="display: inline-block" />
+  </a>
+
+  <img src="https://vsmarketplacebadge.apphb.com/installs/sz-p.dependencygraph.svg" alt="Number of installs"  style="display: inline-block;margin-left:10px" />
+  
+  <img src="https://vsmarketplacebadge.apphb.com/rating/sz-p.dependencygraph.svg" alt="Ratings" style="display: inline-block;margin-left:10px" />
+</p>
+
 <p align='center'>
 <a href="https://github.com/sz-p/vscode-dependencyGraph/blob/master/README.md">English</a> | 简体中文
 </p>
