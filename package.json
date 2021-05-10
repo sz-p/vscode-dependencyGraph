@@ -150,6 +150,8 @@
     "file-loader": "^6.1.1",
     "get-dependency-tree": "^4.0.1",
     "jsdom": "^16.4.0",
+    "less": "^4.1.1",
+    "less-loader": "7.3.0",
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "monaco-editor": "^0.21.2",

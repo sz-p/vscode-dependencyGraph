@@ -14,7 +14,6 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: [paths.src, paths.monacoDir],
         loader: require.resolve("babel-loader"),
         options: {
           configFile: paths.babelConfig,
@@ -34,15 +33,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        include: [paths.src, paths.monacoDir],
-        use: [
-          {
-            loader: require.resolve("style-loader"),
-          },
-          {
-            loader: require.resolve("css-loader"),
-          },
-        ],
+        use: ["style-loader", "css-loader", "less-loader"],
       },
     ],
   },
@@ -52,6 +43,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: paths.indexHTML,
+    }),
+    new MonacoWebpackPlugin({
+      languages: ["javascript"],
+      features: ["coreCommands"],
     }),
   ],
   devtool: "source-map",
