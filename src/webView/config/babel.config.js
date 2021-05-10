@@ -6,7 +6,9 @@ module.exports = function (api) {
     // 将 jsx 代码解析成通用代码
     "babel-preset-react-app",
   ];
+  const sourceType = "unambiguous";
   return {
     presets,
+    sourceType,
   };
 };

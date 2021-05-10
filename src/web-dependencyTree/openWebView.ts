@@ -30,7 +30,7 @@ import {
 
 import { isPathExists } from "../utils/utils";
 import { onError } from "../utils/error/onError";
-import { GET_DEPENDENCY_TREE_FAIL } from "../utils/error/errorKey";
+import { GET_DEPENDENCY_TREE_FAIL, NO_WEBVIEW_PANEL } from "../utils/error/errorKey";
 import { isSavedData } from "../utils/fileSystem/data";
 
 /**
@@ -44,13 +44,18 @@ function getWebViewContent(templatePath: string) {
   html = html.replace(
     /(<link.+?href="|<script.+?src="|<img.+?src=")(.+?)"/g,
     (m, $1, $2) => {
-      return (
-        $1 +
-        vscode.Uri.file(path.resolve(dirPath, $2))
-          .with({ scheme: "vscode-resource" })
-          .toString() +
-        '"'
-      );
+      if (global.webViewPanel) {
+        return (
+          $1 +
+          global.webViewPanel.webview
+            .asWebviewUri(vscode.Uri.file(path.resolve(dirPath, $2)))
+            .toString() +
+          '"'
+        )
+      } else {
+        onError(NO_WEBVIEW_PANEL);
+        return ""
+      }
     }
   );
   return html;
@@ -85,9 +90,10 @@ export const postNecessaryMessageWhenCreateView = function (): void {
   const folderPath = getCurrentFolderPath();
   postMessageCatchError({ key: MESSAGE_FOLDER_PATH, value: folderPath });
   msgGetActiveThemeKind.post();
+  const baseWebViewUri = getBaseWebViewUri()
   postMessageCatchError({
     key: MESSAGE_ASSETS_BASE_URL,
-    value: getBaseWebViewUri(),
+    value: baseWebViewUri,
   });
 };
 

@@ -13,5 +13,10 @@
 </body>
 <script>
    window.vscode = acquireVsCodeApi();
+   window.EVENTS_BEFORE_LISTENER = [];
+   window.EVENTS_LISTENER_BEFORE_LOAD_JS = (event) => {
+    window.EVENTS_BEFORE_LISTENER.push(event);
+   };
+   window.addEventListener("message", window.EVENTS_LISTENER_BEFORE_LOAD_JS);
 </script>
 </html>

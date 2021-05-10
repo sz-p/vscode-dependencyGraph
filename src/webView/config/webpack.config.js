@@ -43,6 +43,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: paths.indexHTML,
+      scriptLoading: "defer"
     }),
     new MonacoWebpackPlugin({
       languages: ["javascript"],
