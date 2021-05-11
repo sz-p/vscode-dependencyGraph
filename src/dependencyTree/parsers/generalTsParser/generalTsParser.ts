@@ -10,6 +10,8 @@ import * as path from "path";
 import * as Resolve from "enhanced-resolve";
 
 import * as tsParser from "recast/parsers/typescript";
+import { visitOnExportDeclaration } from "../utils/utils-js";
+
 const babelOption = {};
 export const parser: Parser = function (
   dependencyNode: DependencyTreeData,
@@ -52,6 +54,30 @@ export const parser: Parser = function (
         }
         dependencies.push(dependencyPath);
       }
+      return false;
+    },
+    visitExportNamedDeclaration(nodePath) {
+      const dependencyPath = visitOnExportDeclaration(nodePath, dependencies, dirName, resolve, absolutePath)
+      if (!dependencyPath) {
+        return false;
+      }
+      // TODO add excludes option
+      if (dependencyPath.includes("node_modules")) {
+        return false;
+      }
+      dependencies.push(dependencyPath);
+      return false;
+    },
+    visitExportAllDeclaration(nodePath) {
+      const dependencyPath = visitOnExportDeclaration(nodePath, dependencies, dirName, resolve, absolutePath)
+      if (!dependencyPath) {
+        return false;
+      }
+      // TODO add excludes option
+      if (dependencyPath.includes("node_modules")) {
+        return false;
+      }
+      dependencies.push(dependencyPath);
       return false;
     },
     visitIdentifier(nodePath) {
