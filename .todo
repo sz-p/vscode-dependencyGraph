@@ -61,6 +61,7 @@
 [x] feat: fileInfoView title add icon
 [x] feat: dependency tree get required node
 
+[ ] feat: add loading view in webview html
 [ ] feat: change name framegraph to dependency graph
 [ ] refactor: move dependencyTree to package
 [ ] fix: move resolver to single file
@@ -78,7 +79,6 @@ TODO
 
 [ ] fix: open multiple webview send message error(always send, but not get don't know why)
 [ ] fix: resend activeThemeKind(when changed theme kind get kind error)(get the kind is previous kind don't know why)
-
 
 // return require("./PnpPlugin").PnpApiImpl; // eslint-disable-line node/no-missing-require
 // vsce package
