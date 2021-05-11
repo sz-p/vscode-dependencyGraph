@@ -1,0 +1,204 @@
+{
+  "%DIR-PATH%\\src\\index.js": {
+    "absolutePath": "%DIR-PATH%\\src\\index.js",
+    "ancestors": [],
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%\\src\\config.ts",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js"
+        ],
+        "extension": ".ts",
+        "name": "config.ts",
+        "relativePath": "\\src\\config.ts",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%\\src\\config-backEnd.ts",
+            "ancestors": [
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\config.ts"
+            ],
+            "extension": ".ts",
+            "name": "config-backEnd.ts",
+            "relativePath": "\\src\\config-backEnd.ts",
+            "children": [],
+            "fileDescription": {},
+            "type": "typescript",
+            "language": "file",
+            "analysed": true,
+            "lines": 1,
+            "functions": []
+          },
+          {
+            "absolutePath": "%DIR-PATH%\\src\\config-fontEnd.ts",
+            "ancestors": [
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\config.ts"
+            ],
+            "extension": ".ts",
+            "name": "config-fontEnd.ts",
+            "relativePath": "\\src\\config-fontEnd.ts",
+            "children": [],
+            "fileDescription": {},
+            "type": "typescript",
+            "language": "file",
+            "analysed": true,
+            "lines": 1,
+            "functions": []
+          },
+          {
+            "absolutePath": "%DIR-PATH%\\src\\config-default.ts",
+            "ancestors": [
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\config.ts"
+            ],
+            "extension": ".ts",
+            "name": "config-default.ts",
+            "relativePath": "\\src\\config-default.ts",
+            "children": [],
+            "fileDescription": {},
+            "type": "typescript",
+            "language": "file",
+            "analysed": true,
+            "lines": 1,
+            "functions": []
+          }
+        ],
+        "fileDescription": {},
+        "type": "typescript",
+        "language": "file",
+        "analysed": true,
+        "lines": 3,
+        "functions": []
+      }
+    ],
+    "extension": ".js",
+    "name": "index.js",
+    "relativePath": "\\src\\index.js",
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 2,
+    "functions": []
+  },
+  "%DIR-PATH%\\src\\config.ts": {
+    "absolutePath": "%DIR-PATH%\\src\\config.ts",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js"
+    ],
+    "extension": ".ts",
+    "name": "config.ts",
+    "relativePath": "\\src\\config.ts",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%\\src\\config-backEnd.ts",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\config.ts"
+        ],
+        "extension": ".ts",
+        "name": "config-backEnd.ts",
+        "relativePath": "\\src\\config-backEnd.ts",
+        "children": [],
+        "fileDescription": {},
+        "type": "typescript",
+        "language": "file",
+        "analysed": true,
+        "lines": 1,
+        "functions": []
+      },
+      {
+        "absolutePath": "%DIR-PATH%\\src\\config-fontEnd.ts",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\config.ts"
+        ],
+        "extension": ".ts",
+        "name": "config-fontEnd.ts",
+        "relativePath": "\\src\\config-fontEnd.ts",
+        "children": [],
+        "fileDescription": {},
+        "type": "typescript",
+        "language": "file",
+        "analysed": true,
+        "lines": 1,
+        "functions": []
+      },
+      {
+        "absolutePath": "%DIR-PATH%\\src\\config-default.ts",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\config.ts"
+        ],
+        "extension": ".ts",
+        "name": "config-default.ts",
+        "relativePath": "\\src\\config-default.ts",
+        "children": [],
+        "fileDescription": {},
+        "type": "typescript",
+        "language": "file",
+        "analysed": true,
+        "lines": 1,
+        "functions": []
+      }
+    ],
+    "fileDescription": {},
+    "type": "typescript",
+    "language": "file",
+    "analysed": true,
+    "lines": 3,
+    "functions": []
+  },
+  "%DIR-PATH%\\src\\config-backEnd.ts": {
+    "absolutePath": "%DIR-PATH%\\src\\config-backEnd.ts",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\config.ts"
+    ],
+    "extension": ".ts",
+    "name": "config-backEnd.ts",
+    "relativePath": "\\src\\config-backEnd.ts",
+    "children": [],
+    "fileDescription": {},
+    "type": "typescript",
+    "language": "file",
+    "analysed": true,
+    "lines": 1,
+    "functions": []
+  },
+  "%DIR-PATH%\\src\\config-fontEnd.ts": {
+    "absolutePath": "%DIR-PATH%\\src\\config-fontEnd.ts",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\config.ts"
+    ],
+    "extension": ".ts",
+    "name": "config-fontEnd.ts",
+    "relativePath": "\\src\\config-fontEnd.ts",
+    "children": [],
+    "fileDescription": {},
+    "type": "typescript",
+    "language": "file",
+    "analysed": true,
+    "lines": 1,
+    "functions": []
+  },
+  "%DIR-PATH%\\src\\config-default.ts": {
+    "absolutePath": "%DIR-PATH%\\src\\config-default.ts",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\config.ts"
+    ],
+    "extension": ".ts",
+    "name": "config-default.ts",
+    "relativePath": "\\src\\config-default.ts",
+    "children": [],
+    "fileDescription": {},
+    "type": "typescript",
+    "language": "file",
+    "analysed": true,
+    "lines": 1,
+    "functions": []
+  }
+}
