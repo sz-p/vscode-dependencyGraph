@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.0.2...v1.1.0) (2021-05-11)
+
+
+### Bug Fixes
+
+* [#6](https://github.com/sz-p/vscode-dependencyGraph/issues/6) work at vscode 1.56.0 ([73ffe53](https://github.com/sz-p/vscode-dependencyGraph/commit/73ffe538501aed14ad744d793cdf24472a61d671))
+
+
+### Features
+
+* [#5](https://github.com/sz-p/vscode-dependencyGraph/issues/5) dependency tree js/ts parser support export {...} from xxx ([76917bc](https://github.com/sz-p/vscode-dependencyGraph/commit/76917bc40e630ffa3e9aba423dc4fdf667df3adb))
+
 ## [1.0.2](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.0.1...v1.0.2) (2021-04-30)
 
 
