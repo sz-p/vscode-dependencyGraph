@@ -9,6 +9,7 @@ import {
   MESSAGE_DEPENDENCY_TREE_DATA,
   MESSAGE_FOCUS_ON_NODE,
   MESSAGE_UPDATE_WEBVIEW,
+  MsgKey,
 } from "./utils/message/messagesKeys";
 import { msgGetSavedData } from "./utils/message/messages";
 import * as stringRandom from "string-random";
@@ -24,8 +25,8 @@ export const command_createView = vscode.commands.registerCommand(
   }
 );
 
-// export const command_postMessage = vscode.commands.registerCommand('framegraph.postMessage', () => {
-// 	postMessageCatchError({ key: 'postMessageTest', value: message++ });
+// export const command_postMessage = vscode.commands.registerCommand('dependencygraph.postMessage', () => {
+//   postMessageCatchError({ key: 'postMessageTest' as MsgKey, value: 0 });
 // });
 
 const refreshFile = async (): Promise<boolean> => {
@@ -125,6 +126,7 @@ export const command_upDateData = vscode.commands.registerCommand(
     saveData();
   }
 );
+
 export const command_saveDataWithMessage = vscode.commands.registerCommand(
   "dependencygraph.refreshFileWithMessage",
   async () => {
@@ -151,4 +153,5 @@ export const allCommands = [
   command_saveData,
   command_upDateData,
   command_saveDataWithMessage,
+  // command_postMessage
 ];

@@ -8,10 +8,10 @@ export const visitOnExportDeclaration = function (nodePath: NodePath<namedTypes.
     try {
       dependencyPath = resolve(dirName, nodePath.value.source.value);
     } catch (e) {
-      resolveChildrenNodeError(absolutePath, nodePath.value.source.value,)
+      resolveChildrenNodeError(absolutePath, nodePath.value.source.value);
       return false
     }
-    return dependencyPath;
+    return dependencyPath as string | false;
   }
   return false;
 }
