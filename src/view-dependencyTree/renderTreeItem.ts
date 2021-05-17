@@ -8,7 +8,7 @@ export function renderTreeItem(data: DependencyTreeData): vscode.TreeItem {
     ? vscode.TreeItemCollapsibleState.Collapsed
     : vscode.TreeItemCollapsibleState.None;
   const treeItem = new vscode.TreeItem(data.name, collapsibleState);
-  treeItem.tooltip = data.relativePath;
+  treeItem.tooltip = data.relativePath.replace(/\\/g, '/');
   treeItem.iconPath = getFileIconPathByFileType(data.type);
   treeItem.command = {
     command: "dependencygraph.focusOnNode",

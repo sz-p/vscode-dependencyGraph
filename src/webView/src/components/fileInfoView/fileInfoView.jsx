@@ -8,6 +8,7 @@ import { i18n } from "../../../../i18n/i18n";
 import {
   FILE_LINES,
   FILE_TYPE,
+  FILE_PATH,
   INTRODUCTION,
   DESCRIPTION,
   METHODS,
@@ -38,6 +39,7 @@ const fileInfoView = function (props) {
     lines,
     fileDescription,
     functions,
+    relativePath
   } = selectedNode;
   console.log(selectedNode);
   let { introduction, description } = fileDescription;
@@ -71,6 +73,10 @@ const fileInfoView = function (props) {
           {i18n.getText(FILE_LINES)}:{" "}
           <span className="fileLineText">{lines}</span>
         </div>
+      </div>
+      <div className="fileInfoView-filePath">
+        {i18n.getText(FILE_PATH)}:{" "}
+        <span className="filePathText">{relativePath.replace(/\\/g, '/')}</span>
       </div>
       <div className="fileInfoView-fileDescription">
         {

@@ -78,6 +78,9 @@
 .fileLineText {
   color: var(--vscode-charts-blue);
 }
+.filePathText{
+  color: var(--vscode-charts-green);
+}
 .fileInfoView-fileDescription {
   padding: 0px 20px;
 }
@@ -103,4 +106,9 @@
 .function-comment {
   color: var(--vscode-charts-green);
   word-break: break-all;
+}
+.fileInfoView-filePath{
+  padding: 0px 20px;
+  line-height: 35px;
+  width: calc(100% - 40px);
 }

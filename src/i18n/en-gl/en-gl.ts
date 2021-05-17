@@ -63,6 +63,7 @@ engl[status.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA] =
 
 engl[types.FILE_LINES] = "File lineNumbers";
 engl[types.FILE_TYPE] = "File type";
+engl[types.FILE_PATH] = "File path";
 engl[types.INTRODUCTION] = "Introduction";
 engl[types.DESCRIPTION] = "Description";
 engl[types.METHODS] = "Methods";

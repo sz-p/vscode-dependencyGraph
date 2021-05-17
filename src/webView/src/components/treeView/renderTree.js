@@ -22,13 +22,13 @@ const collapse = function (d) {
 
 export class D3Tree {
   constructor(newWindow) {
-		if (newWindow) {
-			this.window = newWindow;
-			this.isBrowser = false;
-		} else {
-			this.window = window;
+    if (newWindow) {
+      this.window = newWindow;
+      this.isBrowser = false;
+    } else {
+      this.window = window;
       this.isBrowser = true;
-		}
+    }
     this.initStaticVariables();
   }
   resize() {
@@ -55,12 +55,12 @@ export class D3Tree {
       width: 100,
       height: 200,
     };
-    this.NODE_HIGHLIGHT_COLOR = this.window.getComputedStyle(
-      this.window.document.documentElement
-    ).getPropertyValue("--vscode-editorLightBulb-foreground");
-    this.DEFAULT_TEXT_COLOR = this.window.getComputedStyle(
-      this.window.document.documentElement
-    ).getPropertyValue("--vscode-editor-foreground");
+    this.NODE_HIGHLIGHT_COLOR = this.window
+      .getComputedStyle(this.window.document.documentElement)
+      .getPropertyValue("--vscode-editorLightBulb-foreground");
+    this.DEFAULT_TEXT_COLOR = this.window
+      .getComputedStyle(this.window.document.documentElement)
+      .getPropertyValue("--vscode-editor-foreground");
     this.options = {
       PADDING: this.PADDING,
       DEPTH_LENGTH: this.DEPTH_LENGTH,
@@ -83,7 +83,7 @@ export class D3Tree {
         .append("svg")
         .attr("width", this.width)
         .attr("height", this.height)
-        .attr("id","treeViewSvgBox")
+        .attr("id", "treeViewSvgBox")
         .on("click", () => {
           store.dispatch(action_selectNode({}));
         });
@@ -91,7 +91,7 @@ export class D3Tree {
     if (!this.svg) {
       this.svg = this.svgBox
         .append("g")
-        .attr("id","treeViewSvg")
+        .attr("id", "treeViewSvg")
         .attr(
           "transform",
           "translate(" +
@@ -141,7 +141,7 @@ export class D3Tree {
     this.root = d3.hierarchy(this.data, (d) => d.children);
     this.root.x0 = 0;
     this.root.y0 = 0;
-    if(this.root.children){
+    if (this.root.children) {
       this.root.children.forEach(collapse);
     }
   }
@@ -200,6 +200,11 @@ export class D3Tree {
       .attr("y", 0)
       .attr("width", 0)
       .attr("height", 0);
+  }
+  appendNodeTitle() {
+    this.nodeDom.append("title").text((d) => {
+      return d?.data?.relativePath?.replace(/\\/g, "/");
+    });
   }
   appendNodeName() {
     this.nodeDom
@@ -349,6 +354,7 @@ export class D3Tree {
 
     this.getNodes();
     this.appendNodeDom(source);
+    this.appendNodeTitle();
     this.appendNodeIcon();
     this.appendNodeName();
     this.appendNodeArrowButton();

@@ -61,6 +61,7 @@ zhcn[status.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA] = "处理依赖树数据";
 
 zhcn[types.FILE_LINES] = "文件行数";
 zhcn[types.FILE_TYPE] = "文件类型";
+zhcn[types.FILE_PATH] = "文件路径";
 zhcn[types.INTRODUCTION] = "简介";
 zhcn[types.DESCRIPTION] = "描述";
 zhcn[types.METHODS] = "方法";

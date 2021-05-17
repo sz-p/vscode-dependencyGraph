@@ -34,7 +34,8 @@ export const RESOLVE_PATH = "RESOLVE_PATH";
 
 export const WAITING_DATA = "WAITING_DATA";
 export const FILE_LINES = "FILE_LINES";
-export const FILE_TYPE = "FILE_TYPE";
+export const FILE_TYPE = "FILE_TYPE"
+export const FILE_PATH = "FILE_PATH"
 export const INTRODUCTION = "INTRODUCTION";
 export const DESCRIPTION = "DESCRIPTION";
 export const METHODS = "METHODS";
