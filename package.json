@@ -3,7 +3,7 @@
   "displayName": "Dependency Graph",
   "description": "A plugin for vscode to view your project's dependency graph",
   "icon": "assets/dependencygraph.png",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "engines": {
     "vscode": "^1.41.0"
@@ -108,6 +108,7 @@
     "watch:WebView": "node ./src/webView/scripts/watch.js",
     "build:Extension": "node ./scripts/build.js",
     "build:WebView": "node ./src/webView/scripts/build.js",
+    "package": "vsce package",
     "test": "ts-mocha -p ./tests/tsconfig.testing.json tests/**/*.test.ts tests/**/*.test.js"
   },
   "devDependencies": {

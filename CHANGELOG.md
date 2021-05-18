@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.0...v1.1.1) (2021-05-26)
+
+
+### Features
+
+* add file path in tree view and file info view ([afe9006](https://github.com/sz-p/vscode-dependencyGraph/commit/afe900683ecb0898b90a61e1fe3099b85b8c049a))
+
+
+
 # [1.1.0](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.0.2...v1.1.0) (2021-05-11)
 
 
