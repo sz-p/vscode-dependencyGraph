@@ -6,6 +6,11 @@ import { processMessage } from "./processMessage";
 
 import "./index.css";
 
+const removeLoading = function () {
+  const loadingDom = window.document.getElementById("dependencyGraphLoading");
+  if (loadingDom) loadingDom.remove();
+};
+
 while (window.EVENTS_BEFORE_LISTENER && window.EVENTS_BEFORE_LISTENER.length) {
   const event = window.EVENTS_BEFORE_LISTENER.pop();
   processMessage(event);
@@ -16,3 +21,4 @@ window.addEventListener("message", (event) => {
 });
 const root = window.document.getElementById("root");
 ReactDOM.render(<App />, root);
+removeLoading();
