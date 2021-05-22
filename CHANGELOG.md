@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.0...v1.1.2) (2021-05-28)
+
+
+### Features
+
+* add loading view in webview html ([e99af3d](https://github.com/sz-p/vscode-dependencyGraph/commit/e99af3d7202bc9543505794118c240b711148973))
+
+
 ## [1.1.1](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.0...v1.1.1) (2021-05-26)
 
 
