@@ -42,15 +42,15 @@ const getOptions = function (newHeight, newWith) {
   return {
     height: newHeight,
     width: newWith,
-    modifyStyle: function (cssText) {
+    modifyStyle: function (styleText) {
       const rex = /var\([^\)]*/g;
-      let newCss = cssText.replace(rex, (w) => {
+      let newStyle = styleText.replace(rex, (w) => {
         return getComputedStyle(document.documentElement).getPropertyValue(
           w.replace("var(", "")
         );
       });
-      newCss = newCss.replace(/\)/g, "");
-      return newCss;
+      newStyle = newStyle.replace(/\)/g, "");
+      return newStyle;
     },
   };
 };
@@ -58,7 +58,10 @@ export const exportSvg = function () {
   const { svgDom, svgNode, newWith, newHeight, transform } = beforeExport();
   prepareSvg(svgDom, getOptions(newHeight, newWith))
     .then((src) => {
-      msgExportSvg(src.src).post();
+      let svgText = src.src;
+      const rex = /@font-face (.*) \}/g;
+      let svgWithOutFontFace = svgText.replace(rex,'');
+      msgExportSvg(svgWithOutFontFace).post();
       afterExport(svgNode, transform);
     })
     .catch(() => {
