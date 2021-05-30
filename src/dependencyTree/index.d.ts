@@ -19,7 +19,7 @@ export interface DependencyTreeOptions {
   ) => void;
 }
 export interface Alias {
-  [key: string]: string;
+  [key: string]: string | Array<string>;
 }
 export interface Parsers {
   [key: string]: Parser;

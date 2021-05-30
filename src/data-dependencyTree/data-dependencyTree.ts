@@ -15,7 +15,7 @@ import {
   getAliasKey,
   getResolveExtension,
   getEntryFileRelativePath,
-} from "../utils/fileSystem/setting";
+} from "../utils/fileSystem/setting/setting";
 import { getCurrentFolderPath, isPathExists } from "../utils/utils";
 import { getDependencyTree } from "../dependencyTree/index";
 import { getMainFilePath, getPackageJsonPath } from "./dependencyTreeMethods";
@@ -24,12 +24,10 @@ import {
   onGotCircularStructureNode,
   onGotFileString,
 } from "../fileAnalysis/fileAnalysis";
-import { postSetting } from "../utils/message/messages";
 import { setData, getData } from "../utils/fileSystem/data";
 import { StatusCallBack } from "./getDataStatusCallBack";
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
-
 /**
  * Check whether the folder was opened
  *
@@ -182,14 +180,10 @@ export const getDependencyTreeData = async (
   }
   let resolveExtensions = getResolveExtension();
   let alias = getAliasKey();
-  if (!alias) {
-    setAliasKey({});
-  }
   if (!resolveExtensions) {
     resolveExtensions = defaultOptions.resolveExtensions;
     setResolveExtension(resolveExtensions);
   }
-  postSetting(setting);
   const dpDataFromFile = checkDataFromFile();
   if (!dpDataFromFile) {
   } else {

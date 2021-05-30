@@ -6,7 +6,7 @@
 import * as MESSAGES from "./utils/message/messagesKeys";
 import * as vscode from "vscode";
 import { Msg } from "./utils/message/message.d";
-import { setSetting } from "./utils/fileSystem/setting";
+import { setSetting } from "./utils/fileSystem/setting/setting";
 import { SETTING_KEY_ENTRY_FILE_PATH } from "./utils/fileSystem/settingKey";
 import { onError } from "./utils/error/onError";
 import { NO_FOLDER } from "./utils/error/errorKey";

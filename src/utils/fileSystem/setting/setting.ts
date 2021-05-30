@@ -10,12 +10,13 @@ import {
   getCurrentFolderPath,
   getObjectFromJsonFile,
   beforeSetDataToLocal,
-} from "../utils";
+} from "../../utils";
 import {
   SETTING_KEY_ENTRY_FILE_PATH,
   SETTING_KEY_RESOLVE_EXTENSIONS,
   SETTING_KEY_ALIAS,
-} from "./settingKey";
+} from "../settingKey";
+import { getAliasFromLocalSetting } from "./getAliasFromLocalSetting";
 const getSettingFilePath = function (): string | false {
   const dirPath = getCurrentFolderPath();
   if (!dirPath) return false;
@@ -62,12 +63,20 @@ export const setEntryFileRelativePath = function (value: string) {
 export const getAliasKey = function (): {
   [key: string]: string;
 } {
-  const alias = getSetting(SETTING_KEY_ALIAS);
+  let alias = getSetting(SETTING_KEY_ALIAS);
   const folderPath = getCurrentFolderPath() as string;
-  for (let key in alias) {
-    alias[key] = path.join(folderPath, alias[key]);
+  if (!alias) {
+    alias = getAliasFromLocalSetting(folderPath);
+    setAliasKey(alias)
   }
-  return alias;
+  if (alias) {
+    for (let key in alias) {
+      alias[key] = path.join(folderPath, alias[key]);
+    }
+    return alias;
+  } else {
+    return {}
+  }
 };
 
 export const setAliasKey = function (value: object) {

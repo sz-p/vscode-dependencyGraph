@@ -79,6 +79,26 @@ const aliasSetting = function (props) {
     }
     msgSetSetting(SETTING_KEY_ALIAS, _aliasItem).post();
   };
+  const createResolveListDetailItem = function (aliasItemState, i, j) {
+    return (<div
+      key={aliasItemState[i].path}
+      className="setting-resolveList-detail-line"
+    >
+      <div className="setting-resolveList-detail-item alias">
+        {aliasItemState[i].alias}
+      </div>
+      <div className="setting-resolveList-detail-item path">
+        {j !== undefined ? aliasItemState[i].path[j] : aliasItemState[i].path}
+      </div>
+      <div className="setting-resolveList-detail-item delete">
+        <PrimaryButton
+          style={{ float: "right", height: "30px", width: "100%" }}
+          iconProps={deleteIcon}
+          onClick={() => deleteAliasItemState(i)}
+        />
+      </div>
+    </div>)
+  }
   const createResolveListDetail = function () {
     if (!aliasItemState.length) {
       return (
@@ -89,26 +109,17 @@ const aliasSetting = function (props) {
     } else {
       let doms = [];
       for (let i = 0; i < aliasItemState.length; i++) {
-        doms.push(
-          <div
-            key={aliasItemState[i].alias}
-            className="setting-resolveList-detail-line"
-          >
-            <div className="setting-resolveList-detail-item alias">
-              {aliasItemState[i].alias}
-            </div>
-            <div className="setting-resolveList-detail-item path">
-              {aliasItemState[i].path}
-            </div>
-            <div className="setting-resolveList-detail-item delete">
-              <PrimaryButton
-                style={{ float: "right", height: "30px", width: "100%" }}
-                iconProps={deleteIcon}
-                onClick={() => deleteAliasItemState(i)}
-              />
-            </div>
-          </div>
-        );
+        if (aliasItemState[i].path?.constructor?.name === "Array" && aliasItemState[i].path.length) {
+          for (let j = 0; j < aliasItemState[i].path.length; j++) {
+            doms.push(
+              createResolveListDetailItem(aliasItemState, i, j)
+            );
+          }
+        } else {
+          doms.push(
+            createResolveListDetailItem(aliasItemState, i)
+          );
+        }
       }
       return doms;
     }
