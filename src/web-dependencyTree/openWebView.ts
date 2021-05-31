@@ -125,7 +125,6 @@ export const reOpenWebView = function (
       isPathExists(path.join(folderPath as string, entryFilePath))
     ) {
       statusMsgGetEntryFile.postSuccess();
-      postSetting(setting);
     } else {
       statusMsgGetEntryFile.postError();
     }
@@ -141,6 +140,8 @@ export const openWebView = function (
     statusMsgGetDependencyData.postError();
     return undefined;
   }
+  const setting = getAllSettingFromSettingFile();
+  postSetting(setting);
   postMessageCatchError({
     key: MESSAGE_DEPENDENCY_TREE_DATA,
     value: {
