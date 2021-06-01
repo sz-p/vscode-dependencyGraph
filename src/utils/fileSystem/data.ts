@@ -5,11 +5,11 @@
  */
 import * as fs from "fs";
 import {
-  getCurrentFolderPath,
   isPathExists,
   getObjectFromJsonFile,
   beforeSetDataToLocal,
 } from "../utils";
+import { getCurrentFolderPath } from "../getCurrentFolderPath"
 import { DependencyTreeData } from "../../data-dependencyTree/dependencyTreeData";
 import { transportsDataToDependenciesTreeData } from "../../data-dependencyTree/processTreeData";
 import {
@@ -31,12 +31,12 @@ export const getDataFromDataFile = function (): any {
 
 export const getData = function ():
   | {
-      dependencyTreeData: DependencyTreeData;
-      transportsData: {
-        dependencyTree: DependencyTree;
-        dependencyNodes: DependencyNodes;
-      };
-    }
+    dependencyTreeData: DependencyTreeData;
+    transportsData: {
+      dependencyTree: DependencyTree;
+      dependencyNodes: DependencyNodes;
+    };
+  }
   | false {
   let dp = {} as DependencyTreeData;
   const data = getDataFromDataFile();
@@ -61,7 +61,8 @@ export const getData = function ():
 };
 
 export const setData = function (value: any): boolean {
-  beforeSetDataToLocal();
+  const dirPath = getCurrentFolderPath() as string;
+  beforeSetDataToLocal(dirPath);
   let Data = value;
   try {
     fs.writeFileSync(getDataFilePath() as string, JSON.stringify(Data));

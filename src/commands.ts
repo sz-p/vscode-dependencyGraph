@@ -14,7 +14,8 @@ import {
 import { msgGetSavedData } from "./utils/message/messages";
 import * as stringRandom from "string-random";
 import { setData, isSavedData } from "./utils/fileSystem/data";
-import { getCurrentFolderPath, thenAbleWithTimeout } from "./utils/utils";
+import { thenAbleWithTimeout } from "./utils/utils";
+import { getCurrentFolderPath } from "./utils/getCurrentFolderPath"
 import { showMessage } from "./utils/showMessage";
 import { START_UPDATE_DATA, UPDATED_DATA, UPDATE_DATA_FAILED } from "./i18n/types";
 import { i18n } from "./i18n/i18n";

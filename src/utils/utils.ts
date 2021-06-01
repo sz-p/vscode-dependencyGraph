@@ -2,17 +2,16 @@
  * @introduction util functions
  */
 import * as fs from "fs";
-import * as vscode from "vscode";
 
-export const beforeSetDataToLocal = function (): void {
-  const dirPath = getCurrentFolderPath();
-  if (!isPathExists(dirPath + "/.dependencygraph")) createLocalFileDir();
+export const beforeSetDataToLocal = function (dirPath: string): void {
+  if (!isPathExists(dirPath + "/.dependencygraph")) {
+    createLocalFileDir(dirPath);
+  }
 };
 /**
  * create local files dir
  */
-export const createLocalFileDir = function (): void {
-  const dirPath = getCurrentFolderPath();
+export const createLocalFileDir = function (dirPath: string): void {
   fs.mkdirSync(dirPath + "/.dependencygraph");
 };
 
@@ -35,32 +34,11 @@ export const getObjectFromJsonFile = function (
   filePath: string
 ):
   | {
-      [key: string]: any;
-    }
+    [key: string]: any;
+  }
   | false {
   if (!isPathExists(filePath)) return false;
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
-};
-
-/**
- * get current workspace first folder path
- * catch path return path
- *
- * @returns {(String | undefined)}
- */
-export const getCurrentFolderPath = function (): string | undefined {
-  const ws = vscode.workspace;
-  let folder = ws.workspaceFolders;
-  let folderPath = "";
-  if (folder !== undefined) {
-    folderPath = folder[0].uri.fsPath;
-  }
-  if (folderPath) {
-    // setCurrentFolderPath(folderPath);
-    return folderPath;
-  } else {
-    return undefined;
-  }
 };
 
 /**

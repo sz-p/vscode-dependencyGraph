@@ -7,10 +7,10 @@ import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
 import {
-  getCurrentFolderPath,
   getObjectFromJsonFile,
   beforeSetDataToLocal,
 } from "../../utils";
+import { getCurrentFolderPath } from "../../getCurrentFolderPath"
 import {
   SETTING_KEY_ENTRY_FILE_PATH,
   SETTING_KEY_RESOLVE_EXTENSIONS,
@@ -36,7 +36,8 @@ const getSetting = function (settingKey: string): any {
 };
 
 export const setSetting = function (settingKey: string, value: any): boolean {
-  beforeSetDataToLocal();
+  const dirPath = getCurrentFolderPath() as string;
+  beforeSetDataToLocal(dirPath);
   let setting = getAllSettingFromSettingFile();
   if (!setting) {
     setting = {};

@@ -16,7 +16,8 @@ import {
   getResolveExtension,
   getEntryFileRelativePath,
 } from "../utils/fileSystem/setting/setting";
-import { getCurrentFolderPath, isPathExists } from "../utils/utils";
+import { isPathExists } from "../utils/utils";
+import { getCurrentFolderPath } from "../utils/getCurrentFolderPath"
 import { getDependencyTree } from "../dependencyTree/index";
 import { getMainFilePath, getPackageJsonPath } from "./dependencyTreeMethods";
 import {

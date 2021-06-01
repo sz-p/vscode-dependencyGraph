@@ -15,7 +15,7 @@ import {
 } from "../utils/message/messagesKeys";
 import { DependencyTreeData } from "../data-dependencyTree/dependencyTreeData";
 import { createWebviewPanel } from "../initExtension";
-import { getCurrentFolderPath } from "../utils/utils";
+import { getCurrentFolderPath } from "../utils/getCurrentFolderPath";
 import { getAllSettingFromSettingFile } from "../utils/fileSystem/setting/setting";
 import { SETTING_KEY_ENTRY_FILE_PATH } from "../utils/fileSystem/settingKey";
 import {
