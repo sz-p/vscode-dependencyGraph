@@ -8,14 +8,10 @@
 			"es6"
 		],
 		"sourceMap": true,
-		"rootDir": "src",
-		"strict": true
-	},
-  "rootDir": ".",
-	"exclude": [
-		"node_modules",
-		".vscode-test",
-		"./src/webView/**/*",
-    "./tests/**/*"
-	]
+		"strict": true,
+    "baseUrl": "../",
+    "paths": {
+      "@src/*": ["src/*"]
+    }
+	}
 }

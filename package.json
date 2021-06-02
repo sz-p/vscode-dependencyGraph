@@ -109,7 +109,7 @@
     "build:Extension": "node ./scripts/build.js",
     "build:WebView": "node ./src/webView/scripts/build.js",
     "package": "vsce package",
-    "test": "ts-mocha -p ./tests/tsconfig.testing.json tests/**/*.test.ts tests/**/*.test.js"
+    "test": "ts-mocha -r tsconfig-paths/register -p ./tests/tsconfig.testing.json tests/**/*.test.ts tests/**/*.test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -127,6 +127,7 @@
     "npm-run-all": "^4.1.5",
     "style-loader": "^1.2.1",
     "ts-loader": "^8.0.3",
+    "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
     "typescript": "^3.6.4",
     "vscode-test": "^1.2.2",
