@@ -1,0 +1,93 @@
+{
+  "name": "index.js",
+  "fileID": "43351ecb56f3a7e10f80143f717fe4ea",
+  "nodeID": "43351ecb56f3a7e10f80143f717fe4ea",
+  "ancestors": [],
+  "fileDescription": {},
+  "type": "javascript",
+  "language": "javascript",
+  "lines": 2,
+  "analysed": true,
+  "functions": [],
+  "extension": ".js",
+  "absolutePath": "%DIR-PATH%\\src\\index.js",
+  "relativePath": "\\src\\index.js",
+  "children": [
+    {
+      "name": "config.ts",
+      "fileID": "95b1f77969d58ec9203d8e3295370680",
+      "nodeID": "d767225c67fc50e0b01836c57c4c1048",
+      "ancestors": [
+        "43351ecb56f3a7e10f80143f717fe4ea"
+      ],
+      "fileDescription": {},
+      "type": "typescript",
+      "language": "file",
+      "lines": 3,
+      "analysed": true,
+      "functions": [],
+      "extension": ".ts",
+      "absolutePath": "%DIR-PATH%\\src\\config.ts",
+      "relativePath": "\\src\\config.ts",
+      "children": [
+        {
+          "name": "config-backEnd.ts",
+          "fileID": "10e6c449677131f28b79197d640e164a",
+          "nodeID": "37658f0be8070f05d4e3a934efb4e510",
+          "ancestors": [
+            "43351ecb56f3a7e10f80143f717fe4ea",
+            "95b1f77969d58ec9203d8e3295370680"
+          ],
+          "fileDescription": {},
+          "type": "typescript",
+          "language": "file",
+          "lines": 1,
+          "analysed": true,
+          "functions": [],
+          "extension": ".ts",
+          "absolutePath": "%DIR-PATH%\\src\\config-backEnd.ts",
+          "relativePath": "\\src\\config-backEnd.ts",
+          "children": []
+        },
+        {
+          "name": "config-fontEnd.ts",
+          "fileID": "65782bf7b10a2bc366070dceef20abb3",
+          "nodeID": "af2c1f86f179df18c40249a2ff6163a3",
+          "ancestors": [
+            "43351ecb56f3a7e10f80143f717fe4ea",
+            "95b1f77969d58ec9203d8e3295370680"
+          ],
+          "fileDescription": {},
+          "type": "typescript",
+          "language": "file",
+          "lines": 1,
+          "analysed": true,
+          "functions": [],
+          "extension": ".ts",
+          "absolutePath": "%DIR-PATH%\\src\\config-fontEnd.ts",
+          "relativePath": "\\src\\config-fontEnd.ts",
+          "children": []
+        },
+        {
+          "name": "config-default.ts",
+          "fileID": "5fbb7c008827a43affecdd7c9dae3bf8",
+          "nodeID": "1d8bc6224e3e09fff42daa0fc8cdb25c",
+          "ancestors": [
+            "43351ecb56f3a7e10f80143f717fe4ea",
+            "95b1f77969d58ec9203d8e3295370680"
+          ],
+          "fileDescription": {},
+          "type": "typescript",
+          "language": "file",
+          "lines": 1,
+          "analysed": true,
+          "functions": [],
+          "extension": ".ts",
+          "absolutePath": "%DIR-PATH%\\src\\config-default.ts",
+          "relativePath": "\\src\\config-default.ts",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

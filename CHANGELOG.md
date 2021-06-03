@@ -1,3 +1,14 @@
+## [1.1.3](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.2...v1.1.3) (2021-06-08)
+
+
+### Features
+
+* get alias from ts js config ([d07f277](https://github.com/sz-p/vscode-dependencyGraph/commit/d07f2776cad2851cfbf56cf789a03a97a37c3310))
+* mini exported svg file size ([ef90348](https://github.com/sz-p/vscode-dependencyGraph/commit/ef903482ae0a6ee2cdc4bca91b60416f8407da89))
+* post setting to webview when open webview ([c77b5c2](https://github.com/sz-p/vscode-dependencyGraph/commit/c77b5c2df633df0df06d694a288c83294fdbc1f5))
+
+
+
 ## [1.1.2](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.0...v1.1.2) (2021-05-28)
 
 
