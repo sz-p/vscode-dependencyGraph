@@ -13,6 +13,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
+      { test: /\.m?js/, type: "javascript/auto" },
+      {
         test: /\.(js|jsx)$/,
         loader: require.resolve("babel-loader"),
         options: {
@@ -38,7 +43,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js", ".json", ".jsx", ".css", ".svg", ".ttf"],
+    extensions: [".tsx", ".ts", ".mjs", ".js", ".json", ".jsx", ".css", ".svg", ".ttf"],
   },
   plugins: [
     new HtmlWebpackPlugin({

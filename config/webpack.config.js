@@ -19,6 +19,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
+      { test: /\.m?js/, type: "javascript/auto" },
+      {
         test: /\.ts$/,
         exclude: /node_modules/,
         loader: "ts-loader",
@@ -26,7 +31,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".ts", ".js", ".json"],
+    extensions: [".ts", ".mjs", ".js", ".json"],
   },
   plugins: [],
   devtool: "source-map",
