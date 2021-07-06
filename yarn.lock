@@ -1583,11 +1583,6 @@
   resolved "https://registry.npm.taobao.org/@types/chai/download/@types/chai-4.2.15.tgz#b7a6d263c2cecf44b6de9a051cf496249b154553"
   integrity sha1-t6bSY8LOz0S23poFHPSWJJsVRVM=
 
-"@types/dependency-tree@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.npm.taobao.org/@types/dependency-tree/download/@types/dependency-tree-7.2.0.tgz#1cfeb461bd88e5963ddb2c0891e49f758461b5d7"
-  integrity sha1-HP60Yb2I5ZY92ywIkeSfdYRhtdc=
-
 "@types/eslint-scope@^3.7.0":
   version "3.7.1"
   resolved "https://registry.nlark.com/@types/eslint-scope/download/@types/eslint-scope-3.7.1.tgz#8dc390a7b4f9dd9f1284629efce982e41612116e"
@@ -2871,17 +2866,6 @@ delayed-stream@~1.0.0:
   resolved "https://registry.npm.taobao.org/delayed-stream/download/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha1-3zrhmayt+31ECqrgsp4icrJOxhk=
 
-dependency-tree@^7.2.1:
-  version "7.2.1"
-  resolved "https://registry.npm.taobao.org/dependency-tree/download/dependency-tree-7.2.1.tgz#41c8f6feb54a2ae32475c0158e8d2c2696bb7f54"
-  integrity sha1-Qcj2/rVKKuMkdcAVjo0sJpa7f1Q=
-  dependencies:
-    commander "^2.19.0"
-    debug "^4.1.1"
-    filing-cabinet "^2.5.1"
-    precinct "^6.2.0"
-    typescript "^3.7.5"
-
 detective-amd@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/detective-amd/download/detective-amd-3.0.0.tgz#40c8e21e229df8bca1ee2d4b952a7b67b01e2a5a"
@@ -3378,15 +3362,6 @@ get-caller-file@^2.0.1:
   version "2.0.5"
   resolved "https://registry.npm.taobao.org/get-caller-file/download/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
   integrity sha1-T5RBKoLbMvNuOwuXQfipf+sDH34=
-
-get-dependency-tree@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.npm.taobao.org/get-dependency-tree/download/get-dependency-tree-4.0.1.tgz#2796ad2cd2588aa058d50c75e08390ebf19b392c"
-  integrity sha1-J5atLNJYiqBY1Qx14IOQ6/GbOSw=
-  dependencies:
-    "@babel/core" "^7.4.5"
-    "@babel/traverse" "^7.4.5"
-    is-relative "^1.0.0"
 
 get-func-name@^2.0.0:
   version "2.0.0"
