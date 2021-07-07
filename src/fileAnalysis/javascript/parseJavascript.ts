@@ -5,7 +5,7 @@ import {
 import { getFunctionInformation } from "./getFunctionInformation";
 import { i18n } from "../../i18n/i18n";
 import { getFileIconNameByFileName } from "../../utils/fileIcons/getFileIcon";
-import { DependencyHash } from "../../dependencyTree/index.d"
+import { DependencyHash } from "@packages/dependency-tree"
 import { visit } from "recast";
 import {
   CIRCULAR_STRUCTURE_NODE_INTRODUCTION,

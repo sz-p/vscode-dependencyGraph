@@ -1,19 +1,14 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
+		"module": "ES6",
 		"target": "es6",
-		"outDir": "outExtension",
 		"lib": [
 			"es6"
 		],
+    "composite": true,
 		"sourceMap": true,
-		"rootDirs": ["src", "packages/*"],
 		"strict": true,
 	},
-  "references": [{
-    "path": "./packages/dependency-tree"
-  }],
-  "rootDir": ".",
 	"exclude": [
 		"node_modules",
 		".vscode-test",

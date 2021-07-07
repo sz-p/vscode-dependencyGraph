@@ -1,4 +1,4 @@
-import { DependencyTreeData, DependencyHash } from "../dependencyTree/index.d";
+import { DependencyTreeData, DependencyHash } from "@packages/dependency-tree";
 import {
   DependencyTreeData as DTD,
   DependencyNodes,

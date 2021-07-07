@@ -1,7 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
-import { getDependencyTree } from "../../../src/dependencyTree/index";
-import { defaultOptions } from "../../../src/dependencyTree/core/defaultOptions";
+import { getDependencyTree, defaultOptions } from "@packages/dependency-tree";
 import {
   onGotAST,
   onGotCircularStructureNode,

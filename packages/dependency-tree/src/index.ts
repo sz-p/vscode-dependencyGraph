@@ -1,6 +1,8 @@
 import { DependencyTree } from "./core/dependencyTree";
 
-import { DependencyTreeOptions } from "./index.d";
+export { DependencyTreeOptions, Alias, Parsers, Parser, ParseRule, DependencyHash, DependencyTreeData } from "./index.d";
+import { DependencyTreeOptions } from "./index.d"
+export { defaultOptions } from "./core/defaultOptions";
 const dp = new DependencyTree();
 
 const getDependencyTree = function (

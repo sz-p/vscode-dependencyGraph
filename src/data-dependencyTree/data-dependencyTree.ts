@@ -4,7 +4,7 @@
  * @description analyse file dependency by DependencyTreeData \n process data ready to send
  */
 import * as path from "path";
-import { defaultOptions } from "../dependencyTree/core/defaultOptions";
+import { getDependencyTree, defaultOptions } from "@packages/dependency-tree";
 import { DependencyTreeData } from "./dependencyTreeData";
 import { NO_ENTRY_FILE, NO_PACKAGE_JSON } from "../utils/error/errorKey";
 import {
@@ -18,7 +18,6 @@ import {
 } from "../utils/fileSystem/setting/setting";
 import { isPathExists } from "../utils/utils";
 import { getCurrentFolderPath } from "../utils/getCurrentFolderPath"
-import { getDependencyTree } from "../dependencyTree/index";
 import { getMainFilePath, getPackageJsonPath } from "./dependencyTreeMethods";
 import {
   onGotAST,
