@@ -62,8 +62,10 @@
 [x] feat: dependency tree get required node
 [x] feat: add loading view in webview html
 [x] feat: change name framegraph to dependency graph
+[x] refactor: move dependencyTree to package
 
-[ ] refactor: move dependencyTree to package
+[ ] refactor: move dependencies of dependencyTree from dependency-graph
+[ ] refactor: remove lodash from dependency-graph
 [ ] fix: move resolver to single file
 [ ] fix: refresh file not resend data to webview
 [ ] fix: move ancestors from dependencyNodesHash
