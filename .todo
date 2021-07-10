@@ -64,6 +64,7 @@
 [x] feat: change name framegraph to dependency graph
 [x] refactor: move dependencyTree to package
 
+[ ] feat: add analyze script
 [ ] refactor: move dependencies of dependencyTree from dependency-graph
 [ ] refactor: remove lodash from dependency-graph
 [ ] fix: move resolver to single file
