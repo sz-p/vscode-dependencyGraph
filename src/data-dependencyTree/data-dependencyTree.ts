@@ -162,21 +162,21 @@ export const getDependencyTreeData = async (
   const setting = getAllSettingFromSettingFile();
   const folderPath = checkFolderPath();
   if (!folderPath) {
-    statusCallBack ? statusCallBack.checkFolderPathError() : null;
+    statusCallBack ? await statusCallBack.checkFolderPathError() : null;
     return undefined;
   } else {
-    statusCallBack ? statusCallBack.checkFolderPathSuccess() : null;
+    statusCallBack ? await statusCallBack.checkFolderPathSuccess() : null;
   }
   const mainFilePath = checkMainFilePath(folderPath);
   if (mainFilePath === NO_PACKAGE_JSON) {
-    statusCallBack ? statusCallBack.checkPackageJsonError() : null;
+    statusCallBack ? await statusCallBack.checkPackageJsonError() : null;
     return undefined;
   } else if (mainFilePath === NO_ENTRY_FILE) {
-    statusCallBack ? statusCallBack.checkPackageJsonSuccess() : null;
-    statusCallBack ? statusCallBack.checkMainFileError() : null;
+    statusCallBack ? await statusCallBack.checkPackageJsonSuccess() : null;
+    statusCallBack ? await statusCallBack.checkMainFileError() : null;
   } else {
-    statusCallBack ? statusCallBack.checkPackageJsonSuccess() : null;
-    statusCallBack ? statusCallBack.checkMainFileSuccess() : null;
+    statusCallBack ? await statusCallBack.checkPackageJsonSuccess() : null;
+    statusCallBack ? await statusCallBack.checkMainFileSuccess() : null;
   }
   let resolveExtensions = getResolveExtension();
   let alias = getAliasKey();
@@ -188,7 +188,7 @@ export const getDependencyTreeData = async (
   if (!dpDataFromFile) {
   } else {
     if (!refresh) {
-      statusCallBack ? statusCallBack.checkGetDataFromFileSuccess() : null;
+      statusCallBack ? await statusCallBack.checkGetDataFromFileSuccess() : null;
       return dpDataFromFile;
     }
   }
@@ -199,10 +199,10 @@ export const getDependencyTreeData = async (
     resolveExtensions
   );
   if (!dataFromAnalyser) {
-    statusCallBack ? statusCallBack.checkGetDataFromAnalyserError() : null;
+    statusCallBack ? await statusCallBack.checkGetDataFromAnalyserError() : null;
   } else {
     const { dp, tree, nodes } = dataFromAnalyser;
-    statusCallBack ? statusCallBack.checkGetDataFromAnalyserSuccess() : null;
+    statusCallBack ? await statusCallBack.checkGetDataFromAnalyserSuccess() : null;
     return {
       dependencyTreeData: dp,
       transportsData: {
