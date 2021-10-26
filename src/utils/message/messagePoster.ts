@@ -8,10 +8,10 @@ const waitTime = function (waitTime: number) {
     setTimeout(resolve, waitTime || 0);
   })
 }
-const postMessage = async function (msg: Msg) {
+export const postMessage = async function (msg: Msg) {
   if (global.webViewPanel) {
-    // postMessage is not real async just wait more 100ms
-    await waitTime(100)
+    // postMessage is not real async just wait more 500ms
+    await waitTime(500)
     const postMessageStatus = await global.webViewPanel.webview.postMessage(msg);
     if (!postMessageStatus) {
       onError(NO_WEBVIEW_PANEL);

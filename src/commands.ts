@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { getDependencyTreeData } from "./data-dependencyTree/data-dependencyTree";
 import { StatusCallBack } from "./data-dependencyTree/getDataStatusCallBack";
 import { createView } from "./web-dependencyTree/openWebView";
-import { postMessageCatchError } from "./utils/message/postMessageToWebView";
+import { postMessage } from "./utils/message/messagePoster";
 import { reOpenWebView } from "./web-dependencyTree/openWebView";
 import { renderTreeView } from "./view-dependencyTree/renderTreeView";
 import {
@@ -32,16 +32,16 @@ export const command_createView = vscode.commands.registerCommand(
 
 const refreshFile = async (): Promise<boolean> => {
   // no catch error may be webview is closed
-  let postMessage = false;
+  let postedMessage = false;
   let refresh = true;
   if (global.webViewPanel) {
-    postMessage = true;
-    postMessageCatchError({
+    postedMessage = true;
+    postMessage({
       key: MESSAGE_UPDATE_WEBVIEW,
       value: stringRandom(),
     });
   }
-  const scb = new StatusCallBack(postMessage);
+  const scb = new StatusCallBack(postedMessage);
   let data = undefined;
   try {
     data = await getDependencyTreeData(refresh, scb);
@@ -53,7 +53,7 @@ const refreshFile = async (): Promise<boolean> => {
     global.dependencyTreeData = data;
     renderTreeView(global.dependencyTreeData.dependencyTreeData);
     if (global.webViewPanel) {
-      postMessageCatchError({
+      postMessage({
         key: MESSAGE_DEPENDENCY_TREE_DATA,
         value: {
           data: data.transportsData,
@@ -81,7 +81,7 @@ const saveData = () => {
 export const command_focusOnNode = vscode.commands.registerCommand(
   "dependencygraph.focusOnNode",
   (fileName, fileData) => {
-    postMessageCatchError({
+    postMessage({
       key: MESSAGE_FOCUS_ON_NODE,
       value: { fileName, fileData },
     });

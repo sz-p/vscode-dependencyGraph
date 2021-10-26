@@ -7,7 +7,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { webViewHTMLPath } from "../paths";
 import { getBaseWebViewUri } from "../utils/getWebViewUri";
-import { postMessageCatchError } from "../utils/message/postMessageToWebView";
+import { postMessage } from "../utils/message/messagePoster";
 import {
   MESSAGE_ASSETS_BASE_URL,
   MESSAGE_DEPENDENCY_TREE_DATA,
@@ -88,10 +88,10 @@ export const postNecessaryMessageWhenCreateView = function (): void {
   // post language
   msgGetLanguage.post();
   const folderPath = getCurrentFolderPath();
-  postMessageCatchError({ key: MESSAGE_FOLDER_PATH, value: folderPath });
+  postMessage({ key: MESSAGE_FOLDER_PATH, value: folderPath });
   msgGetActiveThemeKind.post();
   const baseWebViewUri = getBaseWebViewUri()
-  postMessageCatchError({
+  postMessage({
     key: MESSAGE_ASSETS_BASE_URL,
     value: baseWebViewUri,
   });
@@ -142,7 +142,7 @@ export const openWebView = function (
   }
   const setting = getAllSettingFromSettingFile();
   postSetting(setting);
-  postMessageCatchError({
+  postMessage({
     key: MESSAGE_DEPENDENCY_TREE_DATA,
     value: {
       data: global.dependencyTreeData?.transportsData,
