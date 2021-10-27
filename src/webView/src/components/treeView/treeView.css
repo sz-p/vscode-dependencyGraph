@@ -8,24 +8,24 @@
   overflow: hidden;
 }
 .link {
-  fill: none;
+  /* fill: none;
   stroke: var(--vscode-checkbox-border);
-  stroke-width: 1;
+  stroke-width: 1; */
 }
 .arrowButton {
-  transform-origin: 22px 0px;
+  /* transform-origin: 22px 0px; */
 }
 .node circle {
-  fill: skyblue;
+  /* fill: skyblue;
   stroke-width: 1;
-  stroke: var(--vscode-checkbox-border);
+  stroke: var(--vscode-checkbox-border); */
 }
 .node text {
-  text-anchor: middle;
+  /* text-anchor: middle;
   dominant-baseline: middle;
 
   fill: var(--vscode-editor-foreground);
   font-family: var(--vscode-font-family);
   font-weight: var(--vscode-font-weight);
-  font-size: var(--vscode-font-size);
+  font-size: var(--vscode-font-size); */
 }

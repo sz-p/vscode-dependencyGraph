@@ -212,6 +212,13 @@ export class D3Tree {
       .style("text-anchor", (d) =>
         d.children || d._children ? "end" : "start"
       )
+      .attr("text-anchor","middle")
+      .attr("dominant-baseline","middle")
+      .attr("fill","var(--vscode-editor-foreground)")
+      .attr("font-family","var(--vscode-font-family)")
+      .attr("font-weight","var(--vscode-font-weight)")
+      .attr("font-size","var(--vscode-font-size)")
+
       .attr("x", (d) =>
         d.children || d._children
           ? -this.NODE_TEXT_OFFSET_X
@@ -229,6 +236,7 @@ export class D3Tree {
       })
       .append("svg:image")
       .attr("class", "arrowButton")
+      .attr("transform-origin","22px 0px")
       .attr("xlink:href", (d) => {
         return `${this.ASSETS_BASE_URL}/webview/arrow-${this.activeThemeKind}.svg`;
       })
@@ -323,6 +331,9 @@ export class D3Tree {
       .enter()
       .insert("path", "g")
       .attr("class", "link")
+      .attr("fill","none")
+      .attr("stroke","var(--vscode-checkbox-border)")
+      .attr("stroke-width",1)
       .attr("d", (d) => {
         const o = { x, y };
         return diagonal(o, o);
