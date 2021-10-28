@@ -1,5 +1,5 @@
 import { msgExportSvg, msgExportPng } from "../../utils/messages";
-import { prepareSvg, svgAsPngUri } from "save-svg-as-png";
+import { svgAsPngUri, prepareSvg} from "save-svg-as-png";
 import * as d3 from "d3";
 
 const getTopNodePosition = function () {
@@ -59,8 +59,9 @@ export const exportSvg = function () {
   prepareSvg(svgDom, getOptions(newHeight, newWith))
     .then((src) => {
       let svgText = src.src;
-      const rex = /@font-face (.*) \}/g;
-      let svgWithOutFontFace = svgText.replace(rex,'');
+      // const rex = /@font-face (.*) \}/g;
+      const rex = /<style(([\s\S])*?)<\/style>/g;
+      let svgWithOutFontFace = svgText.replace(rex, "");
       msgExportSvg(svgWithOutFontFace).post();
       afterExport(svgNode, transform);
     })

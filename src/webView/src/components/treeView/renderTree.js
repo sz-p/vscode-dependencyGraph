@@ -61,6 +61,22 @@ export class D3Tree {
     this.DEFAULT_TEXT_COLOR = this.window
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-editor-foreground");
+
+    this.DEFAULT_FONT_FAMILY = this.window
+      .getComputedStyle(this.window.document.documentElement)
+      .getPropertyValue("--vscode-font-family");
+    this.DEFAULT_FONT_WEIGHT = this.window
+      .getComputedStyle(this.window.document.documentElement)
+      .getPropertyValue("--vscode-font-weight");
+
+    this.DEFAULT_FONT_SIZE = this.window
+      .getComputedStyle(this.window.document.documentElement)
+      .getPropertyValue("--vscode-font-size");
+
+    this.DEFAULT_CHECKBOX_BORDER = this.window
+      .getComputedStyle(this.window.document.documentElement)
+      .getPropertyValue("--vscode-checkbox-border");
+
     this.options = {
       PADDING: this.PADDING,
       DEPTH_LENGTH: this.DEPTH_LENGTH,
@@ -212,12 +228,12 @@ export class D3Tree {
       .style("text-anchor", (d) =>
         d.children || d._children ? "end" : "start"
       )
-      .attr("text-anchor","middle")
-      .attr("dominant-baseline","middle")
-      .attr("fill","var(--vscode-editor-foreground)")
-      .attr("font-family","var(--vscode-font-family)")
-      .attr("font-weight","var(--vscode-font-weight)")
-      .attr("font-size","var(--vscode-font-size)")
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .attr("fill", this.DEFAULT_TEXT_COLOR)
+      .attr("font-family", this.DEFAULT_FONT_FAMILY)
+      .attr("font-weight", this.DEFAULT_FONT_WEIGHT)
+      .attr("font-size", this.DEFAULT_FONT_SIZE)
 
       .attr("x", (d) =>
         d.children || d._children
@@ -236,7 +252,7 @@ export class D3Tree {
       })
       .append("svg:image")
       .attr("class", "arrowButton")
-      .attr("transform-origin","22px 0px")
+      .attr("transform-origin", "22px 0px")
       .attr("xlink:href", (d) => {
         return `${this.ASSETS_BASE_URL}/webview/arrow-${this.activeThemeKind}.svg`;
       })
@@ -331,9 +347,9 @@ export class D3Tree {
       .enter()
       .insert("path", "g")
       .attr("class", "link")
-      .attr("fill","none")
-      .attr("stroke","var(--vscode-checkbox-border)")
-      .attr("stroke-width",1)
+      .attr("fill", "none")
+      .attr("stroke", this.DEFAULT_CHECKBOX_BORDER)
+      .attr("stroke-width", 1)
       .attr("d", (d) => {
         const o = { x, y };
         return diagonal(o, o);
