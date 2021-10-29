@@ -1,3 +1,19 @@
+## [1.1.4](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.3...v1.1.4) (2021-11-11)
+
+
+### Bug Fixes
+
+* always waitting data problem ([e99c9a6](https://github.com/sz-p/vscode-dependencyGraph/commit/e99c9a6ba26334231053608477545d4afe752d97))
+
+
+### Features
+
+* mini exported svg file size ([2c35418](https://github.com/sz-p/vscode-dependencyGraph/commit/2c35418eab17a737d9f219479c4e2ec4e3b9ac7b))
+* remove dependency-tree ([f2ffb7b](https://github.com/sz-p/vscode-dependencyGraph/commit/f2ffb7bc4d34d53c333574a906f94237909925e7))
+* update packages ([e855480](https://github.com/sz-p/vscode-dependencyGraph/commit/e85548042cad5466b8a1bb254ebd9c7f2c610c17))
+
+
+
 ## [1.1.3](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.2...v1.1.3) (2021-06-08)
 
 
