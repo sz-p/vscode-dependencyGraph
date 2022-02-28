@@ -53,7 +53,7 @@ export class D3Tree {
     this.ICON_SIZE = 22;
     this.NODE_SIZE = {
       width: 100,
-      height: 200,
+      height: 250,
     };
     this.NODE_HIGHLIGHT_COLOR = this.window
       .getComputedStyle(this.window.document.documentElement)
