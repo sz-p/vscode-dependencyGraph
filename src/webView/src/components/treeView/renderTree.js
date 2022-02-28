@@ -62,6 +62,10 @@ export class D3Tree {
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-editor-foreground");
 
+    this.DEFAULT_IGNORED_TEXT_COLOR = this.window
+      .getComputedStyle(this.window.document.documentElement)
+      .getPropertyValue("--vscode-gitDecoration-ignoredResourceForeground");
+
     this.DEFAULT_FONT_FAMILY = this.window
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-font-family");
@@ -223,7 +227,7 @@ export class D3Tree {
     });
   }
   appendNodeName() {
-    this.nodeDom
+    this.nodeTextDom = this.nodeDom
       .append("text")
       .style("text-anchor", (d) =>
         d.children || d._children ? "end" : "start"
@@ -240,8 +244,25 @@ export class D3Tree {
           ? -this.NODE_TEXT_OFFSET_X
           : this.NODE_TEXT_OFFSET_X
       )
-      .text((d) => d.data.name)
       .style("fill-opacity", 0);
+    this.nodeFatherNameTextDom = this.nodeTextDom
+      .append("tspan")
+      .attr("fill", this.DEFAULT_IGNORED_TEXT_COLOR)
+      .text((d) => {
+        const nameWhitOutExtension = d.data.name.replace(d.data.extension, "");
+        const filePath = d.data.relativePath.replace(/\\/g, "/").split("/");
+        filePath.pop();
+        const fileFatherDirName = filePath.pop();
+        if (nameWhitOutExtension === "index" && fileFatherDirName) {
+          return fileFatherDirName + "/";
+        } else {
+          return "";
+        }
+      });
+
+    this.nodeNameTextDom = this.nodeTextDom.append("tspan").text((d) => {
+      return d.data.name;
+    });
   }
   appendNodeArrowButton() {
     this.nodeDom
