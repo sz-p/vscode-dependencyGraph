@@ -203,7 +203,7 @@ export class D3Tree {
       .append("g")
       .attr("class", "node")
       .attr("transform", () => `translate(${x},${y})`)
-      .style("cursor", () => "pointer")
+      .attr("cursor", () => "pointer")
       .on("click", function (d) {
         d3.event.stopPropagation();
         store.dispatch(action_selectNode(d));
@@ -229,10 +229,9 @@ export class D3Tree {
   appendNodeName() {
     this.nodeTextDom = this.nodeDom
       .append("text")
-      .style("text-anchor", (d) =>
+      .attr("text-anchor", (d) =>
         d.children || d._children ? "end" : "start"
       )
-      .attr("text-anchor", "middle")
       .attr("dominant-baseline", "middle")
       .attr("fill", this.DEFAULT_TEXT_COLOR)
       .attr("font-family", this.DEFAULT_FONT_FAMILY)
@@ -244,7 +243,7 @@ export class D3Tree {
           ? -this.NODE_TEXT_OFFSET_X
           : this.NODE_TEXT_OFFSET_X
       )
-      .style("fill-opacity", 0);
+      .attr("fill-opacity", 0);
     this.nodeFatherNameTextDom = this.nodeTextDom
       .append("tspan")
       .attr("fill", this.DEFAULT_IGNORED_TEXT_COLOR)
@@ -281,7 +280,7 @@ export class D3Tree {
       .attr("y", 0)
       .attr("width", 0)
       .attr("height", 0)
-      .style("transform", (d) => {
+      .attr("transform", (d) => {
         return d.children ? "rotate(180deg)" : "rotate(0deg)";
       })
       .on("click", throttle(this.clickNodeArrowButton(), this.CLICK_DALEY));
@@ -298,7 +297,7 @@ export class D3Tree {
       .attr("y", () => -this.ICON_SIZE / 2)
       .attr("width", this.ICON_SIZE)
       .attr("height", this.ICON_SIZE)
-      .style("transform", (d) =>
+      .attr("transform", (d) =>
         d.children ? "rotate(180deg)" : "rotate(0deg)"
       );
   }
@@ -317,12 +316,12 @@ export class D3Tree {
       .select("text")
       .transition()
       .duration(this.DURATION_TIME)
-      .style("fill-opacity", 1);
+      .attr("fill-opacity", 1);
     this.nodeEnter
       .transition()
       .duration(this.DURATION_TIME)
       .attr("transform", (d) => "translate(" + d.y + "," + d.x + ")")
-      .style("fill-opacity", 1);
+      .attr("fill-opacity", 1);
   }
   nodesExit(source) {
     const x = source ? source.y : this.root.y0;
@@ -343,14 +342,14 @@ export class D3Tree {
       .attr("height", 0);
   }
   nodesExitName() {
-    this.nodeExit.select("text").style("fill-opacity", 0);
+    this.nodeExit.select("text").attr("fill-opacity", 0);
   }
   nodesExitArrowButton() {
     this.nodeExit
       .select("image.arrowButton")
       .transition()
       .duration(this.DURATION_TIME)
-      .style("transform", (d) =>
+      .attr("transform", (d) =>
         d.children ? "rotate(180deg)" : "rotate(0deg)"
       );
   }
@@ -493,15 +492,15 @@ export class D3Tree {
           }
         }
       })
-      .style("fill", (d) => {
+      .attr("fill", (d) => {
         return this.NODE_HIGHLIGHT_COLOR;
       })
-      .style("fill-opacity", (d) => {
+      .attr("fill-opacity", (d) => {
         return 1;
       })
       .transition()
       .duration(this.DURATION_TIME * 2)
-      .style("fill", (d) => {
+      .attr("fill", (d) => {
         return this.DEFAULT_TEXT_COLOR;
       });
   }
