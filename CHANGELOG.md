@@ -1,3 +1,18 @@
+## [1.1.5](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.4...v1.1.5) (2022-03-01)
+
+
+### Features
+
+* show the dir name of index file in treeview ([29c456c](https://github.com/sz-p/vscode-dependencyGraph/commit/29c456c6ac036ceb16547518186f8c164dcc091f))
+
+
+### Performance Improvements
+
+* Increase node spacing ([df35331](https://github.com/sz-p/vscode-dependencyGraph/commit/df35331d636314da9f464d726f328153e8d0a35d))
+* use svg attributes instead of styles ([a1fc21b](https://github.com/sz-p/vscode-dependencyGraph/commit/a1fc21bc4faca87865e96d99105f192bce127ce2))
+
+
+
 ## [1.1.4](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.3...v1.1.4) (2021-11-11)
 
 
