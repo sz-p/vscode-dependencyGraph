@@ -8,13 +8,19 @@ const waitTime = function (waitTime: number) {
     setTimeout(resolve, waitTime || 0);
   })
 }
+const messagesQueue = [] as Msg[];
 export const postMessage = async function (msg: Msg) {
   if (global.webViewPanel) {
-    // postMessage is not real async just wait more 500ms
+    messagesQueue.push(msg)
     await waitTime(500)
-    const postMessageStatus = await global.webViewPanel.webview.postMessage(msg);
-    if (!postMessageStatus) {
-      onError(NO_WEBVIEW_PANEL);
+    while (messagesQueue.length) {
+      let ms = messagesQueue.pop();
+      // postMessage is not real async just wait more 500ms
+      const postMessageStatus = await global.webViewPanel.webview.postMessage(ms);
+      await waitTime(500)
+      if (!postMessageStatus) {
+        onError(NO_WEBVIEW_PANEL);
+      }
     }
   } else {
     onError(NO_WEBVIEW_PANEL);
