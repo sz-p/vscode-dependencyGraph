@@ -92,6 +92,8 @@ export const command_reOpenView = vscode.commands.registerCommand(
   (fileName, fileData) => {
     if (global.dependencyTreeData) {
       reOpenWebView(global.dependencyTreeData.dependencyTreeData);
+    } else {
+      reOpenWebView(undefined);
     }
   }
 );
