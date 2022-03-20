@@ -1,3 +1,17 @@
+## [1.1.6](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.5...v1.1.6) (2022-03-20)
+
+
+### Bug Fixes
+
+* [#20](https://github.com/sz-p/vscode-dependencyGraph/issues/20) post message use messagesQueue to fix async error ([7264a73](https://github.com/sz-p/vscode-dependencyGraph/commit/7264a739b319c8ff4a2e030df0be424a2c31ac91))
+
+
+### Features
+
+* WebView can still be opened in case of dependency tree analysis error ([0bf6b8f](https://github.com/sz-p/vscode-dependencyGraph/commit/0bf6b8f0f0e30eb7d165d03a97a62cb499f5017b))
+
+
+
 ## [1.1.5](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.4...v1.1.5) (2022-03-01)
 
 
