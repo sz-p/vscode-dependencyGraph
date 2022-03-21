@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+    "outDir":"../../outExtension",
 		"module": "ES6",
 		"target": "es6",
 		"lib": [
@@ -7,12 +8,9 @@
 		],
     "composite": true,
 		"sourceMap": true,
-		"strict": true,
+		"strict": true
 	},
 	"exclude": [
-		"node_modules",
-		".vscode-test",
-		"./src/webView/**/*",
-    "./tests/**/*"
+		"node_modules"
 	]
 }

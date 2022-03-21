@@ -17,6 +17,7 @@
 		"node_modules",
 		".vscode-test",
 		"./src/webView/**/*",
-    "./tests/**/*"
+    "./tests/**/*",
+    "./packages/**/*"
 	]
 }
