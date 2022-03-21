@@ -5,11 +5,11 @@ module.exports = function (api) {
     "@babel/preset-env",
     // 将 jsx 代码解析成通用代码
     "@babel/preset-react",
+    "es2015",
+    "es2016",
   ];
   const sourceType = "unambiguous";
-  const plugins =  [
-    "@babel/plugin-transform-runtime"
-  ]
+  const plugins = ["@babel/plugin-transform-runtime"];
   return {
     presets,
     sourceType,

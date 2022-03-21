@@ -8,7 +8,6 @@
 		],
 		"sourceMap": true,
 		"rootDirs": ["src", "packages/*"],
-		"strict": true,
 	},
   "references": [{
     "path": "./packages/dependency-tree"
