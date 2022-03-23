@@ -19,6 +19,7 @@ const statusView = function (props) {
 
   useEffect(() => {
     if (viewHash) {
+      setError(false);
       doms = [<WaitingView key="WaitingView" />];
       setDoms(doms);
     }
