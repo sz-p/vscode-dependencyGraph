@@ -21,6 +21,7 @@ importers:
       '@types/react-dom': ^16.9.8
       '@types/vscode': ^1.41.0
       '@uifabric/react-hooks': ^7.14.0
+      '@vscode/test-electron': ^1.2.2
       ast-types: ^0.14.2
       babel-loader: ^8.2.2
       babylon: ^6.18.0
@@ -34,6 +35,7 @@ importers:
       html-webpack-plugin: ^4.3.0
       jsdom: ^16.4.0
       json-loader: ^0.5.7
+      json5: ^2.2.1
       less: ^4.1.1
       less-loader: 7.3.0
       lodash: ^4.17.21
@@ -52,7 +54,7 @@ importers:
       redux: ^4.0.5
       redux-actions: ^2.6.5
       redux-promise: ^0.6.0
-      reset-commit-date: ^1.1.0
+      reset-commit-date: ^1.1.1
       save-svg-as-png: ^1.4.17
       string-random: ^0.1.3
       style-loader: ^1.2.1
@@ -62,7 +64,6 @@ importers:
       tslint: ^5.20.0
       typescript: ^3.6.4
       url-loader: ^4.1.1
-      vscode-test: ^1.2.2
       vue: 2.6.12
       vue-template-compiler: 2.6.12
       webpack: ^5.46.0
@@ -83,6 +84,7 @@ importers:
       enhanced-resolve: registry.npmmirror.com/enhanced-resolve/5.8.2
       file-loader: registry.npmmirror.com/file-loader/6.2.0_webpack@5.70.0
       jsdom: registry.npmmirror.com/jsdom/16.7.0
+      json5: registry.npmmirror.com/json5/2.2.1
       less: registry.npmmirror.com/less/4.1.2
       less-loader: registry.npmmirror.com/less-loader/7.3.0_less@4.1.2+webpack@5.70.0
       lodash: registry.npmmirror.com/lodash/4.17.21
@@ -99,7 +101,7 @@ importers:
       redux: registry.npmmirror.com/redux/4.1.2
       redux-actions: registry.npmmirror.com/redux-actions/2.6.5
       redux-promise: registry.npmmirror.com/redux-promise/0.6.0
-      reset-commit-date: registry.npmmirror.com/reset-commit-date/1.1.0
+      reset-commit-date: registry.npmmirror.com/reset-commit-date/1.1.1
       save-svg-as-png: registry.npmmirror.com/save-svg-as-png/1.4.17
       string-random: registry.npmmirror.com/string-random/0.1.3
       ts-mocha: registry.npmmirror.com/ts-mocha/8.0.0_mocha@6.2.3
@@ -116,6 +118,7 @@ importers:
       '@types/mocha': registry.npmmirror.com/@types/mocha/5.2.7
       '@types/node': registry.npmmirror.com/@types/node/14.18.12
       '@types/vscode': registry.npmmirror.com/@types/vscode/1.65.0
+      '@vscode/test-electron': registry.npmmirror.com/@vscode/test-electron/1.6.2
       babel-loader: registry.npmmirror.com/babel-loader/8.2.3_fa907c5a4f16ccc493e21649ccc59574
       css-loader: registry.npmmirror.com/css-loader/4.3.0_webpack@5.70.0
       glob: registry.npmmirror.com/glob/7.2.0
@@ -128,7 +131,6 @@ importers:
       tsconfig-paths: registry.npmmirror.com/tsconfig-paths/3.14.0
       tslint: registry.npmmirror.com/tslint/5.20.1_typescript@3.9.10
       typescript: registry.npmmirror.com/typescript/3.9.10
-      vscode-test: registry.npmmirror.com/vscode-test/1.6.1
       webpack: registry.npmmirror.com/webpack/5.70.0
 
   packages/dependency-tree:
@@ -198,7 +200,7 @@ packages:
       convert-source-map: registry.npmmirror.com/convert-source-map/1.8.0
       debug: registry.npmmirror.com/debug/4.3.4
       gensync: registry.npmmirror.com/gensync/1.0.0-beta.2
-      json5: registry.npmmirror.com/json5/2.2.0
+      json5: registry.npmmirror.com/json5/2.2.1
       semver: registry.npmmirror.com/semver/6.3.0
     transitivePeerDependencies:
       - supports-color
@@ -2112,6 +2114,20 @@ packages:
       react-dom: registry.npmmirror.com/react-dom/16.14.0_react@16.14.0
       tslib: registry.npmmirror.com/tslib/1.14.1
     dev: false
+
+  registry.npmmirror.com/@vscode/test-electron/1.6.2:
+    resolution: {integrity: sha512-W01ajJEMx6223Y7J5yaajGjVs1QfW3YGkkOJHVKfAMEqNB1ZHN9wCcViehv5ZwVSSJnjhu6lYEYgwBdHtCxqhQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vscode/test-electron/-/test-electron-1.6.2.tgz}
+    name: '@vscode/test-electron'
+    version: 1.6.2
+    engines: {node: '>=8.9.3'}
+    dependencies:
+      http-proxy-agent: registry.npmmirror.com/http-proxy-agent/4.0.1
+      https-proxy-agent: registry.npmmirror.com/https-proxy-agent/5.0.0
+      rimraf: registry.npmmirror.com/rimraf/3.0.2
+      unzipper: registry.npmmirror.com/unzipper/0.10.11
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   registry.npmmirror.com/@webassemblyjs/ast/1.11.1:
     resolution: {integrity: sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@webassemblyjs/ast/-/ast-1.11.1.tgz}
@@ -4282,14 +4298,12 @@ packages:
     dependencies:
       minimist: registry.npmmirror.com/minimist/1.2.5
 
-  registry.npmmirror.com/json5/2.2.0:
-    resolution: {integrity: sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/json5/-/json5-2.2.0.tgz}
+  registry.npmmirror.com/json5/2.2.1:
+    resolution: {integrity: sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/json5/-/json5-2.2.1.tgz}
     name: json5
-    version: 2.2.0
+    version: 2.2.1
     engines: {node: '>=6'}
     hasBin: true
-    dependencies:
-      minimist: registry.npmmirror.com/minimist/1.2.5
 
   registry.npmmirror.com/just-curry-it/3.2.1:
     resolution: {integrity: sha512-Q8206k8pTY7krW32cdmPsP+DqqLgWx/hYPSj9/+7SYqSqz7UuwPbfSe07lQtvuuaVyiSJveXk0E5RydOuWwsEg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/just-curry-it/-/just-curry-it-3.2.1.tgz}
@@ -4395,7 +4409,7 @@ packages:
     dependencies:
       big.js: registry.npmmirror.com/big.js/5.2.2
       emojis-list: registry.npmmirror.com/emojis-list/3.0.0
-      json5: registry.npmmirror.com/json5/2.2.0
+      json5: registry.npmmirror.com/json5/2.2.1
 
   registry.npmmirror.com/locate-path/3.0.0:
     resolution: {integrity: sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/locate-path/-/locate-path-3.0.0.tgz}
@@ -5470,10 +5484,10 @@ packages:
     version: 2.0.0
     dev: true
 
-  registry.npmmirror.com/reset-commit-date/1.1.0:
-    resolution: {integrity: sha512-OnEUqGq/fgtsfG2sgFddAbY7TlzvpBTF2zr2fVYMSrg1A222YYOGJ98rgoVE3kXQ7OlKQC3Y0Bf8sJIjKB6COA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/reset-commit-date/-/reset-commit-date-1.1.0.tgz}
+  registry.npmmirror.com/reset-commit-date/1.1.1:
+    resolution: {integrity: sha512-kvgHXcdZXh5wvYK2wc02XxlreJrsB/VxegFWF3ikWY2HSv0Be7QC4pHUK1+GV9jxEDEoxLsm3w/Qp/atu5rwBQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/reset-commit-date/-/reset-commit-date-1.1.1.tgz}
     name: reset-commit-date
-    version: 1.1.0
+    version: 1.1.1
     requiresBuild: true
     dev: false
 
@@ -6292,21 +6306,6 @@ packages:
     dependencies:
       spdx-correct: registry.npmmirror.com/spdx-correct/3.1.1
       spdx-expression-parse: registry.npmmirror.com/spdx-expression-parse/3.0.1
-    dev: true
-
-  registry.npmmirror.com/vscode-test/1.6.1:
-    resolution: {integrity: sha512-086q88T2ca1k95mUzffvbzb7esqQNvJgiwY4h29ukPhFo8u+vXOOmelUoU5EQUHs3Of8+JuQ3oGdbVCqaxuTXA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vscode-test/-/vscode-test-1.6.1.tgz}
-    name: vscode-test
-    version: 1.6.1
-    engines: {node: '>=8.9.3'}
-    deprecated: This package has been renamed to @vscode/test-electron, please update to the new name
-    dependencies:
-      http-proxy-agent: registry.npmmirror.com/http-proxy-agent/4.0.1
-      https-proxy-agent: registry.npmmirror.com/https-proxy-agent/5.0.0
-      rimraf: registry.npmmirror.com/rimraf/3.0.2
-      unzipper: registry.npmmirror.com/unzipper/0.10.11
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   registry.npmmirror.com/vue-template-compiler/2.6.12:
