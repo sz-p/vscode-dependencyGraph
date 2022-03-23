@@ -12,7 +12,7 @@ import {
   MsgKey,
 } from "./utils/message/messagesKeys";
 import { msgGetSavedData } from "./utils/message/messages";
-import * as stringRandom from "string-random";
+import stringRandom from "string-random";
 import { setData, isSavedData } from "./utils/fileSystem/data";
 import { thenAbleWithTimeout } from "./utils/utils";
 import { getCurrentFolderPath } from "./utils/getCurrentFolderPath"
