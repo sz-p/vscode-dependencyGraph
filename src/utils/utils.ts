@@ -2,7 +2,7 @@
  * @introduction util functions
  */
 import * as fs from "fs";
-import JSON5 from "json5";
+import * as JSON5 from "json5";
 export const beforeSetDataToLocal = function (dirPath: string): void {
   if (!isPathExists(dirPath + "/.dependencygraph")) {
     createLocalFileDir(dirPath);

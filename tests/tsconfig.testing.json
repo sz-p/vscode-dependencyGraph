@@ -1,5 +1,9 @@
 {
-	"compilerOptions": {
+  "ts-node": {
+    "files": true
+  },
+  "include": [ "../src/**/*","../packages/**/*","../tests/**/*"],
+  "compilerOptions": {
     "allowJs": true,
 		"module": "commonjs",
 		"target": "es6",
@@ -7,11 +11,15 @@
 		"lib": [
 			"es6"
 		],
-		"sourceMap": true,
-		"strict": true,
-    "baseUrl": "../",
+		"sourceMap": false,
+    "baseUrl": "./",
     "paths": {
-      "@src/*": ["src/*"]
-    }
-	}
+      "@src/*": ["../src/*"]
+    },
+    "typeRoots": ["../node_modules/@types"]
+	},
+  "exclude": [
+		"../node_modules/**/*",
+    "./fileSystemTester/**/*"
+	]
 }
