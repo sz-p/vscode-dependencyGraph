@@ -2,8 +2,6 @@
   "compilerOptions": {
     "baseUrl": "src",
     "outDir": "../../outWebView",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "lib": [
