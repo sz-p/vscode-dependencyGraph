@@ -40,7 +40,7 @@ export const getObjectFromJsonFile = function (
   if (!isPathExists(filePath)) return false;
   try {
     const fileString = fs.readFileSync(filePath, "utf8")
-    const jsonObj = JSON5.parse(fileString);
+    const jsonObj = JSON5.default.parse(fileString);
     return jsonObj
   } catch (e) {
     return false
