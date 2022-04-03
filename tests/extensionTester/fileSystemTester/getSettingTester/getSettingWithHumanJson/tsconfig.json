@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    // add comment
+    "baseUrl": "./",
+    "paths": {
+      "@": ["src"]
+    },
+    // add more comma
+  }
+}
