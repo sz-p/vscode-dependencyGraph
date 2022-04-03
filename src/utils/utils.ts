@@ -2,7 +2,10 @@
  * @introduction util functions
  */
 import * as fs from "fs";
-import * as JSON5 from "json5";
+let JSON5: any = require("json5");
+if (JSON5.default) {
+  JSON5 = JSON5.default
+}
 export const beforeSetDataToLocal = function (dirPath: string): void {
   if (!isPathExists(dirPath + "/.dependencygraph")) {
     createLocalFileDir(dirPath);
@@ -40,7 +43,7 @@ export const getObjectFromJsonFile = function (
   if (!isPathExists(filePath)) return false;
   try {
     const fileString = fs.readFileSync(filePath, "utf8")
-    const jsonObj = JSON5.default.parse(fileString);
+    const jsonObj = JSON5.parse(fileString);
     return jsonObj
   } catch (e) {
     return false

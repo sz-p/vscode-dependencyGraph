@@ -1,12 +1,13 @@
 {
 	"compilerOptions": {
-    "esModuleInterop": true,
+    "esModuleInterop": false,
 		"module": "commonjs",
 		"target": "es6",
 		"outDir": "outExtension",
 		"lib": [
 			"es6"
 		],
+    "allowJs": true,
 		"sourceMap": true,
 		"rootDirs": ["src", "packages/*"],
 	},
@@ -19,6 +20,8 @@
 		".vscode-test",
 		"./src/webView/**/*",
     "./tests/**/*",
-    "./packages/**/*"
+    "./packages/**/*",
+    "./outExtension/**/*",
+    "./outWebView/**/*",
 	]
 }

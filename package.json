@@ -134,13 +134,15 @@
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
     "typescript": "^3.6.4",
-    "webpack": "^5.46.0"
+    "webpack": "^5.46.0",
+    "cross-env": "^7.0.3"
   },
   "publisher": "sz-p",
   "dependencies": {
     "@fluentui/react": "^7.137.1",
     "@packages/dependency-tree": "workspace:^0.0.0",
     "@types/chai": "^4.2.15",
+    "@types/json5": "^2.2.0",
     "@types/lodash": "^4.14.165",
     "@types/md5": "^2.2.1",
     "@types/react": "^16.9.46",
