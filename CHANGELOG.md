@@ -1,3 +1,13 @@
+## [1.1.7](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.6...v1.1.7) (2022-04-04)
+
+
+### Bug Fixes
+
+* [#20](https://github.com/sz-p/vscode-dependencyGraph/issues/20) fix block extension when get error json ([410bc67](https://github.com/sz-p/vscode-dependencyGraph/commit/410bc6722db5ce8c1616fe81d14f50103980b77e))
+* [#22](https://github.com/sz-p/vscode-dependencyGraph/issues/22) circularStructure node have the same nodeId ([1528e1e](https://github.com/sz-p/vscode-dependencyGraph/commit/1528e1e53f958ea5710882213c7ef85c3a0b2593))
+* not use units in svg transforms ([2687c05](https://github.com/sz-p/vscode-dependencyGraph/commit/2687c0594f9cf2f6e480c80f3894d0e419f0e7aa))
+* statusView not show folderAndEntry view  when get error more than once ([39a248b](https://github.com/sz-p/vscode-dependencyGraph/commit/39a248bbe59179608bfee27198b49404f6401625))
+
 ## [1.1.6](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.5...v1.1.6) (2022-03-20)
 
 
