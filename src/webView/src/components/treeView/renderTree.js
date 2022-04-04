@@ -281,7 +281,7 @@ export class D3Tree {
       .attr("width", 0)
       .attr("height", 0)
       .attr("transform", (d) => {
-        return d.children ? "rotate(180deg)" : "rotate(0deg)";
+        return d.children ? "rotate(180)" : "rotate(0)";
       })
       .on("click", throttle(this.clickNodeArrowButton(), this.CLICK_DALEY));
   }
@@ -298,7 +298,7 @@ export class D3Tree {
       .attr("width", this.ICON_SIZE)
       .attr("height", this.ICON_SIZE)
       .attr("transform", (d) =>
-        d.children ? "rotate(180deg)" : "rotate(0deg)"
+        d.children ? "rotate(180)" : "rotate(0)"
       );
   }
   enterNodeIcon() {
@@ -350,7 +350,7 @@ export class D3Tree {
       .transition()
       .duration(this.DURATION_TIME)
       .attr("transform", (d) =>
-        d.children ? "rotate(180deg)" : "rotate(0deg)"
+        d.children ? "rotate(180)" : "rotate(0)"
       );
   }
   getLinks() {
