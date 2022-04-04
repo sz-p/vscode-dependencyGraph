@@ -1,0 +1,166 @@
+{
+  "absolutePath": "%DIR-PATH%\\src\\index.js",
+  "ancestors": [],
+  "children": [
+    {
+      "absolutePath": "%DIR-PATH%\\src\\App.js",
+      "ancestors": [
+        "%DIR-PATH%\\src\\index.js"
+      ],
+      "extension": ".js",
+      "name": "App.js",
+      "relativePath": "\\src\\App.js",
+      "children": [
+        {
+          "absolutePath": "%DIR-PATH%\\src\\a.js",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\App.js"
+          ],
+          "extension": ".js",
+          "name": "a.js",
+          "relativePath": "\\src\\a.js",
+          "children": [
+            {
+              "absolutePath": "%DIR-PATH%\\src\\App.js",
+              "ancestors": [
+                "%DIR-PATH%\\src\\index.js",
+                "%DIR-PATH%\\src\\App.js",
+                "%DIR-PATH%\\src\\a.js"
+              ],
+              "extension": ".js",
+              "name": "App.js",
+              "relativePath": "\\src\\App.js",
+              "children": [
+                {
+                  "name": "circularStructure",
+                  "fileID": "circularStructure",
+                  "circularStructure": true,
+                  "absolutePath": "circularStructure",
+                  "relativePath": "circularStructure",
+                  "extension": "",
+                  "ancestors": [
+                    "%DIR-PATH%\\src\\index.js",
+                    "%DIR-PATH%\\src\\App.js",
+                    "%DIR-PATH%\\src\\a.js"
+                  ],
+                  "children": [],
+                  "type": "circularStructure",
+                  "analysed": false,
+                  "fileDescription": {
+                    "introduction": "Circular Structure",
+                    "description": "Loop dependence \\n The previous node was existed in dependence chain"
+                  }
+                }
+              ],
+              "fileDescription": {},
+              "type": "javascript",
+              "language": "javascript",
+              "analysed": true,
+              "lines": 3,
+              "functions": []
+            }
+          ],
+          "fileDescription": {},
+          "type": "javascript",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 2,
+          "functions": []
+        },
+        {
+          "absolutePath": "%DIR-PATH%\\src\\b.js",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\App.js"
+          ],
+          "extension": ".js",
+          "name": "b.js",
+          "relativePath": "\\src\\b.js",
+          "children": [
+            {
+              "absolutePath": "%DIR-PATH%\\src\\a.js",
+              "ancestors": [
+                "%DIR-PATH%\\src\\index.js",
+                "%DIR-PATH%\\src\\App.js",
+                "%DIR-PATH%\\src\\b.js"
+              ],
+              "extension": ".js",
+              "name": "a.js",
+              "relativePath": "\\src\\a.js",
+              "children": [
+                {
+                  "absolutePath": "%DIR-PATH%\\src\\App.js",
+                  "ancestors": [
+                    "%DIR-PATH%\\src\\index.js",
+                    "%DIR-PATH%\\src\\App.js",
+                    "%DIR-PATH%\\src\\b.js",
+                    "%DIR-PATH%\\src\\a.js"
+                  ],
+                  "extension": ".js",
+                  "name": "App.js",
+                  "relativePath": "\\src\\App.js",
+                  "children": [
+                    {
+                      "name": "circularStructure",
+                      "fileID": "circularStructure",
+                      "circularStructure": true,
+                      "absolutePath": "circularStructure",
+                      "relativePath": "circularStructure",
+                      "extension": "",
+                      "ancestors": [
+                        "%DIR-PATH%\\src\\index.js",
+                        "%DIR-PATH%\\src\\App.js",
+                        "%DIR-PATH%\\src\\a.js"
+                      ],
+                      "children": [],
+                      "type": "circularStructure",
+                      "analysed": false,
+                      "fileDescription": {
+                        "introduction": "Circular Structure",
+                        "description": "Loop dependence \\n The previous node was existed in dependence chain"
+                      }
+                    }
+                  ],
+                  "fileDescription": {},
+                  "type": "javascript",
+                  "language": "javascript",
+                  "analysed": true,
+                  "lines": 3,
+                  "functions": []
+                }
+              ],
+              "fileDescription": {},
+              "type": "javascript",
+              "language": "javascript",
+              "analysed": true,
+              "lines": 2,
+              "functions": []
+            }
+          ],
+          "fileDescription": {},
+          "type": "javascript",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 2,
+          "functions": []
+        }
+      ],
+      "fileDescription": {},
+      "type": "javascript",
+      "language": "javascript",
+      "analysed": true,
+      "lines": 3,
+      "functions": []
+    }
+  ],
+  "extension": ".js",
+  "name": "index.js",
+  "relativePath": "\\src\\index.js",
+  "fileDescription": {},
+  "type": "javascript",
+  "language": "javascript",
+  "analysed": true,
+  "lines": 2,
+  "functions": []
+}

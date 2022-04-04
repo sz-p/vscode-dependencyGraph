@@ -16,8 +16,12 @@
     "paths": {
       "@src/*": ["../src/*"]
     },
+    "rootDirs": ["../src", "../packages/*"],
     "typeRoots": ["../node_modules/@types"]
 	},
+  "references": [{
+    "path": "./packages/dependency-tree"
+  }],
   "exclude": [
 		"../node_modules/**/*",
     "./fileSystemTester/**/*"
