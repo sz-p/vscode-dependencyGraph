@@ -7,13 +7,18 @@ import * as md5 from "md5";
 import { DependencyHash } from "@packages/dependency-tree";
 import { DependencyTreeData } from "./dependencyTreeData.d";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
+import * as stringRandom from "string-random";
 
 const getFileID = function (dependencyTreeData: DependencyTreeData) {
   return md5(dependencyTreeData.relativePath);
 };
 const getNodeID = function (dependencyTreeData: DependencyTreeData) {
   let ancestors = [].concat(dependencyTreeData.ancestors as []) as string[];
-  ancestors.push(dependencyTreeData.relativePath);
+  if (dependencyTreeData.relativePath === 'circularStructure') {
+    ancestors.push(dependencyTreeData.relativePath += stringRandom());
+  } else {
+    ancestors.push(dependencyTreeData.relativePath);
+  }
   return md5(ancestors.toString());
 };
 const getAncestors = function (
