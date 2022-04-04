@@ -150,7 +150,7 @@ export class DependencyTree {
       ) as DependencyTreeData[];
       while (stack.length) {
         let node = stack.pop() as DependencyTreeData;
-        node.ancestors.splice(nodeDeep, 0, absolutePath);
+        node.ancestors.splice(0, nodeDeep, ...dependencyChildrenAncestors, dependencyChildren.absolutePath);
         stack = stack.concat(node.children);
       }
     }

@@ -15,7 +15,7 @@ const getFileID = function (dependencyTreeData: DependencyTreeData) {
 const getNodeID = function (dependencyTreeData: DependencyTreeData) {
   let ancestors = [].concat(dependencyTreeData.ancestors as []) as string[];
   if (dependencyTreeData.relativePath === 'circularStructure') {
-    ancestors.push(dependencyTreeData.relativePath += stringRandom());
+    ancestors.push(dependencyTreeData.relativePath);
   } else {
     ancestors.push(dependencyTreeData.relativePath);
   }
