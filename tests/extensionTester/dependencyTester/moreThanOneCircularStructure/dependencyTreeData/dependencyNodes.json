@@ -43,7 +43,8 @@
                     "ancestors": [
                       "%DIR-PATH%\\src\\index.js",
                       "%DIR-PATH%\\src\\App.js",
-                      "%DIR-PATH%\\src\\a.js"
+                      "%DIR-PATH%\\src\\a.js",
+                      "%DIR-PATH%\\src\\App.js"
                     ],
                     "children": [],
                     "type": "circularStructure",
@@ -112,7 +113,9 @@
                         "ancestors": [
                           "%DIR-PATH%\\src\\index.js",
                           "%DIR-PATH%\\src\\App.js",
-                          "%DIR-PATH%\\src\\a.js"
+                          "%DIR-PATH%\\src\\b.js",
+                          "%DIR-PATH%\\src\\a.js",
+                          "%DIR-PATH%\\src\\App.js"
                         ],
                         "children": [],
                         "type": "circularStructure",
@@ -205,7 +208,8 @@
                 "ancestors": [
                   "%DIR-PATH%\\src\\index.js",
                   "%DIR-PATH%\\src\\App.js",
-                  "%DIR-PATH%\\src\\a.js"
+                  "%DIR-PATH%\\src\\a.js",
+                  "%DIR-PATH%\\src\\App.js"
                 ],
                 "children": [],
                 "type": "circularStructure",
@@ -274,7 +278,9 @@
                     "ancestors": [
                       "%DIR-PATH%\\src\\index.js",
                       "%DIR-PATH%\\src\\App.js",
-                      "%DIR-PATH%\\src\\a.js"
+                      "%DIR-PATH%\\src\\b.js",
+                      "%DIR-PATH%\\src\\a.js",
+                      "%DIR-PATH%\\src\\App.js"
                     ],
                     "children": [],
                     "type": "circularStructure",
@@ -347,7 +353,8 @@
             "ancestors": [
               "%DIR-PATH%\\src\\index.js",
               "%DIR-PATH%\\src\\App.js",
-              "%DIR-PATH%\\src\\a.js"
+              "%DIR-PATH%\\src\\a.js",
+              "%DIR-PATH%\\src\\App.js"
             ],
             "children": [],
             "type": "circularStructure",
@@ -416,7 +423,9 @@
                 "ancestors": [
                   "%DIR-PATH%\\src\\index.js",
                   "%DIR-PATH%\\src\\App.js",
-                  "%DIR-PATH%\\src\\a.js"
+                  "%DIR-PATH%\\src\\b.js",
+                  "%DIR-PATH%\\src\\a.js",
+                  "%DIR-PATH%\\src\\App.js"
                 ],
                 "children": [],
                 "type": "circularStructure",
@@ -460,7 +469,8 @@
     "ancestors": [
       "%DIR-PATH%\\src\\index.js",
       "%DIR-PATH%\\src\\App.js",
-      "%DIR-PATH%\\src\\a.js"
+      "%DIR-PATH%\\src\\a.js",
+      "%DIR-PATH%\\src\\App.js"
     ],
     "children": [],
     "type": "circularStructure",

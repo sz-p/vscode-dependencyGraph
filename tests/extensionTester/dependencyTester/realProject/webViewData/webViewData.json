@@ -49,13 +49,11 @@
           "loc": {
             "start": {
               "line": 17,
-              "column": 0,
-              "index": 511
+              "column": 0
             },
             "end": {
               "line": 23,
-              "column": 2,
-              "index": 765
+              "column": 2
             }
           },
           "code": "const createLocalStore = function() {};",
@@ -69,13 +67,11 @@
           "loc": {
             "start": {
               "line": 26,
-              "column": 0,
-              "index": 808
+              "column": 0
             },
             "end": {
               "line": 37,
-              "column": 1,
-              "index": 1031
+              "column": 1
             }
           },
           "export": false,
@@ -128,13 +124,11 @@
               "loc": {
                 "start": {
                   "line": 9,
-                  "column": 0,
-                  "index": 274
+                  "column": 0
                 },
                 "end": {
                   "line": 17,
-                  "column": 1,
-                  "index": 494
+                  "column": 1
                 }
               },
               "export": false,
@@ -152,13 +146,11 @@
               "loc": {
                 "start": {
                   "line": 18,
-                  "column": 0,
-                  "index": 495
+                  "column": 0
                 },
                 "end": {
                   "line": 26,
-                  "column": 2,
-                  "index": 631
+                  "column": 2
                 }
               },
               "code": "const mapStateToProps = state => {};",
@@ -213,13 +205,11 @@
                   "loc": {
                     "start": {
                       "line": 11,
-                      "column": 0,
-                      "index": 298
+                      "column": 0
                     },
                     "end": {
                       "line": 122,
-                      "column": 1,
-                      "index": 3155
+                      "column": 1
                     }
                   },
                   "export": false,
@@ -237,13 +227,11 @@
                   "loc": {
                     "start": {
                       "line": 123,
-                      "column": 0,
-                      "index": 3156
+                      "column": 0
                     },
                     "end": {
                       "line": 131,
-                      "column": 2,
-                      "index": 3282
+                      "column": 2
                     }
                   },
                   "code": "const mapStateToProps = state => {};",
@@ -322,13 +310,11 @@
                   "loc": {
                     "start": {
                       "line": 7,
-                      "column": 0,
-                      "index": 197
+                      "column": 0
                     },
                     "end": {
                       "line": 23,
-                      "column": 1,
-                      "index": 692
+                      "column": 1
                     }
                   },
                   "export": false,
@@ -346,13 +332,11 @@
                   "loc": {
                     "start": {
                       "line": 24,
-                      "column": 0,
-                      "index": 693
+                      "column": 0
                     },
                     "end": {
                       "line": 33,
-                      "column": 2,
-                      "index": 840
+                      "column": 2
                     }
                   },
                   "code": "const mapStateToProps = state => {};",
@@ -534,13 +518,11 @@
               "loc": {
                 "start": {
                   "line": 7,
-                  "column": 0,
-                  "index": 227
+                  "column": 0
                 },
                 "end": {
                   "line": 27,
-                  "column": 1,
-                  "index": 763
+                  "column": 1
                 }
               },
               "export": false,
@@ -574,13 +556,11 @@
                   "loc": {
                     "start": {
                       "line": 17,
-                      "column": 0,
-                      "index": 511
+                      "column": 0
                     },
                     "end": {
                       "line": 23,
-                      "column": 2,
-                      "index": 765
+                      "column": 2
                     }
                   },
                   "code": "const createLocalStore = function() {};",
@@ -594,13 +574,11 @@
                   "loc": {
                     "start": {
                       "line": 26,
-                      "column": 0,
-                      "index": 808
+                      "column": 0
                     },
                     "end": {
                       "line": 37,
-                      "column": 1,
-                      "index": 1031
+                      "column": 1
                     }
                   },
                   "export": false,
@@ -614,11 +592,12 @@
                 {
                   "name": "circularStructure",
                   "fileID": "8e97a951e6756c2d5cba86d8c4f60ff0",
-                  "nodeID": "061e2e1cd04409b09e8e1f428dc32c5e",
+                  "nodeID": "1bb43d5c0f12be6c0861c8e94ddf1074",
                   "ancestors": [
                     "43351ecb56f3a7e10f80143f717fe4ea",
                     "413433565442f533b995159558e9c9dd",
-                    "183cc85f3d5b7f4150d10fcac3c597ab"
+                    "183cc85f3d5b7f4150d10fcac3c597ab",
+                    "413433565442f533b995159558e9c9dd"
                   ],
                   "fileDescription": {
                     "introduction": "Circular Structure",
@@ -661,13 +640,11 @@
                   "loc": {
                     "start": {
                       "line": 8,
-                      "column": 0,
-                      "index": 189
+                      "column": 0
                     },
                     "end": {
                       "line": 10,
-                      "column": 2,
-                      "index": 248
+                      "column": 2
                     }
                   },
                   "code": "const returnMessage = function(params) {};",
@@ -685,13 +662,11 @@
                   "loc": {
                     "start": {
                       "line": 11,
-                      "column": 0,
-                      "index": 249
+                      "column": 0
                     },
                     "end": {
                       "line": 11,
-                      "column": 93,
-                      "index": 342
+                      "column": 93
                     }
                   },
                   "code": "export const change_data = params => createAction(type.change_data, returnMessage)(params);",
@@ -709,13 +684,11 @@
                   "loc": {
                     "start": {
                       "line": 12,
-                      "column": 0,
-                      "index": 343
+                      "column": 0
                     },
                     "end": {
                       "line": 12,
-                      "column": 103,
-                      "index": 446
+                      "column": 103
                     }
                   },
                   "code": "export const change_dimension = params => createAction(type.change_dimension, returnMessage)(params);",
@@ -773,13 +746,11 @@
               "loc": {
                 "start": {
                   "line": 13,
-                  "column": 0,
-                  "index": 373
+                  "column": 0
                 },
                 "end": {
                   "line": 37,
-                  "column": 2,
-                  "index": 1079
+                  "column": 2
                 }
               },
               "code": "const actionsCase = () => {};",
@@ -797,13 +768,11 @@
               "loc": {
                 "start": {
                   "line": 38,
-                  "column": 0,
-                  "index": 1080
+                  "column": 0
                 },
                 "end": {
                   "line": 45,
-                  "column": 1,
-                  "index": 1300
+                  "column": 1
                 }
               },
               "export": false,
@@ -953,13 +922,11 @@
           "loc": {
             "start": {
               "line": 23,
-              "column": 0,
-              "index": 924
+              "column": 0
             },
             "end": {
               "line": 55,
-              "column": 1,
-              "index": 2315
+              "column": 1
             }
           },
           "export": true,
@@ -980,13 +947,11 @@
           "loc": {
             "start": {
               "line": 57,
-              "column": 0,
-              "index": 2319
+              "column": 0
             },
             "end": {
               "line": 99,
-              "column": 1,
-              "index": 3929
+              "column": 1
             }
           },
           "export": false,
@@ -1007,13 +972,11 @@
           "loc": {
             "start": {
               "line": 101,
-              "column": 0,
-              "index": 3933
+              "column": 0
             },
             "end": {
               "line": 127,
-              "column": 1,
-              "index": 4902
+              "column": 1
             }
           },
           "export": false,
@@ -1027,13 +990,11 @@
           "loc": {
             "start": {
               "line": 129,
-              "column": 0,
-              "index": 4906
+              "column": 0
             },
             "end": {
               "line": 135,
-              "column": 1,
-              "index": 5084
+              "column": 1
             }
           },
           "export": true,
