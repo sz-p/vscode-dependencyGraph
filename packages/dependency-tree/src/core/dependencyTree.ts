@@ -150,7 +150,11 @@ export class DependencyTree {
       ) as DependencyTreeData[];
       while (stack.length) {
         let node = stack.pop() as DependencyTreeData;
-        node.ancestors.splice(0, nodeDeep, ...dependencyChildrenAncestors, dependencyChildren.absolutePath);
+        if (node.name === "circularStructure") {
+          node.ancestors.splice(0, nodeDeep, ...dependencyChildrenAncestors, dependencyChildren.absolutePath);
+        } else {
+          node.ancestors.splice(0, nodeDeep, ...dependencyChildrenAncestors);
+        }
         stack = stack.concat(node.children);
       }
     }
