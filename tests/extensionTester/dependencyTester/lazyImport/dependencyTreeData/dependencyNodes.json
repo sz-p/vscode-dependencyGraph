@@ -1,0 +1,176 @@
+{
+  "%DIR-PATH%\\src\\index.js": {
+    "absolutePath": "%DIR-PATH%\\src\\index.js",
+    "ancestors": [],
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%\\src\\Home.vue",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js"
+        ],
+        "extension": ".vue",
+        "name": "Home.vue",
+        "relativePath": "\\src\\Home.vue",
+        "children": [],
+        "fileDescription": {},
+        "type": "vue",
+        "language": "javascript"
+      },
+      {
+        "absolutePath": "%DIR-PATH%\\src\\Category.vue",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js"
+        ],
+        "extension": ".vue",
+        "name": "Category.vue",
+        "relativePath": "\\src\\Category.vue",
+        "children": [],
+        "fileDescription": {},
+        "type": "vue",
+        "language": "javascript"
+      },
+      {
+        "absolutePath": "%DIR-PATH%\\src\\Shopcart.vue",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js"
+        ],
+        "extension": ".vue",
+        "name": "Shopcart.vue",
+        "relativePath": "\\src\\Shopcart.vue",
+        "children": [],
+        "fileDescription": {},
+        "type": "vue",
+        "language": "javascript"
+      },
+      {
+        "absolutePath": "%DIR-PATH%\\src\\Profile.vue",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js"
+        ],
+        "extension": ".vue",
+        "name": "Profile.vue",
+        "relativePath": "\\src\\Profile.vue",
+        "children": [],
+        "fileDescription": {},
+        "type": "vue",
+        "language": "javascript"
+      }
+    ],
+    "extension": ".js",
+    "name": "index.js",
+    "relativePath": "\\src\\index.js",
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 5,
+    "functions": [
+      {
+        "arrowFunction": true,
+        "params": [],
+        "name": "Home",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 40
+          }
+        },
+        "code": "const Home = () => import(\"./Home.vue\");",
+        "export": false
+      },
+      {
+        "arrowFunction": true,
+        "params": [],
+        "name": "Category",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 0
+          },
+          "end": {
+            "line": 2,
+            "column": 48
+          }
+        },
+        "code": "const Category = () => import(\"./Category.vue\");",
+        "export": false
+      },
+      {
+        "arrowFunction": true,
+        "params": [],
+        "name": "Shopcart",
+        "kind": "const",
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 3,
+            "column": 48
+          }
+        },
+        "code": "const Shopcart = () => import(\"./Shopcart.vue\");",
+        "export": false
+      }
+    ]
+  },
+  "%DIR-PATH%\\src\\Home.vue": {
+    "absolutePath": "%DIR-PATH%\\src\\Home.vue",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js"
+    ],
+    "extension": ".vue",
+    "name": "Home.vue",
+    "relativePath": "\\src\\Home.vue",
+    "children": [],
+    "fileDescription": {},
+    "type": "vue",
+    "language": "javascript"
+  },
+  "%DIR-PATH%\\src\\Category.vue": {
+    "absolutePath": "%DIR-PATH%\\src\\Category.vue",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js"
+    ],
+    "extension": ".vue",
+    "name": "Category.vue",
+    "relativePath": "\\src\\Category.vue",
+    "children": [],
+    "fileDescription": {},
+    "type": "vue",
+    "language": "javascript"
+  },
+  "%DIR-PATH%\\src\\Shopcart.vue": {
+    "absolutePath": "%DIR-PATH%\\src\\Shopcart.vue",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js"
+    ],
+    "extension": ".vue",
+    "name": "Shopcart.vue",
+    "relativePath": "\\src\\Shopcart.vue",
+    "children": [],
+    "fileDescription": {},
+    "type": "vue",
+    "language": "javascript"
+  },
+  "%DIR-PATH%\\src\\Profile.vue": {
+    "absolutePath": "%DIR-PATH%\\src\\Profile.vue",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js"
+    ],
+    "extension": ".vue",
+    "name": "Profile.vue",
+    "relativePath": "\\src\\Profile.vue",
+    "children": [],
+    "fileDescription": {},
+    "type": "vue",
+    "language": "javascript"
+  }
+}
