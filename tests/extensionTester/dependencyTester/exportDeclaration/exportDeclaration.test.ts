@@ -36,7 +36,7 @@ describe("dependencyTree(export declaration): get dependencyTree data", function
   });
 });
 // setDataToFile("./savedData.json", savedDataByCompute);
-setDataToFile("./webViewData.json", readData);
+// setDataToFile("./webViewData.json", readData);
 
 describe("dependencyTree(export declaration): get saved data", function () {
   it("jsonString", function () {

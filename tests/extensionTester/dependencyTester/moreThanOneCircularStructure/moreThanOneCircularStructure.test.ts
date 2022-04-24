@@ -29,11 +29,11 @@ const readData = getWebViewDataByCompute("moreThanOneCircularStructure", folderP
 const webViewData = getWebViewDataFromFile("moreThanOneCircularStructure");
 describe("dependencyTree(more than one circularStructure node): get dependencyTree data", function () {
   it("dependencyNodesData", function () {
-    setDataToFile("./dependencyNodes.json", dependencyNodes)
+    // setDataToFile("./dependencyNodes.json", dependencyNodes)
     expect(dependencyNodesData.length).to.equal(dependencyNodes.length);
   });
   it("dependencyTreeData", function () {
-    setDataToFile("./dependencyTree.json", dependencyTree)
+    // setDataToFile("./dependencyTree.json", dependencyTree)
     expect(dependencyTreeData.length).to.equal(dependencyTree.length);
   });
 });
@@ -42,14 +42,14 @@ describe("dependencyTree(more than one circularStructure node): get dependencyTr
 
 describe("dependencyTree(more than one circularStructure node): get saved data", function () {
   it("jsonString", function () {
-    setDataToFile("./savedData.json", savedDataByCompute)
+    // setDataToFile("./savedData.json", savedDataByCompute)
     expect(savedDataFromFile.length).to.equal(savedDataByCompute.length);
   });
 });
 
 describe("dependencyTree(more than one circularStructure node): get webView data", function () {
   it("dependencyTreeData", function () {
-    setDataToFile("./webViewData.json", readData)
+    // setDataToFile("./webViewData.json", readData)
     expect(readData.length).to.equal(webViewData.length);
   });
 });
