@@ -109,6 +109,29 @@ export const parser: Parser = function (
       }
       return false;
     },
+    //TODO perf with prev one
+    visitCallExpression(nodePath) {
+      let dependencyPath = undefined;
+      const node = nodePath.value;
+      if (node?.callee?.type === 'Import') {
+        if (node.arguments?.length && node.arguments[0]?.type === "StringLiteral") {
+          const expressionArgument = node.arguments[0];
+          try {
+            dependencyPath = resolve(dirName, expressionArgument.value);
+          } catch (e) {
+            resolveChildrenNodeError(expressionArgument.value, absolutePath);
+            return false;
+          }
+          if (typeof dependencyPath === "string") {
+            if (dependencyPath.includes("node_modules")) {
+              return false;
+            }
+            dependencies.push(dependencyPath);
+          }
+        }
+      }
+      return false
+    }
   });
   return dependencies;
 };
