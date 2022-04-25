@@ -1,0 +1,31 @@
+{
+  "absolutePath": "%DIR-PATH%\\src\\index.js",
+  "ancestors": [],
+  "children": [
+    {
+      "absolutePath": "%DIR-PATH%\\src\\middleNode.js",
+      "ancestors": [
+        "%DIR-PATH%\\src\\index.js"
+      ],
+      "extension": ".js",
+      "name": "middleNode.js",
+      "relativePath": "\\src\\middleNode.js",
+      "children": [],
+      "fileDescription": {},
+      "type": "javascript",
+      "language": "javascript",
+      "analysed": true,
+      "lines": 1,
+      "functions": []
+    }
+  ],
+  "extension": ".js",
+  "name": "index.js",
+  "relativePath": "\\src\\index.js",
+  "fileDescription": {},
+  "type": "javascript",
+  "language": "javascript",
+  "analysed": true,
+  "lines": 2,
+  "functions": []
+}
