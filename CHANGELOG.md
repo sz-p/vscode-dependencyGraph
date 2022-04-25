@@ -1,3 +1,12 @@
+## [1.1.9](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.8...v1.1.9) (2022-04-26)
+
+
+### Features
+
+* [#26](https://github.com/sz-p/vscode-dependencyGraph/issues/26) pick up inline requires ([aefcb4c](https://github.com/sz-p/vscode-dependencyGraph/commit/aefcb4c401041cee217bacb329e09a6e187194b4))
+
+
+
 ## [1.1.8](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.7...v1.1.8) (2022-04-25)
 
 
