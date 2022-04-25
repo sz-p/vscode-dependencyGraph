@@ -1,3 +1,16 @@
+## [1.1.8](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.7...v1.1.8) (2022-04-25)
+
+
+### Bug Fixes
+
+* get wrong ancestors when get node is not a circular node ([69d0267](https://github.com/sz-p/vscode-dependencyGraph/commit/69d0267d6729337abe5e51d95a2f8f8554b58959))
+
+
+### Features
+
+* [#25](https://github.com/sz-p/vscode-dependencyGraph/issues/25) get dependency-node by lazy import ([5a90b13](https://github.com/sz-p/vscode-dependencyGraph/commit/5a90b136d133935c496c19f96ea21692ae69b561))
+
+
 ## [1.1.7](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.6...v1.1.7) (2022-04-04)
 
 
