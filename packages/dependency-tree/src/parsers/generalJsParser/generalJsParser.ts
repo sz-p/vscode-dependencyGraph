@@ -83,6 +83,7 @@ export const parser: Parser = function (
     visitCallExpression(nodePath) {
       let dependencyPath = undefined;
       const node = nodePath.value;
+      const expressionArguments = node?.arguments;
       // import(xxx)
       if (node?.callee?.type === 'Import') {
         if (node.arguments?.length && node.arguments[0]?.type === "StringLiteral") {
@@ -116,6 +117,13 @@ export const parser: Parser = function (
               return false;
             }
             dependencies.push(dependencyPath);
+          }
+        }
+      }
+      if (expressionArguments && expressionArguments.length > 0) {
+        for (let i = 0; i < expressionArguments.length; i++) {
+          if (expressionArguments[i].type === "CallExpression") {
+            this.visitor.visitCallExpression.bind(this)({ value: expressionArguments[i] });
           }
         }
       }
