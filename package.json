@@ -100,7 +100,7 @@
   "scripts": {
     "watch": "npm-run-all -p watch:*",
     "build": "npm-run-all -p build:*",
-    "vscode:prepublish": "npm-run-all -p build:*",
+    "vscode:prepublish": "yarn test && npm-run-all -p build:*",
     "codeCount": "cloc ./ --exclude-dir=node_modules,out,outExtension,outWebView,assets,fileIcons",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "compile": "tsc -p ./",
