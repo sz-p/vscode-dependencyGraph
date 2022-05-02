@@ -47,7 +47,7 @@ export class D3Tree {
       TOP: 20,
     };
     this.DEPTH_LENGTH = 200;
-    this.NODE_TEXT_OFFSET_X = 13;
+    this.NODE_TEXT_OFFSET_X = 13 + 3;
     this.DURATION_TIME = 750;
     this.CLICK_DALEY = 500;
     this.ICON_SIZE = 22;
@@ -105,6 +105,7 @@ export class D3Tree {
         .attr("height", this.height)
         .attr("id", "treeViewSvgBox")
         .on("click", () => {
+          this.clearSelectNodeStyle();
           store.dispatch(action_selectNode({}));
         });
     }
@@ -122,6 +123,29 @@ export class D3Tree {
             ")"
         );
     }
+  }
+  initDefs() {
+    const filter = this.svg
+      .append("defs")
+      .append("filter")
+      .attr("primitiveUnits", "objectBoundingBox")
+      .attr("id", "rounded-corners");
+    filter
+      .append("feImage")
+      .attr("preserveAspectRatio", "none")
+      .attr("width", "120%")
+      .attr("height", "110%")
+      .attr("x", "-10%")
+      .attr("y", "0%")
+      .attr(
+        "xlink:href",
+        () =>
+          `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 400 40' height='40' width='400'%3E%3Crect fill='rgba(255,0,0,0.5)' x='0' y='0' rx='80' ry='100' width='400' height='40'/%3E%3C/svg%3E`
+      );
+    filter
+      .append("feComposite")
+      .attr("operator", "over")
+      .attr("in", "SourceGraphic");
   }
   initZoom() {
     if (!this.zoom && this.isBrowser) {
@@ -167,6 +191,7 @@ export class D3Tree {
   }
   init(dom, data, assetsBaseURL, activeThemeKind) {
     this.initDom(dom);
+    this.initDefs();
     this.initZoom();
     this.getData(data);
     this.getAssetsBaseURL(assetsBaseURL);
@@ -195,6 +220,26 @@ export class D3Tree {
       return "node_" + d.data.id;
     });
   }
+  setSelectedStyleToNode(nodeId) {
+    if (!nodeId) return;
+    this.clearSelectNodeStyle();
+    d3.selectAll("text")
+      .select(function (d) {
+        if (d.data.id === nodeId) {
+          return this;
+        }
+      })
+      .attr("filter", "url(#rounded-corners)");
+  }
+  clearSelectNodeStyle() {
+    d3.selectAll("text")
+      .select(function (d) {
+        if (this.getAttribute("filter")) {
+          return this;
+        }
+      })
+      .attr("filter", "");
+  }
   appendNodeDom(source) {
     const x = source ? source.y0 : this.root.y0;
     const y = source ? source.x0 : this.root.x0;
@@ -204,7 +249,8 @@ export class D3Tree {
       .attr("class", "node")
       .attr("transform", () => `translate(${x},${y})`)
       .attr("cursor", () => "pointer")
-      .on("click", function (d) {
+      .on("click", (d) => {
+        this.setSelectedStyleToNode(d?.data?.id);
         d3.event.stopPropagation();
         store.dispatch(action_selectNode(d));
       });
@@ -229,9 +275,7 @@ export class D3Tree {
   appendNodeName() {
     this.nodeTextDom = this.nodeDom
       .append("text")
-      .attr("text-anchor", (d) =>
-        d.children || d._children ? "end" : "start"
-      )
+      .attr("text-anchor", (d) => (d.children || d._children ? "end" : "start"))
       .attr("dominant-baseline", "middle")
       .attr("fill", this.DEFAULT_TEXT_COLOR)
       .attr("font-family", this.DEFAULT_FONT_FAMILY)
@@ -243,6 +287,7 @@ export class D3Tree {
           ? -this.NODE_TEXT_OFFSET_X
           : this.NODE_TEXT_OFFSET_X
       )
+      .attr("y", 2)
       .attr("fill-opacity", 0);
     this.nodeFatherNameTextDom = this.nodeTextDom
       .append("tspan")
@@ -297,9 +342,7 @@ export class D3Tree {
       .attr("y", () => -this.ICON_SIZE / 2)
       .attr("width", this.ICON_SIZE)
       .attr("height", this.ICON_SIZE)
-      .attr("transform", (d) =>
-        d.children ? "rotate(180)" : "rotate(0)"
-      );
+      .attr("transform", (d) => (d.children ? "rotate(180)" : "rotate(0)"));
   }
   enterNodeIcon() {
     this.nodeEnter
@@ -349,9 +392,7 @@ export class D3Tree {
       .select("image.arrowButton")
       .transition()
       .duration(this.DURATION_TIME)
-      .attr("transform", (d) =>
-        d.children ? "rotate(180)" : "rotate(0)"
-      );
+      .attr("transform", (d) => (d.children ? "rotate(180)" : "rotate(0)"));
   }
   getLinks() {
     this.linksData = this.svg
