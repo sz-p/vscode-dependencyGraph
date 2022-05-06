@@ -7,11 +7,10 @@
   "module": "src/index.ts",
   "dependencies": {
     "@types/node": "^16.4.10",
-    "ast-types": "^0.14.2",
     "enhanced-resolve": "^5.8.2",
     "lodash": "^4.17.21",
     "postcss": "^8.3.6",
-    "recast": "^0.20.5",
+    "recast": "^0.21.1",
     "vue-template-compiler": "2.6.12"
   },
   "devDependencies": {
