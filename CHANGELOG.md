@@ -1,3 +1,13 @@
+## [1.1.10](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.9...v1.1.10) (2022-05-06)
+
+
+### Features
+
+* add tsx parser ([8b729ca](https://github.com/sz-p/vscode-dependencyGraph/commit/8b729cab965513b5dd484bc47bc88eea89abe142))
+* run test script force before build vsce package ([7173aa2](https://github.com/sz-p/vscode-dependencyGraph/commit/7173aa2677ea6272a9d260c3582130a2a7a26513))
+
+
+
 ## [1.1.9](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.8...v1.1.9) (2022-04-26)
 
 
