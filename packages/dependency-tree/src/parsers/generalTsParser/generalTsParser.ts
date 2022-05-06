@@ -5,25 +5,25 @@ import {
   Parsers,
 } from "../../index.d";
 import { triggerOnGotAST, resolveChildrenNodeError } from "../utils/utils";
+import { Overrides } from "recast/parsers/_babel_options"
 import { visit } from "recast";
 import * as path from "path";
 import * as Resolve from "enhanced-resolve";
-
-import * as tsParser from "recast/parsers/typescript";
 import { visitOnExportDeclaration } from "../utils/utils-js";
 
 const babelOption = {};
-export const parser: Parser = function (
+export const parser = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,
   codeString: string,
-  options: DependencyTreeOptions
+  options: DependencyTreeOptions,
+  parser: { parse(source: string, options?: Overrides): import("@babel/types").File }
 ) {
   const dirName = path.dirname(absolutePath);
   let ast = undefined;
   let dependencies = [] as string[];
   try {
-    ast = tsParser.parse(codeString, babelOption);
+    ast = parser.parse(codeString, babelOption);
   } catch (e) {
     console.error(`get AST error: ${absolutePath}`);
   }

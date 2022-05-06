@@ -12,7 +12,8 @@ import {
 } from "../index.d";
 import { parser as generalJsParser } from "../parsers/generalJsParser/generalJsParser";
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
-import { parser as tsParser } from "../parsers/generalTsParser/generalTsParser";
+import { parser as tsParser } from "../parsers/tsParser/tsParser";
+import { parser as tsxParser } from "../parsers/tsxParser/tsxParser";
 import { parser as cssParser } from "../parsers/cssParser/cssParser";
 import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
 import { parser as generalCssParser } from "../parsers/generalCssParser/generalCssParser";
@@ -30,6 +31,7 @@ export class DependencyTree {
   static noDependenceParser: Parser;
   static cssParser: Parser;
   static tsParser: Parser;
+  static tsxParser: Parser;
   constructor(options?: DependencyTreeOptions) {
     this.options = defaultOptions;
     if (options) merge(this.options, options);
@@ -301,3 +303,4 @@ DependencyTree.tsParser = tsParser;
 DependencyTree.cssParser = cssParser;
 DependencyTree.noDependenceParser = noDependenceParser;
 DependencyTree.generalCssParser = generalCssParser;
+DependencyTree.tsxParser = tsxParser;
