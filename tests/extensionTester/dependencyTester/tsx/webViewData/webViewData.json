@@ -1,0 +1,52 @@
+{
+  "name": "index.js",
+  "fileID": "43351ecb56f3a7e10f80143f717fe4ea",
+  "nodeID": "43351ecb56f3a7e10f80143f717fe4ea",
+  "ancestors": [],
+  "fileDescription": {},
+  "type": "javascript",
+  "language": "javascript",
+  "lines": 2,
+  "analysed": true,
+  "functions": [],
+  "extension": ".js",
+  "absolutePath": "%DIR-PATH%\\src\\index.js",
+  "relativePath": "\\src\\index.js",
+  "children": [
+    {
+      "name": "tsx.tsx",
+      "fileID": "da0acda11625edcc51dde30cd2802fc2",
+      "nodeID": "9fe3fcd7c02b5894297ff213d90e989c",
+      "ancestors": [
+        "43351ecb56f3a7e10f80143f717fe4ea"
+      ],
+      "fileDescription": {},
+      "type": "react_ts",
+      "language": "file",
+      "extension": ".tsx",
+      "absolutePath": "%DIR-PATH%\\src\\tsx.tsx",
+      "relativePath": "\\src\\tsx.tsx",
+      "children": [
+        {
+          "name": "my.js",
+          "fileID": "6ac94e8f6bdf69e3667d5a6106a7c234",
+          "nodeID": "15ca17f27495df1a606c46c980b8cd75",
+          "ancestors": [
+            "43351ecb56f3a7e10f80143f717fe4ea",
+            "da0acda11625edcc51dde30cd2802fc2"
+          ],
+          "fileDescription": {},
+          "type": "javascript",
+          "language": "javascript",
+          "lines": 1,
+          "analysed": true,
+          "functions": [],
+          "extension": ".js",
+          "absolutePath": "%DIR-PATH%\\src\\my.js",
+          "relativePath": "\\src\\my.js",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

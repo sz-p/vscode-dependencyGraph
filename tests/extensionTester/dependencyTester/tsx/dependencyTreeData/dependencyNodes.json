@@ -1,0 +1,96 @@
+{
+  "%DIR-PATH%\\src\\index.js": {
+    "absolutePath": "%DIR-PATH%\\src\\index.js",
+    "ancestors": [],
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%\\src\\tsx.tsx",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js"
+        ],
+        "extension": ".tsx",
+        "name": "tsx.tsx",
+        "relativePath": "\\src\\tsx.tsx",
+        "children": [
+          {
+            "absolutePath": "%DIR-PATH%\\src\\my.js",
+            "ancestors": [
+              "%DIR-PATH%\\src\\index.js",
+              "%DIR-PATH%\\src\\tsx.tsx"
+            ],
+            "extension": ".js",
+            "name": "my.js",
+            "relativePath": "\\src\\my.js",
+            "children": [],
+            "fileDescription": {},
+            "type": "javascript",
+            "language": "javascript",
+            "analysed": true,
+            "lines": 1,
+            "functions": []
+          }
+        ],
+        "fileDescription": {},
+        "type": "react_ts",
+        "language": "file"
+      }
+    ],
+    "extension": ".js",
+    "name": "index.js",
+    "relativePath": "\\src\\index.js",
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 2,
+    "functions": []
+  },
+  "%DIR-PATH%\\src\\tsx.tsx": {
+    "absolutePath": "%DIR-PATH%\\src\\tsx.tsx",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js"
+    ],
+    "extension": ".tsx",
+    "name": "tsx.tsx",
+    "relativePath": "\\src\\tsx.tsx",
+    "children": [
+      {
+        "absolutePath": "%DIR-PATH%\\src\\my.js",
+        "ancestors": [
+          "%DIR-PATH%\\src\\index.js",
+          "%DIR-PATH%\\src\\tsx.tsx"
+        ],
+        "extension": ".js",
+        "name": "my.js",
+        "relativePath": "\\src\\my.js",
+        "children": [],
+        "fileDescription": {},
+        "type": "javascript",
+        "language": "javascript",
+        "analysed": true,
+        "lines": 1,
+        "functions": []
+      }
+    ],
+    "fileDescription": {},
+    "type": "react_ts",
+    "language": "file"
+  },
+  "%DIR-PATH%\\src\\my.js": {
+    "absolutePath": "%DIR-PATH%\\src\\my.js",
+    "ancestors": [
+      "%DIR-PATH%\\src\\index.js",
+      "%DIR-PATH%\\src\\tsx.tsx"
+    ],
+    "extension": ".js",
+    "name": "my.js",
+    "relativePath": "\\src\\my.js",
+    "children": [],
+    "fileDescription": {},
+    "type": "javascript",
+    "language": "javascript",
+    "analysed": true,
+    "lines": 1,
+    "functions": []
+  }
+}
