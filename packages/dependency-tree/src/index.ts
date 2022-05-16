@@ -11,7 +11,7 @@ const getDependencyTree = function (
   options?: DependencyTreeOptions
 ) {
   if (options) dp.setOptions(options);
-  dp.registerParser("generalJsParser", DependencyTree.generalJsParser);
+  dp.registerParser("jsParser", DependencyTree.jsParser);
   dp.registerParser("vueParser", DependencyTree.vueParser);
   dp.registerParser("noDependenceParser", DependencyTree.noDependenceParser);
   dp.registerParser("cssParser", DependencyTree.cssParser);
@@ -28,9 +28,9 @@ const getDependencyTree = function (
   dp.registerParseRule(".sass", "generalCssParser");
   dp.registerParseRule(".scss", "generalCssParser");
 
-  dp.registerParseRule(".js", "generalJsParser");
+  dp.registerParseRule(".js", "jsParser");
   dp.registerParseRule(".ts", "tsParser");
-  dp.registerParseRule(".jsx", "generalJsParser");
+  dp.registerParseRule(".jsx", "jsParser");
   dp.registerParseRule(".tsx", "tsxParser");
 
   return dp.parse(folderPath, entryPath);

@@ -80,35 +80,40 @@ export const parser = function (
       dependencies.push(dependencyPath);
       return false;
     },
-    visitIdentifier(nodePath) {
+    visitCallExpression(nodePath) {
       let dependencyPath = undefined;
       const node = nodePath.value;
-      // try to find require identifier node
-      if (nodePath.name === 'callee' && node && node.name === "require") {
-        // try to find expression
-        if (nodePath.parent?.name === 'expression' && nodePath.parent?.value?.type === 'CallExpression') {
-          const expressionNode = nodePath.parent.value;
-          if (expressionNode.arguments?.length && expressionNode.arguments[0]?.type === "StringLiteral") {
-            const expressionArgument = expressionNode.arguments[0];
-            try {
-              dependencyPath = resolve(dirName, expressionArgument.value);
-            } catch (e) {
-              resolveChildrenNodeError(expressionArgument.value, absolutePath);
+      const expressionArguments = node?.arguments;
+      // import(xxx)
+      if (node?.callee?.type === 'Import' || node?.callee?.name === 'require') {
+        if (node.arguments?.length && node.arguments[0]?.type === "StringLiteral") {
+          const expressionArgument = node.arguments[0];
+          try {
+            dependencyPath = resolve(dirName, expressionArgument.value);
+          } catch (e) {
+            resolveChildrenNodeError(expressionArgument.value, absolutePath);
+            return false;
+          }
+          if (typeof dependencyPath === "string") {
+            if (dependencyPath.includes("node_modules")) {
               return false;
             }
-            if (typeof dependencyPath === "string") {
-              if (dependencyPath.includes("node_modules")) {
-                return false;
-              }
-              dependencies.push(dependencyPath);
-            }
+            dependencies.push(dependencyPath);
           }
         }
-      } else {
-        return false;
       }
-      return false;
-    },
+      if (expressionArguments && expressionArguments.length > 0) {
+        for (let i = 0; i < expressionArguments.length; i++) {
+          if (expressionArguments[i].type === "CallExpression") {
+            this.visitor.visitCallExpression.bind(this)({ value: expressionArguments[i] });
+          }
+          if (expressionArguments[i].type === "ArrowFunctionExpression") {
+            this.visitor.visitCallExpression.bind(this)({ value: expressionArguments[i].body });
+          }
+        }
+      }
+      return false
+    }
   });
   return dependencies;
 };

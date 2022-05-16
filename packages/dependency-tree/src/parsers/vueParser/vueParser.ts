@@ -6,7 +6,7 @@ import {
   Parsers,
   ParseRule,
 } from "../../index.d";
-import { parser as tsParser } from "../generalJsParser/generalJsParser";
+import { parser as tsParser } from "../jsParser/jsParser";
 export const parser: Parser = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,

@@ -10,7 +10,7 @@ import {
   DependencyHash,
   DependencyTreeData,
 } from "../index.d";
-import { parser as generalJsParser } from "../parsers/generalJsParser/generalJsParser";
+import { parser as jsParser } from "../parsers/jsParser/jsParser";
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
 import { parser as tsParser } from "../parsers/tsParser/tsParser";
 import { parser as tsxParser } from "../parsers/tsxParser/tsxParser";
@@ -25,7 +25,7 @@ export class DependencyTree {
   dependencyHash: DependencyHash;
   dependencyTreeData: DependencyTreeData;
   circularStructureNode: DependencyTreeData;
-  static generalJsParser: Parser;
+  static jsParser: Parser;
   static generalCssParser: Parser;
   static vueParser: Parser;
   static noDependenceParser: Parser;
@@ -297,7 +297,7 @@ export class DependencyTree {
     };
   }
 }
-DependencyTree.generalJsParser = generalJsParser;
+DependencyTree.jsParser = jsParser;
 DependencyTree.vueParser = vueParser;
 DependencyTree.tsParser = tsParser;
 DependencyTree.cssParser = cssParser;

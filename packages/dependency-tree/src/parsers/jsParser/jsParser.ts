@@ -1,4 +1,4 @@
-import * as tsParser from "recast/parsers/typescript";
+import * as babelParser from "recast/parsers/babel";
 import { parser as generalJavaScriptParser } from "../generalJavaScriptParser/generalJavaScriptParser"
 import {
   Parser,
@@ -12,5 +12,5 @@ export const parser: Parser = function (
   codeString: string,
   options: DependencyTreeOptions,
 ) {
-  return generalJavaScriptParser(dependencyNode, absolutePath, codeString, options, tsParser)
+  return generalJavaScriptParser(dependencyNode, absolutePath, codeString, options, babelParser)
 }

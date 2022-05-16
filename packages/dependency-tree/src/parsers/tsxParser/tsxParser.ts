@@ -1,5 +1,5 @@
 import * as tsParser from "recast/parsers/babel-ts";
-import { parser as generalTsParser } from "../generalTsParser/generalTsParser"
+import { parser as generalJavaScriptParser } from "../generalJavaScriptParser/generalJavaScriptParser"
 import {
   Parser,
   DependencyTreeData,
@@ -12,5 +12,5 @@ export const parser: Parser = function (
   codeString: string,
   options: DependencyTreeOptions,
 ) {
-  return generalTsParser(dependencyNode, absolutePath, codeString, options, tsParser)
+  return generalJavaScriptParser(dependencyNode, absolutePath, codeString, options, tsParser)
 }
