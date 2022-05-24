@@ -1,3 +1,11 @@
+## [1.1.11](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.10...v1.1.11) (2022-05-24)
+
+
+### Features
+
+* [#29](https://github.com/sz-p/vscode-dependencyGraph/issues/29) recognize lazy imports ([1b79ff0](https://github.com/sz-p/vscode-dependencyGraph/commit/1b79ff0a022cf1d6ae5b58b9bc4c243d170b30a1))
+
+
 ## [1.1.10](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.9...v1.1.10) (2022-05-06)
 
 
