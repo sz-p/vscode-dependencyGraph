@@ -10,6 +10,7 @@ import { visit } from "recast";
 import * as path from "path";
 import * as Resolve from "enhanced-resolve";
 import { visitOnExportDeclaration } from "../utils/utils-js";
+import { ASTNode } from "ast-types";
 
 const babelOption = {};
 export const parser = function (
@@ -37,6 +38,40 @@ export const parser = function (
     extensions: resolveExtensions,
     alias: alias,
   });
+  const visitCallExpressionRecursion = function (ast: ASTNode) {
+    visit(ast, {
+      visitCallExpression(nodePath) {
+        let dependencyPath = undefined;
+        const node = nodePath.value;
+        const expressionArguments = node?.arguments;
+        // import(xxx)
+        if (node?.callee?.type === 'Import' || node?.callee?.name === 'require') {
+          if (node.arguments?.length && node.arguments[0]?.type === "StringLiteral") {
+            const expressionArgument = node.arguments[0];
+            try {
+              dependencyPath = resolve(dirName, expressionArgument.value);
+            } catch (e) {
+              resolveChildrenNodeError(expressionArgument.value, absolutePath);
+              return false;
+            }
+            if (typeof dependencyPath === "string") {
+              if (dependencyPath.includes("node_modules")) {
+                return false;
+              }
+              dependencies.push(dependencyPath);
+            }
+          }
+        }
+        if (expressionArguments && expressionArguments.length > 0) {
+          for (let i = 0; i < expressionArguments.length; i++) {
+            visitCallExpressionRecursion(expressionArguments[i])
+          }
+        }
+        return false
+      }
+    }
+    )
+  }
   visit(ast, {
     visitImportDeclaration(nodePath) {
       if (typeof nodePath.node.source.value !== "string") return false;
@@ -79,41 +114,8 @@ export const parser = function (
       }
       dependencies.push(dependencyPath);
       return false;
-    },
-    visitCallExpression(nodePath) {
-      let dependencyPath = undefined;
-      const node = nodePath.value;
-      const expressionArguments = node?.arguments;
-      // import(xxx)
-      if (node?.callee?.type === 'Import' || node?.callee?.name === 'require') {
-        if (node.arguments?.length && node.arguments[0]?.type === "StringLiteral") {
-          const expressionArgument = node.arguments[0];
-          try {
-            dependencyPath = resolve(dirName, expressionArgument.value);
-          } catch (e) {
-            resolveChildrenNodeError(expressionArgument.value, absolutePath);
-            return false;
-          }
-          if (typeof dependencyPath === "string") {
-            if (dependencyPath.includes("node_modules")) {
-              return false;
-            }
-            dependencies.push(dependencyPath);
-          }
-        }
-      }
-      if (expressionArguments && expressionArguments.length > 0) {
-        for (let i = 0; i < expressionArguments.length; i++) {
-          if (expressionArguments[i].type === "CallExpression") {
-            this.visitor.visitCallExpression.bind(this)({ value: expressionArguments[i] });
-          }
-          if (expressionArguments[i].type === "ArrowFunctionExpression") {
-            this.visitor.visitCallExpression.bind(this)({ value: expressionArguments[i].body });
-          }
-        }
-      }
-      return false
     }
   });
+  visitCallExpressionRecursion(ast)
   return dependencies;
 };

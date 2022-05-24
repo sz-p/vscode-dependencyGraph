@@ -8,7 +8,7 @@ import { ASTNode } from "ast-types/lib/types";
 import { namedTypes } from "ast-types/gen/namedTypes";
 import { prettyPrint } from "recast";
 import * as recast from "recast";
-
+import { cloneDeep } from "lodash";
 const getCode = function (ASTNode: ASTNode): string {
   const code = prettyPrint(ASTNode).code;
   return code;
@@ -206,7 +206,7 @@ export const getFunctionInformation = function (
   nodePath: NodePath<namedTypes.Function>
 ): FunctionInformation {
   const functionInfo = {} as FunctionInformation;
-
+  nodePath = cloneDeep(nodePath)
   const {
     FunctionDeclaration,
     ExportNamedDeclaration,
