@@ -1,0 +1,242 @@
+{
+  "absolutePath": "%DIR-PATH%\\src\\index.js",
+  "ancestors": [],
+  "children": [
+    {
+      "absolutePath": "%DIR-PATH%\\src\\index.ts",
+      "ancestors": [
+        "%DIR-PATH%\\src\\index.js"
+      ],
+      "extension": ".ts",
+      "name": "index.ts",
+      "relativePath": "\\src\\index.ts",
+      "children": [
+        {
+          "absolutePath": "%DIR-PATH%\\src\\OtherComponent-1.jsx",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\index.ts"
+          ],
+          "extension": ".jsx",
+          "name": "OtherComponent-1.jsx",
+          "relativePath": "\\src\\OtherComponent-1.jsx",
+          "children": [],
+          "fileDescription": {},
+          "type": "react",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        },
+        {
+          "absolutePath": "%DIR-PATH%\\src\\OtherComponent-2.jsx",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\index.ts"
+          ],
+          "extension": ".jsx",
+          "name": "OtherComponent-2.jsx",
+          "relativePath": "\\src\\OtherComponent-2.jsx",
+          "children": [],
+          "fileDescription": {},
+          "type": "react",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        },
+        {
+          "absolutePath": "%DIR-PATH%\\src\\OtherComponent-3.jsx",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\index.ts"
+          ],
+          "extension": ".jsx",
+          "name": "OtherComponent-3.jsx",
+          "relativePath": "\\src\\OtherComponent-3.jsx",
+          "children": [],
+          "fileDescription": {},
+          "type": "react",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        }
+      ],
+      "fileDescription": {},
+      "type": "typescript",
+      "language": "file",
+      "analysed": true,
+      "lines": 4,
+      "functions": [
+        {
+          "arrowFunction": true,
+          "params": []
+        },
+        {
+          "arrowFunction": true,
+          "params": []
+        },
+        {
+          "arrowFunction": false,
+          "params": []
+        }
+      ]
+    },
+    {
+      "absolutePath": "%DIR-PATH%\\src\\index.jsx",
+      "ancestors": [
+        "%DIR-PATH%\\src\\index.js"
+      ],
+      "extension": ".jsx",
+      "name": "index.jsx",
+      "relativePath": "\\src\\index.jsx",
+      "children": [
+        {
+          "absolutePath": "%DIR-PATH%\\src\\OtherComponent-1.jsx",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\index.jsx"
+          ],
+          "extension": ".jsx",
+          "name": "OtherComponent-1.jsx",
+          "relativePath": "\\src\\OtherComponent-1.jsx",
+          "children": [],
+          "fileDescription": {},
+          "type": "react",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        },
+        {
+          "absolutePath": "%DIR-PATH%\\src\\OtherComponent-2.jsx",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\index.jsx"
+          ],
+          "extension": ".jsx",
+          "name": "OtherComponent-2.jsx",
+          "relativePath": "\\src\\OtherComponent-2.jsx",
+          "children": [],
+          "fileDescription": {},
+          "type": "react",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        },
+        {
+          "absolutePath": "%DIR-PATH%\\src\\OtherComponent-3.jsx",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\index.jsx"
+          ],
+          "extension": ".jsx",
+          "name": "OtherComponent-3.jsx",
+          "relativePath": "\\src\\OtherComponent-3.jsx",
+          "children": [],
+          "fileDescription": {},
+          "type": "react",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        }
+      ],
+      "fileDescription": {},
+      "type": "react",
+      "language": "javascript",
+      "analysed": true,
+      "lines": 4,
+      "functions": [
+        {
+          "arrowFunction": true,
+          "params": []
+        },
+        {
+          "arrowFunction": true,
+          "params": []
+        },
+        {
+          "arrowFunction": false,
+          "params": []
+        }
+      ]
+    },
+    {
+      "absolutePath": "%DIR-PATH%\\src\\index.tsx",
+      "ancestors": [
+        "%DIR-PATH%\\src\\index.js"
+      ],
+      "extension": ".tsx",
+      "name": "index.tsx",
+      "relativePath": "\\src\\index.tsx",
+      "children": [
+        {
+          "absolutePath": "%DIR-PATH%\\src\\OtherComponent-1.jsx",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\index.tsx"
+          ],
+          "extension": ".jsx",
+          "name": "OtherComponent-1.jsx",
+          "relativePath": "\\src\\OtherComponent-1.jsx",
+          "children": [],
+          "fileDescription": {},
+          "type": "react",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        },
+        {
+          "absolutePath": "%DIR-PATH%\\src\\OtherComponent-2.jsx",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\index.tsx"
+          ],
+          "extension": ".jsx",
+          "name": "OtherComponent-2.jsx",
+          "relativePath": "\\src\\OtherComponent-2.jsx",
+          "children": [],
+          "fileDescription": {},
+          "type": "react",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        },
+        {
+          "absolutePath": "%DIR-PATH%\\src\\OtherComponent-3.jsx",
+          "ancestors": [
+            "%DIR-PATH%\\src\\index.js",
+            "%DIR-PATH%\\src\\index.tsx"
+          ],
+          "extension": ".jsx",
+          "name": "OtherComponent-3.jsx",
+          "relativePath": "\\src\\OtherComponent-3.jsx",
+          "children": [],
+          "fileDescription": {},
+          "type": "react",
+          "language": "javascript",
+          "analysed": true,
+          "lines": 1,
+          "functions": []
+        }
+      ],
+      "fileDescription": {},
+      "type": "react_ts",
+      "language": "file"
+    }
+  ],
+  "extension": ".js",
+  "name": "index.js",
+  "relativePath": "\\src\\index.js",
+  "fileDescription": {},
+  "type": "javascript",
+  "language": "javascript",
+  "analysed": true,
+  "lines": 3,
+  "functions": []
+}
