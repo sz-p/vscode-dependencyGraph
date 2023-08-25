@@ -14,9 +14,12 @@ import { DependencyTreeData } from "../../../src/data-dependencyTree/dependencyT
 
 const resolveExtensions = defaultOptions.resolveExtensions;
 const alias = {};
-
+const normalizeMacWin = function (string) {
+  const normalizeString = string.replace(/\\\\/g, "/").replace(/\r\n/g, "").replace(/\n/g, "").replace(/ /g, "")
+  return normalizeString
+}
 export const getDependencyTreeDataFromFile = function (testCase: string) {
-  const dependencyTreeData = fs
+  const dependencyTreeData = normalizeMacWin(fs
     .readFileSync(
       path.resolve(
         __dirname,
@@ -24,8 +27,8 @@ export const getDependencyTreeDataFromFile = function (testCase: string) {
       )
     )
     .toString()
-    .replace(/\r\n/g, "\n");
-  const dependencyNodesData = fs
+  )
+  const dependencyNodesData = normalizeMacWin(fs
     .readFileSync(
       path.resolve(
         __dirname,
@@ -33,7 +36,7 @@ export const getDependencyTreeDataFromFile = function (testCase: string) {
       )
     )
     .toString()
-    .replace(/\r\n/g, "\n");
+  )
   const folderPath = path.join(__dirname, `./${testCase}/files`);
   return { dependencyTreeData, dependencyNodesData, folderPath };
 };
@@ -61,22 +64,19 @@ export const getDependencyTreeDataByCompute = function (
     }
   );
   return {
-    dependencyTree: JSON.stringify(dt, null, 2)
-      .replace(replaceDirPathReg, "%DIR-PATH%")
-      .replace(/\r\n/g, "\n"),
-    dependencyNodes: JSON.stringify(dn, null, 2)
-      .replace(replaceDirPathReg, "%DIR-PATH%")
-      .replace(/\r\n/g, "\n"),
+    dependencyTree: normalizeMacWin(JSON.stringify(dt, null, 2)
+      .replace(replaceDirPathReg, "%DIR-PATH%")),
+    dependencyNodes: normalizeMacWin(JSON.stringify(dn, null, 2)
+      .replace(replaceDirPathReg, "%DIR-PATH%"))
   };
 };
 
 export const getSavedDataFromFile = function (testCase: string) {
-  const dataString = fs
+  const dataString = normalizeMacWin(fs
     .readFileSync(
       path.resolve(__dirname, `./${testCase}/savedData/savedData.json`)
     )
-    .toString()
-    .replace(/\r\n/g, "\n");
+    .toString())
   return dataString;
 };
 export const getSavedDataByCompute = function (
@@ -100,16 +100,15 @@ export const getSavedDataByCompute = function (
     dn,
     folderPath
   );
-  return JSON.stringify(data).replace(/\r\n/g, "\n");
+  return normalizeMacWin(JSON.stringify(data));
 };
 
 export const getWebViewDataFromFile = function (testCase: string) {
-  const dependencyTreeData = fs
+  const dependencyTreeData = normalizeMacWin(fs
     .readFileSync(
       path.resolve(__dirname, `./${testCase}/webViewData/webViewData.json`)
     )
-    .toString()
-    .replace(/\r\n/g, "\n");
+    .toString())
   return dependencyTreeData;
 };
 
@@ -128,14 +127,15 @@ export const getWebViewDataByCompute = function (
         path.resolve(__dirname, `./${testCase}/savedData/savedData.json`)
       )
       .toString()
-      .replace(/\r\n/g, "\n")
+      .replace(/\r\n/g, "")
+      .replace(/ /g, "")
+      .replace(/\n/g, "")
   );
   const dependencyTreeData = transportsDataToDependenciesTreeData(
     dependencyTree,
     dependencyNodes,
     folderPath
   );
-  return JSON.stringify(dependencyTreeData, null, 2)
-    .replace(replaceDirPathReg, "%DIR-PATH%")
-    .replace(/\r\n/g, "\n");
+  return normalizeMacWin(JSON.stringify(dependencyTreeData, null, 2)
+    .replace(replaceDirPathReg, "%DIR-PATH%"))
 };
