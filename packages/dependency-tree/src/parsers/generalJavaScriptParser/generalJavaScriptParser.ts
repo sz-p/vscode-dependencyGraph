@@ -12,19 +12,19 @@ import * as Resolve from "enhanced-resolve";
 import { visitOnExportDeclaration } from "../utils/utils-js";
 import { ASTNode } from "ast-types";
 
-const babelOption = {};
 export const parser = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,
   codeString: string,
   options: DependencyTreeOptions,
-  parser: { parse(source: string, options?: Overrides): import("@babel/types").File }
+  parser: { parse(source: string, options?: Overrides): import("@babel/types").File },
+  parserOptions: Object = {}
 ) {
   const dirName = path.dirname(absolutePath);
   let ast = undefined;
   let dependencies = [] as string[];
   try {
-    ast = parser.parse(codeString, babelOption);
+    ast = parser.parse(codeString, parserOptions);
   } catch (e) {
     console.error(`get AST error: ${absolutePath}`);
   }
@@ -72,6 +72,7 @@ export const parser = function (
     }
     )
   }
+  visitCallExpressionRecursion(ast)
   visit(ast, {
     visitImportDeclaration(nodePath) {
       if (typeof nodePath.node.source.value !== "string") return false;
@@ -116,6 +117,5 @@ export const parser = function (
       return false;
     }
   });
-  visitCallExpressionRecursion(ast)
   return dependencies;
 };
