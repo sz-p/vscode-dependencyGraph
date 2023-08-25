@@ -109,7 +109,7 @@
     "build:Extension": "node ./scripts/build.js",
     "build:WebView": "node ./src/webView/scripts/build.js",
     "package": "vsce package",
-    "test": "mocha -r tsconfig-paths/register -r ts-node/register -p ./tests/tsconfig.testing.json tests/**/*.test.ts tests/**/*.test.js"
+    "test": "mocha -n experimental-specifier-resolution=node -n loader=ts-node/esm --serial -p ./tests/tsconfig.testing.json --spec tests/**/*.test.ts tests/**/*.test.js"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
