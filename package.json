@@ -109,6 +109,7 @@
     "build:Extension": "node ./scripts/build.js",
     "build:WebView": "node ./src/webView/scripts/build.js",
     "package": "vsce package",
+    "ls-lint": "node_modules/.bin/ls-lint",
     "test": "mocha -n experimental-specifier-resolution=node -n loader=ts-node/esm --serial -p ./tests/tsconfig.testing.json --spec tests/**/*.test.ts tests/**/*.test.js"
   },
   "devDependencies": {
@@ -117,6 +118,8 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.14.5",
     "@babel/runtime": "^7.14.8",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@ls-lint/ls-lint": "^2.0.1",
     "@types/glob": "^7.1.1",
     "@types/mocha": "^5.2.7",
     "@types/node": "^14.17.7",
@@ -180,6 +183,12 @@
     "url-loader": "^4.1.1",
     "vue": "2.6.12",
     "vue-template-compiler": "2.6.12"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn ls-lint"
+    }
   },
   "private": true,
   "workspaces": [

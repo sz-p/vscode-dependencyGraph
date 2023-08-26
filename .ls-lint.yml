@@ -1,0 +1,13 @@
+ls:
+  .js: kebabcase | camelCase | pointcase
+  .ts: kebabcase | camelCase | pointcase
+  .d.ts: PascalCase | pointcase
+  .html: regex:[a-z0-9]+
+
+ignore:
+  - node_modules
+  - outExtension
+  - outWebView
+  - packages/dependency-tree/node_modules
+  - tests
+  - typings
