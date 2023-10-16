@@ -157,7 +157,7 @@
     "d3": "^5.16.0",
     "enhanced-resolve": "5.8.2",
     "file-loader": "^6.1.1",
-    "jsdom": "^16.4.0",
+    "jsdom": "^16.5.0",
     "json5": "^2.2.1",
     "less": "^4.1.1",
     "less-loader": "7.3.0",
