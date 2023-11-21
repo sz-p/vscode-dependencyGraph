@@ -38,16 +38,22 @@ export interface Parser {
 export interface ParseRule {
   [key: string]: string;
 }
-export interface DependencyHash {
-  [key: string]: DependencyTreeData;
-}
-export interface DependencyTreeData {
+
+export interface FileData {
   fileID: string;
   name: string;
   extension: string;
-  ancestors: string[];
   absolutePath: string;
   relativePath: string;
+  children: Array<FileData>;
+  fathers?: Array<FileData>;
   circularStructure?: boolean;
-  children: Array<DependencyTreeData>;
+}
+
+export interface DependencyHash {
+  [key: string]: FileData;
+}
+export interface DependencyTreeData {
+  fileID:string;
+  ancestors: string[];
 }

@@ -9,6 +9,7 @@ import {
   ParseRule,
   DependencyHash,
   DependencyTreeData,
+  FileData
 } from "../index.d";
 import { parser as jsParser } from "../parsers/jsParser/jsParser";
 import { parser as vueParser } from "../parsers/vueParser/vueParser";
@@ -18,13 +19,15 @@ import { parser as cssParser } from "../parsers/cssParser/cssParser";
 import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
 import { parser as generalCssParser } from "../parsers/generalCssParser/generalCssParser";
 import { isPathExists, isDirectory } from "../utils/utils";
+export const CIRCULAR_STRUCTURE_FILE_ID = "DEPENDENCIES-GRAPH-CIRCULAR-STRUCTURE"
+
 export class DependencyTree {
   options: DependencyTreeOptions;
   parsers: Parsers;
   parseRule: ParseRule;
   dependencyHash: DependencyHash;
   dependencyTreeData: DependencyTreeData;
-  circularStructureNode: DependencyTreeData;
+  circularStructureFile: FileData;
   static jsParser: Parser;
   static generalCssParser: Parser;
   static vueParser: Parser;
@@ -39,29 +42,28 @@ export class DependencyTree {
     this.parseRule = {};
     this.dependencyHash = {};
     this.dependencyTreeData = {} as DependencyTreeData;
-    this.circularStructureNode = {
+    this.circularStructureFile = {
       name: "circularStructure",
-      fileID: "circularStructure",
+      fileID: CIRCULAR_STRUCTURE_FILE_ID,
       circularStructure: true,
       absolutePath: "circularStructure",
       relativePath: "circularStructure",
       extension: "",
-      ancestors: [] as string[],
       children: [],
     };
   }
-  private setDataToDependencyNode(
-    dependencyNode: DependencyTreeData,
+  private setDataToFileData(
+    FileData: FileData,
     absolutePath: string,
     folderPath: string
   ) {
     const extname = path.extname(absolutePath);
     const baseName = path.basename(absolutePath);
     const relativePath = absolutePath.replace(folderPath, "");
-    dependencyNode.extension = extname;
-    dependencyNode.name = baseName;
-    dependencyNode.relativePath = relativePath;
-    dependencyNode.children = [];
+    FileData.extension = extname;
+    FileData.name = baseName;
+    FileData.relativePath = relativePath;
+    FileData.children = [];
   }
   private triggerGetFileString(
     dependencyNode: DependencyTreeData,
@@ -108,23 +110,51 @@ export class DependencyTree {
     }
     return false;
   }
+
   /**
-   * if fended CircularStructure create CircularStructureNode
+   * if found circular structure create CircularStructureNode
    *
    * @param {string} absolutePath
    * @param {DependencyHash} dependencyHash
+   * @param {string[]} CircularStructureFileID
+   * @returns {DependencyTreeData}
+   */
+  private setCircularStructureFile(
+    absolutePath: string,
+    dependencyHash: DependencyHash,
+    circularStructureFileID: string
+  ) {
+    const circularStructureFile = {
+      ...dependencyHash[absolutePath],
+      fileID: circularStructureFileID,
+      children: [this.circularStructureFile]
+    }
+    dependencyHash[circularStructureFileID] = circularStructureFile
+  }
+  /**
+   * if found circular structure create CircularStructureNode
+   *
+   * @param {string} absolutePath
+   * @param {DependencyHash} dependencyHash
+   * @param {string[]} ancestors
    * @returns {DependencyTreeData}
    */
   private getCircularStructureNode(
     absolutePath: string,
-    dependencyHash: DependencyHash
+    dependencyHash: DependencyHash,
+    ancestors: string[]
   ): DependencyTreeData {
-    let circularStructureNode = cloneDeep(dependencyHash[absolutePath]);
-    const circularStructureNodeChild = cloneDeep(this.circularStructureNode);
-    circularStructureNodeChild.ancestors = circularStructureNode.ancestors.concat(
-      absolutePath
-    );
-    circularStructureNode.children = [circularStructureNodeChild];
+    let circularStructureNode = undefined;
+    const circularStructureFileID = absolutePath + CIRCULAR_STRUCTURE_FILE_ID;
+    if (!dependencyHash[circularStructureFileID]) {
+      this.setCircularStructureFile(absolutePath, dependencyHash, circularStructureFileID)
+    }
+    circularStructureNode = {
+      fileID: circularStructureFileID,
+      ancestors: ancestors.concat(
+        absolutePath
+      )
+    } as DependencyTreeData
     return circularStructureNode;
   }
   /**
@@ -223,7 +253,7 @@ export class DependencyTree {
         console.error(`file does not exist: ${absolutePath}`);
         continue;
       }
-      this.setDataToDependencyNode(dependencyNode, absolutePath, folderPath);
+      this.setDataToFileData(dependencyNode, absolutePath, folderPath);
       const codeString = fs.readFileSync(absolutePath).toString();
       this.triggerGetFileString(dependencyNode, absolutePath, codeString);
       const parser = this.parsers[this.parseRule[dependencyNode.extension]];
@@ -262,7 +292,8 @@ export class DependencyTree {
           if (this.isCircularStructure(childrenPath, ancestors)) {
             dependencyChildren = this.getCircularStructureNode(
               childrenPath,
-              this.dependencyHash
+              this.dependencyHash,
+              ancestors
             );
             this.triggerGetCircularStructureNode(
               dependencyChildren,

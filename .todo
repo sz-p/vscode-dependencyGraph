@@ -70,7 +70,7 @@
 [ ] fix: move resolver to single file
 [ ] fix: refresh file not resend data to webview
 [ ] fix: move ancestors from dependencyNodesHash
-
+[ ] refactor: shorten entryFilePath absolute path
 [ ] feat: update one file
 [ ] feat: webview data read
 [ ] feat: webview data save
