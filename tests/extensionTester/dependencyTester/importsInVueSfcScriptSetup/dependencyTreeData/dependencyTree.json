@@ -1,0 +1,46 @@
+{
+  "absolutePath": "%DIR-PATH%/src/index.js",
+  "ancestors": [],
+  "children": [
+    {
+      "absolutePath": "%DIR-PATH%/src/vueComp.vue",
+      "ancestors": [
+        "%DIR-PATH%/src/index.js"
+      ],
+      "extension": ".vue",
+      "name": "vueComp.vue",
+      "relativePath": "/src/vueComp.vue",
+      "children": [
+        {
+          "absolutePath": "%DIR-PATH%/src/my-fancy-component.vue",
+          "ancestors": [
+            "%DIR-PATH%/src/index.js",
+            "%DIR-PATH%/src/vueComp.vue"
+          ],
+          "extension": ".vue",
+          "name": "my-fancy-component.vue",
+          "relativePath": "/src/my-fancy-component.vue",
+          "children": [],
+          "fileDescription": {},
+          "type": "vue",
+          "language": "javascript"
+        }
+      ],
+      "fileDescription": {},
+      "type": "vue",
+      "language": "javascript",
+      "analysed": true,
+      "lines": 3,
+      "functions": []
+    }
+  ],
+  "extension": ".js",
+  "name": "index.js",
+  "relativePath": "/src/index.js",
+  "fileDescription": {},
+  "type": "javascript",
+  "language": "javascript",
+  "analysed": true,
+  "lines": 2,
+  "functions": []
+}

@@ -1,0 +1,72 @@
+{
+  "dependencyTree": {
+    "name": "index.js",
+    "ancestors": [],
+    "fileID": "43351ecb56f3a7e10f80143f717fe4ea",
+    "nodeID": "43351ecb56f3a7e10f80143f717fe4ea",
+    "children": [
+      {
+        "name": "vueComp.vue",
+        "ancestors": [
+          "43351ecb56f3a7e10f80143f717fe4ea"
+        ],
+        "fileID": "2ee11267e9df5d038de9e7a4b2c0bc92",
+        "nodeID": "69d3a430f1457082e545429a4df850a7",
+        "children": [
+          {
+            "name": "my-fancy-component.vue",
+            "ancestors": [
+              "43351ecb56f3a7e10f80143f717fe4ea",
+              "2ee11267e9df5d038de9e7a4b2c0bc92"
+            ],
+            "fileID": "e7ac6fb912669220c426b839e61a8454",
+            "nodeID": "4d0dd65239bc1bda6edd0be644601cd8",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "dependencyNodes": {
+    "43351ecb56f3a7e10f80143f717fe4ea": {
+      "fileID": "43351ecb56f3a7e10f80143f717fe4ea",
+      "name": "index.js",
+      "type": "javascript",
+      "extension": ".js",
+      "language": "javascript",
+      "lines": 2,
+      "analysed": true,
+      "relativePath": "/src/index.js",
+      "fileDescription": {},
+      "functions": [],
+      "children": [
+        "2ee11267e9df5d038de9e7a4b2c0bc92"
+      ]
+    },
+    "2ee11267e9df5d038de9e7a4b2c0bc92": {
+      "fileID": "2ee11267e9df5d038de9e7a4b2c0bc92",
+      "name": "vueComp.vue",
+      "type": "vue",
+      "extension": ".vue",
+      "language": "javascript",
+      "lines": 3,
+      "analysed": true,
+      "relativePath": "/src/vueComp.vue",
+      "fileDescription": {},
+      "functions": [],
+      "children": [
+        "e7ac6fb912669220c426b839e61a8454"
+      ]
+    },
+    "e7ac6fb912669220c426b839e61a8454": {
+      "fileID": "e7ac6fb912669220c426b839e61a8454",
+      "name": "my-fancy-component.vue",
+      "type": "vue",
+      "extension": ".vue",
+      "language": "javascript",
+      "relativePath": "/src/my-fancy-component.vue",
+      "fileDescription": {},
+      "children": []
+    }
+  }
+}
