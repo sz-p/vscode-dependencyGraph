@@ -1,0 +1,15 @@
+{
+  "entryFilePath": "files\\src\\index.js",
+  "alias": {
+    "compoment/": "./src/compoment"
+  },
+  "resolveExtensions": [
+    ".js",
+    ".jsx",
+    ".ts",
+    ".tsx",
+    ".vue",
+    ".scss",
+    ".less"
+  ]
+}
