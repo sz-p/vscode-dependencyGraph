@@ -15,12 +15,12 @@ const getAliasFromConfig = function (baseUrl: string, jsonPath?: string): object
     baseUrlFromConfig = configObj['compilerOptions']['baseUrl'] || './';
   }
   if (alias) {
-    for (let key in alias) {
-      // TODO change to array
-      if (alias[key][0]) {
-        alias[key] = path.join(baseUrlFromConfig, alias[key][0])
-      }
-    }
+    // for (let key in alias) {
+    //   // TODO change to array
+    //   if (alias[key][0]) {
+    //     alias[key] = path.join(baseUrlFromConfig, alias[key][0])
+    //   }
+    // }
     return alias
   }
   return false;
