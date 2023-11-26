@@ -1,7 +1,8 @@
 <template></template>
 
 <script setup lang="ts">
-import MyFancyComponent from 'compoment/my-fancy-component.vue';
+import MyFancyComponentComponent from 'compoment/my-fancy-component-compoment.vue';
+import MyFancyComponentSrc from '@/my-fancy-component-src.vue';
 </script>
 
 <style>

@@ -1,7 +1,8 @@
 {
   "entryFilePath": "files\\src\\index.js",
   "alias": {
-    "compoment/": "./files/src/compoment"
+    "@": "./files/src",
+    "compoment": "./files/src/compoment"
   },
   "resolveExtensions": [
     ".js",
