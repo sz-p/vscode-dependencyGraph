@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
-import { cloneDeep, merge } from "lodash";
+import { merge } from "lodash";
 import { defaultOptions } from "./defaultOptions";
 import {
   DependencyTreeOptions,
@@ -46,7 +46,7 @@ export class DependencyTree {
       absolutePath: "circularStructure",
       relativePath: "circularStructure",
       extension: "",
-      ancestors: [] as string[],
+      parent: null,
       children: [],
     };
   }
@@ -91,22 +91,60 @@ export class DependencyTree {
     }
   }
   /**
-   * use absolutePath and ancestors find circular structure
+   * use absolutePath and parent find circular structure
    *
    * @param {string} absolutePath
-   * @param {string[]} ancestors
+   * @param {DependencyTreeData | null} parent
    * @returns {boolean}
    */
   private isCircularStructure(
     absolutePath: string,
-    ancestors: string[]
+    parent: DependencyTreeData | null
   ): boolean {
-    for (let i = 0; i < ancestors.length; i++) {
-      if (absolutePath === ancestors[i]) {
-        return true;
+    while (parent) {
+      if (parent.absolutePath === absolutePath) {
+        return true
+      }
+      parent = parent.parent
+    }
+    return false
+  }
+  /**
+   * use absolutePath and parent find circular structure on Children
+   * @param {DependencyTreeData | null} parent
+   */
+  private removeRepeatNodeOnTee(dependencyTreeData: DependencyTreeData) {
+    const nodeStack = [{ ...dependencyTreeData, deep: 0 }];
+    let count = 0;
+    let removeCount = 0;
+    while (nodeStack.length) {
+      count++;
+      const node = nodeStack.pop() as DependencyTreeData;
+      const { children } = node
+      // console.log(`当前树节点数量: ${count} 当前节点深度: ${node.deep} 已移除重复子节点数量: ${removeCount} 剩余待分析节点数量: ${nodeStack.length}`)
+      node.children = [];
+      if (!children.length) {
+        continue
+      } else {
+        for (let i = 0; i < children.length; i++) {
+          const child = children[i];
+          if (this.isCircularStructure(child.absolutePath, node)) {
+            removeCount++;
+            const circularStructureNode = this.getCircularStructureNode(
+              child.absolutePath,
+              this.dependencyHash
+            )
+            node.children.push({ ...circularStructureNode, deep: (node.deep || 0) + 1 })
+          } else {
+            const nodeWithDeep = { ...child, deep: (node.deep || 0) + 1 }
+            node.children.push(nodeWithDeep);
+            if (child.children.length) {
+              nodeStack.unshift(nodeWithDeep);
+            }
+          }
+        }
       }
     }
-    return false;
   }
   /**
    * if fended CircularStructure create CircularStructureNode
@@ -119,67 +157,43 @@ export class DependencyTree {
     absolutePath: string,
     dependencyHash: DependencyHash
   ): DependencyTreeData {
-    let circularStructureNode = cloneDeep(dependencyHash[absolutePath]);
-    const circularStructureNodeChild = cloneDeep(this.circularStructureNode);
-    circularStructureNodeChild.ancestors = circularStructureNode.ancestors.concat(
-      absolutePath
-    );
-    circularStructureNode.children = [circularStructureNodeChild];
+    const circularStructureNodeChild = { ...this.circularStructureNode };
+    //! circularStructureNode id?
+    let circularStructureNode = { ...dependencyHash[absolutePath], children: [circularStructureNodeChild] };
+    circularStructureNodeChild.parent = circularStructureNode
     return circularStructureNode;
   }
   /**
-   * reset analysed node ancestor
+   * reset analyzed node parent
    *
    * @private
    * @param {string} absolutePath
-   * @param {string[]} ancestors
+   * @param { DependencyTreeData | null} parent
    * @param {DependencyTreeData} dependencyChildren
    * @memberof DependencyTree
    */
-  private reSetAnalysedNodesAncestors(
+  private reSetAnalyzedNodesParent(
     absolutePath: string,
-    ancestors: string[],
+    parent: DependencyTreeData | null,
     dependencyChildren: DependencyTreeData
   ) {
-    let nodeDeep = ancestors.length;
-    const dependencyChildrenAncestors = [].concat(ancestors as []) as string[];
-    dependencyChildrenAncestors.push(absolutePath);
-    dependencyChildren.ancestors = dependencyChildrenAncestors;
-    // if node have children reset children's ancestors
-    if (dependencyChildren.children) {
-      let stack = [].concat(
-        dependencyChildren.children as []
-      ) as DependencyTreeData[];
-      while (stack.length) {
-        let node = stack.pop() as DependencyTreeData;
-        if (node.name === "circularStructure") {
-          node.ancestors.splice(0, nodeDeep, ...dependencyChildrenAncestors, dependencyChildren.absolutePath);
-        } else {
-          node.ancestors.splice(0, nodeDeep, ...dependencyChildrenAncestors);
-        }
-        stack = stack.concat(node.children);
-      }
-    }
+    dependencyChildren.parent = parent
   }
   /**
    *
    *
    * @private
    * @param {string} absolutePath
-   * @param {string[]} ancestors
+   * @param {DependencyTreeData | null} parent
    * @param {string} childrenPath
    * @param {DependencyTreeData[]} dependencyList
    * @return {*}  {DependencyTreeData}
    * @memberof DependencyTree
    */
-  private getNewNode(absolutePath: string, ancestors: string[], childrenPath: string, dependencyList: DependencyTreeData[]): DependencyTreeData {
-    const dependencyChildrenAncestors = [].concat(
-      ancestors as []
-    ) as string[];
-    dependencyChildrenAncestors.push(absolutePath);
+  private getNewNode(absolutePath: string, parent: DependencyTreeData | null, childrenPath: string, dependencyList: DependencyTreeData[]): DependencyTreeData {
     const dependencyChildren = {
       absolutePath: childrenPath,
-      ancestors: dependencyChildrenAncestors as string[],
+      parent
     } as DependencyTreeData;
     this.triggerGetNewDependencyTreeNode(dependencyChildren);
     dependencyList.push(dependencyChildren);
@@ -208,16 +222,16 @@ export class DependencyTree {
     this.dependencyHash = {};
     this.dependencyTreeData = {
       absolutePath: entryPath,
-      ancestors: [] as string[],
+      parent: null,
       children: [] as DependencyTreeData[],
     } as DependencyTreeData;
-
+    let treeNodeCount = 0;
     const dependencyList = [this.dependencyTreeData];
     while (dependencyList.length) {
       const dependencyNode = dependencyList.pop();
       if (!dependencyNode) throw new Error("Error no dependencyNode");
 
-      let { absolutePath, ancestors } = dependencyNode;
+      let { absolutePath, parent } = dependencyNode;
 
       if (!isPathExists(absolutePath)) {
         console.error(`file does not exist: ${absolutePath}`);
@@ -242,9 +256,8 @@ export class DependencyTree {
         this.parsers
       );
       // if not set dependencyNode in dependencyHash before
-      // will not found analysed node
+      // will not found analyzed node
       this.dependencyHash[absolutePath] = dependencyNode;
-
       for (let i = 0; i < children.length; i++) {
         const childrenPath = children[i];
         if (!isPathExists(childrenPath)) {
@@ -253,13 +266,13 @@ export class DependencyTree {
         }
 
         let dependencyChildren = undefined;
-        // old node; node was analysed
+        // old node; node was analyzed
         if (this.dependencyHash[childrenPath]) {
           // if (!this.dependencyHash[childrenPath].name) {
           //   // import a file from the same file twice will cloneDeep a not analyzed dependencyChildren
           //   continue;
           // }
-          if (this.isCircularStructure(childrenPath, ancestors)) {
+          if (this.isCircularStructure(childrenPath, dependencyNode)) {
             dependencyChildren = this.getCircularStructureNode(
               childrenPath,
               this.dependencyHash
@@ -269,28 +282,32 @@ export class DependencyTree {
               this.dependencyHash
             );
           } else {
-            dependencyChildren = cloneDeep(this.dependencyHash[childrenPath]);
+            dependencyChildren = { ...this.dependencyHash[childrenPath], };
             this.triggerGetOldDependencyTreeNode(dependencyChildren);
           }
-          this.reSetAnalysedNodesAncestors(
+          this.reSetAnalyzedNodesParent(
             absolutePath,
-            ancestors,
+            dependencyNode,
             dependencyChildren
           );
-          // not analysed
+          // not analyzed
           if (!dependencyChildren.name) {
-            dependencyChildren = this.getNewNode(absolutePath, ancestors, childrenPath, dependencyList)
+            dependencyChildren = this.getNewNode(absolutePath, dependencyNode, childrenPath, dependencyList)
           }
         }
         // find new node
         else {
-          dependencyChildren = this.getNewNode(absolutePath, ancestors, childrenPath, dependencyList)
+          dependencyChildren = this.getNewNode(absolutePath, dependencyNode, childrenPath, dependencyList)
         }
         dependencyNode.children.push(dependencyChildren);
+        treeNodeCount++;
+        // console.log('已分析文件数量：' + Object.keys(this.dependencyHash).length, '依赖树节点：' + treeNodeCount)
       }
       // cloneDeep
       // this.dependencyHash[absolutePath] = cloneDeep(dependencyNode);
     }
+    // console.log(`正在移除文件依赖关系中的重复节点`)
+    this.removeRepeatNodeOnTee(this.dependencyTreeData);
     return {
       dependencyTree: this.dependencyTreeData,
       dependencyNodes: this.dependencyHash,
