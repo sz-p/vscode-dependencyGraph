@@ -206,6 +206,7 @@ export const getFunctionInformation = function (
   nodePath: NodePath<namedTypes.Function>
 ): FunctionInformation {
   const functionInfo = {} as FunctionInformation;
+  //! fix this
   nodePath = cloneDeep(nodePath)
   const {
     FunctionDeclaration,
