@@ -7,42 +7,53 @@ import * as md5 from "md5";
 import { DependencyHash } from "@packages/dependency-tree";
 import { DependencyTreeData } from "./dependencyTreeData.d";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
-import * as stringRandom from "string-random";
 
 const getFileID = function (dependencyTreeData: DependencyTreeData) {
-  return md5(dependencyTreeData.relativePath);
+  try {
+    return md5(dependencyTreeData.relativePath);
+  }
+  catch (e) {
+    new Error(e)
+  }
 };
 const getNodeID = function (dependencyTreeData: DependencyTreeData) {
-  let ancestors = [].concat(dependencyTreeData.ancestors as []) as string[];
-  if (dependencyTreeData.relativePath === 'circularStructure') {
-    ancestors.push(dependencyTreeData.relativePath);
-  } else {
-    ancestors.push(dependencyTreeData.relativePath);
+  let md5Hash = undefined
+  let ancestorsString = dependencyTreeData.relativePath;
+  let loopTempVar = dependencyTreeData.parent
+  while (loopTempVar) {
+    ancestorsString = loopTempVar.relativePath + ancestorsString;
+    loopTempVar = loopTempVar.parent;
   }
-  return md5(ancestors.toString());
+  md5Hash = md5(ancestorsString);
+  return md5Hash
 };
-const getAncestors = function (
-  dependencyTreeData: DependencyTreeData,
-  dirPath: string
-) {
-  let ancestors = [];
-  for (let i = 0; i < dependencyTreeData.ancestors.length; i++) {
-    const relativePath = dependencyTreeData.ancestors[i].replace(dirPath, "");
-    let nodeHash = md5(relativePath);
-    ancestors.push(nodeHash);
-  }
-  return ancestors;
-};
+// const getParentId = function (
+//   dependencyTreeData: DependencyTreeData,
+//   dirPath: string
+// ) {
+//   let ancestors = [];
+//   for (let i = 0; i < dependencyTreeData.ancestors.length; i++) {
+//     const relativePath = dependencyTreeData.ancestors[i].replace(dirPath, "");
+//     let nodeHash = md5(relativePath);
+//     ancestors.push(nodeHash);
+//   }
+//   return ancestors;
+// };
 export const dependenciesTreeDataToTransportsData = function (
   dependencyTreeData: DependencyTreeData,
   dependencyTreeNodes: DependencyHash,
   dirPath: string
 ): { dependencyTree: DependencyTree; dependencyNodes: DependencyNodes } {
+  // console.log(`开始数据转换`)
   let dependencyNodes = {} as DependencyNodes;
   let dependencyTree = {} as DependencyTree;
   // change DependencyHash to DependencyNodes (change the hash table key from absolutePath to relativePath md5)
   // set fileID
+  let dependencyNodeCount = 0;
+  let dependencyTreeDataHashTableNodeCount = 0;
   for (let key in dependencyTreeNodes) {
+    dependencyNodeCount++;
+    // console.log(`已分离的文件数量：${dependencyNodeCount}`)
     const dependencyTreeNode = dependencyTreeNodes[key] as DependencyTreeData;
     const md5Hash = getFileID(dependencyTreeNode);
     dependencyNodes[md5Hash] = {
@@ -53,7 +64,7 @@ export const dependenciesTreeDataToTransportsData = function (
       extension: dependencyTreeNode.extension,
       language: dependencyTreeNode.language,
       lines: dependencyTreeNode.lines,
-      analysed: dependencyTreeNode.analysed,
+      analyzed: dependencyTreeNode.analyzed,
       relativePath: dependencyTreeNode.relativePath,
       fileDescription: dependencyTreeNode.fileDescription,
       functions: dependencyTreeNode.functions,
@@ -68,32 +79,40 @@ export const dependenciesTreeDataToTransportsData = function (
     dependencyNode["fileID"] = md5Hash;
   }
   let dependencyTreeDataHashTable = [
-    { node: dependencyTreeData, tree: dependencyTree },
+    { node: { ...dependencyTreeData, nodeDeep: 0 }, tree: dependencyTree },
   ];
   // create DependencyTree by DependencyNodes and DependencyTreeData
   // set nodeID
   while (dependencyTreeDataHashTable.length) {
-    let { node, tree } = dependencyTreeDataHashTable.pop() as {
+    dependencyTreeDataHashTableNodeCount++;
+    // console.log(`已分离的节点数量：${dependencyTreeDataHashTableNodeCount}`)
+    let { node, tree } = dependencyTreeDataHashTable.shift() as {
       node: DependencyTreeData;
       tree: DependencyTree;
     };
     tree.name = node.name;
-    tree.ancestors = getAncestors(node, dirPath);
-    node.ancestors = tree.ancestors;
     tree.fileID = getFileID(node);
     node.fileID = tree.fileID;
     tree.nodeID = getNodeID(node);
     node.nodeID = tree.nodeID;
     tree.children = [] as DependencyTree[];
     for (let i = 0; i < node.children.length; i++) {
-      let treeChild = {} as DependencyTree;
+      let treeChild = {
+        parentNodeID: tree.nodeID
+      } as DependencyTree;
       tree.children.push(treeChild);
+      const nextDeep = node.nodeDeep + 1;
+      if (nextDeep > 3) {
+        treeChild.children = [];
+        continue
+      }
       dependencyTreeDataHashTable.push({
-        node: node.children[i],
+        node: { ...node.children[i], nodeDeep: nextDeep },
         tree: treeChild,
       });
     }
   }
+  // console.log(`数据转换完毕`)
   return { dependencyTree, dependencyNodes };
 };
 export const transportsDataToDependenciesTreeData = function (
@@ -119,13 +138,13 @@ export const transportsDataToDependenciesTreeData = function (
     dependencyTreeData.name = dependencyTree.name;
     dependencyTreeData.fileID = dependencyTree.fileID;
     dependencyTreeData.nodeID = dependencyTree.nodeID;
-    dependencyTreeData.ancestors = dependencyTree.ancestors;
+    // dependencyTreeData.parent = dependencyTree.parent;
     dependencyTreeData.fileDescription = nodesData.fileDescription;
     dependencyTreeData.circularStructure = nodesData.circularStructure;
     dependencyTreeData.type = nodesData.type;
     dependencyTreeData.language = nodesData.language;
     dependencyTreeData.lines = nodesData.lines;
-    dependencyTreeData.analysed = nodesData.analysed;
+    dependencyTreeData.analyzed = nodesData.analyzed;
     dependencyTreeData.functions = nodesData.functions;
     dependencyTreeData.extension = nodesData.extension;
     dependencyTreeData.absolutePath = dirPath + nodesData.relativePath;
