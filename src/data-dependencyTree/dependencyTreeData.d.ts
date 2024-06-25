@@ -21,17 +21,18 @@ export interface DependencyTreeData {
   name: string;
   fileID: string;
   nodeID: string;
+  nodeDeep: number;
   fileDescription: FileInformation;
   circularStructure?: true;
   type: string;
   language: "javascript" | "css" | "file";
   lines: number | undefined;
-  analysed: boolean;
+  analyzed: boolean;
   functions: FunctionInformation[] | [];
   extension: string;
   absolutePath: string;
   relativePath: string;
-  ancestors: string[];
+  parent: DependencyTreeData;
   children: Array<DependencyTreeData>;
 }
 
@@ -40,7 +41,7 @@ export interface DependencyTree {
   nodeID: string;
   fileID: string;
   children: Array<DependencyTree>;
-  ancestors: string[];
+  parentNodeID: string;
 }
 
 //TODO extends
@@ -52,7 +53,7 @@ export interface DependencyNode {
   type: string;
   language: "javascript" | "css" | "file";
   lines: number | undefined;
-  analysed: boolean;
+  analyzed: boolean;
   functions: FunctionInformation[] | [];
   extension: string;
   relativePath: string;

@@ -34,7 +34,7 @@ const fileInfoView = function (props) {
   className = "fileInfoView";
   const {
     name,
-    analysed,
+    analyzed,
     type,
     lines,
     fileDescription,
@@ -105,7 +105,7 @@ const fileInfoView = function (props) {
             {i18n.getText(METHODS)}:
         </div>
           <FunctionsBox
-            analysed={analysed}
+            analyzed={analyzed}
             type={type}
             activeThemeKind={activeThemeKind}
             functionsList={functions}

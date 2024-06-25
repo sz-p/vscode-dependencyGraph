@@ -18,7 +18,7 @@ export const onGotJsAST = function (
   AST: any
 ) {
   const functionsList = [] as FunctionInformation[];
-  dependencyNode.analysed = true;
+  dependencyNode.analyzed = true;
   dependencyNode.lines = AST.loc?.end.line;
   visit(AST, {
     visitFunction(nodePath) {
@@ -36,7 +36,7 @@ export const onGotJsCircularStructureNode = function (
 ) {
   const circularStructureNode = dependencyNode.children[0];
   circularStructureNode.type = getFileIconNameByFileName(circularStructureNode.name);
-  circularStructureNode.analysed = false;
+  circularStructureNode.analyzed = false;
   circularStructureNode.fileDescription = {
     introduction: i18n.getText(CIRCULAR_STRUCTURE_NODE_INTRODUCTION),
     description: i18n.getText(CIRCULAR_STRUCTURE_NODE_DESCRIPTION),

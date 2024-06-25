@@ -17,8 +17,8 @@ const options = {
 };
 let monacoEditor = undefined;
 export const FunctionsBox = function (props) {
-  const { analysed, functionsList, activeThemeKind, type, language } = props;
-  if (!analysed || !functionsList || !type) {
+  const { analyzed, functionsList, activeThemeKind, type, language } = props;
+  if (!analyzed || !functionsList || !type) {
     return <div>{i18n.getText(METHODS_ANALYZED_FAILED)}</div>;
   }
   let codeText = "";
