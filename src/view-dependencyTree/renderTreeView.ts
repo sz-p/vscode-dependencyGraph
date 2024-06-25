@@ -7,14 +7,14 @@ export const renderTreeView = function (
   const DTD = dependencyTreeData
     ? dependencyTreeData
     : (({
-        name: undefined,
-        type: undefined,
-        absolutePath: undefined,
-        relativePath: undefined,
-        extension: undefined,
-        children: [],
-        ancestors: [],
-      } as unknown) as DependencyTreeData);
+      name: undefined,
+      type: undefined,
+      absolutePath: undefined,
+      relativePath: undefined,
+      extension: undefined,
+      children: [],
+      parent: null,
+    } as unknown) as DependencyTreeData);
   vscode.window.registerTreeDataProvider(
     "dependencygraphExplorer-DependencyTree",
     new DependenciesTreeProvider(DTD)
