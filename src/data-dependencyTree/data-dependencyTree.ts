@@ -28,6 +28,9 @@ import { setData, getData } from "../utils/fileSystem/data";
 import { StatusCallBack } from "./getDataStatusCallBack";
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
+// import { Profile } from "../utils/profile"
+// const getDependencyTreeProfile = new Profile('getDependencyTree');
+// const dependenciesTreeDataToTransportsDataProfile = new Profile('dependenciesTreeDataToTransportsData');
 /**
  * Check whether the folder was opened
  *
@@ -100,18 +103,28 @@ const checkDataFromAnalyser = function (
     tree: DependencyTree;
   }
   | false {
-  const { dependencyTree: dp, dependencyNodes } = getDependencyTree(
-    path.join(folderPath, mainFilePath),
-    folderPath,
-    {
-      alias,
-      resolveExtensions,
-      onGotFileString,
-      onGotAST,
-      onGotCircularStructureNode,
-    }
-  );
+  // getDependencyTreeProfile.start()
+  let dependencyTreeData = undefined;
   try {
+    dependencyTreeData = getDependencyTree(
+      path.join(folderPath, mainFilePath),
+      folderPath,
+      {
+        alias,
+        resolveExtensions,
+        onGotFileString,
+        onGotAST,
+        onGotCircularStructureNode,
+      });
+  } catch (e) {
+    // getDependencyTreeProfile.end()
+    return false;
+  }
+  // getDependencyTreeProfile.end()
+  try {
+    const { dependencyTree: dp, dependencyNodes } = dependencyTreeData
+    // console.log('dependenciesTreeDataToTransportsData')
+    // dependenciesTreeDataToTransportsDataProfile.start()
     const {
       dependencyNodes: nodes,
       dependencyTree: tree,
@@ -121,11 +134,14 @@ const checkDataFromAnalyser = function (
       folderPath
     );
     if (!dp) {
+      // dependenciesTreeDataToTransportsDataProfile.end()
       return false;
     } else {
+      // dependenciesTreeDataToTransportsDataProfile.end()
       return { dp: dp as DependencyTreeData, nodes, tree };
     }
   } catch (e) {
+    // dependenciesTreeDataToTransportsDataProfile.end()
     return false;
   }
 
@@ -202,6 +218,7 @@ export const getDependencyTreeData = async (
     statusCallBack ? await statusCallBack.checkGetDataFromAnalyserError() : null;
   } else {
     const { dp, tree, nodes } = dataFromAnalyser;
+    // console.log(`开始向前端传输数据`)
     statusCallBack ? await statusCallBack.checkGetDataFromAnalyserSuccess() : null;
     return {
       dependencyTreeData: dp,
