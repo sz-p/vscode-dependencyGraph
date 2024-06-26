@@ -6,7 +6,7 @@
 import * as md5 from "md5";
 import { DependencyHash } from "@packages/dependency-tree";
 import { DependencyTreeData } from "./dependencyTreeData.d";
-import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
+import { DependencyTree, DependencyNodes, DependencyNode } from "./dependencyTreeData.d";
 
 const getFileID = function (dependencyTreeData: DependencyTreeData) {
   try {
@@ -134,12 +134,21 @@ export const transportsDataToDependenciesTreeData = function (
       dependencyTree: DependencyTree;
       dependencyTreeData: DependencyTreeData;
     };
-    const nodesData = dependencyNodes[dependencyTree.fileID];
+    let nodesData = dependencyNodes[dependencyTree.fileID];
 
     dependencyTreeData.name = dependencyTree.name;
     dependencyTreeData.fileID = dependencyTree.fileID;
     dependencyTreeData.nodeID = dependencyTree.nodeID;
     // dependencyTreeData.parent = dependencyTree.parent;
+    if (!nodesData && dependencyTreeData.name === 'circularStructure') {
+      nodesData = {
+        name: 'circularStructure',
+        circularStructure: true,
+        type: 'circularStructure',
+        fileDescription: {},
+        relativePath: "circularStructure"
+      } as DependencyNode
+    }
     dependencyTreeData.fileDescription = nodesData.fileDescription;
     dependencyTreeData.circularStructure = nodesData.circularStructure;
     dependencyTreeData.type = nodesData.type;
