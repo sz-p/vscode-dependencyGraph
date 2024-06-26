@@ -3,6 +3,7 @@ import { onError } from "../error/onError";
 import { NO_WEBVIEW_PANEL } from "../error/errorKey";
 import { StatusKey } from "../../data-dependencyTree/statusType";
 import { MsgKey, MESSAGE_GET_DATA_STATUS } from "./messagesKeys";
+import { logger } from "../logger";
 const waitTime = function (waitTime: number) {
   return new Promise((resolve, reject) => {
     setTimeout(resolve, waitTime || 0);
@@ -16,6 +17,10 @@ export const postMessage = async function (msg: Msg) {
     while (messagesQueue.length) {
       let ms = messagesQueue.pop();
       // postMessage is not real async just wait more 500ms
+      logger.debug({
+        "POST-MESSAGE-TO-WEBVIEW-KEY": ms.key,
+        "POST-MESSAGE-TO-WEBVIEW-VALUE": ms.value
+      })
       const postMessageStatus = await global.webViewPanel.webview.postMessage(ms);
       await waitTime(500)
       if (!postMessageStatus) {

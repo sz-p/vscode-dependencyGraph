@@ -12,6 +12,7 @@ import { onError } from "./utils/error/onError";
 import { NO_FOLDER } from "./utils/error/errorKey";
 import { exportSvg, exportPng } from "./utils/fileSystem/svgAndPng";
 import { msgRunCommandStatus } from "./utils/message/messages";
+import { logger } from "./utils/logger"
 
 /**
  * get command open folder
@@ -85,6 +86,18 @@ const actionUpDateData = async function (msg: Msg) {
     msgRunCommandStatus("command", msg.key, false).post();
   }
 };
+const actionLogToLocal = function (msg: Msg) {
+  switch (msg.value) {
+    case 'debug': {
+      logger.debug(msg.description)
+      return
+    }
+    case 'info': {
+      logger.info(msg.description)
+      return
+    }
+  }
+}
 const messageCase = () => {
   return new Map([
     [MESSAGES.MESSAGE_OPEN_FILE_FROM_WEBVIEW, actionOpenFile],
@@ -94,6 +107,7 @@ const messageCase = () => {
     [MESSAGES.MESSAGE_UPDATE_DATA, actionUpDateData],
     [MESSAGES.MESSAGE_EXPORT_SVG, actionExportSvg],
     [MESSAGES.MESSAGE_EXPORT_PNG, actionExportPng],
+    [MESSAGES.MESSAGE_WEBVIEW_LOG, actionLogToLocal]
   ]);
 };
 
@@ -102,7 +116,8 @@ export const processMessage = function (msg: Msg) {
   if (typeof messageFunction === "function") {
     messageFunction(msg);
   } else {
-    console.log("unwatch message: ");
-    console.log(msg.key);
+    logger.debug({
+      "unwatch message: ": msg.key,
+    })
   }
 };

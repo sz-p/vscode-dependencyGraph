@@ -102,10 +102,11 @@ export const dependenciesTreeDataToTransportsData = function (
       } as DependencyTree;
       tree.children.push(treeChild);
       const nextDeep = node.nodeDeep + 1;
-      if (nextDeep > 3) {
-        treeChild.children = [];
-        continue
-      }
+      // TODO
+      // if (nextDeep > 3) {
+      //   treeChild.children = [];
+      //   continue
+      // }
       dependencyTreeDataHashTable.push({
         node: { ...node.children[i], nodeDeep: nextDeep },
         tree: treeChild,

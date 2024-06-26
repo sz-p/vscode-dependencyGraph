@@ -1,6 +1,7 @@
 import * as action from "./actions/action.js";
 import * as MESSAGES from "../../utils/message/messagesKeys";
 import { store } from "./reducers/store";
+import { msgWebViewLog } from "./utils/messages.js";
 const messageCase = () => {
   return new Map([
     [MESSAGES.MESSAGE_GET_DATA_STATUS, action.action_changeGetDataStatus],
@@ -22,6 +23,10 @@ const messageCase = () => {
 
 export const processMessage = function (event) {
   const messageFunction = messageCase().get(event.data.key);
+  msgWebViewLog("debug", {
+    "GET-MESSAGE-ON-WEBVIEW-KEY": event.data.key,
+    "GET-MESSAGE-ON-WEBVIEW-VALUE": event.data.value,
+  }).post();
   if (typeof messageFunction === "function") {
     store.dispatch(messageFunction(event));
   } else {

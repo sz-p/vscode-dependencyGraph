@@ -166,6 +166,7 @@
     "monaco-editor": "^0.21.2",
     "monaco-editor-webpack-plugin": "^2.0.0",
     "office-ui-fabric-react": "^7.183.1",
+    "pino": "^9.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-monaco-editor": "^0.41.1",

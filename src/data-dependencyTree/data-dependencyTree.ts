@@ -218,7 +218,6 @@ export const getDependencyTreeData = async (
     statusCallBack ? await statusCallBack.checkGetDataFromAnalyserError() : null;
   } else {
     const { dp, tree, nodes } = dataFromAnalyser;
-    // console.log(`开始向前端传输数据`)
     statusCallBack ? await statusCallBack.checkGetDataFromAnalyserSuccess() : null;
     return {
       dependencyTreeData: dp,

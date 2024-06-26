@@ -15,6 +15,7 @@ import {
   SETTING_KEY_ENTRY_FILE_PATH,
   SETTING_KEY_RESOLVE_EXTENSIONS,
   SETTING_KEY_ALIAS,
+  SETTING_KEY_LOG
 } from "../settingKey";
 import { getAliasFromLocalSetting } from "./getAliasFromLocalSetting";
 const getSettingFilePath = function (): string | false {
@@ -96,3 +97,7 @@ export const getActiveTheme = function () {
   const kind = vscode.window.activeColorTheme.kind;
   return vscode.ColorThemeKind[kind];
 };
+
+export const getLog = function () {
+  return getSetting(SETTING_KEY_LOG);
+}
