@@ -26,11 +26,10 @@ export const processMessage = function (event) {
   msgWebViewLog("debug", {
     "GET-MESSAGE-ON-WEBVIEW-KEY": event.data.key,
     "GET-MESSAGE-ON-WEBVIEW-VALUE": event.data.value,
-  }).post();
+  })
   if (typeof messageFunction === "function") {
     store.dispatch(messageFunction(event));
   } else {
-    window.console.log("unwatch message: ");
-    window.console.log(event.data);
+    msgWebViewLog("debug", `unwatch message: ${event.data.key}`);
   }
 };

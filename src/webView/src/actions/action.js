@@ -1,18 +1,22 @@
 import { createAction } from "redux-actions";
 import * as type from "./actionType";
 import { transportsDataToDependenciesTreeData } from "../../../data-dependencyTree/processTreeData.ts";
+import { msgWebViewLog } from "../utils/messages.js";
 const returnParams = function (Params) {
   return Params;
 };
 const getDependenciesTreeData = function (Params) {
   try {
+    msgWebViewLog("debug", "start transportsDataToDependenciesTreeData")
     const data = transportsDataToDependenciesTreeData(
       Params.data.value.data.dependencyTree,
       Params.data.value.data.dependencyNodes,
       Params.data.value.folderPath
     );
+    msgWebViewLog("debug", "end transportsDataToDependenciesTreeData")
     return data;
   } catch (error) {
+    msgWebViewLog("error", "transportsDataToDependenciesTreeData error")
     return false;
   }
 };
