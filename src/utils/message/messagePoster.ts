@@ -9,45 +9,52 @@ const waitTime = function (waitTime: number) {
     setTimeout(resolve, waitTime || 0);
   })
 }
-const messagesQueue = [] as Msg[];
-export const postMessage = async function (msg: Msg) {
-  if (global.webViewPanel) {
-    messagesQueue.push(msg)
-    await waitTime(500)
-    while (messagesQueue.length) {
-      let ms = messagesQueue.pop();
-      // postMessage is not real async just wait more 500ms
-      logger.debug({
-        "POST-MESSAGE-TO-WEBVIEW-KEY": ms.key,
-        "POST-MESSAGE-TO-WEBVIEW-VALUE": ms.value
-      })
-      const postMessageStatus = await global.webViewPanel.webview.postMessage(ms);
-      await waitTime(500)
-      if (!postMessageStatus) {
-        onError(NO_WEBVIEW_PANEL);
+class MessagePoster {
+  messagesQueue: Msg[];
+  status: 'posting' | 'emptyMessagesQueue' | 'waitingWebViewPanel' | 'waitingWebViewReady';
+  constructor() {
+    this.messagesQueue = [];
+  }
+  newMsg(msg: Msg) {
+    this.messagesQueue.push(msg);
+    this.startPost();
+  }
+  clearMessagesQueue() {
+    this.messagesQueue = [];
+  }
+  async startPost() {
+    if (this.status !== 'posting') {
+      this.status = 'posting';
+      while (this.messagesQueue.length) {
+        if (global.webViewPanel) {
+          if (global.webViewReady) {
+            let ms = this.messagesQueue.pop();
+            logger.debug({
+              "POST-MESSAGE-TO-WEBVIEW-KEY": ms.key,
+              "POST-MESSAGE-TO-WEBVIEW-VALUE": ms.value
+            })
+            const postMessageStatus = await global.webViewPanel.webview.postMessage(ms);
+            if (!postMessageStatus) {
+              logger.error("NO_WEBVIEW_PANEL")
+              onError(NO_WEBVIEW_PANEL);
+            }
+          } else {
+            logger.debug("webView is not ready")
+            await waitTime(500)
+            this.status = 'waitingWebViewReady';
+          }
+        }
+        else {
+          logger.error("webview panel is not ready")
+          this.status = 'waitingWebViewPanel';
+          break;
+        }
       }
+      this.status = 'emptyMessagesQueue';
     }
-  } else {
-    onError(NO_WEBVIEW_PANEL);
-  }
-};
-export class MessagePoster {
-  msg: {
-    key: MsgKey;
-    value: any;
-    description: string | undefined;
-  };
-  constructor(key: MsgKey, value: any, description?: string) {
-    this.msg = {
-      key: key,
-      value: value,
-      description: description,
-    };
-  }
-  async post() {
-    await postMessage(this.msg);
   }
 }
+export const messagePoster = new MessagePoster();
 export class StatusMessagePoster {
   msg: {
     key: MsgKey;
@@ -69,10 +76,10 @@ export class StatusMessagePoster {
   }
   async postSuccess() {
     this.msg.value.status = "success";
-    await postMessage(this.msg);
+    messagePoster.newMsg(this.msg);
   }
   async postError() {
     this.msg.value.status = "error";
-    await postMessage(this.msg);
+    messagePoster.newMsg(this.msg);
   }
 }

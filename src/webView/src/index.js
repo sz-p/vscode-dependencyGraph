@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import { App } from "./app";
 import { processMessage } from "./processMessage";
-
+import { msgWebViewReady, msgWebViewLog } from "./utils/messages.js";
 import "./index.css";
 
 const removeLoading = function () {
@@ -21,4 +21,6 @@ window.addEventListener("message", (event) => {
 });
 const root = window.document.getElementById("root");
 ReactDOM.render(<App />, root);
+msgWebViewReady.post();
+msgWebViewLog("info", "web view ready")
 removeLoading();

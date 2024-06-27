@@ -51,7 +51,7 @@ export class StatusCallBack {
     // this.postMessage ? await msgGetSavedData.post() : null;
   }
   async checkGetDataFromFileSuccess() {
-    this.postMessage ? await msgGetSavedData.post() : null;
+    this.postMessage ? msgGetSavedData() : null;
   }
   async checkGetDataFromAnalyserError() {
     onError(NO_DEPENDENCY);

@@ -37,9 +37,9 @@ const actionSetSetting = async function (msg: Msg) {
   // msgRunCommandStatus("waiting", msg.value.key, true).post();
   try {
     await setSetting(msg.value.key, msg.value.value);
-    msgRunCommandStatus("setting", msg.value.key, true).post();
+    msgRunCommandStatus("setting", msg.value.key, true)
   } catch (e) {
-    msgRunCommandStatus("setting", msg.value.key, false).post();
+    msgRunCommandStatus("setting", msg.value.key, false);
     onError(NO_FOLDER, e);
   }
   if (msg.value.key === SETTING_KEY_ENTRY_FILE_PATH) {
@@ -51,9 +51,9 @@ const actionExportSvg = async function (msg: Msg) {
   // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
     await exportSvg(msg.value);
-    msgRunCommandStatus("command", msg.key, true).post();
+    msgRunCommandStatus("command", msg.key, true)
   } catch (e) {
-    msgRunCommandStatus("command", msg.key, false).post();
+    msgRunCommandStatus("command", msg.key, false)
   }
 };
 const actionExportPng = async function (msg: Msg) {
@@ -61,9 +61,9 @@ const actionExportPng = async function (msg: Msg) {
   // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
     await exportPng(msg.value);
-    msgRunCommandStatus("command", msg.key, true).post();
+    msgRunCommandStatus("command", msg.key, true)
   } catch (e) {
-    msgRunCommandStatus("command", msg.key, false).post();
+    msgRunCommandStatus("command", msg.key, false)
   }
 };
 const actionSaveData = async function (msg: Msg) {
@@ -71,9 +71,9 @@ const actionSaveData = async function (msg: Msg) {
   // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
     await vscode.commands.executeCommand("dependencygraph.saveData");
-    msgRunCommandStatus("command", msg.key, true).post();
+    msgRunCommandStatus("command", msg.key, true)
   } catch (e) {
-    msgRunCommandStatus("command", msg.key, false).post();
+    msgRunCommandStatus("command", msg.key, false)
   }
 };
 const actionUpDateData = async function (msg: Msg) {
@@ -81,22 +81,29 @@ const actionUpDateData = async function (msg: Msg) {
   // msgRunCommandStatus("waiting", msg.key, true).post();
   try {
     await vscode.commands.executeCommand("dependencygraph.upDateData");
-    msgRunCommandStatus("command", msg.key, true).post();
+    msgRunCommandStatus("command", msg.key, true)
   } catch (e) {
-    msgRunCommandStatus("command", msg.key, false).post();
+    msgRunCommandStatus("command", msg.key, false)
   }
 };
 const actionLogToLocal = function (msg: Msg) {
   switch (msg.value) {
     case 'debug': {
-      logger.debug(msg.description)
+      logger.debug({'WEBVIEW_LOG': msg.description })
       return
     }
     case 'info': {
-      logger.info(msg.description)
+      logger.info({'WEBVIEW_LOG': msg.description })
+      return
+    }
+    case 'error': {
+      logger.error({'WEBVIEW_LOG': msg.description })
       return
     }
   }
+}
+const actionWebViewReady = function () {
+  global.webViewReady = true
 }
 const messageCase = () => {
   return new Map([
@@ -107,7 +114,8 @@ const messageCase = () => {
     [MESSAGES.MESSAGE_UPDATE_DATA, actionUpDateData],
     [MESSAGES.MESSAGE_EXPORT_SVG, actionExportSvg],
     [MESSAGES.MESSAGE_EXPORT_PNG, actionExportPng],
-    [MESSAGES.MESSAGE_WEBVIEW_LOG, actionLogToLocal]
+    [MESSAGES.MESSAGE_WEBVIEW_LOG, actionLogToLocal],
+    [MESSAGES.MESSAGE_WEBVIEW_READY, actionWebViewReady]
   ]);
 };
 

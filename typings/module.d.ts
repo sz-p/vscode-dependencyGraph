@@ -14,15 +14,16 @@ declare global {
   namespace NodeJS {
     interface Global {
       webViewPanel: vscode.WebviewPanel | undefined;
+      webViewReady: boolean | undefined;
       dependencyTreeData:
-        | {
-            dependencyTreeData: DependencyTreeData;
-            transportsData: {
-              dependencyTree: DependencyTree;
-              dependencyNodes: DependencyNodes;
-            };
-          }
-        | undefined;
+      | {
+        dependencyTreeData: DependencyTreeData;
+        transportsData: {
+          dependencyTree: DependencyTree;
+          dependencyNodes: DependencyNodes;
+        };
+      }
+      | undefined;
     }
   }
 }

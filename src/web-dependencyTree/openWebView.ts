@@ -7,23 +7,23 @@ import * as path from "path";
 import * as fs from "fs";
 import { webViewHTMLPath } from "../paths";
 import { getBaseWebViewUri } from "../utils/getWebViewUri";
-import { postMessage } from "../utils/message/messagePoster";
+import { messagePoster } from "../utils/message/messagePoster";
 import {
   MESSAGE_ASSETS_BASE_URL,
   MESSAGE_DEPENDENCY_TREE_DATA,
   MESSAGE_FOLDER_PATH,
+  MESSAGE_GET_LANGUAGE,
+  MESSAGE_GET_ACTIVE_THEME_KIND
 } from "../utils/message/messagesKeys";
 import { DependencyTreeData } from "../data-dependencyTree/dependencyTreeData";
 import { createWebviewPanel } from "../initExtension";
 import { getCurrentFolderPath } from "../utils/getCurrentFolderPath";
-import { getAllSettingFromSettingFile } from "../utils/fileSystem/setting/setting";
+import { getAllSettingFromSettingFile, getActiveTheme } from "../utils/fileSystem/setting/setting";
 import { SETTING_KEY_ENTRY_FILE_PATH } from "../utils/fileSystem/settingKey";
 import {
   statusMsgGetFolderPath,
   statusMsgGetEntryFile,
   statusMsgGetDependencyData,
-  msgGetLanguage,
-  msgGetActiveThemeKind,
   postSetting,
   msgGetSavedData,
 } from "../utils/message/messages";
@@ -32,6 +32,7 @@ import { isPathExists } from "../utils/utils";
 import { onError } from "../utils/error/onError";
 import { GET_DEPENDENCY_TREE_FAIL, NO_WEBVIEW_PANEL } from "../utils/error/errorKey";
 import { isSavedData } from "../utils/fileSystem/data";
+import { logger } from "../utils/logger";
 
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
@@ -86,12 +87,18 @@ export const createView = function (): void {
  */
 export const postNecessaryMessageWhenCreateView = function (): void {
   // post language
-  msgGetLanguage.post();
+  messagePoster.newMsg({
+    key: MESSAGE_GET_LANGUAGE,
+    value: vscode.env.language,
+  });
   const folderPath = getCurrentFolderPath();
-  postMessage({ key: MESSAGE_FOLDER_PATH, value: folderPath });
-  msgGetActiveThemeKind.post();
+  messagePoster.newMsg({ key: MESSAGE_FOLDER_PATH, value: folderPath });
+  messagePoster.newMsg({
+    key: MESSAGE_GET_ACTIVE_THEME_KIND,
+    value: getActiveTheme()
+  })
   const baseWebViewUri = getBaseWebViewUri()
-  postMessage({
+  messagePoster.newMsg({
     key: MESSAGE_ASSETS_BASE_URL,
     value: baseWebViewUri,
   });
@@ -103,6 +110,8 @@ export const reOpenWebView = function (
   const columnToShowIn = vscode.window.activeTextEditor
     ? vscode.window.activeTextEditor.viewColumn
     : undefined;
+  logger.info("reopen webView");
+  messagePoster.clearMessagesQueue();
   if (global.webViewPanel) {
     // 如果我们已经有了一个面板，那就把它显示到目标列布局中
     global.webViewPanel.reveal(columnToShowIn);
@@ -118,7 +127,7 @@ export const reOpenWebView = function (
       statusMsgGetFolderPath.postError();
     }
     if (isSavedData()) {
-      msgGetSavedData.post();
+      msgGetSavedData;
     }
     if (
       entryFilePath &&
@@ -134,6 +143,7 @@ export const reOpenWebView = function (
 export const openWebView = function (
   dependencyTreeData: DependencyTreeData | undefined
 ) {
+  logger.info("open webView");
   const folderPath = getCurrentFolderPath();
   if (!dependencyTreeData || !Object.keys(dependencyTreeData).length) {
     onError(GET_DEPENDENCY_TREE_FAIL);
@@ -142,7 +152,7 @@ export const openWebView = function (
   }
   const setting = getAllSettingFromSettingFile();
   postSetting(setting);
-  postMessage({
+  messagePoster.newMsg({
     key: MESSAGE_DEPENDENCY_TREE_DATA,
     value: {
       data: global.dependencyTreeData?.transportsData,
