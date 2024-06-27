@@ -1,6 +1,7 @@
 const paths = require("./paths");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports = {
   mode: "development",
   entry: [paths.mainjs, paths.monacoDir],
@@ -54,6 +55,7 @@ module.exports = {
       languages: ["javascript"],
       features: ["coreCommands"],
     }),
+    new CleanWebpackPlugin(),
   ],
   devtool: "source-map",
 };

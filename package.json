@@ -153,6 +153,7 @@
     "ast-types": "^0.14.2",
     "babylon": "^6.18.0",
     "chai": "^4.3.0",
+    "clean-webpack-plugin": "^4.0.0",
     "cssom": "^0.4.4",
     "d3": "^5.16.0",
     "enhanced-resolve": "5.8.2",

@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const fs = require("fs");
 const watchOptions = {
   aggregateTimeout: 300,
-  ignored: /node_modules/,
+  ignored: ["**/node_modules", "**/outExtension", "**/outWebView"],
   poll: 1000,
 };
 const buildCallback = (err, stats) => {
