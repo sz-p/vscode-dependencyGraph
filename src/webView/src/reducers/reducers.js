@@ -1,6 +1,7 @@
 import * as type from "../actions/actionType";
 import { i18n } from "../../../i18n/i18n";
 import { initialState } from "./initialState";
+import { STATUS_DECODE_DEPENDENCY_DATA } from "../../../data-dependencyTree/statusType";
 const actionsCase = () => {
   const change_getDataStatus = (state, action) => {
     const data = action.payload.data;
@@ -25,10 +26,30 @@ const actionsCase = () => {
         dependencyTreeData: data,
         gotDependencyTreeData: true,
       });
+      newState = change_getDataStatus(newState, {
+        payload: {
+          data: {
+            value: {
+              type: STATUS_DECODE_DEPENDENCY_DATA,
+              status: "success",
+            },
+          },
+        },
+      });
     } else {
       newState = Object.assign({}, state, {
         dependencyTreeData: undefined,
         gotDependencyTreeData: false,
+      });
+      newState = change_getDataStatus(newState, {
+        payload: {
+          data: {
+            value: {
+              type: STATUS_DECODE_DEPENDENCY_DATA,
+              status: "error",
+            },
+          },
+        },
       });
     }
 

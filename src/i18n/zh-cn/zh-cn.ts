@@ -58,6 +58,7 @@ zhcn[status.STATUS_GET_DEPENDENCY_DATA_GET_PACKAGE_JSON] =
 zhcn[status.STATUS_GET_DEPENDENCY_DATA_GET_ENTRY_FILE] = "获取入口文件";
 zhcn[status.STATUS_GET_DEPENDENCY_DATA_GET_DATA] = "获取依赖树";
 zhcn[status.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA] = "处理依赖树数据";
+zhcn[status.STATUS_DECODE_DEPENDENCY_DATA] = "解析依赖树数据";
 
 zhcn[types.FILE_LINES] = "文件行数";
 zhcn[types.FILE_TYPE] = "文件类型";

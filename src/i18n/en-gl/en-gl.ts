@@ -60,7 +60,8 @@ engl[status.STATUS_GET_DEPENDENCY_DATA_GET_ENTRY_FILE] = "Get entry file";
 engl[status.STATUS_GET_DEPENDENCY_DATA_GET_DATA] = "Get dependency data";
 engl[status.STATUS_GET_DEPENDENCY_DATA_PROCESS_DATA] =
   "Process dependency data";
-
+engl[status.STATUS_DECODE_DEPENDENCY_DATA] =
+  "Decode dependency data";
 engl[types.FILE_LINES] = "File lineNumbers";
 engl[types.FILE_TYPE] = "File type";
 engl[types.FILE_PATH] = "File path";
