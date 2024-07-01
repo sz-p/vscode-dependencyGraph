@@ -247,7 +247,7 @@ export class DependencyTree {
         );
         continue;
       }
-      const children = parser(
+      let children = parser(
         dependencyNode,
         absolutePath,
         codeString,
@@ -255,6 +255,10 @@ export class DependencyTree {
         this.parseRule,
         this.parsers
       );
+      // remove repeated child
+      if (children.length >= 2) {
+        children = Array.from(new Set(children));
+      }
       // if not set dependencyNode in dependencyHash before
       // will not found analyzed node
       this.dependencyHash[absolutePath] = dependencyNode;
