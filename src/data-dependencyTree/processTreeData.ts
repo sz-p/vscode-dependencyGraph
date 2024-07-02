@@ -16,15 +16,8 @@ const getFileID = function (dependencyTreeData: DependencyTreeData) {
     new Error(e)
   }
 };
-const getNodeID = function (dependencyTreeData: DependencyTreeData) {
-  let md5Hash = undefined
-  let ancestorsString = dependencyTreeData.relativePath;
-  let loopTempVar = dependencyTreeData.parent
-  while (loopTempVar) {
-    ancestorsString = loopTempVar.relativePath + ancestorsString;
-    loopTempVar = loopTempVar.parent;
-  }
-  md5Hash = md5(ancestorsString);
+const getChildNodeID = function (parentNodeID: string, fileID: string) {
+  const md5Hash = md5(parentNodeID + fileID);
   return md5Hash
 };
 // const getParentId = function (
@@ -93,7 +86,6 @@ export const dependenciesTreeDataToTransportsData = function (
     tree.name = node.name;
     tree.fileID = getFileID(node);
     node.fileID = tree.fileID;
-    tree.nodeID = getNodeID(node);
     node.nodeID = tree.nodeID;
     tree.children = [] as DependencyTree[];
     for (let i = 0; i < node.children.length; i++) {
@@ -124,7 +116,7 @@ export const transportsDataToDependenciesTreeData = function (
   let dependencyTreeData = {} as DependencyTreeData;
 
   let dependencyTreeDataHashTable = [
-    { dependencyTree: dependencyTree, dependencyTreeData: dependencyTreeData },
+    { dependencyTree: { ...dependencyTree, nodeID: dependencyTree.fileID }, dependencyTreeData: dependencyTreeData },
   ];
   while (dependencyTreeDataHashTable.length) {
     let {
@@ -165,7 +157,10 @@ export const transportsDataToDependenciesTreeData = function (
       let child = {} as DependencyTreeData;
       dependencyTreeData.children.push(child);
       dependencyTreeDataHashTable.push({
-        dependencyTree: dependencyTree.children[i],
+        dependencyTree: {
+          ...dependencyTree.children[i],
+          nodeID: getChildNodeID(dependencyTree.nodeID, dependencyTree.children[i].fileID)
+        },
         dependencyTreeData: child,
       });
     }
