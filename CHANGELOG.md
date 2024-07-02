@@ -1,3 +1,7 @@
+## [1.2.1](https://github.com/sz-p/vscode-dependencyGraph/compare/1.2.0...1.2.1) (2024-07-02)
+
+
+
 # [1.2.0](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.11...v1.2.0) (2024-07-02)
 
 
