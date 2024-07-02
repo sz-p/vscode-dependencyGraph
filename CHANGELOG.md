@@ -1,3 +1,33 @@
+# [1.2.0](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.11...v1.2.0) (2024-07-02)
+
+
+### Bug Fixes
+
+* create circularStructure node when it id not found in dependencyNodes ([e80a7af](https://github.com/sz-p/vscode-dependencyGraph/commit/e80a7af093c6837c7f1b27704a0d994044d37897))
+* get nodeID from backend to webView for fix get  the same nodeID ([5b520cb](https://github.com/sz-p/vscode-dependencyGraph/commit/5b520cb6f894b1465adf20473b73be460422d5ff))
+* test script run different in mac and win ([503855a](https://github.com/sz-p/vscode-dependencyGraph/commit/503855a270f2a55e765fc6743c63c66feb76c356))
+* test script run error ([492ff0d](https://github.com/sz-p/vscode-dependencyGraph/commit/492ff0d699b91a5b897d540e826dbce1bb5b1e8f))
+
+
+### Features
+
+* add clean-webpack-plugin to clean outWebview bundle ([c664424](https://github.com/sz-p/vscode-dependencyGraph/commit/c664424247005f63b2639cccf485388c5f364552))
+* add info log ([2cdd2f5](https://github.com/sz-p/vscode-dependencyGraph/commit/2cdd2f5382b6933daa72975160e22e893c2f65b2))
+* add log system ([7a2b87a](https://github.com/sz-p/vscode-dependencyGraph/commit/7a2b87af735842f2d3a0f4132cf9c68d3fa6ca63))
+* add profile analyse script ([d5bd5d7](https://github.com/sz-p/vscode-dependencyGraph/commit/d5bd5d75a01e7b25acadcd1b8b9150fafc322d57))
+* create class to get heapsnapshot cpuprofile ([a5084fe](https://github.com/sz-p/vscode-dependencyGraph/commit/a5084fe534112e64f7b90b53128c920b1de4417a))
+* DependencyTreeData add deep attr ([8c07cb1](https://github.com/sz-p/vscode-dependencyGraph/commit/8c07cb1af51bb0c89713eac48b1fe228d37cea3d))
+* new status DECODE_DEPENDENCY_DATA ([1438e0c](https://github.com/sz-p/vscode-dependencyGraph/commit/1438e0c457532feb6da24c4719417604feb3760b))
+* Profile analyse start with time ([8229ddb](https://github.com/sz-p/vscode-dependencyGraph/commit/8229ddb1031168e74def32382c743a32b06f4e71))
+* remove repeated child on dependency tree view ([9956951](https://github.com/sz-p/vscode-dependencyGraph/commit/9956951be7acebf7361c90052a74fa6d48293a51))
+* reset ancestors to parent ([e2da184](https://github.com/sz-p/vscode-dependencyGraph/commit/e2da18415c733d0200c2f704a6f24720bc27f27c))
+* update generalJavaScriptParser ([80f3ccf](https://github.com/sz-p/vscode-dependencyGraph/commit/80f3ccf27426b889061635ef104b171a853c221e))
+* update message poster to wait webview ready ([6988b4a](https://github.com/sz-p/vscode-dependencyGraph/commit/6988b4a9488e44f35e4afce3524f0ccd5b6bc729))
+* use parent object replace ancestors string list to zip file size ([641c4ea](https://github.com/sz-p/vscode-dependencyGraph/commit/641c4ea4757681cb3ff852430cfb4a447863cf85))
+* use parent object replace ancestors string list to zip file size ([3409085](https://github.com/sz-p/vscode-dependencyGraph/commit/3409085a422e067f3bff6449cea0283f1067b067))
+
+
+
 ## [1.1.11](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.1.10...v1.1.11) (2022-05-24)
 
 
