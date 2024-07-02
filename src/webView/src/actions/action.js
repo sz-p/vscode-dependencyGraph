@@ -16,7 +16,7 @@ const getDependenciesTreeData = function (Params) {
     msgWebViewLog("debug", "end transportsDataToDependenciesTreeData")
     return data;
   } catch (error) {
-    msgWebViewLog("error", "transportsDataToDependenciesTreeData error")
+    msgWebViewLog("error", "transportsDataToDependenciesTreeData error", error)
     return false;
   }
 };
