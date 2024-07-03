@@ -28,6 +28,7 @@ import { setData, getData } from "../utils/fileSystem/data";
 import { StatusCallBack } from "./getDataStatusCallBack";
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
 import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
+import { logger } from "../utils/logger"
 // import { Profile } from "../utils/profile"
 // const getDependencyTreeProfile = new Profile('getDependencyTree');
 // const dependenciesTreeDataToTransportsDataProfile = new Profile('dependenciesTreeDataToTransportsData');
@@ -80,6 +81,7 @@ const checkDataFromFile = function ():
     };
   }
   | false {
+
   let dpDataFromFile = getData();
   return dpDataFromFile || false;
 };
@@ -103,6 +105,7 @@ const checkDataFromAnalyser = function (
     tree: DependencyTree;
   }
   | false {
+  logger.debug("start getDependencyTree");
   // getDependencyTreeProfile.start()
   let dependencyTreeData = undefined;
   try {
@@ -117,13 +120,16 @@ const checkDataFromAnalyser = function (
         onGotCircularStructureNode,
       });
   } catch (e) {
+    logger.error("getDependencyTree error", e);
     // getDependencyTreeProfile.end()
     return false;
   }
+  logger.debug("stop getDependencyTree");
   // getDependencyTreeProfile.end()
   try {
     const { dependencyTree: dp, dependencyNodes } = dependencyTreeData
     // console.log('dependenciesTreeDataToTransportsData')
+    logger.debug("start dependenciesTreeDataToTransportsDataProfile");
     // dependenciesTreeDataToTransportsDataProfile.start()
     const {
       dependencyNodes: nodes,
@@ -134,13 +140,16 @@ const checkDataFromAnalyser = function (
       folderPath
     );
     if (!dp) {
+      logger.error("stop dependenciesTreeDataToTransportsDataProfile");
       // dependenciesTreeDataToTransportsDataProfile.end()
       return false;
     } else {
+      logger.debug("stop dependenciesTreeDataToTransportsDataProfile");
       // dependenciesTreeDataToTransportsDataProfile.end()
       return { dp: dp as DependencyTreeData, nodes, tree };
     }
   } catch (e) {
+    logger.error("error dependenciesTreeDataToTransportsDataProfile", e);
     // dependenciesTreeDataToTransportsDataProfile.end()
     return false;
   }
@@ -175,8 +184,8 @@ export const getDependencyTreeData = async (
   }
   | undefined
 > => {
-  const setting = getAllSettingFromSettingFile();
   const folderPath = checkFolderPath();
+  logger.info("getDependencyTreeData");
   if (!folderPath) {
     statusCallBack ? await statusCallBack.checkFolderPathError() : null;
     return undefined;
@@ -184,6 +193,7 @@ export const getDependencyTreeData = async (
     statusCallBack ? await statusCallBack.checkFolderPathSuccess() : null;
   }
   const mainFilePath = checkMainFilePath(folderPath);
+  logger.info("mainFilePath");
   if (mainFilePath === NO_PACKAGE_JSON) {
     statusCallBack ? await statusCallBack.checkPackageJsonError() : null;
     return undefined;
@@ -200,14 +210,17 @@ export const getDependencyTreeData = async (
     resolveExtensions = defaultOptions.resolveExtensions;
     setResolveExtension(resolveExtensions);
   }
+  logger.info("try checkDataFromFile");
   const dpDataFromFile = checkDataFromFile();
   if (!dpDataFromFile) {
   } else {
     if (!refresh) {
       statusCallBack ? await statusCallBack.checkGetDataFromFileSuccess() : null;
+      logger.info("checkDataFromFile");
       return dpDataFromFile;
     }
   }
+  logger.info("try checkDataFromAnalyser");
   const dataFromAnalyser = checkDataFromAnalyser(
     folderPath,
     mainFilePath,
@@ -219,6 +232,7 @@ export const getDependencyTreeData = async (
   } else {
     const { dp, tree, nodes } = dataFromAnalyser;
     statusCallBack ? await statusCallBack.checkGetDataFromAnalyserSuccess() : null;
+    logger.info("getDependencyTreeData success");
     return {
       dependencyTreeData: dp,
       transportsData: {
