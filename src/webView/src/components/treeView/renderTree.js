@@ -2,6 +2,7 @@ import * as d3 from "d3";
 import { throttle } from "../../utils/utils";
 import { store } from "../../reducers/store";
 import { action_selectNode } from "../../actions/action";
+import { msgWebViewLog } from "../../utils/messages";
 
 const diagonal = function (s, d) {
   const path = `M ${s.y} ${s.x}
@@ -229,9 +230,7 @@ export class D3Tree {
   appendNodeName() {
     this.nodeTextDom = this.nodeDom
       .append("text")
-      .attr("text-anchor", (d) =>
-        d.children || d._children ? "end" : "start"
-      )
+      .attr("text-anchor", (d) => (d.children || d._children ? "end" : "start"))
       .attr("dominant-baseline", "middle")
       .attr("fill", this.DEFAULT_TEXT_COLOR)
       .attr("font-family", this.DEFAULT_FONT_FAMILY)
@@ -297,9 +296,7 @@ export class D3Tree {
       .attr("y", () => -this.ICON_SIZE / 2)
       .attr("width", this.ICON_SIZE)
       .attr("height", this.ICON_SIZE)
-      .attr("transform", (d) =>
-        d.children ? "rotate(180)" : "rotate(0)"
-      );
+      .attr("transform", (d) => (d.children ? "rotate(180)" : "rotate(0)"));
   }
   enterNodeIcon() {
     this.nodeEnter
@@ -349,9 +346,7 @@ export class D3Tree {
       .select("image.arrowButton")
       .transition()
       .duration(this.DURATION_TIME)
-      .attr("transform", (d) =>
-        d.children ? "rotate(180)" : "rotate(0)"
-      );
+      .attr("transform", (d) => (d.children ? "rotate(180)" : "rotate(0)"));
   }
   getLinks() {
     this.linksData = this.svg
@@ -442,14 +437,15 @@ export class D3Tree {
       d3.event.stopPropagation();
     };
   }
-  openToNode(data) {
-    if (!data.ancestors) console.log("error");
+  openToNode(ancestors) {
+    if (!ancestors || !ancestors.length) {
+      msgWebViewLog("error", "openToNode failed no ancestors to open");
+    }
     let temp = this.root;
     let updateSource = null;
     let updateTarget = null;
-    data.ancestors.push(data.fileID);
     // find child by node's ancestors
-    for (let i = 0; i < data.ancestors.length; i++) {
+    for (let i = 0; i < ancestors.length; i++) {
       // children is not hash table so here is a loop
       if (temp && !temp.children) {
         if (!updateSource) {
@@ -461,7 +457,7 @@ export class D3Tree {
         temp._children = tempChildren;
       }
       for (let j = 0; j < temp.children.length; j++) {
-        if (temp.children[j].data.fileID === data.ancestors[i]) {
+        if (temp.children[j].data.relativePath === ancestors[i]) {
           temp = temp.children[j];
           updateTarget = temp;
           if (temp && !temp.children) {
@@ -504,8 +500,8 @@ export class D3Tree {
         return this.DEFAULT_TEXT_COLOR;
       });
   }
-  focusOnNode(data) {
-    const updateTarget = this.openToNode(data);
+  focusOnNode(ancestors) {
+    const updateTarget = this.openToNode(ancestors);
     let transformToNode = undefined;
     let transformX = undefined;
     let transformY = undefined;

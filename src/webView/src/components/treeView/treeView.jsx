@@ -36,7 +36,7 @@ const treeView = function (props) {
     };
   }, [dependencyTreeData, assetsBaseURL]);
   useEffect(() => {
-    if (focusOn) focusOnNode(focusOn.fileData);
+    if (focusOn) focusOnNode(focusOn.ancestors);
     console.log(focusOn);
   }, [focusOn]);
   const viewStatus = gotDependencyTreeData ? "treeView" : "treeView hidden";

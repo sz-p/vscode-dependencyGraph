@@ -80,10 +80,10 @@ const saveData = () => {
 
 export const command_focusOnNode = vscode.commands.registerCommand(
   "dependencygraph.focusOnNode",
-  (fileName, fileData) => {
+  (fileName, ancestors) => {
     messagePoster.newMsg({
       key: MESSAGE_FOCUS_ON_NODE,
-      value: { fileName, fileData },
+      value: { fileName, ancestors },
     });
   }
 );

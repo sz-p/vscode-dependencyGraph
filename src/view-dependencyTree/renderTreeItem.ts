@@ -1,8 +1,8 @@
-import { DependencyTreeData } from "../data-dependencyTree/dependencyTreeData";
+import { DependencyTreeDataInTreeView } from "./DependenciesTreeProvider"
 import { getFileIconPathByFileType } from "../utils/fileIcons/getFileIcon";
 import * as vscode from "vscode";
 
-export function renderTreeItem(data: DependencyTreeData): vscode.TreeItem {
+export function renderTreeItem(data: DependencyTreeDataInTreeView): vscode.TreeItem {
   const hasChildren = data.children.length ? true : false;
   const collapsibleState = hasChildren
     ? vscode.TreeItemCollapsibleState.Collapsed
@@ -13,7 +13,7 @@ export function renderTreeItem(data: DependencyTreeData): vscode.TreeItem {
   treeItem.command = {
     command: "dependencygraph.focusOnNode",
     title: "focusOnNode",
-    arguments: [data.name, data],
+    arguments: [data.name, data.ancestors],
   };
   return treeItem;
 }

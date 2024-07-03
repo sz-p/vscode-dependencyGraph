@@ -2,19 +2,44 @@ import * as vscode from "vscode";
 import { DependencyTreeData } from "../data-dependencyTree/dependencyTreeData";
 import { renderTreeItem } from "./renderTreeItem";
 
-export class DependenciesTreeProvider
-  implements vscode.TreeDataProvider<DependencyTreeData> {
-  constructor(private dependencyTreeData: DependencyTreeData) {}
+export type DependencyTreeDataInTreeView = {
+  children: DependencyTreeData[],
+  name: string,
+  relativePath: string,
+  type: string,
+  ancestors: string[]
+}
 
-  getTreeItem(node: DependencyTreeData): vscode.TreeItem {
+export class DependenciesTreeProvider
+  implements vscode.TreeDataProvider<DependencyTreeDataInTreeView> {
+  constructor(private dependencyTreeData: DependencyTreeData) { }
+
+  getTreeItem(node: DependencyTreeDataInTreeView): vscode.TreeItem {
     return renderTreeItem(node);
   }
 
-  getChildren(node?: DependencyTreeData): DependencyTreeData[] {
+  getChildren(node?: DependencyTreeDataInTreeView): DependencyTreeDataInTreeView[] {
     if (node) {
-      return node.children;
+      return node.children.map((child) => {
+        const { name, relativePath, type, fileID, children } = child
+        return {
+          children,
+          name,
+          relativePath,
+          type,
+          fileID,
+          ancestors: [...node.ancestors, relativePath],
+        };
+      });
     } else {
-      return [this.dependencyTreeData];
+      const { name, relativePath, type, children } = this.dependencyTreeData
+      return [{
+        children,
+        name,
+        relativePath,
+        type,
+        ancestors: [relativePath],
+      }];
     }
   }
 }
