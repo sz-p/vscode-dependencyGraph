@@ -456,7 +456,7 @@ export class D3Tree {
         temp.children = temp._children;
         temp._children = tempChildren;
       }
-      for (let j = 0; j < temp.children.length; j++) {
+      for (let j = 0; j < temp?.children?.length; j++) {
         if (temp.children[j].data.relativePath === ancestors[i]) {
           temp = temp.children[j];
           updateTarget = temp;
