@@ -221,6 +221,10 @@ export const getDependencyTreeData = async (
     }
   }
   logger.info("try checkDataFromAnalyser");
+  statusCallBack ? await statusCallBack.startGetDependencyTreeDataSuccess() : null;
+  // before getDependencyTree wait post all status
+  statusCallBack ? await statusCallBack.allStatusPosted() : null;
+  // checkDataFromAnalyser maybe be slow
   const dataFromAnalyser = checkDataFromAnalyser(
     folderPath,
     mainFilePath,

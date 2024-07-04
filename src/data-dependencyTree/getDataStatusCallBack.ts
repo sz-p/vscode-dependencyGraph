@@ -8,8 +8,11 @@ import {
   statusMsgGetEntryFile,
   statusMsgGetFolderPath,
   statusMsgGetPackageJsonPath,
+  statusMsgStartGetDependencyTreeData,
+  statusMsgStartPostDependencyTreeData,
   msgGetSavedData,
 } from "../utils/message/messages";
+import { messagePoster } from "../utils/message/messagePoster"
 import {
   NO_DEPENDENCY,
   NO_FOLDER,
@@ -52,6 +55,15 @@ export class StatusCallBack {
   }
   async checkGetDataFromFileSuccess() {
     this.postMessage ? msgGetSavedData() : null;
+  }
+  async startGetDependencyTreeDataSuccess() {
+    this.postMessage ? await statusMsgStartGetDependencyTreeData.postSuccess() : null;
+  }
+  async StartPostDependencyTreeDataSuccess() {
+    this.postMessage ? await statusMsgStartPostDependencyTreeData.postSuccess() : null;
+  }
+  async allStatusPosted() {
+    this.postMessage ? await messagePoster.allMessagesPosted() : null;
   }
   async checkGetDataFromAnalyserError() {
     onError(NO_DEPENDENCY);

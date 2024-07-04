@@ -4,11 +4,7 @@ import { NO_WEBVIEW_PANEL } from "../error/errorKey";
 import { StatusKey } from "../../data-dependencyTree/statusType";
 import { MsgKey, MESSAGE_GET_DATA_STATUS } from "./messagesKeys";
 import { logger } from "../logger";
-const waitTime = function (waitTime: number) {
-  return new Promise((resolve, reject) => {
-    setTimeout(resolve, waitTime || 0);
-  })
-}
+import { waitTime } from "../utils";
 class MessagePoster {
   messagesQueue: Msg[];
   status: 'posting' | 'emptyMessagesQueue' | 'waitingWebViewPanel' | 'waitingWebViewReady';
@@ -19,6 +15,11 @@ class MessagePoster {
     this.messagesQueue.push(msg);
     this.startPost();
   }
+  async allMessagesPosted() {
+    while (this.messagesQueue.length !== 0) {
+      await waitTime(0)
+    }
+  }
   clearMessagesQueue() {
     this.messagesQueue = [];
   }
@@ -28,7 +29,7 @@ class MessagePoster {
       while (this.messagesQueue.length) {
         if (global.webViewPanel) {
           if (global.webViewReady) {
-            let ms = this.messagesQueue.pop();
+            let ms = this.messagesQueue.shift();
             logger.debug({
               "POST-MESSAGE-TO-WEBVIEW-KEY": ms.key,
               "POST-MESSAGE-TO-WEBVIEW-VALUE": ms.value
@@ -40,12 +41,13 @@ class MessagePoster {
             }
           } else {
             logger.debug("webView is not ready")
-            await waitTime(500)
+            await waitTime(10)
             this.status = 'waitingWebViewReady';
           }
         }
         else {
           logger.error("webview panel is not ready")
+          await waitTime(10)
           this.status = 'waitingWebViewPanel';
           break;
         }
@@ -76,10 +78,10 @@ export class StatusMessagePoster {
   }
   async postSuccess() {
     this.msg.value.status = "success";
-    messagePoster.newMsg(this.msg);
+    await messagePoster.newMsg(this.msg);
   }
   async postError() {
     this.msg.value.status = "error";
-    messagePoster.newMsg(this.msg);
+    await messagePoster.newMsg(this.msg);
   }
 }
