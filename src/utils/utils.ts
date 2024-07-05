@@ -65,3 +65,9 @@ export const thenAbleWithTimeout = (
     new Promise((_r) => (timer = setTimeout(_r, time))),
   ]).finally(() => clearTimeout(timer));
 };
+
+export const waitTime = function (waitTime: number) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, waitTime || 0);
+  })
+}

@@ -11,7 +11,7 @@ import { createView, openWebView } from "./web-dependencyTree/openWebView";
 import { allCommands } from "./commands";
 import { renderTreeView } from "./view-dependencyTree/renderTreeView";
 import { logger } from "./utils/logger";
-
+import { msgPostDependencyTreeDataToWebView } from "./utils/message/messages"
 // this method is called when your extension is started
 export async function activate(context: vscode.ExtensionContext) {
   // init commands
@@ -25,21 +25,25 @@ export async function activate(context: vscode.ExtensionContext) {
   initExtension();
   // create webView content
   logger.info("create web view")
-  createView();
+  await createView();
+  // create webView content
   const scb = new StatusCallBack(true);
+  logger.info("open web view")
+  openWebView();
   // get dependency tree data
   logger.info("start get dependency tree data")
   const dependencyTreeData = await getDependencyTreeData(false, scb);
 
   global.dependencyTreeData = dependencyTreeData;
 
-  // openWebView
-  logger.info("open web view with dependency tree data")
-  openWebView(dependencyTreeData?.dependencyTreeData);
-
   // render tree view
   logger.info("render tree view in treeDataProvider")
   renderTreeView(dependencyTreeData?.dependencyTreeData);
+
+  // openWebView
+  logger.info("open web view with dependency tree data")
+  msgPostDependencyTreeDataToWebView();
+
 }
 
 // this method is called when your extension is deactivated

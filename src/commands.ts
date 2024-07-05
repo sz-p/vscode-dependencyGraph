@@ -1,17 +1,14 @@
 import * as vscode from "vscode";
 import { getDependencyTreeData } from "./data-dependencyTree/data-dependencyTree";
 import { StatusCallBack } from "./data-dependencyTree/getDataStatusCallBack";
-import { createView } from "./web-dependencyTree/openWebView";
+import { createView, reOpenWebViewWithTreeData } from "./web-dependencyTree/openWebView";
 import { messagePoster } from "./utils/message/messagePoster";
-import { reOpenWebView } from "./web-dependencyTree/openWebView";
 import { renderTreeView } from "./view-dependencyTree/renderTreeView";
 import {
-  MESSAGE_DEPENDENCY_TREE_DATA,
   MESSAGE_FOCUS_ON_NODE,
   MESSAGE_UPDATE_WEBVIEW,
-  MsgKey,
 } from "./utils/message/messagesKeys";
-import { msgGetSavedData } from "./utils/message/messages";
+import { msgGetSavedData, msgPostDependencyTreeDataToWebView } from "./utils/message/messages";
 import * as stringRandom from "string-random";
 import { setData, isSavedData } from "./utils/fileSystem/data";
 import { thenAbleWithTimeout } from "./utils/utils";
@@ -53,13 +50,7 @@ const refreshFile = async (): Promise<boolean> => {
     global.dependencyTreeData = data;
     renderTreeView(global.dependencyTreeData.dependencyTreeData);
     if (global.webViewPanel) {
-      messagePoster.newMsg({
-        key: MESSAGE_DEPENDENCY_TREE_DATA,
-        value: {
-          data: data.transportsData,
-          folderPath: getCurrentFolderPath(),
-        },
-      });
+      msgPostDependencyTreeDataToWebView()
     }
     return true;
   } else {
@@ -91,9 +82,9 @@ export const command_reOpenView = vscode.commands.registerCommand(
   "dependencygraph.reOpenView",
   (fileName, fileData) => {
     if (global.dependencyTreeData) {
-      reOpenWebView(global.dependencyTreeData.dependencyTreeData);
+      reOpenWebViewWithTreeData(global.dependencyTreeData.dependencyTreeData);
     } else {
-      reOpenWebView(undefined);
+      reOpenWebViewWithTreeData(undefined);
     }
   }
 );

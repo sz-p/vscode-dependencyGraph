@@ -8,9 +8,9 @@ import * as fs from "fs";
 import { webViewHTMLPath } from "../paths";
 import { getBaseWebViewUri } from "../utils/getWebViewUri";
 import { messagePoster } from "../utils/message/messagePoster";
+import { msgPostDependencyTreeDataToWebView } from "../utils/message/messages"
 import {
   MESSAGE_ASSETS_BASE_URL,
-  MESSAGE_DEPENDENCY_TREE_DATA,
   MESSAGE_FOLDER_PATH,
   MESSAGE_GET_LANGUAGE,
   MESSAGE_GET_ACTIVE_THEME_KIND
@@ -33,7 +33,7 @@ import { onError } from "../utils/error/onError";
 import { GET_DEPENDENCY_TREE_FAIL, NO_WEBVIEW_PANEL } from "../utils/error/errorKey";
 import { isSavedData } from "../utils/fileSystem/data";
 import { logger } from "../utils/logger";
-
+import { waitTime } from "../utils/utils";
 /**
  * 从某个HTML文件读取能被Webview加载的HTML内容
  * @param {*} templatePath 相对于插件根目录的html文件绝对路径
@@ -65,13 +65,16 @@ function getWebViewContent(templatePath: string) {
 /**
  * @description create view
  */
-export const createView = function (): void {
+export const createView = async function (): Promise<void> {
   if (global.webViewPanel) {
     global.webViewPanel.iconPath = vscode.Uri.file(paths.dependencygraphPNG);
     global.webViewPanel.webview.html = getWebViewContent(webViewHTMLPath);
     global.webViewPanel.onDidDispose(() => {
       global.webViewPanel = undefined;
     });
+    while (!global.webViewReady) {
+      await waitTime(10)
+    }
     postNecessaryMessageWhenCreateView();
   }
 };
@@ -103,14 +106,11 @@ export const postNecessaryMessageWhenCreateView = function (): void {
     value: baseWebViewUri,
   });
 };
-
-export const reOpenWebView = function (
-  dependencyTreeData: DependencyTreeData | undefined
-) {
+const initWebView = function () {
   const columnToShowIn = vscode.window.activeTextEditor
     ? vscode.window.activeTextEditor.viewColumn
     : undefined;
-  logger.info("reopen webView");
+  logger.info("reopen webView with tree data");
   messagePoster.clearMessagesQueue();
   if (global.webViewPanel) {
     // 如果我们已经有了一个面板，那就把它显示到目标列布局中
@@ -137,14 +137,20 @@ export const reOpenWebView = function (
     } else {
       statusMsgGetEntryFile.postError();
     }
-    openWebView(dependencyTreeData);
   }
-};
-export const openWebView = function (
+}
+export const reOpenWebViewWithTreeData = function (
   dependencyTreeData: DependencyTreeData | undefined
 ) {
-  logger.info("open webView");
-  const folderPath = getCurrentFolderPath();
+  initWebView();
+  if (global.webViewPanel) {
+    openWebViewWithTreeData(dependencyTreeData);
+  }
+};
+export const openWebViewWithTreeData = function (
+  dependencyTreeData: DependencyTreeData | undefined
+) {
+  logger.info("open webView with tree data");
   if (!dependencyTreeData || !Object.keys(dependencyTreeData).length) {
     onError(GET_DEPENDENCY_TREE_FAIL);
     statusMsgGetDependencyData.postError();
@@ -152,11 +158,11 @@ export const openWebView = function (
   }
   const setting = getAllSettingFromSettingFile();
   postSetting(setting);
-  messagePoster.newMsg({
-    key: MESSAGE_DEPENDENCY_TREE_DATA,
-    value: {
-      data: global.dependencyTreeData?.transportsData,
-      folderPath,
-    },
-  });
+  msgPostDependencyTreeDataToWebView();
 };
+
+export const openWebView = function () {
+  logger.info("open webView");
+  const setting = getAllSettingFromSettingFile();
+  postSetting(setting);
+}
