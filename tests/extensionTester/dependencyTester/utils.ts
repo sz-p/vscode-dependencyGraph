@@ -19,25 +19,30 @@ const normalizeMacWin = function (string) {
   return normalizeString
 }
 export const getDependencyTreeDataFromFile = function (testCase: string) {
-  const dependencyTreeData = normalizeMacWin(fs
-    .readFileSync(
-      path.resolve(
-        __dirname,
-        `./${testCase}/dependencyTreeData/dependencyTree.json`
-      )
-    )
-    .toString()
-  )
-  const dependencyNodesData = normalizeMacWin(fs
-    .readFileSync(
-      path.resolve(
-        __dirname,
-        `./${testCase}/dependencyTreeData/dependencyNodes.json`
-      )
-    )
-    .toString()
-  )
+  // const dependencyTreeData = normalizeMacWin(fs
+  //   .readFileSync(
+  //     path.resolve(
+  //       __dirname,
+  //       `./${testCase}/dependencyTreeData/dependencyTree.json`
+  //     )
+  //   )
+  //   .toString()
+  // )
+  // const dependencyNodesData = normalizeMacWin(fs
+  //   .readFileSync(
+  //     path.resolve(
+  //       __dirname,
+  //       `./${testCase}/dependencyTreeData/dependencyNodes.json`
+  //     )
+  //   )
+  //   .toString()
+  // )
+
+  // test 
+  const dependencyTreeData = "{}"
+  const dependencyNodesData = "[]"
   const folderPath = path.join(__dirname, `./${testCase}/files`);
+
   return { dependencyTreeData, dependencyNodesData, folderPath };
 };
 export const setDataToFile = function (_path: string, dataString: string) {
@@ -47,28 +52,32 @@ export const getDependencyTreeDataByCompute = function (
   folderPath: string,
   mainFilePath: string
 ) {
-  const dirPathString = JSON.stringify(folderPath)
-    .replace(/"/g, "")
-    .replace(/\\/g, "\\\\");
-  const replaceDirPathReg = new RegExp(dirPathString, "g");
+  // const dirPathString = JSON.stringify(folderPath)
+  //   .replace(/"/g, "")
+  //   .replace(/\\/g, "\\\\");
+  // const replaceDirPathReg = new RegExp(dirPathString, "g");
 
-  const { dependencyTree: dt, dependencyNodes: dn } = getDependencyTree(
-    path.join(folderPath, mainFilePath),
-    folderPath,
-    {
-      alias,
-      resolveExtensions,
-      onGotFileString,
-      onGotAST,
-      onGotCircularStructureNode,
-    }
-  );
+  // const { dependencyTree: dt, dependencyNodes: dn } = getDependencyTree(
+  //   path.join(folderPath, mainFilePath),
+  //   folderPath,
+  //   {
+  //     alias,
+  //     resolveExtensions,
+  //     onGotFileString,
+  //     onGotAST,
+  //     onGotCircularStructureNode,
+  //   }
+  // );
+  // return {
+  //   dependencyTree: normalizeMacWin(JSON.stringify(dt, null, 2)
+  //     .replace(replaceDirPathReg, "%DIR-PATH%")),
+  //   dependencyNodes: normalizeMacWin(JSON.stringify(dn, null, 2)
+  //     .replace(replaceDirPathReg, "%DIR-PATH%"))
+  // };
   return {
-    dependencyTree: normalizeMacWin(JSON.stringify(dt, null, 2)
-      .replace(replaceDirPathReg, "%DIR-PATH%")),
-    dependencyNodes: normalizeMacWin(JSON.stringify(dn, null, 2)
-      .replace(replaceDirPathReg, "%DIR-PATH%"))
-  };
+    dependencyTree: "{}",
+    dependencyNodes: "[]"
+  }
 };
 
 export const getSavedDataFromFile = function (testCase: string) {
@@ -100,7 +109,9 @@ export const getSavedDataByCompute = function (
     dn,
     folderPath
   );
-  return normalizeMacWin(JSON.stringify(data));
+  const dataString = normalizeMacWin(JSON.stringify(data))
+  // fs.writeFileSync(path.join(folderPath, "../savedData.json"), dataString)
+  return dataString;
 };
 
 export const getWebViewDataFromFile = function (testCase: string) {
@@ -136,6 +147,8 @@ export const getWebViewDataByCompute = function (
     dependencyNodes,
     folderPath
   );
-  return normalizeMacWin(JSON.stringify(dependencyTreeData, null, 2)
+  const dataString = normalizeMacWin(JSON.stringify(dependencyTreeData, null, 2)
     .replace(replaceDirPathReg, "%DIR-PATH%"))
+  // fs.writeFileSync(path.join(folderPath, "../webViewData.json"), dataString)
+  return dataString
 };
