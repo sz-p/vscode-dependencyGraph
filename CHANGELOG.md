@@ -1,3 +1,20 @@
+## [1.2.2](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.2.1...v1.2.2) (2024-07-05)
+
+
+### Bug Fixes
+
+* fix open to node is not work ([5773ad8](https://github.com/sz-p/vscode-dependencyGraph/commit/5773ad81c52eb9158a42b81c8fa88fdc55822987))
+* treeview openToNode on only one node ([abffe71](https://github.com/sz-p/vscode-dependencyGraph/commit/abffe7194f747870055552c6644a77b2be284fa9))
+
+
+### Features
+
+* add 2 status before get checkDataFromAnalyser ([0741e21](https://github.com/sz-p/vscode-dependencyGraph/commit/0741e21b9ee886cc6d4c763ea11095e4264244dc))
+* add logger in data-dependencyTree ([27461ab](https://github.com/sz-p/vscode-dependencyGraph/commit/27461ab697d5bb512c6d13f3c5f47fda48ae3408))
+* update webview open and status transfer ([bfacbe2](https://github.com/sz-p/vscode-dependencyGraph/commit/bfacbe2e9ff8ccced7a8bca14dd367debc2a56e4))
+
+
+
 ## [1.2.1](https://github.com/sz-p/vscode-dependencyGraph/compare/1.2.0...1.2.1) (2024-07-02)
 
 
