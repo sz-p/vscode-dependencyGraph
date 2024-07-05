@@ -8,7 +8,12 @@
         "*.cpuprofile": true,
         "*.heapsnapshot": true,
         "tests": true,
-        "*.todo": true
+        "*.todo": true,
+        "/node_modules": true,
+        "/.dependencygraph": true,
+        "/CHANGELOG.md": true,
+        "outExtension": true,
+        "outWebView": true
     },
     // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
     "typescript.tsc.autoDetect": "off",
