@@ -1,5 +1,9 @@
-import { msgExportSvg, msgExportPng } from "../../utils/messages";
-import { svgAsPngUri, prepareSvg} from "save-svg-as-png";
+import {
+  msgExportSvg,
+  msgExportPng,
+  msgWebViewLog,
+} from "../../utils/messages";
+import { svgAsPngUri, prepareSvg } from "save-svg-as-png";
 import * as d3 from "d3";
 
 const getTopNodePosition = function () {
@@ -42,6 +46,7 @@ const getOptions = function (newHeight, newWith) {
   return {
     height: newHeight,
     width: newWith,
+    excludeCss: true,
     modifyStyle: function (styleText) {
       const rex = /var\([^\)]*/g;
       let newStyle = styleText.replace(rex, (w) => {
@@ -65,7 +70,8 @@ export const exportSvg = function () {
       msgExportSvg(svgWithOutFontFace).post();
       afterExport(svgNode, transform);
     })
-    .catch(() => {
+    .catch((e) => {
+      msgWebViewLog("error", "exportSvgFailed", e);
       afterExport(svgNode, transform);
     });
 };
@@ -76,7 +82,8 @@ export const exportPng = function () {
       msgExportPng(uri).post();
       afterExport(svgNode, transform);
     })
-    .catch(() => {
+    .catch((e) => {
+      msgWebViewLog("error", "exportPngFailed", e);
       afterExport(svgNode, transform);
     });
 };
