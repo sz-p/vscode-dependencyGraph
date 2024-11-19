@@ -31,6 +31,9 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      "@packages":paths.packages,
+    },
     extensions: [".ts", ".mjs", ".js", ".json"],
   },
   plugins: [],
