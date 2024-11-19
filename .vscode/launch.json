@@ -11,13 +11,13 @@
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
 			"args": [
-        "--disable-extensions",
+        		"--disable-extensions",
 				"--extensionDevelopmentPath=${workspaceFolder}"
 			],
 			"outFiles": [
-        "${workspaceFolder}/outExtension/**/*.js",
-        "${workspaceFolder}/outWebView/**/*.js"
-			],
+				"${workspaceFolder}/outExtension/**/*.js",
+				"${workspaceFolder}/outWebView/**/*.js"
+			]
 			// "preLaunchTask": "${defaultBuildTask}"
 		}
 	]
