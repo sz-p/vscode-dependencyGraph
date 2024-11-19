@@ -11,6 +11,25 @@ export type DependencyTreeDataInTreeView = {
   ancestors: string[]
 }
 
+const getTreeNodeFromDependencyTreeData = function (data: DependencyTreeData): DependencyTreeDataInTreeView {
+  const { relativePath, type, children, absolutePath } = data
+  let { name } = data
+  const filePath = relativePath.replace(/\\/g, "/").split("/");
+  filePath.pop();
+  const fileFatherDirName = filePath.pop();
+  if (name.includes("index") && fileFatherDirName) {
+    name = fileFatherDirName + '/' + name
+  }
+  return {
+    children,
+    absolutePath,
+    name,
+    relativePath,
+    type,
+    ancestors: [relativePath],
+  }
+}
+
 export class DependenciesTreeProvider
   implements vscode.TreeDataProvider<DependencyTreeDataInTreeView> {
   constructor(private dependencyTreeData: DependencyTreeData) { }
@@ -22,27 +41,10 @@ export class DependenciesTreeProvider
   getChildren(node?: DependencyTreeDataInTreeView): DependencyTreeDataInTreeView[] {
     if (node) {
       return node.children.map((child) => {
-        const { name, relativePath, type, fileID, children, absolutePath } = child
-        return {
-          children,
-          absolutePath,
-          name,
-          relativePath,
-          type,
-          fileID,
-          ancestors: [...node.ancestors, relativePath],
-        };
+        return getTreeNodeFromDependencyTreeData(child);
       });
     } else {
-      const { name, relativePath, type, children, absolutePath } = this.dependencyTreeData
-      return [{
-        children,
-        absolutePath,
-        name,
-        relativePath,
-        type,
-        ancestors: [relativePath],
-      }];
+      return [getTreeNodeFromDependencyTreeData(this.dependencyTreeData)];
     }
   }
 }
