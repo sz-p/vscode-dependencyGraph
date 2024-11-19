@@ -5,6 +5,7 @@ import { renderTreeItem } from "./renderTreeItem";
 export type DependencyTreeDataInTreeView = {
   children: DependencyTreeData[],
   name: string,
+  absolutePath: string,
   relativePath: string,
   type: string,
   ancestors: string[]
@@ -21,9 +22,10 @@ export class DependenciesTreeProvider
   getChildren(node?: DependencyTreeDataInTreeView): DependencyTreeDataInTreeView[] {
     if (node) {
       return node.children.map((child) => {
-        const { name, relativePath, type, fileID, children } = child
+        const { name, relativePath, type, fileID, children, absolutePath } = child
         return {
           children,
+          absolutePath,
           name,
           relativePath,
           type,
@@ -32,9 +34,10 @@ export class DependenciesTreeProvider
         };
       });
     } else {
-      const { name, relativePath, type, children } = this.dependencyTreeData
+      const { name, relativePath, type, children, absolutePath } = this.dependencyTreeData
       return [{
         children,
+        absolutePath,
         name,
         relativePath,
         type,
