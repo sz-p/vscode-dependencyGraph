@@ -69,6 +69,21 @@ const saveData = () => {
   }
 };
 
+const focusOnFile = async function (filePath) {
+
+    const openEditors = vscode.window.visibleTextEditors;
+    const targetEditor = openEditors.find(editor => editor.document.uri.fsPath === filePath);
+
+    if (targetEditor) {
+        await vscode.window.showTextDocument(targetEditor.document, { viewColumn: targetEditor.viewColumn });
+    } else {
+        const uri = vscode.Uri.file(filePath);
+        const doc = await vscode.workspace.openTextDocument(uri);
+        await vscode.window.showTextDocument(doc, vscode.ViewColumn.Beside);
+    }
+
+}
+
 export const command_focusOnNode = vscode.commands.registerCommand(
   "dependencygraph.focusOnNode",
   (fileName, ancestors) => {
@@ -103,10 +118,8 @@ export const command_openFile = vscode.commands.registerCommand(
     } else {
       _absolutePath = absoluteFilePath.absolutePath;
     }
-    let uri = vscode.Uri.file(_absolutePath);
-    vscode.workspace.openTextDocument(uri).then((doc) => {
-      vscode.window.showTextDocument(doc, vscode.ViewColumn.Beside);
-    });
+
+    focusOnFile(_absolutePath);
   }
 );
 
