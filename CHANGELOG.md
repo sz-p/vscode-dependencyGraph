@@ -1,3 +1,27 @@
+## [1.2.5](https://github.com/sz-p/vscode-dependencyGraph/compare/1.2.4...1.2.5) (2024-11-26)
+
+
+### Performance Improvements
+
+* focus text document not open when text document was opened ([b6981a8](https://github.com/sz-p/vscode-dependencyGraph/commit/b6981a8f040ab8c3a935b5c7a642c5c94de5f4af))
+
+
+
+## [1.2.4](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.2.3...1.2.4) (2024-11-19)
+
+
+### Bug Fixes
+
+* [#55](https://github.com/sz-p/vscode-dependencyGraph/issues/55) edit icon in tree view not work ([feb0e60](https://github.com/sz-p/vscode-dependencyGraph/commit/feb0e601a839ed0922ac05cca659d86118eafa9c))
+
+
+### Features
+
+* [#55](https://github.com/sz-p/vscode-dependencyGraph/issues/55) file name include index show dir in tree view ([0130794](https://github.com/sz-p/vscode-dependencyGraph/commit/01307940d702bd5b843ac9c4403896431280c627))
+* add resolve packages in webpack config ([05b86d5](https://github.com/sz-p/vscode-dependencyGraph/commit/05b86d51cd3bb464c5d2e4fb39d857e58588882d))
+
+
+
 ## [1.2.4](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.2.3...v1.2.4) (2024-11-19)
 
 
