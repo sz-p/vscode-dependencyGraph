@@ -18,6 +18,10 @@
   float: right;
 }
 
+.statusView .ms-MessageBar-content .ms-MessageBar-icon i{
+  font-family: FabricMDL2Icons;
+}
+
 .ms-MessageBar--success,
 .ms-MessageBar--error,
 .ms-MessageBar {

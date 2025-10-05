@@ -146,7 +146,6 @@ const commandView = function (props) {
             className="commandView-button commandView-button-export button"
             style={{ width: "100%", top: "3px" }}
             text={TEXT_EXPORT}
-            iconProps={{ iconName: "Export" }}
             menuProps={menuProps}
             menuAs={_getMenu}
             allowDisabledFocus
