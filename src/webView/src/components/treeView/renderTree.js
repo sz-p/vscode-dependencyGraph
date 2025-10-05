@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { throttle } from "../../utils/utils";
+import { throttle, isWindows } from "../../utils/utils";
 import { store } from "../../reducers/store";
 import { action_selectNode } from "../../actions/action";
 import { msgWebViewLog } from "../../utils/messages";
@@ -124,7 +124,7 @@ export class D3Tree {
         );
     }
   }
-  initZoom() {
+  initZoomForMac() {
     if (!this.zoom && this.isBrowser) {
       let currentX = this.PADDING.LEFT;
       let currentY = this.height / 2 - this.PADDING.TOP;
@@ -166,6 +166,30 @@ export class D3Tree {
             `translate(${currentX},${currentY}) scale(${currentScale})`
           );
       });
+    }
+  }
+  initZoomForWin() {
+    if (!this.zoom && this.isBrowser) {
+      const zoomed = () => {
+        const transform = d3.event.transform;
+        this.svg.attr("transform", transform);
+      };
+      this.zoom = d3.zoom();
+      this.zoom.on("zoom", zoomed);
+      this.svgBox.call(this.zoom).on("dblclick.zoom", null);
+      this.svgBox.call(
+        this.zoom.translateBy,
+        this.PADDING.LEFT,
+        this.height / 2 - this.PADDING.TOP
+      );
+    }
+  }
+  initZoom() {
+    const isWin = isWindows();
+    if (isWin) {
+      this.initZoomForWin();
+    } else {
+      this.initZoomForMac();
     }
   }
   initLayout() {
