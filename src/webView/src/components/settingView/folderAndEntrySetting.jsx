@@ -13,6 +13,7 @@ import {
 import { msgOpenFolder, msgSetSetting } from "../../utils/messages";
 import { SETTING_KEY_ENTRY_FILE_PATH } from "../../../../utils/fileSystem/settingKey";
 import { action_getCommandWaitingStatus } from "../../actions/action";
+import { isWindows } from "../../utils/utils"
 const openFolder = function () {
   msgOpenFolder.post();
 };
@@ -33,16 +34,10 @@ const onEnter = function (entryFilePath) {
  * @param {string} folderPath - Original absolute path
  * @returns {string} Formatted path
  */
-export function formatFolderPath(folderPath) {
+export function formatFolderPath(folderPath, to) {
   if (!folderPath) return "";
 
-  // Detect OS using process.platform if available, otherwise fallback to window.navigator.userAgent
-  let isWindows = false;
-  if (typeof process !== "undefined" && process.platform) {
-    isWindows = process.platform === "win32";
-  } else if (typeof window !== "undefined" && window.navigator) {
-    isWindows = /Windows/i.test(window.navigator.userAgent);
-  }
+  const isWin = isWindows()
 
   // Normalize separators
   let parts = folderPath.replace(/\\/g, "/").split("/").filter(Boolean);
@@ -59,10 +54,12 @@ export function formatFolderPath(folderPath) {
   if (parts.length > 5) {
     parts = [...parts.slice(0, 3), "...", parts[parts.length - 1]];
   }
-
+  if (to === 'folder') {
+    parts.push('')
+  }
   // Join with system separator
-  const sep = isWindows ? "\\" : "/";
-  let formatted = (isWindows && /^[a-zA-Z]:/.test(folderPath))
+  const sep = isWin ? "\\" : "/";
+  let formatted = (isWin && /^[a-zA-Z]:/.test(folderPath))
     ? parts.join(sep)
     : sep + parts.join(sep);
 
@@ -114,7 +111,7 @@ const folderAndEntry = function (props) {
           className="settingView-inputBox"
           label={TEXT_ENTRY_FILE}
           required
-          prefix={formatFolderPath(folderPath)}
+          prefix={formatFolderPath(folderPath, 'folder')}
           onChange={(e, v) => {
             setEntryFilePath(v);
           }}
