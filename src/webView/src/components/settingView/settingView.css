@@ -16,6 +16,7 @@
 }
 .closeButton {
   cursor: pointer;
+  font-family: FabricMDL2Icons !important;
   margin-bottom: 20px;
 }
 

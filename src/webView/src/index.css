@@ -1,7 +1,16 @@
+@import url('office-ui-fabric-react/dist/css/fabric.min.css');
 html,
 body,
 #root {
   width: 100%;
   height: 100%;
   padding: 0;
+}
+
+.button {
+  color: var(--vscode-editor-foreground) !important;
+}
+
+.button:hover {
+  color: var(--vscode-editor-foreground) !important;
 }

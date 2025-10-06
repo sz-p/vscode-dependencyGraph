@@ -2,3 +2,7 @@
   position: absolute;
   bottom: 0px;
 }
+
+.settingCommandStatusView .ms-MessageBar-content .ms-MessageBar-icon i{
+  font-family: FabricMDL2Icons;
+}

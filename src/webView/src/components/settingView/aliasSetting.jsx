@@ -93,6 +93,7 @@ const aliasSetting = function (props) {
       <div className="setting-resolveList-detail-item delete">
         <PrimaryButton
           style={{ float: "right", height: "30px", width: "100%" }}
+          className="button"
           iconProps={deleteIcon}
           onClick={() => deleteAliasItemState(i)}
         />
@@ -146,9 +147,8 @@ const aliasSetting = function (props) {
           value={aliasState.path}
         />
         <PrimaryButton
-          className="settingView-button"
+          className="settingView-button button"
           text={TEXT_ADD}
-          iconProps={addIcon}
           onClick={addAliasItemState}
         />
       </div>
@@ -167,7 +167,7 @@ const aliasSetting = function (props) {
         {createResolveListDetail()}
       </div>
       <PrimaryButton
-        className="settingView-button"
+        className="settingView-button button"
         text={TEXT_SET_CONFIRM}
         onClick={() => {
           props.dispatch(action_getCommandWaitingStatus(SETTING_KEY_ALIAS));

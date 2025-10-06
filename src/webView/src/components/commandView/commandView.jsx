@@ -105,7 +105,7 @@ const commandView = function (props) {
           >
             <PrimaryButton
               style={{ width: "100%" }}
-              className="commandView-button commandView-button-save"
+              className="commandView-button commandView-button-save button"
               text={TEXT_SAVE_DATA}
               onClick={() => {
                 props.dispatch(
@@ -124,7 +124,7 @@ const commandView = function (props) {
           >
             <PrimaryButton
               style={{ width: "100%" }}
-              className="commandView-button commandView-button-update"
+              className="commandView-button commandView-button-update button"
               text={TEXT_UPDATE_DATA}
               onClick={() => {
                 props.dispatch(
@@ -143,7 +143,7 @@ const commandView = function (props) {
           styles={hostStyles}
         >
           <PrimaryButton
-            className="commandView-button commandView-button-export"
+            className="commandView-button commandView-button-export button"
             style={{ width: "100%", top: "3px" }}
             text={TEXT_EXPORT}
             iconProps={{ iconName: "Export" }}

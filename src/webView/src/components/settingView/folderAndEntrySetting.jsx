@@ -104,7 +104,7 @@ const folderAndEntry = function (props) {
           value={formatFolderPath(folderPath)}
         />
         <PrimaryButton
-          className="settingView-button"
+          className="settingView-button button"
           text={TEXT_OPEN_FOLDER}
           onClick={openFolder}
         />
@@ -121,7 +121,7 @@ const folderAndEntry = function (props) {
           value={entryFilePath}
         />
         <PrimaryButton
-          className="settingView-button"
+          className="settingView-button button"
           text={TEXT_SET_ENTRY_FILE}
           onClick={() => {
             props.dispatch(

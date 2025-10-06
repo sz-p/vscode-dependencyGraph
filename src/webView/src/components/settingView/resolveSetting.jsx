@@ -44,7 +44,7 @@ const resolveSetting = function (props) {
         value={resolveExtensions}
       />
       <PrimaryButton
-        className="settingView-button"
+        className="settingView-button button"
         text={TEXT_SET_CONFIRM}
         onClick={() => {
           props.dispatch(
