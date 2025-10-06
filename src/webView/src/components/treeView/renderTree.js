@@ -126,18 +126,46 @@ export class D3Tree {
   }
   initZoom() {
     if (!this.zoom && this.isBrowser) {
-      const zoomed = () => {
-        const transform = d3.event.transform;
-        this.svg.attr("transform", transform);
-      };
+      let currentX = this.PADDING.LEFT;
+      let currentY = this.height / 2 - this.PADDING.TOP;
+      let currentScale = 1;
+      const scaleExtent = [0.1, 4];
+      this.svg.attr("transform", `translate(${currentX},${currentY}) scale(1)`);
+
       this.zoom = d3.zoom();
-      this.zoom.on("zoom", zoomed);
-      this.svgBox.call(this.zoom).on("dblclick.zoom", null);
-      this.svgBox.call(
-        this.zoom.translateBy,
-        this.PADDING.LEFT,
-        this.height / 2 - this.PADDING.TOP
-      );
+      this.svgBox.on(".zoom", null);
+
+      this.svgBox.on("wheel", function () {
+        d3.event.preventDefault();
+        if (d3.event.ctrlKey || d3.event.metaKey) {
+          const zoomFactor = 1 - d3.event.deltaY * 0.02;
+          const newScale = currentScale * zoomFactor;
+
+          if (newScale >= scaleExtent[0] && newScale <= scaleExtent[1]) {
+            const transformOriginX = d3.event.offsetX;
+            const transformOriginY = d3.event.offsetY;
+
+            const dx = ((transformOriginX - currentX) / currentScale) * 0.5;
+            const dy = ((transformOriginY - currentY) / currentScale) * 0.5;
+
+            const deltaScale = currentScale - newScale;
+
+            currentX = currentX + dx * deltaScale;
+            currentY = currentY + dy * deltaScale;
+
+            currentScale = newScale;
+          }
+        } else {
+          currentX -= d3.event.deltaX * 0.5;
+          currentY -= d3.event.deltaY * 0.5;
+        }
+        d3.select(this)
+          .select("g")
+          .attr(
+            "transform",
+            `translate(${currentX},${currentY}) scale(${currentScale})`
+          );
+      });
     }
   }
   initLayout() {
