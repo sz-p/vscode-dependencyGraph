@@ -26,6 +26,49 @@ const onEnter = function (entryFilePath) {
     }
   };
 };
+
+/**
+ * Format folder path to current OS style, collapse levels if too deep,
+ * and abbreviate folder names longer than 20 characters.
+ * @param {string} folderPath - Original absolute path
+ * @returns {string} Formatted path
+ */
+export function formatFolderPath(folderPath) {
+  if (!folderPath) return "";
+
+  // Detect OS using process.platform if available, otherwise fallback to window.navigator.userAgent
+  let isWindows = false;
+  if (typeof process !== "undefined" && process.platform) {
+    isWindows = process.platform === "win32";
+  } else if (typeof window !== "undefined" && window.navigator) {
+    isWindows = /Windows/i.test(window.navigator.userAgent);
+  }
+
+  // Normalize separators
+  let parts = folderPath.replace(/\\/g, "/").split("/").filter(Boolean);
+
+  // Abbreviate folder names longer than 20 characters
+  parts = parts.map((part) => {
+    if (part.length > 20) {
+      return part.slice(0, 5) + "..." + part.slice(-5);
+    }
+    return part;
+  });
+
+  // Collapse levels if more than 5
+  if (parts.length > 5) {
+    parts = [...parts.slice(0, 3), "...", parts[parts.length - 1]];
+  }
+
+  // Join with system separator
+  const sep = isWindows ? "\\" : "/";
+  let formatted = (isWindows && /^[a-zA-Z]:/.test(folderPath))
+    ? parts.join(sep)
+    : sep + parts.join(sep);
+
+  return formatted;
+}
+
 const folderAndEntry = function (props) {
   const { folderPath, setting, language } = props;
   let [entryFilePath, setEntryFilePath] = useState();
@@ -58,7 +101,7 @@ const folderAndEntry = function (props) {
           label={TEXT_FOLDER}
           disabled
           required
-          value={folderPath}
+          value={formatFolderPath(folderPath)}
         />
         <PrimaryButton
           className="settingView-button"
@@ -71,7 +114,7 @@ const folderAndEntry = function (props) {
           className="settingView-inputBox"
           label={TEXT_ENTRY_FILE}
           required
-          prefix={folderPath}
+          prefix={formatFolderPath(folderPath)}
           onChange={(e, v) => {
             setEntryFilePath(v);
           }}
@@ -91,6 +134,9 @@ const folderAndEntry = function (props) {
     </div>
   );
 };
+
+
+
 const mapStateToProps = (state) => {
   return {
     folderPath: state.folderPath,
