@@ -1,3 +1,28 @@
+## [1.3.0](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.2.3...v1.3.0) (2025-10-07)
+
+
+### Bug Fixes
+
+* [#55](https://github.com/sz-p/vscode-dependencyGraph/issues/55) edit icon in tree view not work ([feb0e60](https://github.com/sz-p/vscode-dependencyGraph/commit/feb0e601a839ed0922ac05cca659d86118eafa9c))
+* fix webview icon ([25f8d06](https://github.com/sz-p/vscode-dependencyGraph/commit/25f8d0699ed4a70b2afe16e285da6105b99e9f32))
+* update theme to fix icon and text color in webview ([745020e](https://github.com/sz-p/vscode-dependencyGraph/commit/745020ea60c403bb76588c2dce941a7fbd6d65ca))
+
+
+### Features
+
+* [#55](https://github.com/sz-p/vscode-dependencyGraph/issues/55) file name include index show dir in tree view ([0130794](https://github.com/sz-p/vscode-dependencyGraph/commit/01307940d702bd5b843ac9c4403896431280c627))
+* add resolve packages in webpack config ([05b86d5](https://github.com/sz-p/vscode-dependencyGraph/commit/05b86d51cd3bb464c5d2e4fb39d857e58588882d))
+* Format folder path to current OS style, collapse levels if too deep in webview ([5ecc9ec](https://github.com/sz-p/vscode-dependencyGraph/commit/5ecc9ec5029f42a6a03dedf72b0d5f4171220f26))
+* refactor zoom and pan in web treeview ([fe9c2bf](https://github.com/sz-p/vscode-dependencyGraph/commit/fe9c2bfb491e1e8858d672a34d95bf7cab46bf72))
+* refactor zoom and pan in web treeview ([74ab293](https://github.com/sz-p/vscode-dependencyGraph/commit/74ab29318382e54197d8b8e6a22c0b37cbf02c0d))
+
+
+### Performance Improvements
+
+* focus text document not open when text document was opened ([b6981a8](https://github.com/sz-p/vscode-dependencyGraph/commit/b6981a8f040ab8c3a935b5c7a642c5c94de5f4af))
+
+
+
 ## [1.2.5](https://github.com/sz-p/vscode-dependencyGraph/compare/1.2.4...1.2.5) (2024-11-26)
 
 
