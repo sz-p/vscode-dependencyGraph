@@ -1,3 +1,13 @@
+## [1.3.1](https://github.com/sz-p/vscode-dependencyGraph/compare/1.3.0...1.3.1) (2025-10-08)
+
+
+### Features
+
+* restore tree view canvas interaction mode under Linux-like systems ([6653ac3](https://github.com/sz-p/vscode-dependencyGraph/commit/6653ac35a90c2690334da14d6d7cc9235b5b83a9))
+
+
+
+
 ## [1.3.0](https://github.com/sz-p/vscode-dependencyGraph/compare/v1.2.3...v1.3.0) (2025-10-07)
 
 
