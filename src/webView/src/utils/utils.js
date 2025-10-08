@@ -21,3 +21,15 @@ export const isWindows = function() {
   }
   return isWindows
 }
+
+export const isMac = function() {
+  // Detect OS using process.platform if available, otherwise fallback to window.navigator.userAgent
+  debugger
+  let isMac = false;
+  if (typeof process !== "undefined" && process.platform) {
+    isMac = process.platform === "darwin";
+  } else if (typeof window !== "undefined" && window.navigator) {
+    isMac = /Macintosh/i.test(window.navigator.userAgent);
+  }
+  return isMac
+}

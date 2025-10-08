@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import { throttle, isWindows } from "../../utils/utils";
+import { throttle, isMac } from "../../utils/utils";
 import { store } from "../../reducers/store";
 import { action_selectNode } from "../../actions/action";
 import { msgWebViewLog } from "../../utils/messages";
@@ -185,11 +185,11 @@ export class D3Tree {
     }
   }
   initZoom() {
-    const isWin = isWindows();
-    if (isWin) {
-      this.initZoomForWin();
-    } else {
+    const isOnMac = isMac();
+    if (isOnMac) {
       this.initZoomForMac();
+    } else {
+      this.initZoomForWin();
     }
   }
   initLayout() {
