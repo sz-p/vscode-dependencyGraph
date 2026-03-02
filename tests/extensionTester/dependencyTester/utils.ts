@@ -38,10 +38,10 @@ export const getDependencyTreeDataFromFile = function (testCase: string) {
   //   .toString()
   // )
 
-  // test 
+  // test
   const dependencyTreeData = "{}"
   const dependencyNodesData = "[]"
-  const folderPath = path.join(__dirname, `./${testCase}/files`);
+  const folderPath = path.join(__dirname, `./js-ts/${testCase}/files`);
 
   return { dependencyTreeData, dependencyNodesData, folderPath };
 };
@@ -80,10 +80,10 @@ export const getDependencyTreeDataByCompute = function (
   }
 };
 
-export const getSavedDataFromFile = function (testCase: string) {
+export const getSavedDataFromFile = function (base: string, testCase: string) {
   const dataString = normalizeMacWin(fs
     .readFileSync(
-      path.resolve(__dirname, `./${testCase}/savedData/savedData.json`)
+      path.resolve(__dirname, `./${base}/${testCase}/savedData/savedData.json`)
     )
     .toString())
   return dataString;
@@ -114,16 +114,17 @@ export const getSavedDataByCompute = function (
   return dataString;
 };
 
-export const getWebViewDataFromFile = function (testCase: string) {
+export const getWebViewDataFromFile = function (base: string, testCase: string) {
   const dependencyTreeData = normalizeMacWin(fs
     .readFileSync(
-      path.resolve(__dirname, `./${testCase}/webViewData/webViewData.json`)
+      path.resolve(__dirname, `./${base}/${testCase}/webViewData/webViewData.json`)
     )
     .toString())
   return dependencyTreeData;
 };
 
 export const getWebViewDataByCompute = function (
+  base: string,
   testCase: string,
   folderPath: string
 ) {
@@ -135,7 +136,7 @@ export const getWebViewDataByCompute = function (
   const { dependencyTree, dependencyNodes } = JSON.parse(
     fs
       .readFileSync(
-        path.resolve(__dirname, `./${testCase}/savedData/savedData.json`)
+        path.resolve(__dirname, `./${base}/${testCase}/savedData/savedData.json`)
       )
       .toString()
       .replace(/\r\n/g, "")

@@ -5,7 +5,7 @@ import {
   getSavedDataFromFile,
   getSavedDataByCompute,
   getWebViewDataFromFile,
-} from "../../utils";
+} from "../utils";
 import { expect } from 'chai';
 const mainFilePath = "./src/index.js";
 const {
