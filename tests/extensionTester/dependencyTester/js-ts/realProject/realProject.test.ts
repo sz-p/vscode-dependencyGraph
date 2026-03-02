@@ -6,28 +6,27 @@ import {
   getSavedDataByCompute,
   getWebViewDataFromFile,
   setDataToFile
-} from "../utils";
+} from "../../utils";
 import { expect } from 'chai';
 const mainFilePath = "./src/index.js";
 const {
   dependencyTreeData,
   dependencyNodesData,
   folderPath,
-} = getDependencyTreeDataFromFile("lazyImport");
-// const folderPath = path.join(__dirname, `./files`)
+} = getDependencyTreeDataFromFile("realProject");
 const { dependencyTree, dependencyNodes } = getDependencyTreeDataByCompute(
   folderPath,
   mainFilePath
 );
-const savedDataFromFile = getSavedDataFromFile("lazyImport");
+const savedDataFromFile = getSavedDataFromFile("realProject");
 const savedDataByCompute = getSavedDataByCompute(
-  "lazyImport",
+  "realProject",
   folderPath,
   mainFilePath
 );
-const readData = getWebViewDataByCompute("lazyImport", folderPath);
-const webViewData = getWebViewDataFromFile("lazyImport");
-describe("dependencyTree(lazy import): get dependencyTree data", function () {
+const readData = getWebViewDataByCompute("realProject", folderPath);
+const webViewData = getWebViewDataFromFile("realProject");
+describe("dependencyTree(real project): get dependencyTree data", function () {
   it("dependencyNodesData", function () {
     expect(dependencyNodesData.length).to.equal(dependencyNodes.length);
   });
@@ -36,14 +35,15 @@ describe("dependencyTree(lazy import): get dependencyTree data", function () {
   });
 });
 
-describe("dependencyTree(lazy import): get saved data", function () {
+describe("dependencyTree(real project): get saved data", function () {
   it("jsonString", function () {
     expect(savedDataFromFile.length).to.equal(savedDataByCompute.length);
   });
 });
 
-describe("dependencyTree(lazy import): get webView data", function () {
+describe("dependencyTree(real project): get webView data", function () {
   it("dependencyTreeData", function () {
+    // setDataToFile("./readData.json", readData)
     expect(readData.length).to.equal(webViewData.length);
   });
 });

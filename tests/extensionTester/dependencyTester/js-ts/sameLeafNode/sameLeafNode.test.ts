@@ -5,28 +5,28 @@ import {
   getSavedDataFromFile,
   getSavedDataByCompute,
   getWebViewDataFromFile,
-} from "../utils";
+} from "../../utils";
 import { expect } from 'chai';
 const mainFilePath = "./src/index.js";
 const {
   dependencyTreeData,
   dependencyNodesData,
   folderPath,
-} = getDependencyTreeDataFromFile("aboveFatherNode");
-// const folderPath = path.join(__dirname, `./files`)
+} = getDependencyTreeDataFromFile("sameLeafNode");
 const { dependencyTree, dependencyNodes } = getDependencyTreeDataByCompute(
   folderPath,
   mainFilePath
 );
-const savedDataFromFile = getSavedDataFromFile("aboveFatherNode");
+const savedDataFromFile = getSavedDataFromFile("sameLeafNode");
 const savedDataByCompute = getSavedDataByCompute(
-  "aboveFatherNode",
+  "sameLeafNode",
   folderPath,
   mainFilePath
 );
-const readData = getWebViewDataByCompute("aboveFatherNode", folderPath);
-const webViewData = getWebViewDataFromFile("aboveFatherNode");
-describe("dependencyTree(above father node): get dependencyTree data", function () {
+const readData = getWebViewDataByCompute("sameLeafNode", folderPath);
+const webViewData = getWebViewDataFromFile("sameLeafNode");
+
+describe("dependencyTree(same leaf node): get dependencyTree data", function () {
   it("dependencyNodesData", function () {
     expect(dependencyNodesData.length).to.equal(dependencyNodes.length);
   });
@@ -35,13 +35,13 @@ describe("dependencyTree(above father node): get dependencyTree data", function 
   });
 });
 
-describe("dependencyTree(above father node): get saved data", function () {
+describe("dependencyTree(same leaf node): get saved data", function () {
   it("jsonString", function () {
     expect(savedDataFromFile.length).to.equal(savedDataByCompute.length);
   });
 });
 
-describe("dependencyTree(above father node): get webView data", function () {
+describe("dependencyTree(same leaf node): get webView data", function () {
   it("dependencyTreeData", function () {
     expect(readData.length).to.equal(webViewData.length);
   });
