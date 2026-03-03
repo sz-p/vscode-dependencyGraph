@@ -18,7 +18,7 @@ const normalizeMacWin = function (string) {
   const normalizeString = string.replace(/\\\\/g, "/").replace(/\r\n/g, "").replace(/\n/g, "").replace(/ /g, "")
   return normalizeString
 }
-export const getDependencyTreeDataFromFile = function (testCase: string) {
+export const getDependencyTreeDataFromFile = function (base: string, testCase: string) {
   // const dependencyTreeData = normalizeMacWin(fs
   //   .readFileSync(
   //     path.resolve(
@@ -41,13 +41,14 @@ export const getDependencyTreeDataFromFile = function (testCase: string) {
   // test
   const dependencyTreeData = "{}"
   const dependencyNodesData = "[]"
-  const folderPath = path.join(__dirname, `./js-ts/${testCase}/files`);
+  const folderPath = path.join(__dirname, `./${base}/${testCase}/files`);
 
   return { dependencyTreeData, dependencyNodesData, folderPath };
 };
 export const setDataToFile = function (_path: string, dataString: string) {
   fs.writeFileSync(path.join(__dirname, _path), dataString)
 }
+// !DependencyTreeData have circular structure can't converte to string
 export const getDependencyTreeDataByCompute = function (
   folderPath: string,
   mainFilePath: string

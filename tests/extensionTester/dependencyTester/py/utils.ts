@@ -8,16 +8,16 @@ import {
   setDataToFile
 } from "../utils";
 const getWebViewDataByCompute = function (testCase: string, folderPath: string) {
-  return getWebViewDataByComputeBase('js-ts', testCase, folderPath);
+  return getWebViewDataByComputeBase('py', testCase, folderPath);
 }
 const getSavedDataFromFile = function (testCase: string) {
-  return getSavedDataFromFileBase('js-ts', testCase);
+  return getSavedDataFromFileBase('py', testCase);
 }
 const getWebViewDataFromFile = function (testCase: string) {
-  return getWebViewDataFromFileBase('js-ts', testCase);
+  return getWebViewDataFromFileBase('py', testCase);
 }
 const getDependencyTreeDataFromFile = function (testCase: string) {
-  return getDependencyTreeDataFromFileBase('js-ts', testCase)
+  return getDependencyTreeDataFromFileBase('py', testCase)
 }
 export {
   getDependencyTreeDataFromFile,

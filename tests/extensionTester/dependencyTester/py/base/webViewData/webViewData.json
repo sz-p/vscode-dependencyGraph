@@ -1,0 +1,62 @@
+{
+  "name": "main.py",
+  "fileID": "6f00eeda0c0e2a6ebfdddcc69e8275e6",
+  "nodeID": "6f00eeda0c0e2a6ebfdddcc69e8275e6",
+  "fileDescription": {},
+  "type": "python",
+  "language": "python",
+  "extension": ".py",
+  "absolutePath": "%DIR-PATH%/src/main.py",
+  "relativePath": "/src/main.py",
+  "children": [
+    {
+      "name": "module1.py",
+      "fileID": "6f38a80c4f0f9f451c644dfd6a69b2db",
+      "nodeID": "4576c334f8529179da8da2ae915cc3e9",
+      "fileDescription": {},
+      "type": "python",
+      "language": "python",
+      "extension": ".py",
+      "absolutePath": "%DIR-PATH%/src/module1.py",
+      "relativePath": "/src/module1.py",
+      "children": []
+    },
+    {
+      "name": "module2.py",
+      "fileID": "8273540fab49516bf650ae619ab9a458",
+      "nodeID": "c4dead0530b2edc46e02f5a5a11e122f",
+      "fileDescription": {},
+      "type": "python",
+      "language": "python",
+      "extension": ".py",
+      "absolutePath": "%DIR-PATH%/src/module2.py",
+      "relativePath": "/src/module2.py",
+      "children": [
+        {
+          "name": "module3.py",
+          "fileID": "bfc08f25bc4e30a14b25cbcff6f1329e",
+          "nodeID": "2a47d8f17cee0c19cc5ec6bf9986c0e1",
+          "fileDescription": {},
+          "type": "python",
+          "language": "python",
+          "extension": ".py",
+          "absolutePath": "%DIR-PATH%/src/module3.py",
+          "relativePath": "/src/module3.py",
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "relative_module.py",
+      "fileID": "5917c60bcdb36d7f9babb55bddc1ec80",
+      "nodeID": "b11a0385fa3c42d740b9e5b6e376b093",
+      "fileDescription": {},
+      "type": "python",
+      "language": "python",
+      "extension": ".py",
+      "absolutePath": "%DIR-PATH%/src/relative_module.py",
+      "relativePath": "/src/relative_module.py",
+      "children": []
+    }
+  ]
+}

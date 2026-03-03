@@ -1,0 +1,87 @@
+{
+  "dependencyTree": {
+    "name": "main.py",
+    "fileID": "6f00eeda0c0e2a6ebfdddcc69e8275e6",
+    "children": [
+      {
+        "name": "module1.py",
+        "fileID": "6f38a80c4f0f9f451c644dfd6a69b2db",
+        "children": []
+      },
+      {
+        "name": "module2.py",
+        "fileID": "8273540fab49516bf650ae619ab9a458",
+        "children": [
+          {
+            "name": "module3.py",
+            "fileID": "bfc08f25bc4e30a14b25cbcff6f1329e",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "relative_module.py",
+        "fileID": "5917c60bcdb36d7f9babb55bddc1ec80",
+        "children": []
+      }
+    ]
+  },
+  "dependencyNodes": {
+    "6f00eeda0c0e2a6ebfdddcc69e8275e6": {
+      "fileID": "6f00eeda0c0e2a6ebfdddcc69e8275e6",
+      "name": "main.py",
+      "type": "python",
+      "extension": ".py",
+      "language": "python",
+      "relativePath": "/src/main.py",
+      "fileDescription": {},
+      "children": [
+        "6f38a80c4f0f9f451c644dfd6a69b2db",
+        "8273540fab49516bf650ae619ab9a458",
+        "5917c60bcdb36d7f9babb55bddc1ec80"
+      ]
+    },
+    "6f38a80c4f0f9f451c644dfd6a69b2db": {
+      "fileID": "6f38a80c4f0f9f451c644dfd6a69b2db",
+      "name": "module1.py",
+      "type": "python",
+      "extension": ".py",
+      "language": "python",
+      "relativePath": "/src/module1.py",
+      "fileDescription": {},
+      "children": []
+    },
+    "8273540fab49516bf650ae619ab9a458": {
+      "fileID": "8273540fab49516bf650ae619ab9a458",
+      "name": "module2.py",
+      "type": "python",
+      "extension": ".py",
+      "language": "python",
+      "relativePath": "/src/module2.py",
+      "fileDescription": {},
+      "children": [
+        "bfc08f25bc4e30a14b25cbcff6f1329e"
+      ]
+    },
+    "5917c60bcdb36d7f9babb55bddc1ec80": {
+      "fileID": "5917c60bcdb36d7f9babb55bddc1ec80",
+      "name": "relative_module.py",
+      "type": "python",
+      "extension": ".py",
+      "language": "python",
+      "relativePath": "/src/relative_module.py",
+      "fileDescription": {},
+      "children": []
+    },
+    "bfc08f25bc4e30a14b25cbcff6f1329e": {
+      "fileID": "bfc08f25bc4e30a14b25cbcff6f1329e",
+      "name": "module3.py",
+      "type": "python",
+      "extension": ".py",
+      "language": "python",
+      "relativePath": "/src/module3.py",
+      "fileDescription": {},
+      "children": []
+    }
+  }
+}
