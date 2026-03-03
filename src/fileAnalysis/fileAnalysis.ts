@@ -60,6 +60,10 @@ export const onGotCircularStructureNode = function (
     case ".jsx":
     case ".vue":
       onGotJsCircularStructureNode(dependencyNode as DTD, dependencyNodeHash);
+      break;
+    case ".py":
+      // TODO: add Python circular structure handling
+      break;
   }
 };
 export const onGotAST = function (
@@ -73,5 +77,9 @@ export const onGotAST = function (
     case ".jsx":
     case ".vue":
       onGotJsAST(dependencyNode as DTD, absolutePath, AST);
+      break;
+    case ".py":
+      // TODO: add Python AST handling
+      break;
   }
 };

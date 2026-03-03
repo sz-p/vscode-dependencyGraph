@@ -18,6 +18,7 @@ const getDependencyTree = function (
   dp.registerParser("generalCssParser", DependencyTree.generalCssParser);
   dp.registerParser("tsParser", DependencyTree.tsParser);
   dp.registerParser("tsxParser", DependencyTree.tsxParser);
+  dp.registerParser("pythonParser", DependencyTree.pythonParser);
 
   dp.registerParseRule(".json", "noDependenceParser");
 
@@ -32,6 +33,7 @@ const getDependencyTree = function (
   dp.registerParseRule(".ts", "tsParser");
   dp.registerParseRule(".jsx", "jsParser");
   dp.registerParseRule(".tsx", "tsxParser");
+  dp.registerParseRule(".py", "pythonParser");
 
   return dp.parse(folderPath, entryPath);
 };

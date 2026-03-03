@@ -13,6 +13,9 @@ export const setFileLanguage = (dependencyNode: DTD): void => {
     case ".js":
       dependencyNode.language = "javascript";
       break;
+    case ".py":
+      dependencyNode.language = "python";
+      break;
     default:
       dependencyNode.language = "file";
   }

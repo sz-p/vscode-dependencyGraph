@@ -17,6 +17,7 @@ import { parser as tsxParser } from "../parsers/tsxParser/tsxParser";
 import { parser as cssParser } from "../parsers/cssParser/cssParser";
 import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
 import { parser as generalCssParser } from "../parsers/generalCssParser/generalCssParser";
+import { parser as pythonParser } from "../parsers/pythonParser/pythonParser";
 import { isPathExists, isDirectory } from "../utils/utils";
 export class DependencyTree {
   options: DependencyTreeOptions;
@@ -32,6 +33,7 @@ export class DependencyTree {
   static cssParser: Parser;
   static tsParser: Parser;
   static tsxParser: Parser;
+  static pythonParser: Parser;
   constructor(options?: DependencyTreeOptions) {
     this.options = defaultOptions;
     if (options) merge(this.options, options);
@@ -325,3 +327,4 @@ DependencyTree.cssParser = cssParser;
 DependencyTree.noDependenceParser = noDependenceParser;
 DependencyTree.generalCssParser = generalCssParser;
 DependencyTree.tsxParser = tsxParser;
+DependencyTree.pythonParser = pythonParser;

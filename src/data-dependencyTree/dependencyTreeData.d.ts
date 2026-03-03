@@ -25,7 +25,7 @@ export interface DependencyTreeData {
   fileDescription: FileInformation;
   circularStructure?: true;
   type: string;
-  language: "javascript" | "css" | "file";
+  language: "javascript" | "css" | "file" | "python";
   lines: number | undefined;
   analyzed: boolean;
   functions: FunctionInformation[] | [];
@@ -51,7 +51,7 @@ export interface DependencyNode {
   fileDescription: FileInformation;
   circularStructure?: true;
   type: string;
-  language: "javascript" | "css" | "file";
+  language: "javascript" | "css" | "file" | "python";
   lines: number | undefined;
   analyzed: boolean;
   functions: FunctionInformation[] | [];
