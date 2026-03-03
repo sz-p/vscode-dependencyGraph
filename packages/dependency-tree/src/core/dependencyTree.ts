@@ -218,104 +218,198 @@ export class DependencyTree {
   setOptions(options: DependencyTreeOptions) {
     if (options) merge(this.options, options);
   }
-  parse(entryPath: string, folderPath: string) {
+
+  /**
+   * Initialize parsing state
+   */
+  private initializeParseState(entryPath: string) {
     this.dependencyHash = {};
     this.dependencyTreeData = {
       absolutePath: entryPath,
       parent: null,
       children: [] as DependencyTreeData[],
     } as DependencyTreeData;
-    let treeNodeCount = 0;
-    const dependencyList = [this.dependencyTreeData];
-    while (dependencyList.length) {
-      const dependencyNode = dependencyList.pop();
-      if (!dependencyNode) throw new Error("Error no dependencyNode");
+  }
 
-      let { absolutePath, parent } = dependencyNode;
+  /**
+   * Process a single dependency node
+   */
+  private processDependencyNode(
+    dependencyNode: DependencyTreeData,
+    folderPath: string,
+    dependencyList: DependencyTreeData[],
+    treeNodeCount: { value: number }
+  ) {
+    let { absolutePath } = dependencyNode;
 
-      if (!isPathExists(absolutePath)) {
-        console.error(`file does not exist: ${absolutePath}`);
-        continue;
-      }
-      this.setDataToDependencyNode(dependencyNode, absolutePath, folderPath);
-      const codeString = fs.readFileSync(absolutePath).toString();
-      this.triggerGetFileString(dependencyNode, absolutePath, codeString);
-      const parser = this.parsers[this.parseRule[dependencyNode.extension]];
-      if (!parser) {
-        console.warn(
-          `no ${dependencyNode.extension} parser please register parserRule and parser`
-        );
-        continue;
-      }
-      let children = parser(
-        dependencyNode,
-        absolutePath,
-        codeString,
-        this.options,
-        this.parseRule,
-        this.parsers
-      );
-      // remove repeated child
-      if (children.length >= 2) {
-        children = Array.from(new Set(children));
-      }
-      // if not set dependencyNode in dependencyHash before
-      // will not found analyzed node
-      this.dependencyHash[absolutePath] = dependencyNode;
-      for (let i = 0; i < children.length; i++) {
-        const childrenPath = children[i];
-        if (!isPathExists(childrenPath)) {
-          console.error(`file does not exist: ${childrenPath}`);
-          continue;
-        }
-
-        let dependencyChildren = undefined;
-        // old node; node was analyzed
-        if (this.dependencyHash[childrenPath]) {
-          // if (!this.dependencyHash[childrenPath].name) {
-          //   // import a file from the same file twice will cloneDeep a not analyzed dependencyChildren
-          //   continue;
-          // }
-          if (this.isCircularStructure(childrenPath, dependencyNode)) {
-            dependencyChildren = this.getCircularStructureNode(
-              childrenPath,
-              this.dependencyHash
-            );
-            this.triggerGetCircularStructureNode(
-              dependencyChildren,
-              this.dependencyHash
-            );
-          } else {
-            dependencyChildren = { ...this.dependencyHash[childrenPath], };
-            this.triggerGetOldDependencyTreeNode(dependencyChildren);
-          }
-          this.reSetAnalyzedNodesParent(
-            absolutePath,
-            dependencyNode,
-            dependencyChildren
-          );
-          // not analyzed
-          if (!dependencyChildren.name) {
-            dependencyChildren = this.getNewNode(absolutePath, dependencyNode, childrenPath, dependencyList)
-          }
-        }
-        // find new node
-        else {
-          dependencyChildren = this.getNewNode(absolutePath, dependencyNode, childrenPath, dependencyList)
-        }
-        dependencyNode.children.push(dependencyChildren);
-        treeNodeCount++;
-        // console.log('已分析文件数量：' + Object.keys(this.dependencyHash).length, '依赖树节点：' + treeNodeCount)
-      }
-      // cloneDeep
-      // this.dependencyHash[absolutePath] = cloneDeep(dependencyNode);
+    if (!isPathExists(absolutePath)) {
+      console.error(`file does not exist: ${absolutePath}`);
+      return;
     }
+
+    this.setDataToDependencyNode(dependencyNode, absolutePath, folderPath);
+    const codeString = fs.readFileSync(absolutePath).toString();
+    this.triggerGetFileString(dependencyNode, absolutePath, codeString);
+
+    const parser = this.parsers[this.parseRule[dependencyNode.extension]];
+    if (!parser) {
+      console.warn(
+        `no ${dependencyNode.extension} parser please register parserRule and parser`
+      );
+      return;
+    }
+
+    let children = parser(
+      dependencyNode,
+      absolutePath,
+      codeString,
+      this.options,
+      this.parseRule,
+      this.parsers
+    );
+
+    // remove repeated child
+    if (children.length >= 2) {
+      children = Array.from(new Set(children));
+    }
+
+    // if not set dependencyNode in dependencyHash before
+    // will not found analyzed node
+    this.dependencyHash[absolutePath] = dependencyNode;
+
+    for (let i = 0; i < children.length; i++) {
+      const childrenPath = children[i];
+      this.processChildDependency(
+        childrenPath,
+        dependencyNode,
+        dependencyList,
+        treeNodeCount
+      );
+    }
+  }
+
+  /**
+   * Process a child dependency path
+   */
+  private processChildDependency(
+    childrenPath: string,
+    parentNode: DependencyTreeData,
+    dependencyList: DependencyTreeData[],
+    treeNodeCount: { value: number }
+  ) {
+    if (!isPathExists(childrenPath)) {
+      console.error(`file does not exist: ${childrenPath}`);
+      return;
+    }
+
+    let dependencyChildren: DependencyTreeData;
+
+    // old node; node was analyzed
+    if (this.dependencyHash[childrenPath]) {
+      dependencyChildren = this.handleExistingNode(
+        childrenPath,
+        parentNode,
+        dependencyList
+      );
+    } else {
+      // find new node
+      dependencyChildren = this.handleNewNode(
+        childrenPath,
+        parentNode,
+        dependencyList
+      );
+    }
+
+    parentNode.children.push(dependencyChildren);
+    treeNodeCount.value++;
+    // console.log('已分析文件数量：' + Object.keys(this.dependencyHash).length, '依赖树节点：' + treeNodeCount.value)
+  }
+
+  /**
+   * Handle existing node (already analyzed)
+   */
+  private handleExistingNode(
+    childrenPath: string,
+    parentNode: DependencyTreeData,
+    dependencyList: DependencyTreeData[]
+  ): DependencyTreeData {
+    if (this.isCircularStructure(childrenPath, parentNode)) {
+      const circularNode = this.getCircularStructureNode(
+        childrenPath,
+        this.dependencyHash
+      );
+      this.triggerGetCircularStructureNode(circularNode, this.dependencyHash);
+      this.reSetAnalyzedNodesParent(
+        parentNode.absolutePath,
+        parentNode,
+        circularNode
+      );
+      return circularNode;
+    } else {
+      const existingNode = { ...this.dependencyHash[childrenPath] };
+      this.triggerGetOldDependencyTreeNode(existingNode);
+      this.reSetAnalyzedNodesParent(
+        parentNode.absolutePath,
+        parentNode,
+        existingNode
+      );
+
+      // not analyzed
+      if (!existingNode.name) {
+        return this.getNewNode(
+          parentNode.absolutePath,
+          parentNode,
+          childrenPath,
+          dependencyList
+        );
+      }
+
+      return existingNode;
+    }
+  }
+
+  /**
+   * Handle new node (not yet analyzed)
+   */
+  private handleNewNode(
+    childrenPath: string,
+    parentNode: DependencyTreeData,
+    dependencyList: DependencyTreeData[]
+  ): DependencyTreeData {
+    return this.getNewNode(
+      parentNode.absolutePath,
+      parentNode,
+      childrenPath,
+      dependencyList
+    );
+  }
+
+  /**
+   * Finalize parse and return result
+   */
+  private finalizeParse() {
     // console.log(`正在移除文件依赖关系中的重复节点`)
     this.removeRepeatNodeOnTee(this.dependencyTreeData);
     return {
       dependencyTree: this.dependencyTreeData,
       dependencyNodes: this.dependencyHash,
     };
+  }
+
+  parse(entryPath: string, folderPath: string) {
+    this.initializeParseState(entryPath);
+
+    let treeNodeCount = { value: 0 };
+    const dependencyList = [this.dependencyTreeData];
+
+    while (dependencyList.length) {
+      const dependencyNode = dependencyList.pop();
+      if (!dependencyNode) throw new Error("Error no dependencyNode");
+
+      this.processDependencyNode(dependencyNode, folderPath, dependencyList, treeNodeCount);
+    }
+
+    return this.finalizeParse();
   }
 }
 DependencyTree.jsParser = jsParser;
