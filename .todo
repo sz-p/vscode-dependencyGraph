@@ -86,3 +86,5 @@ TODO
 // return require("./PnpPlugin").PnpApiImpl; // eslint-disable-line node/no-missing-require
 // vsce package
 // https://marketplace.visualstudio.com/manage/publishers/sz-p
+
+//! 架构上仅做简单异步并不可行，理论上应该仅传输文件节点数据，交由前端动态组装。

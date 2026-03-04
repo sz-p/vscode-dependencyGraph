@@ -8,6 +8,7 @@ import {
   MESSAGE_EXPORT_PNG,
   MESSAGE_WEBVIEW_LOG,
   MESSAGE_WEBVIEW_READY,
+  MESSAGE_EXPAND_NODE,
 } from "../../../utils/message/messagesKeys";
 class Msg {
   constructor(key, value, description) {
@@ -33,5 +34,9 @@ export const msgExportSvg = (value) => new Msg(MESSAGE_EXPORT_SVG, value);
 export const msgExportPng = (value) => new Msg(MESSAGE_EXPORT_PNG, value);
 export const msgWebViewLog = (value, description) => {
   const messagePoster = new Msg(MESSAGE_WEBVIEW_LOG, value, description);
+  messagePoster.post();
+};
+export const msgExpandNode = (nodeId) => {
+  const messagePoster = new Msg(MESSAGE_EXPAND_NODE, nodeId);
   messagePoster.post();
 };

@@ -11,7 +11,7 @@ export const throttle = function (func, delay) {
   };
 };
 
-export const isWindows = function() {
+export const isWindows = function () {
   // Detect OS using process.platform if available, otherwise fallback to window.navigator.userAgent
   let isWindows = false;
   if (typeof process !== "undefined" && process.platform) {
@@ -22,9 +22,8 @@ export const isWindows = function() {
   return isWindows
 }
 
-export const isMac = function() {
+export const isMac = function () {
   // Detect OS using process.platform if available, otherwise fallback to window.navigator.userAgent
-  debugger
   let isMac = false;
   if (typeof process !== "undefined" && process.platform) {
     isMac = process.platform === "darwin";

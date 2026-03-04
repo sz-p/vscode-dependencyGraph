@@ -1,6 +1,7 @@
 export interface DependencyTreeOptions {
   resolveExtensions?: string[];
   alias?: Alias;
+  maxDepth?: number;
   onGotFileString?: (
     dependencyNode: DependencyTreeData,
     absolutePath: string,
@@ -51,4 +52,6 @@ export interface DependencyTreeData {
   relativePath: string;
   circularStructure?: boolean;
   children: Array<DependencyTreeData>;
+  hasMoreChildren?: boolean;
+  pendingChildren?: string[];
 }

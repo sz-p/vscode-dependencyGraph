@@ -35,7 +35,9 @@ const getChildNodeID = function (parentNodeID: string, fileID: string) {
 export const dependenciesTreeDataToTransportsData = function (
   dependencyTreeData: DependencyTreeData,
   dependencyTreeNodes: DependencyHash,
-  dirPath: string
+  dirPath: string,
+  maxDepth: number = 2,
+  parentNodeId: string | null = null
 ): { dependencyTree: DependencyTree; dependencyNodes: DependencyNodes } {
   // console.log(`开始数据转换`)
   let dependencyNodes = {} as DependencyNodes;
@@ -72,19 +74,27 @@ export const dependenciesTreeDataToTransportsData = function (
     dependencyNode["fileID"] = md5Hash;
   }
   let dependencyTreeDataHashTable = [
-    { node: { ...dependencyTreeData, nodeDeep: 0 }, tree: dependencyTree },
+    { node: { ...dependencyTreeData, nodeDeep: 0 }, tree: dependencyTree, parentNodeID: parentNodeId },
   ];
   // create DependencyTree by DependencyNodes and DependencyTreeData
   // set nodeID
   while (dependencyTreeDataHashTable.length) {
     dependencyTreeDataHashTableNodeCount++;
     // console.log(`已分离的节点数量：${dependencyTreeDataHashTableNodeCount}`)
-    let { node, tree } = dependencyTreeDataHashTable.shift() as {
+    let { node, tree, parentNodeID } = dependencyTreeDataHashTable.shift() as {
       node: DependencyTreeData;
       tree: DependencyTree;
+      parentNodeID: string | null;
     };
     tree.name = node.name;
     tree.fileID = getFileID(node);
+    // Set nodeID: for root node, nodeID = fileID; for child nodes, nodeID = getChildNodeID(parentNodeID, fileID)
+    if (parentNodeID === null) {
+      tree.nodeID = tree.fileID;
+    } else {
+      tree.nodeID = getChildNodeID(parentNodeID, tree.fileID);
+    }
+    tree.parentNodeID = parentNodeID;
     node.fileID = tree.fileID;
     node.nodeID = tree.nodeID;
     tree.children = [] as DependencyTree[];
@@ -94,14 +104,27 @@ export const dependenciesTreeDataToTransportsData = function (
       } as DependencyTree;
       tree.children.push(treeChild);
       const nextDeep = node.nodeDeep + 1;
-      // TODO
-      // if (nextDeep > 3) {
-      //   treeChild.children = [];
-      //   continue
-      // }
+      if (nextDeep === maxDepth) {
+        // Don't set children for nodes beyond max depth
+        // This allows D3 to treat them as collapsed nodes with potential children
+        treeChild.children = [];
+        // Mark node as having more children if it has children in original data
+        if (node.children[i].children && node.children[i].children.length > 0) {
+          const childFileID = getFileID(node.children[i]);
+          if (dependencyNodes[childFileID]) {
+            dependencyNodes[childFileID].hasMoreChildren = true;
+          }
+          treeChild.hasMoreChildren = true;
+        }
+      }
+      if (nextDeep > maxDepth) {
+        tree.children = [];
+        continue;
+      }
       dependencyTreeDataHashTable.push({
         node: { ...node.children[i], nodeDeep: nextDeep },
         tree: treeChild,
+        parentNodeID: tree.nodeID,
       });
     }
   }

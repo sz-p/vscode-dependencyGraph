@@ -10,6 +10,7 @@ export const initialState = {
   assetsBaseURL: undefined,
   getDataStatus: undefined,
   dependencyTreeData: undefined,
+  dependencyNodes: undefined,
   getDataFailed: undefined,
   focusOn: undefined,
   viewHash: undefined,

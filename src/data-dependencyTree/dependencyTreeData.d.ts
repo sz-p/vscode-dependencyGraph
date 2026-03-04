@@ -34,6 +34,8 @@ export interface DependencyTreeData {
   relativePath: string;
   parent: DependencyTreeData;
   children: Array<DependencyTreeData>;
+  hasMoreChildren?: boolean;
+  pendingChildren?: string[];
 }
 
 export interface DependencyTree {
@@ -42,6 +44,7 @@ export interface DependencyTree {
   fileID: string;
   children: Array<DependencyTree>;
   parentNodeID: string;
+  hasMoreChildren?: boolean;
 }
 
 //TODO extends
@@ -58,6 +61,8 @@ export interface DependencyNode {
   extension: string;
   relativePath: string;
   children: string[];
+  hasMoreChildren?: boolean;
+  pendingChildren?: string[];
 }
 export interface DependencyNodes {
   [key: string]: DependencyNode;

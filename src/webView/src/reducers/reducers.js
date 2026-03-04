@@ -23,7 +23,8 @@ const actionsCase = () => {
     let newState = undefined;
     if (data) {
       newState = Object.assign({}, state, {
-        dependencyTreeData: data,
+        dependencyTreeData: data.dependencyTreeData,
+        dependencyNodes: data.dependencyNodes,
         gotDependencyTreeData: true,
       });
       newState = change_getDataStatus(newState, {
@@ -39,6 +40,7 @@ const actionsCase = () => {
     } else {
       newState = Object.assign({}, state, {
         dependencyTreeData: undefined,
+        dependencyNodes: undefined,
         gotDependencyTreeData: false,
       });
       newState = change_getDataStatus(newState, {
@@ -105,7 +107,7 @@ const actionsCase = () => {
     });
     return newState;
   };
-  const changeSettingStatus = (state, action) => {
+  const changeSettingStatus = (state, _action) => {
     const newState = Object.assign({}, state, {
       showSetting: !state.showSetting,
     });
@@ -119,7 +121,8 @@ const actionsCase = () => {
     return newState;
   };
   const getSavedData = (state, action) => {
-    const data = action.payload.data;
+    // data is not used, but kept for consistency
+    const _data = action.payload.data;
     const newState = Object.assign({}, state, {
       savedData: true,
     });
@@ -131,6 +134,77 @@ const actionsCase = () => {
       commandSettingStatus: data.value,
     });
     return newState;
+  };
+  const expandNodeResult = (state, action) => {
+    try {
+      const { nodeId, subtreeTree, subtreeNodes } = action.payload;
+
+      if (!state.dependencyNodes || !state.dependencyTreeData) {
+        console.error("No dependency data available for expandNodeResult");
+        return state;
+      }
+
+      // Merge subtree nodes into existing nodes
+      const mergedNodes = {
+        ...state.dependencyNodes,
+        ...subtreeNodes
+      };
+
+      // Update the expanded node's hasMoreChildren flag
+      if (mergedNodes[nodeId]) {
+        mergedNodes[nodeId] = {
+          ...mergedNodes[nodeId],
+          hasMoreChildren: false
+        };
+      }
+
+      // Helper function to update a node in the tree
+      const updateTreeWithSubtree = (treeNode, targetNodeId, subtree) => {
+        if (treeNode.fileID === targetNodeId) {
+          // Found the node to update
+          // Merge subtree properties with existing tree node
+          // Keep important fields from the original treeNode (nodeID, parentNodeID, etc.)
+          return {
+            ...treeNode,
+            ...subtree, // Spread subtree properties (children, hasMoreChildren, etc.)
+            // Ensure nodeID and parentNodeID remain unchanged
+            nodeID: treeNode.nodeID,
+            parentNodeID: treeNode.parentNodeID,
+            fileID: treeNode.fileID,
+            name: treeNode.name,
+            hasMoreChildren: false // Clear the flag since we've expanded it
+          };
+        }
+
+        if (treeNode.children && treeNode.children.length > 0) {
+          return {
+            ...treeNode,
+            children: treeNode.children.map(child =>
+              updateTreeWithSubtree(child, targetNodeId, subtree)
+            )
+          };
+        }
+
+        return treeNode;
+      };
+
+      // Update the tree data
+      const updatedTreeData = updateTreeWithSubtree(
+        state.dependencyTreeData,
+        nodeId,
+        subtreeTree
+      );
+
+      const newState = Object.assign({}, state, {
+        dependencyNodes: mergedNodes,
+        dependencyTreeData: updatedTreeData
+      });
+
+      return newState;
+    } catch (error) {
+      console.error("Error in expandNodeResult reducer:", error);
+      return state;
+    }
   };
   return new Map([
     [type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus],
@@ -146,6 +220,7 @@ const actionsCase = () => {
     [type.TYPE_GET_ENTRY_FILE, getEntryFile],
     [type.TYPE_GET_SAVED_DATA, getSavedData],
     [type.TYPE_GET_RUN_COMMAND_STATUS, getRunCommandStatus],
+    [type.TYPE_EXPAND_NODE_RESULT, expandNodeResult],
   ]);
 };
 export const reducer = function (state = initialState, action) {

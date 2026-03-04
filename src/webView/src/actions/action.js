@@ -8,13 +8,16 @@ const returnParams = function (Params) {
 const getDependenciesTreeData = function (Params) {
   try {
     msgWebViewLog("debug", "start transportsDataToDependenciesTreeData")
-    const data = transportsDataToDependenciesTreeData(
+    const dependencyTreeData = transportsDataToDependenciesTreeData(
       Params.data.value.data.dependencyTree,
       Params.data.value.data.dependencyNodes,
       Params.data.value.folderPath
     );
     msgWebViewLog("debug", "end transportsDataToDependenciesTreeData")
-    return data;
+    return {
+      dependencyTreeData,
+      dependencyNodes: Params.data.value.data.dependencyNodes
+    };
   } catch (error) {
     msgWebViewLog("error", "transportsDataToDependenciesTreeData error", error)
     return false;
@@ -89,4 +92,26 @@ export const action_getRunCommandStatus = createAction(
 export const action_getCommandWaitingStatus = createAction(
   type.TYPE_GET_RUN_COMMAND_STATUS,
   getCommandWaitingStatus
+);
+
+const mergeSubtreeData = function (Params) {
+  try {
+    const { nodeId, subtree } = Params.data.value;
+    const { dependencyTree: subtreeTree, dependencyNodes: subtreeNodes } = subtree;
+
+    // Return the data to be processed by reducer
+    return {
+      nodeId,
+      subtreeTree,
+      subtreeNodes
+    };
+  } catch (error) {
+    msgWebViewLog("error", "mergeSubtreeData error", error);
+    return false;
+  }
+};
+
+export const action_expandNodeResult = createAction(
+  type.TYPE_EXPAND_NODE_RESULT,
+  mergeSubtreeData
 );

@@ -25,6 +25,7 @@ export class DependencyTree {
   dependencyHash: DependencyHash;
   dependencyTreeData: DependencyTreeData;
   circularStructureNode: DependencyTreeData;
+  maxDepth: number;
   static jsParser: Parser;
   static generalCssParser: Parser;
   static vueParser: Parser;
@@ -49,6 +50,7 @@ export class DependencyTree {
       parent: null,
       children: [],
     };
+    this.maxDepth = this.options.maxDepth !== undefined ? this.options.maxDepth : Infinity;
   }
   private setDataToDependencyNode(
     dependencyNode: DependencyTreeData,
@@ -108,6 +110,18 @@ export class DependencyTree {
       parent = parent.parent
     }
     return false
+  }
+  /**
+   * Calculate depth of a node (distance from root)
+   */
+  private getNodeDepth(node: DependencyTreeData | null): number {
+    let depth = 0;
+    let current = node;
+    while (current && current.parent) {
+      depth++;
+      current = current.parent;
+    }
+    return depth;
   }
   /**
    * use absolutePath and parent find circular structure on Children
@@ -216,7 +230,12 @@ export class DependencyTree {
     delete this.parseRule[key];
   }
   setOptions(options: DependencyTreeOptions) {
-    if (options) merge(this.options, options);
+    if (options) {
+      merge(this.options, options);
+      if (options.maxDepth !== undefined) {
+        this.maxDepth = options.maxDepth;
+      }
+    }
   }
 
   /**

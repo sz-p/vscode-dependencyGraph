@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import { throttle, isMac } from "../../utils/utils";
 import { store } from "../../reducers/store";
 import { action_selectNode } from "../../actions/action";
-import { msgWebViewLog } from "../../utils/messages";
+import { msgWebViewLog, msgExpandNode } from "../../utils/messages";
 
 const diagonal = function (s, d) {
   const path = `M ${s.y} ${s.x}
@@ -116,11 +116,11 @@ export class D3Tree {
         .attr(
           "transform",
           "translate(" +
-            this.PADDING.LEFT +
-            "," +
-            this.PADDING.TOP +
-            this.height / 2 +
-            ")"
+          this.PADDING.LEFT +
+          "," +
+          this.PADDING.TOP +
+          this.height / 2 +
+          ")"
         );
     }
   }
@@ -478,10 +478,12 @@ export class D3Tree {
   }
   clickNodeArrowButton() {
     return (d) => {
+      // Normal expand/collapse for nodes that already have children
       if (d.children) {
         d._children = d.children;
         d.children = null;
       } else {
+        msgExpandNode(d.data.nodeID);
         d.children = d._children;
         d._children = null;
       }

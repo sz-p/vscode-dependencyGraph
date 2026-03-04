@@ -12,7 +12,9 @@ import { onError } from "./utils/error/onError";
 import { NO_FOLDER } from "./utils/error/errorKey";
 import { exportSvg, exportPng } from "./utils/fileSystem/svgAndPng";
 import { msgRunCommandStatus } from "./utils/message/messages";
-import { logger } from "./utils/logger"
+import { logger } from "./utils/logger";
+import { expandNode } from "./data-dependencyTree/data-dependencyTree";
+import { messagePoster } from "./utils/message/messagePoster";
 
 /**
  * get command open folder
@@ -102,6 +104,32 @@ const actionLogToLocal = function (msg: Msg) {
     }
   }
 }
+const actionExpandNode = async function (msg: Msg) {
+  try {
+    const nodeId = msg.value;
+    logger.info(`Expanding node with ID: ${nodeId}`);
+
+    const subtreeData = await expandNode(nodeId);
+
+    if (subtreeData) {
+      // Send the subtree data back to the webview
+      messagePoster.newMsg({
+        key: MESSAGES.MESSAGE_EXPAND_NODE_RESULT,
+        value: {
+          nodeId,
+          subtree: subtreeData
+        }
+      });
+      logger.info(`Successfully expanded node: ${nodeId}`);
+    } else {
+      logger.error(`Failed to expand node: ${nodeId}`);
+      // Could send an error message back to webview if needed
+    }
+  } catch (error) {
+    logger.error("Error in actionExpandNode:", error);
+  }
+};
+
 const actionWebViewReady = function () {
   global.webViewReady = true
 }
@@ -115,7 +143,8 @@ const messageCase = () => {
     [MESSAGES.MESSAGE_EXPORT_SVG, actionExportSvg],
     [MESSAGES.MESSAGE_EXPORT_PNG, actionExportPng],
     [MESSAGES.MESSAGE_WEBVIEW_LOG, actionLogToLocal],
-    [MESSAGES.MESSAGE_WEBVIEW_READY, actionWebViewReady]
+    [MESSAGES.MESSAGE_WEBVIEW_READY, actionWebViewReady],
+    [MESSAGES.MESSAGE_EXPAND_NODE, actionExpandNode]
   ]);
 };
 
