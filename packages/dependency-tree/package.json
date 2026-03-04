@@ -11,7 +11,9 @@
     "lodash": "^4.17.21",
     "postcss": "^8.3.6",
     "recast": "^0.21.1",
-    "vue-template-compiler": "2.6.12"
+    "vue-template-compiler": "2.6.12",
+    "tree-sitter": "^0.20.0",
+    "tree-sitter-python": "^0.20.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.165",

@@ -20,3 +20,6 @@ scripts
 utils
 yarn-error.log
 yarn.lock
+!node_modules/tree-sitter
+!node_modules/tree-sitter-python
+!node_modules/nan

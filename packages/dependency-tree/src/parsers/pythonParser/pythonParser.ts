@@ -4,88 +4,65 @@ import {
   DependencyTreeOptions,
   Parsers,
 } from "../../index.d";
+import { triggerOnGotAST } from "../utils/utils";
 import * as path from "path";
 import * as fs from "fs";
 
-/**
- * Extract import statements from Python code using regex.
- * Supports:
- *   import module
- *   import module as alias
- *   import module1, module2
- *   from module import name
- *   from module import name as alias
- *   from . import module (relative imports)
- *   from .. import module
- */
-export const parser: Parser = function (
+// 是否启用 tree-sitter 解析器
+// 可以通过环境变量 DEPENDENCY_GRAPH_USE_TREE_SITTER 控制
+const USE_TREE_SITTER = true
+
+// ============================================
+// 正则表达式解析器（回退方案）
+// ============================================
+function regexPythonParser(
   dependencyNode: DependencyTreeData,
   absolutePath: string,
   codeString: string,
   options: DependencyTreeOptions
-) {
+): string[] {
   const dependencies: string[] = [];
   const dirName = path.dirname(absolutePath);
   const { resolveExtensions, alias } = options;
-  // Python-specific path resolution
+
+  // Python-specific path resolution (same as before)
   function resolvePythonPath(contextDir: string, moduleSpecifier: string): string | undefined {
-    // If moduleSpecifier is already absolute, return it
     if (path.isAbsolute(moduleSpecifier)) {
       return moduleSpecifier;
     }
 
-    // moduleSpecifier should already be normalized by getModulePathToResolve
-    // It may contain relative prefixes (., ..) and slashes
     let specifier = moduleSpecifier;
-
-    // Resolve relative to context directory
     let resolved = path.resolve(contextDir, specifier);
 
-    // Try with .py extension if no extension present
     if (!path.extname(resolved)) {
       const withPy = resolved + '.py';
       if (fs.existsSync(withPy)) {
         return withPy;
       }
-      // Also check if it's a directory with __init__.py
       const initPy = path.join(resolved, '__init__.py');
       if (fs.existsSync(initPy)) {
         return initPy;
       }
-      // If not found, still return the .py path (let caller handle missing files)
       return withPy;
     }
 
-    // Ensure we return an absolute path
     if (!path.isAbsolute(resolved)) {
-      // This shouldn't happen with path.resolve, but just in case
       return path.resolve(resolved);
     }
 
     return resolved;
   }
 
-  /**
-   * Convert Python module specifier to a path that can be resolved by enhanced-resolve
-   */
   function getModulePathToResolve(module: string, importedName?: string): string {
-    // Handle relative imports (starting with dot)
     if (module.startsWith('.')) {
-      // Count leading dots for relative depth
       const leadingDots = module.match(/^\.+/)?.[0] || '';
       const rest = module.slice(leadingDots.length);
-
-      // Convert dots in the rest of the module to slashes (for submodules)
       const restPath = rest.replace(/\./g, '/');
-
-      // Reconstruct path with leading dots (converted to ./ or ../ etc.)
       let modulePath = leadingDots.replace(/\./g, '.') + restPath;
 
-      // If it's just dots (e.g., from . import something), treat as current directory
       if (modulePath === '.') {
         modulePath = './';
       } else if (modulePath.startsWith('..') && !modulePath.includes('/')) {
-        // e.g., '..' -> '../'
         modulePath = modulePath + '/';
       }
 
@@ -96,29 +73,23 @@ export const parser: Parser = function (
       return modulePath;
     }
 
-    // Bare module name (no slashes, no dots) -> treat as relative import
     if (!module.includes('/') && !module.includes('\\') && !module.includes('.')) {
       return './' + module;
     }
 
-    // Module with dots (e.g., package.module) -> convert dots to slashes
     if (module.includes('.') && !module.includes('/') && !module.includes('\\')) {
       return './' + module.replace(/\./g, '/');
     }
 
-    // Already has path separators, return as is
     return module;
   }
 
-  // Regular expressions for Python imports
   const importRegex = /^\s*import\s+([^#\n]+)/gm;
   const fromImportRegex = /^\s*from\s+([^\s]+)\s+import\s+([^#\n]+)/gm;
 
   let match;
-  // Match simple imports: import module, import module as alias, import module1, module2
   while ((match = importRegex.exec(codeString)) !== null) {
     const importStatement = match[1].trim();
-    // Split by commas to handle multiple imports
     const modules = importStatement.split(',').map(m => m.trim().split(/\s+/)[0]);
     for (const module of modules) {
       if (!module) continue;
@@ -129,21 +100,17 @@ export const parser: Parser = function (
           dependencies.push(dependencyPath);
         }
       } catch (e) {
-        // Silently ignore resolution failures (likely system/third-party modules)
+        // Silently ignore resolution failures
       }
     }
   }
 
-  // Match from imports: from module import ...
   while ((match = fromImportRegex.exec(codeString)) !== null) {
     const module = match[1].trim();
     const importClause = match[2].trim();
     if (!module) continue;
 
-    // Extract imported names from import clause
-    // Examples: "something", "something as alias", "something, another"
     const importItems = importClause.split(',').map(item => {
-      // Remove "as alias" part
       return item.trim().split(/\s+/)[0];
     }).filter(Boolean);
 
@@ -155,23 +122,114 @@ export const parser: Parser = function (
           dependencies.push(dependencyPath);
         }
       } catch (e) {
-        // Silently ignore resolution failures (likely system/third-party modules)
+        // Silently ignore resolution failures
       }
     }
   }
 
-  // Remove duplicates and ensure absolute paths
-  const uniqueDependencies = Array.from(new Set(dependencies));
+  // Trigger AST callback with minimal AST representation
+  // This allows file analysis to work even with regex parser
+  triggerOnGotAST(dependencyNode, absolutePath, options, {
+    type: 'regex_ast',
+    source: codeString,
+    imports: dependencies.length
+  });
 
-  // Ensure all paths are absolute and normalized
+  const uniqueDependencies = Array.from(new Set(dependencies));
   const normalizedDependencies = uniqueDependencies.map(dep => {
     if (path.isAbsolute(dep)) {
       return path.normalize(dep);
     }
-    // If somehow a relative path slipped through, resolve it relative to dirName
-    // This shouldn't happen if resolvePythonPath is working correctly
     return path.normalize(path.resolve(dirName, dep));
   });
 
   return normalizedDependencies;
+}
+
+// ============================================
+// Tree-sitter 解析器（主方案）
+// ============================================
+let treeSitterAvailable = false;
+let treeSitterParser: any = null;
+let treeSitterPython: any = null;
+
+function tryInitializeTreeSitter(): boolean {
+  // 如果配置为不使用 tree-sitter，直接返回 false
+  if (!USE_TREE_SITTER) {
+    return false;
+  }
+
+  if (treeSitterAvailable) {
+    return true;
+  }
+
+  try {
+    // 动态导入 tree-sitter 模块
+    // 使用 require 避免在激活时立即失败
+    //! fixme tree-sitter 依赖c++环境 目前编译有问题
+    const TreeSitter = require('tree-sitter');
+    const TreeSitterPython = require('tree-sitter-python');
+
+    // 尝试初始化
+    if (TreeSitterPython.init && typeof TreeSitterPython.init === 'function') {
+      TreeSitterPython.init();
+    }
+
+    const parser = new TreeSitter();
+    parser.setLanguage(TreeSitterPython);
+
+    treeSitterParser = parser;
+    treeSitterPython = TreeSitterPython;
+    treeSitterAvailable = true;
+    console.log('tree-sitter-python initialized successfully');
+    return true;
+  } catch (error) {
+    console.warn('Failed to initialize tree-sitter-python, falling back to regex parser:', (error as Error).message);
+    treeSitterAvailable = false;
+    return false;
+  }
+}
+
+// Tree-sitter AST 解析函数
+function parseWithTreeSitter(codeString: string): any {
+  if (!treeSitterAvailable && !tryInitializeTreeSitter()) {
+    throw new Error('tree-sitter not available');
+  }
+
+  return treeSitterParser.parse(codeString);
+}
+
+// ============================================
+// 主解析器函数
+// ============================================
+export const parser: Parser = function (
+  dependencyNode: DependencyTreeData,
+  absolutePath: string,
+  codeString: string,
+  options: DependencyTreeOptions,
+) {
+  // 首先尝试使用 tree-sitter
+  if (tryInitializeTreeSitter()) {
+    try {
+      // 导入通用 Python 解析器
+      const { parser: generalPythonParser } = require("../generalPythonParser/generalPythonParser");
+
+      const pythonParser = {
+        parse: (code: string) => parseWithTreeSitter(code)
+      };
+
+      return generalPythonParser(dependencyNode, absolutePath, codeString, options, pythonParser);
+    } catch (error) {
+      console.warn('tree-sitter parsing failed, falling back to regex parser:', (error as Error).message);
+      // 如果 tree-sitter 解析失败，回退到正则表达式
+      return regexPythonParser(dependencyNode, absolutePath, codeString, options);
+    }
+  } else {
+    // tree-sitter 不可用，直接使用正则表达式
+    return regexPythonParser(dependencyNode, absolutePath, codeString, options);
+  }
 };
+
+// 导出两个解析器以供测试
+export const regexParser = regexPythonParser;
+export const isTreeSitterAvailable = () => treeSitterAvailable;
