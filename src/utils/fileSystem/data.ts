@@ -13,6 +13,7 @@ import { getCurrentFolderPath } from "../getCurrentFolderPath"
 import { DependencyTreeData } from "../../data-dependencyTree/dependencyTreeData";
 import { transportsDataToDependenciesTreeData } from "../../data-dependencyTree/processTreeData";
 import { TransportsData } from "../../data-dependencyTree/dependencyTreeData";
+import { writeSnapshot } from "./snapshot";
 
 const getDataFilePath = function (): string | false {
   const dirPath = getCurrentFolderPath();
@@ -53,6 +54,7 @@ export const setData = function (value: any): boolean {
   let Data = value;
   try {
     fs.writeFileSync(getDataFilePath() as string, JSON.stringify(Data));
+    writeSnapshot(Data);
     return true;
   } catch (err) {
     return false;
