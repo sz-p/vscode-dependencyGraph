@@ -191,6 +191,7 @@ export class D3Tree {
     this.focusedNodeId = null;
     if (this.nodeDoms) this.nodeDoms.attr("opacity", 1);
     if (this.linkDoms) this.linkDoms.attr("opacity", 1);
+    if (this.linkLabelDoms) this.linkLabelDoms.attr("opacity", 0);
   }
 
   enterFocusMode(nodeId) {
@@ -218,6 +219,7 @@ export class D3Tree {
       const tgtId = d.target.fileID !== undefined ? d.target.fileID : d.target;
       return srcId === nodeId || tgtId === nodeId ? 1 : 0.08;
     });
+    if (this.linkLabelDoms) this.linkLabelDoms.attr("opacity", 0);
   }
 
   // ── Phase 6: Layout Modes ────────────────────────────────────────────────────
@@ -362,18 +364,65 @@ export class D3Tree {
     this.exitFocusMode();
     this.svg.selectAll("*").remove();
 
+    // Arrowhead marker
+    const borderColor = this.DEFAULT_CHECKBOX_BORDER;
+    this.svg.append("defs").append("marker")
+      .attr("id", "arrowhead")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 18)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .attr("fill", borderColor);
+
+    const linksGroup = this.svg.append("g").attr("class", "links");
+
     // Links layer (behind nodes)
-    this.linkDoms = this.svg
-      .append("g")
-      .attr("class", "links")
-      .selectAll("line.link")
+    this.linkDoms = linksGroup
+      .selectAll("path.link")
       .data(this.edges)
       .enter()
-      .append("line")
+      .append("path")
       .attr("class", "link")
       .attr("fill", "none")
       .attr("stroke", this.DEFAULT_CHECKBOX_BORDER)
-      .attr("stroke-width", 1);
+      .attr("stroke-width", 1)
+      .attr("marker-end", "url(#arrowhead)");
+
+    // Edge labels (hidden by default, shown on hover)
+    this.linkLabelDoms = linksGroup
+      .selectAll("text.link-label")
+      .data(this.edges)
+      .enter()
+      .append("text")
+      .attr("class", "link-label")
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .attr("font-size", "10px")
+      .attr("fill", this.DEFAULT_IGNORED_TEXT_COLOR)
+      .attr("pointer-events", "none")
+      .attr("opacity", 0)
+      .text((d) => {
+        const names = d.importedNames || [];
+        const label = names.join(", ");
+        return label.length > 30 ? label.slice(0, 28) + "…" : label;
+      });
+
+    // Show label on link hover
+    this.linkDoms
+      .on("mouseenter", function (d, i, nodes) {
+        d3.select(nodes[i].parentNode).selectAll("text.link-label")
+          .filter((ld) => ld === d)
+          .attr("opacity", 1);
+      })
+      .on("mouseleave", function (d, i, nodes) {
+        d3.select(nodes[i].parentNode).selectAll("text.link-label")
+          .filter((ld) => ld === d)
+          .attr("opacity", 0);
+      });
 
     // Nodes layer
     this.nodeDoms = this.svg
@@ -472,11 +521,21 @@ export class D3Tree {
   }
 
   ticked() {
-    this.linkDoms
-      .attr("x1", (d) => d.source.x)
-      .attr("y1", (d) => d.source.y)
-      .attr("x2", (d) => d.target.x)
-      .attr("y2", (d) => d.target.y);
+    this.linkDoms.attr("d", (d) => {
+      const sx = d.source.x, sy = d.source.y;
+      const tx = d.target.x, ty = d.target.y;
+      const mx = (sx + tx) / 2;
+      const my = (sy + ty) / 2;
+      return `M${sx},${sy} Q${mx},${my} ${tx},${ty}`;
+    });
+
+    if (this.linkLabelDoms) {
+      this.linkLabelDoms.attr("transform", (d) => {
+        const mx = (d.source.x + d.target.x) / 2;
+        const my = (d.source.y + d.target.y) / 2;
+        return `translate(${mx},${my})`;
+      });
+    }
 
     this.nodeDoms.attr("transform", (d) => `translate(${d.x},${d.y})`);
   }

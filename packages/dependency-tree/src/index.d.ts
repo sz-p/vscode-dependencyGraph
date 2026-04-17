@@ -51,4 +51,5 @@ export interface DependencyTreeData {
   relativePath: string;
   circularStructure?: boolean;
   children: Array<DependencyTreeData>;
+  importedNamesByChild?: { [childAbsolutePath: string]: string[] };
 }

@@ -26,11 +26,13 @@ export const dependenciesTreeDataToTransportsData = function (
   dirPath: string
 ): TransportsData {
   const nodeMap: { [fileID: string]: DependencyNode } = {};
+  const fileIDByAbsPath: { [absPath: string]: string } = {};
 
   for (let key in dependencyTreeNodes) {
     const node = dependencyTreeNodes[key] as DependencyTreeData;
     const fileID = getFileID(node);
     node["fileID"] = fileID;
+    fileIDByAbsPath[key] = fileID;
     nodeMap[fileID] = {
       fileID,
       name: node.name,
@@ -49,12 +51,19 @@ export const dependenciesTreeDataToTransportsData = function (
 
   const edges: TransportEdge[] = [];
   const seenEdges = new Set<string>();
-  for (const fileID in nodeMap) {
-    for (const childFileID of nodeMap[fileID].children) {
+  for (const absPath in dependencyTreeNodes) {
+    const node = dependencyTreeNodes[absPath] as DependencyTreeData;
+    const fileID = fileIDByAbsPath[absPath];
+    for (const child of node.children) {
+      const childFileID = child.absolutePath
+        ? (fileIDByAbsPath[child.absolutePath] ?? getFileID(child))
+        : getFileID(child);
+      if (!childFileID) continue;
       const key = `${fileID}|${childFileID}`;
       if (!seenEdges.has(key)) {
         seenEdges.add(key);
-        edges.push({ source: fileID, target: childFileID });
+        const importedNames = node.importedNamesByChild?.[child.absolutePath] ?? [];
+        edges.push({ source: fileID, target: childFileID, importedNames });
       }
     }
   }
