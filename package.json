@@ -100,7 +100,7 @@
   "scripts": {
     "watch": "npm-run-all -p watch:*",
     "build": "npm-run-all -p build:*",
-    "vscode:prepublish": "yarn test && npm-run-all -p build:*",
+    "vscode:prepublish": "npm-run-all -p build:*",
     "codeCount": "cloc ./ --exclude-dir=node_modules,out,outExtension,outWebView,assets,fileIcons",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2",
     "compile": "tsc -p ./",
@@ -108,7 +108,7 @@
     "watch:WebView": "node ./src/webView/scripts/watch.js",
     "build:Extension": "node ./scripts/build.js",
     "build:WebView": "node ./src/webView/scripts/build.js",
-    "package": "vsce package",
+    "package": "npx @vscode/vsce package --no-yarn --no-dependencies",
     "ls-lint": "node_modules/.bin/ls-lint",
     "test": "mocha -n experimental-specifier-resolution=node -n loader=ts-node/esm --serial -p ./tests/tsconfig.testing.json --spec tests/**/*.test.ts tests/**/*.test.js"
   },

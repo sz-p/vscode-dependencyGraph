@@ -1,8 +1,7 @@
 import * as vscode from "vscode";
 import {
   DependencyTreeData,
-  DependencyNodes,
-  DependencyTree,
+  TransportsData,
 } from "../src/data-dependencyTree/dependencyTreeData";
 
 declare module "*.html" {
@@ -18,10 +17,7 @@ declare global {
       dependencyTreeData:
       | {
         dependencyTreeData: DependencyTreeData;
-        transportsData: {
-          dependencyTree: DependencyTree;
-          dependencyNodes: DependencyNodes;
-        };
+        transportsData: TransportsData;
       }
       | undefined;
     }
