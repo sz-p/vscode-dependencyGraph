@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import * as dagre from "dagre";
 import { throttle, isMac } from "../../utils/utils";
 import { store } from "../../reducers/store";
 import { action_selectNode } from "../../actions/action";
@@ -71,6 +72,9 @@ export class D3Tree {
       CLICK_DALEY: this.CLICK_DALEY,
       ICON_SIZE: this.ICON_SIZE,
     };
+
+    this.focusedNodeId = null;
+    this.layout = "force";
   }
 
   initDom(dom) {
@@ -89,6 +93,7 @@ export class D3Tree {
         .attr("id", "treeViewSvgBox")
         .on("click", () => {
           store.dispatch(action_selectNode({}));
+          this.exitFocusMode();
         });
     }
     if (!this.svg) {
@@ -180,7 +185,181 @@ export class D3Tree {
       : "dark";
   }
 
+  // ── Phase 5: Focus Mode ──────────────────────────────────────────────────────
+
+  exitFocusMode() {
+    this.focusedNodeId = null;
+    if (this.nodeDoms) this.nodeDoms.attr("opacity", 1);
+    if (this.linkDoms) this.linkDoms.attr("opacity", 1);
+  }
+
+  enterFocusMode(nodeId) {
+    this.focusedNodeId = nodeId;
+    const connectedSet = new Set();
+    this.edges.forEach((e) => {
+      const srcId = e.source.fileID !== undefined ? e.source.fileID : e.source;
+      const tgtId = e.target.fileID !== undefined ? e.target.fileID : e.target;
+      if (srcId === nodeId || tgtId === nodeId) {
+        connectedSet.add(srcId);
+        connectedSet.add(tgtId);
+      }
+    });
+    this.applyFocusOpacity(nodeId, connectedSet);
+  }
+
+  applyFocusOpacity(nodeId, connectedSet) {
+    this.nodeDoms.attr("opacity", (d) => {
+      if (d.fileID === nodeId) return 1;
+      if (connectedSet.has(d.fileID)) return 0.35;
+      return 0.08;
+    });
+    this.linkDoms.attr("opacity", (d) => {
+      const srcId = d.source.fileID !== undefined ? d.source.fileID : d.source;
+      const tgtId = d.target.fileID !== undefined ? d.target.fileID : d.target;
+      return srcId === nodeId || tgtId === nodeId ? 1 : 0.08;
+    });
+  }
+
+  // ── Phase 6: Layout Modes ────────────────────────────────────────────────────
+
+  setLayout(layoutId) {
+    this.layout = layoutId;
+    if (!this.nodes || !this.linkDoms || !this.nodeDoms) return;
+    switch (layoutId) {
+      case "hierarchical":
+        this.applyHierarchicalLayout();
+        break;
+      case "radial":
+        this.applyRadialLayout();
+        break;
+      case "grid":
+        this.applyGridLayout();
+        break;
+      default:
+        this.applyForceLayout();
+        break;
+    }
+  }
+
+  applyForceLayout() {
+    this.nodes.forEach((d) => { d.fx = null; d.fy = null; });
+    this.initSimulation();
+  }
+
+  applyHierarchicalLayout() {
+    if (this.simulation) this.simulation.stop();
+
+    const g = new dagre.graphlib.Graph();
+    g.setGraph({ rankdir: "TB", ranksep: 120, nodesep: 80 });
+    g.setDefaultEdgeLabel(() => ({}));
+
+    this.nodes.forEach((n) => g.setNode(n.fileID, { width: 120, height: 40 }));
+    this.edges.forEach((e) => {
+      const src = e.source.fileID !== undefined ? e.source.fileID : e.source;
+      const tgt = e.target.fileID !== undefined ? e.target.fileID : e.target;
+      g.setEdge(src, tgt);
+    });
+
+    dagre.layout(g);
+
+    const offsetX = this.width / 2 - g.graph().width / 2;
+    const offsetY = this.PADDING.TOP;
+    this.nodes.forEach((n) => {
+      const pos = g.node(n.fileID);
+      if (pos) {
+        n.fx = pos.x + offsetX;
+        n.fy = pos.y + offsetY;
+        n.x = n.fx;
+        n.y = n.fy;
+      }
+    });
+    this.ticked();
+  }
+
+  applyRadialLayout() {
+    if (this.simulation) this.simulation.stop();
+
+    const levelMap = new Map();
+    const visited = new Set();
+    const queue = [this.rootId];
+    levelMap.set(this.rootId, 0);
+    visited.add(this.rootId);
+
+    const adjacency = new Map();
+    this.edges.forEach((e) => {
+      const src = e.source.fileID !== undefined ? e.source.fileID : e.source;
+      const tgt = e.target.fileID !== undefined ? e.target.fileID : e.target;
+      if (!adjacency.has(src)) adjacency.set(src, []);
+      adjacency.get(src).push(tgt);
+    });
+
+    while (queue.length) {
+      const current = queue.shift();
+      const children = adjacency.get(current) || [];
+      children.forEach((child) => {
+        if (!visited.has(child)) {
+          visited.add(child);
+          levelMap.set(child, (levelMap.get(current) || 0) + 1);
+          queue.push(child);
+        }
+      });
+    }
+
+    const maxDepth = Math.max(...levelMap.values(), 0);
+    const radiusStep = Math.min(this.width, this.height) / (2 * (maxDepth + 1));
+    const byLevel = new Map();
+    levelMap.forEach((level, id) => {
+      if (!byLevel.has(level)) byLevel.set(level, []);
+      byLevel.get(level).push(id);
+    });
+
+    const cx = this.width / 2;
+    const cy = this.height / 2;
+
+    this.nodes.forEach((n) => {
+      const level = levelMap.has(n.fileID) ? levelMap.get(n.fileID) : maxDepth + 1;
+      if (level === 0) {
+        n.fx = cx;
+        n.fy = cy;
+      } else {
+        const peers = byLevel.get(level) || [n.fileID];
+        const idx = peers.indexOf(n.fileID);
+        const angle = (2 * Math.PI * idx) / peers.length - Math.PI / 2;
+        const radius = level * radiusStep;
+        n.fx = cx + radius * Math.cos(angle);
+        n.fy = cy + radius * Math.sin(angle);
+      }
+      n.x = n.fx;
+      n.y = n.fy;
+    });
+    this.ticked();
+  }
+
+  applyGridLayout() {
+    if (this.simulation) this.simulation.stop();
+
+    const sorted = [...this.nodes].sort((a, b) =>
+      (a.relativePath || "").localeCompare(b.relativePath || "")
+    );
+    const cols = Math.ceil(Math.sqrt(sorted.length));
+    const spacingX = Math.min(180, (this.width - this.PADDING.LEFT - this.PADDING.RIGHT) / cols);
+    const spacingY = 100;
+
+    sorted.forEach((n, i) => {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      n.fx = this.PADDING.LEFT + col * spacingX + spacingX / 2;
+      n.fy = this.PADDING.TOP + row * spacingY + spacingY / 2;
+      n.x = n.fx;
+      n.y = n.fy;
+    });
+    this.ticked();
+  }
+
+  // ────────────────────────────────────────────────────────────────────────────
+
   render() {
+    this.exitFocusMode();
     this.svg.selectAll("*").remove();
 
     // Links layer (behind nodes)
@@ -209,6 +388,11 @@ export class D3Tree {
       .on("click", (d) => {
         d3.event.stopPropagation();
         store.dispatch(action_selectNode({ data: d }));
+        if (this.focusedNodeId === d.fileID) {
+          this.exitFocusMode();
+        } else {
+          this.enterFocusMode(d.fileID);
+        }
       })
       .call(this.buildDragBehavior());
 
@@ -252,7 +436,9 @@ export class D3Tree {
 
   buildDragBehavior() {
     const dragStarted = (d) => {
-      if (!d3.event.active) this.simulation.alphaTarget(0.3).restart();
+      if (!d3.event.active && this.layout === "force") {
+        this.simulation.alphaTarget(0.3).restart();
+      }
       d.fx = d.x;
       d.fy = d.y;
     };
@@ -261,9 +447,9 @@ export class D3Tree {
       d.fy = d3.event.y;
     };
     const dragEnded = (d) => {
-      if (!d3.event.active) this.simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
+      if (!d3.event.active && this.layout === "force") {
+        this.simulation.alphaTarget(0);
+      }
     };
     return d3.drag()
       .on("start", dragStarted)
@@ -302,11 +488,15 @@ export class D3Tree {
     this.getAssetsBaseURL(assetsBaseURL);
     this.getActiveThemeKind(activeThemeKind);
     this.render();
-    this.initSimulation();
+    if (this.layout === "force") {
+      this.initSimulation();
+    } else {
+      this.setLayout(this.layout);
+    }
   }
 
   update() {
-    if (this.simulation) {
+    if (this.layout === "force" && this.simulation) {
       this.simulation.alpha(0.3).restart();
     }
   }

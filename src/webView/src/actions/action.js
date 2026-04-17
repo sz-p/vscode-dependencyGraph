@@ -84,6 +84,11 @@ export const action_getRunCommandStatus = createAction(
   returnParams
 );
 
+export const action_setLayout = createAction(
+  type.TYPE_SET_LAYOUT,
+  returnParams
+);
+
 export const action_getCommandWaitingStatus = createAction(
   type.TYPE_GET_RUN_COMMAND_STATUS,
   getCommandWaitingStatus
