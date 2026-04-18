@@ -12,10 +12,7 @@ import {
 import { getCurrentFolderPath } from "../getCurrentFolderPath"
 import { DependencyTreeData } from "../../data-dependencyTree/dependencyTreeData";
 import { transportsDataToDependenciesTreeData } from "../../data-dependencyTree/processTreeData";
-import {
-  DependencyTree,
-  DependencyNodes,
-} from "../../data-dependencyTree/dependencyTreeData";
+import { TransportsData } from "../../data-dependencyTree/dependencyTreeData";
 
 const getDataFilePath = function (): string | false {
   const dirPath = getCurrentFolderPath();
@@ -32,31 +29,21 @@ export const getDataFromDataFile = function (): any {
 export const getData = function ():
   | {
     dependencyTreeData: DependencyTreeData;
-    transportsData: {
-      dependencyTree: DependencyTree;
-      dependencyNodes: DependencyNodes;
-    };
+    transportsData: TransportsData;
   }
   | false {
   let dp = {} as DependencyTreeData;
-  const data = getDataFromDataFile();
+  const data = getDataFromDataFile() as TransportsData;
   const dirPath = getCurrentFolderPath();
   if (!data || !dirPath) return false;
   try {
-    dp = transportsDataToDependenciesTreeData(
-      data.dependencyTree,
-      data.dependencyNodes,
-      dirPath
-    );
+    dp = transportsDataToDependenciesTreeData(data, dirPath);
   } catch (e) {
     return false;
   }
   return {
     dependencyTreeData: dp,
-    transportsData: {
-      dependencyTree: data.dependencyTree,
-      dependencyNodes: data.dependencyNodes,
-    },
+    transportsData: data,
   };
 };
 

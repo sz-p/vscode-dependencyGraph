@@ -1,12 +1,12 @@
 /**
  * @introduction process dependency tree data
  *
- * @description mini the data size \n change 'DependencyTreeData' to DependencyTree & DependencyNodes
+ * @description mini the data size \n change 'DependencyTreeData' to flat { nodes, edges } format
  */
 import * as md5 from "md5";
 import { DependencyHash } from "@packages/dependency-tree";
 import { DependencyTreeData } from "./dependencyTreeData.d";
-import { DependencyTree, DependencyNodes, DependencyNode } from "./dependencyTreeData.d";
+import { DependencyNode, TransportEdge, TransportsData } from "./dependencyTreeData.d";
 
 const getFileID = function (dependencyTreeData: DependencyTreeData) {
   try {
@@ -17,153 +17,181 @@ const getFileID = function (dependencyTreeData: DependencyTreeData) {
   }
 };
 const getChildNodeID = function (parentNodeID: string, fileID: string) {
-  const md5Hash = md5(parentNodeID + fileID);
-  return md5Hash
+  return md5(parentNodeID + fileID);
 };
-// const getParentId = function (
-//   dependencyTreeData: DependencyTreeData,
-//   dirPath: string
-// ) {
-//   let ancestors = [];
-//   for (let i = 0; i < dependencyTreeData.ancestors.length; i++) {
-//     const relativePath = dependencyTreeData.ancestors[i].replace(dirPath, "");
-//     let nodeHash = md5(relativePath);
-//     ancestors.push(nodeHash);
-//   }
-//   return ancestors;
-// };
+
 export const dependenciesTreeDataToTransportsData = function (
   dependencyTreeData: DependencyTreeData,
   dependencyTreeNodes: DependencyHash,
   dirPath: string
-): { dependencyTree: DependencyTree; dependencyNodes: DependencyNodes } {
-  // console.log(`开始数据转换`)
-  let dependencyNodes = {} as DependencyNodes;
-  let dependencyTree = {} as DependencyTree;
-  // change DependencyHash to DependencyNodes (change the hash table key from absolutePath to relativePath md5)
-  // set fileID
-  let dependencyNodeCount = 0;
-  let dependencyTreeDataHashTableNodeCount = 0;
+): TransportsData {
+  const nodeMap: { [fileID: string]: DependencyNode } = {};
+
   for (let key in dependencyTreeNodes) {
-    dependencyNodeCount++;
-    // console.log(`已分离的文件数量：${dependencyNodeCount}`)
-    const dependencyTreeNode = dependencyTreeNodes[key] as DependencyTreeData;
-    const md5Hash = getFileID(dependencyTreeNode);
-    dependencyNodes[md5Hash] = {
-      fileID: md5Hash,
-      name: dependencyTreeNode.name,
-      circularStructure: dependencyTreeNode.circularStructure,
-      type: dependencyTreeNode.type,
-      extension: dependencyTreeNode.extension,
-      language: dependencyTreeNode.language,
-      lines: dependencyTreeNode.lines,
-      analyzed: dependencyTreeNode.analyzed,
-      relativePath: dependencyTreeNode.relativePath,
-      fileDescription: dependencyTreeNode.fileDescription,
-      functions: dependencyTreeNode.functions,
-      children: [] as string[],
+    const node = dependencyTreeNodes[key] as DependencyTreeData;
+    const fileID = getFileID(node);
+    node["fileID"] = fileID;
+    nodeMap[fileID] = {
+      fileID,
+      name: node.name,
+      circularStructure: node.circularStructure,
+      type: node.type,
+      extension: node.extension,
+      language: node.language,
+      lines: node.lines,
+      analyzed: node.analyzed,
+      relativePath: node.relativePath,
+      fileDescription: node.fileDescription,
+      functions: node.functions,
+      children: node.children.map(child => getFileID(child)),
     };
-    for (let i = 0; i < dependencyTreeNode.children.length; i++) {
-      dependencyNodes[md5Hash].children.push(
-        getFileID(dependencyTreeNode.children[i])
-      );
-    }
-    let dependencyNode = dependencyTreeNodes[key];
-    dependencyNode["fileID"] = md5Hash;
   }
-  let dependencyTreeDataHashTable = [
-    { node: { ...dependencyTreeData, nodeDeep: 0 }, tree: dependencyTree },
-  ];
-  // create DependencyTree by DependencyNodes and DependencyTreeData
-  // set nodeID
-  while (dependencyTreeDataHashTable.length) {
-    dependencyTreeDataHashTableNodeCount++;
-    // console.log(`已分离的节点数量：${dependencyTreeDataHashTableNodeCount}`)
-    let { node, tree } = dependencyTreeDataHashTable.shift() as {
-      node: DependencyTreeData;
-      tree: DependencyTree;
-    };
-    tree.name = node.name;
-    tree.fileID = getFileID(node);
-    node.fileID = tree.fileID;
-    node.nodeID = tree.nodeID;
-    tree.children = [] as DependencyTree[];
-    for (let i = 0; i < node.children.length; i++) {
-      let treeChild = {
-        parentNodeID: tree.nodeID
-      } as DependencyTree;
-      tree.children.push(treeChild);
-      const nextDeep = node.nodeDeep + 1;
-      // TODO
-      // if (nextDeep > 3) {
-      //   treeChild.children = [];
-      //   continue
-      // }
-      dependencyTreeDataHashTable.push({
-        node: { ...node.children[i], nodeDeep: nextDeep },
-        tree: treeChild,
-      });
+
+  const edges: TransportEdge[] = [];
+  const seenEdges = new Set<string>();
+  for (const fileID in nodeMap) {
+    for (const childFileID of nodeMap[fileID].children) {
+      const key = `${fileID}|${childFileID}`;
+      if (!seenEdges.has(key)) {
+        seenEdges.add(key);
+        edges.push({ source: fileID, target: childFileID });
+      }
     }
   }
-  // console.log(`数据转换完毕`)
-  return { dependencyTree, dependencyNodes };
+
+  return {
+    nodes: Object.values(nodeMap),
+    edges,
+    rootId: getFileID(dependencyTreeData),
+  };
 };
+
 export const transportsDataToDependenciesTreeData = function (
-  dependencyTree: DependencyTree,
-  dependencyNodes: DependencyNodes,
+  transportsData: TransportsData,
   dirPath: string
 ): DependencyTreeData {
-  let dependencyTreeData = {} as DependencyTreeData;
+  const { nodes, edges, rootId } = transportsData;
 
-  let dependencyTreeDataHashTable = [
-    { dependencyTree: { ...dependencyTree, nodeID: dependencyTree.fileID }, dependencyTreeData: dependencyTreeData },
+  const nodeMap = new Map<string, DependencyNode>();
+  for (const node of nodes) nodeMap.set(node.fileID, node);
+
+  const adjacency = new Map<string, string[]>();
+  for (const edge of edges) {
+    const list = adjacency.get(edge.source) ?? [];
+    list.push(edge.target);
+    adjacency.set(edge.source, list);
+  }
+
+  const result = {} as DependencyTreeData;
+
+  type QueueItem = {
+    fileID: string;
+    nodeID: string;
+    target: DependencyTreeData;
+    ancestors: Set<string>;
+  };
+
+  const queue: QueueItem[] = [
+    { fileID: rootId, nodeID: rootId, target: result, ancestors: new Set() },
   ];
-  while (dependencyTreeDataHashTable.length) {
-    let {
-      dependencyTree,
-      dependencyTreeData,
-    } = dependencyTreeDataHashTable.pop() as {
-      dependencyTree: DependencyTree;
-      dependencyTreeData: DependencyTreeData;
-    };
-    let nodesData = dependencyNodes[dependencyTree.fileID];
 
-    dependencyTreeData.name = dependencyTree.name;
-    dependencyTreeData.fileID = dependencyTree.fileID;
-    dependencyTreeData.nodeID = dependencyTree.nodeID;
-    // dependencyTreeData.parent = dependencyTree.parent;
-    if (!nodesData && dependencyTreeData.name === 'circularStructure') {
-      nodesData = {
-        name: 'circularStructure',
-        circularStructure: true,
-        type: 'circularStructure',
-        fileDescription: {},
-        relativePath: "circularStructure"
-      } as DependencyNode
+  while (queue.length) {
+    const { fileID, nodeID, target, ancestors } = queue.shift()!;
+    let nodeData = nodeMap.get(fileID);
+
+    if (!nodeData) {
+      if (target.name === "circularStructure") {
+        nodeData = {
+          name: "circularStructure",
+          fileID: "circularStructure",
+          circularStructure: true,
+          type: "circularStructure",
+          fileDescription: {} as any,
+          relativePath: "circularStructure",
+          children: [],
+          language: undefined as any,
+          lines: undefined,
+          analyzed: false,
+          functions: [],
+          extension: "",
+        };
+      } else {
+        continue;
+      }
     }
-    dependencyTreeData.fileDescription = nodesData.fileDescription;
-    dependencyTreeData.circularStructure = nodesData.circularStructure;
-    dependencyTreeData.type = nodesData.type;
-    dependencyTreeData.language = nodesData.language;
-    dependencyTreeData.lines = nodesData.lines;
-    dependencyTreeData.analyzed = nodesData.analyzed;
-    dependencyTreeData.functions = nodesData.functions;
-    dependencyTreeData.extension = nodesData.extension;
-    dependencyTreeData.absolutePath = dirPath + nodesData.relativePath;
-    dependencyTreeData.relativePath = nodesData.relativePath;
-    dependencyTreeData.children = [] as DependencyTreeData[];
 
-    for (let i = 0; i < dependencyTree.children.length; i++) {
-      let child = {} as DependencyTreeData;
-      dependencyTreeData.children.push(child);
-      dependencyTreeDataHashTable.push({
-        dependencyTree: {
-          ...dependencyTree.children[i],
-          nodeID: getChildNodeID(dependencyTree.nodeID, dependencyTree.children[i].fileID)
-        },
-        dependencyTreeData: child,
-      });
+    target.name = nodeData.name;
+    target.fileID = fileID;
+    target.nodeID = nodeID;
+    target.fileDescription = nodeData.fileDescription;
+    target.circularStructure = nodeData.circularStructure;
+    target.type = nodeData.type;
+    target.language = nodeData.language;
+    target.lines = nodeData.lines;
+    target.analyzed = nodeData.analyzed;
+    target.functions = nodeData.functions;
+    target.extension = nodeData.extension;
+    target.absolutePath = dirPath + nodeData.relativePath;
+    target.relativePath = nodeData.relativePath;
+    target.children = [];
+
+    if (fileID === "circularStructure") continue;
+
+    const childIDs = adjacency.get(fileID) ?? [];
+    const newAncestors = new Set(ancestors).add(fileID);
+
+    for (const childFileID of childIDs) {
+      const child = {} as DependencyTreeData;
+      target.children.push(child);
+      const childNodeID = getChildNodeID(nodeID, childFileID);
+
+      if (ancestors.has(childFileID)) {
+        // Cycle detected: reconstruct the circular node with a sentinel child
+        const originalNode = nodeMap.get(childFileID)!;
+        child.name = originalNode.name;
+        child.fileID = childFileID;
+        child.nodeID = childNodeID;
+        child.fileDescription = originalNode.fileDescription;
+        child.circularStructure = true;
+        child.type = originalNode.type;
+        child.language = originalNode.language;
+        child.lines = originalNode.lines;
+        child.analyzed = originalNode.analyzed;
+        child.functions = originalNode.functions;
+        child.extension = originalNode.extension;
+        child.absolutePath = dirPath + originalNode.relativePath;
+        child.relativePath = originalNode.relativePath;
+        child.parents = [];
+        child.children = [
+          {
+            name: "circularStructure",
+            fileID: "circularStructure",
+            nodeID: getChildNodeID(childNodeID, "circularStructure"),
+            circularStructure: true,
+            type: "circularStructure",
+            fileDescription: {} as any,
+            relativePath: "circularStructure",
+            absolutePath: "circularStructure",
+            parents: [],
+            children: [],
+            language: undefined as any,
+            lines: undefined,
+            analyzed: false,
+            functions: [],
+            extension: "",
+            nodeDeep: 0,
+          } as DependencyTreeData,
+        ];
+      } else {
+        queue.push({
+          fileID: childFileID,
+          nodeID: childNodeID,
+          target: child,
+          ancestors: newAncestors,
+        });
+      }
     }
   }
-  return dependencyTreeData;
+
+  return result;
 };

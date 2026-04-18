@@ -9,8 +9,7 @@ const getDependenciesTreeData = function (Params) {
   try {
     msgWebViewLog("debug", "start transportsDataToDependenciesTreeData")
     const data = transportsDataToDependenciesTreeData(
-      Params.data.value.data.dependencyTree,
-      Params.data.value.data.dependencyNodes,
+      Params.data.value.data,
       Params.data.value.folderPath
     );
     msgWebViewLog("debug", "end transportsDataToDependenciesTreeData")

@@ -62,3 +62,12 @@ export interface DependencyNode {
 export interface DependencyNodes {
   [key: string]: DependencyNode;
 }
+export interface TransportEdge {
+  source: string;
+  target: string;
+}
+export interface TransportsData {
+  nodes: DependencyNode[];
+  edges: TransportEdge[];
+  rootId: string;
+}
