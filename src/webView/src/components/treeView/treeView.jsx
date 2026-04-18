@@ -15,6 +15,7 @@ const treeView = function (props) {
     assetsBaseURL,
     gotDependencyTreeData,
     activeThemeKind,
+    layout,
   } = props;
   const chartArea = useRef();
   useEffect(() => {
@@ -39,6 +40,9 @@ const treeView = function (props) {
     if (focusOn) focusOnNode(focusOn.ancestors);
     console.log(focusOn);
   }, [focusOn]);
+  useEffect(() => {
+    if (layout) tree.setLayout(layout);
+  }, [layout]);
   const viewStatus = gotDependencyTreeData ? "treeView" : "treeView hidden";
   return <div className={viewStatus} ref={chartArea}></div>;
 };
@@ -49,6 +53,7 @@ const mapStateToProps = (state) => {
     assetsBaseURL: state.assetsBaseURL,
     focusOn: state.focusOn,
     gotDependencyTreeData: state.gotDependencyTreeData,
+    layout: state.layout,
   };
 };
 export const TreeView = connect(mapStateToProps)(treeView);

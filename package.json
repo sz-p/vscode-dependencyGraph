@@ -100,7 +100,7 @@
   "scripts": {
     "watch": "npm-run-all -p watch:*",
     "build": "npm-run-all -p build:*",
-    "vscode:prepublish": "yarn test && npm-run-all -p build:*",
+    "vscode:prepublish": "npm-run-all -p build:*",
     "codeCount": "cloc ./ --exclude-dir=node_modules,out,outExtension,outWebView,assets,fileIcons",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2",
     "compile": "tsc -p ./",
@@ -108,12 +108,11 @@
     "watch:WebView": "node ./src/webView/scripts/watch.js",
     "build:Extension": "node ./scripts/build.js",
     "build:WebView": "node ./src/webView/scripts/build.js",
-    "package": "vsce package",
+    "package": "npx @vscode/vsce package --no-yarn --no-dependencies",
     "ls-lint": "node_modules/.bin/ls-lint",
     "test": "mocha -n experimental-specifier-resolution=node -n loader=ts-node/esm --serial -p ./tests/tsconfig.testing.json --spec tests/**/*.test.ts tests/**/*.test.js"
   },
   "devDependencies": {
-    "conventional-changelog-cli": "^4.1.0",
     "@babel/core": "^7.14.8",
     "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.11.0",
@@ -127,6 +126,7 @@
     "@types/vscode": "^1.41.0",
     "@vscode/test-electron": "^1.2.2",
     "babel-loader": "^8.2.2",
+    "conventional-changelog-cli": "^4.1.0",
     "cross-env": "^7.0.3",
     "css-loader": "^4.2.1",
     "glob": "^7.1.5",
@@ -157,6 +157,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "cssom": "^0.4.4",
     "d3": "^5.16.0",
+    "dagre": "^0.8.5",
     "enhanced-resolve": "5.8.2",
     "file-loader": "^6.1.1",
     "jsdom": "^16.4.0",

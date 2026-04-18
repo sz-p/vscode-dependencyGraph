@@ -27,7 +27,7 @@ import {
 import { setData, getData } from "../utils/fileSystem/data";
 import { StatusCallBack } from "./getDataStatusCallBack";
 import { dependenciesTreeDataToTransportsData } from "./processTreeData";
-import { DependencyTree, DependencyNodes } from "./dependencyTreeData.d";
+import { TransportsData } from "./dependencyTreeData.d";
 import { logger } from "../utils/logger"
 // import { Profile } from "../utils/profile"
 // const getDependencyTreeProfile = new Profile('getDependencyTree');
@@ -75,10 +75,7 @@ const checkMainFilePath = function (folderPath: string): string {
 const checkDataFromFile = function ():
   | {
     dependencyTreeData: DependencyTreeData;
-    transportsData: {
-      dependencyTree: DependencyTree;
-      dependencyNodes: DependencyNodes;
-    };
+    transportsData: TransportsData;
   }
   | false {
 
@@ -101,8 +98,7 @@ const checkDataFromAnalyser = function (
 ):
   | {
     dp: DependencyTreeData;
-    nodes: DependencyNodes;
-    tree: DependencyTree;
+    transportsData: TransportsData;
   }
   | false {
   logger.debug("start getDependencyTree");
@@ -131,10 +127,7 @@ const checkDataFromAnalyser = function (
     // console.log('dependenciesTreeDataToTransportsData')
     logger.debug("start dependenciesTreeDataToTransportsDataProfile");
     // dependenciesTreeDataToTransportsDataProfile.start()
-    const {
-      dependencyNodes: nodes,
-      dependencyTree: tree,
-    } = dependenciesTreeDataToTransportsData(
+    const transportsData = dependenciesTreeDataToTransportsData(
       dp as DependencyTreeData,
       dependencyNodes,
       folderPath
@@ -146,7 +139,7 @@ const checkDataFromAnalyser = function (
     } else {
       logger.debug("stop dependenciesTreeDataToTransportsDataProfile");
       // dependenciesTreeDataToTransportsDataProfile.end()
-      return { dp: dp as DependencyTreeData, nodes, tree };
+      return { dp: dp as DependencyTreeData, transportsData };
     }
   } catch (e) {
     logger.error("error dependenciesTreeDataToTransportsDataProfile", e);
@@ -177,10 +170,7 @@ export const getDependencyTreeData = async (
 ): Promise<
   | {
     dependencyTreeData: DependencyTreeData;
-    transportsData: {
-      dependencyTree: DependencyTree;
-      dependencyNodes: DependencyNodes;
-    };
+    transportsData: TransportsData;
   }
   | undefined
 > => {
@@ -234,15 +224,12 @@ export const getDependencyTreeData = async (
   if (!dataFromAnalyser) {
     statusCallBack ? await statusCallBack.checkGetDataFromAnalyserError() : null;
   } else {
-    const { dp, tree, nodes } = dataFromAnalyser;
+    const { dp, transportsData } = dataFromAnalyser;
     statusCallBack ? await statusCallBack.checkGetDataFromAnalyserSuccess() : null;
     logger.info("getDependencyTreeData success");
     return {
       dependencyTreeData: dp,
-      transportsData: {
-        dependencyTree: tree,
-        dependencyNodes: nodes,
-      },
+      transportsData,
     };
   }
 };

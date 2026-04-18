@@ -132,6 +132,9 @@ const actionsCase = () => {
     });
     return newState;
   };
+  const setLayout = (state, action) => {
+    return Object.assign({}, state, { layout: action.payload });
+  };
   return new Map([
     [type.TYPE_CHANGE_GET_DATA_STATUS, change_getDataStatus],
     [type.TYPE_SET_DEPENDENCIES_TREE_DATA, setDependencyTreeData],
@@ -146,6 +149,7 @@ const actionsCase = () => {
     [type.TYPE_GET_ENTRY_FILE, getEntryFile],
     [type.TYPE_GET_SAVED_DATA, getSavedData],
     [type.TYPE_GET_RUN_COMMAND_STATUS, getRunCommandStatus],
+    [type.TYPE_SET_LAYOUT, setLayout],
   ]);
 };
 export const reducer = function (state = initialState, action) {

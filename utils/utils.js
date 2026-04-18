@@ -25,7 +25,7 @@ function watchSources(webpackConfig, buildPath) {
 }
 function buildSources(webpackConfig, buildPath) {
   const compiler = webpack(webpackConfig);
-  fs.rmdirSync(buildPath, { recursive: true });
+  if (fs.existsSync(buildPath)) fs.rmdirSync(buildPath, { recursive: true });
   compiler.run(buildCallback);
 }
 module.exports = {

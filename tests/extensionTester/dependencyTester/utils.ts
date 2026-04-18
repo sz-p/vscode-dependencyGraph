@@ -133,7 +133,7 @@ export const getWebViewDataByCompute = function (
     .replace(/\\/g, "\\\\");
   const replaceDirPathReg = new RegExp(dirPathString, "g");
 
-  const { dependencyTree, dependencyNodes } = JSON.parse(
+  const transportsData = JSON.parse(
     fs
       .readFileSync(
         path.resolve(__dirname, `./${base}/${testCase}/savedData/savedData.json`)
@@ -144,8 +144,7 @@ export const getWebViewDataByCompute = function (
       .replace(/\n/g, "")
   );
   const dependencyTreeData = transportsDataToDependenciesTreeData(
-    dependencyTree,
-    dependencyNodes,
+    transportsData,
     folderPath
   );
   const dataString = normalizeMacWin(JSON.stringify(dependencyTreeData, null, 2)
