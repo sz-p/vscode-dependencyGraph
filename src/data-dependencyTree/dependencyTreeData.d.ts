@@ -32,7 +32,7 @@ export interface DependencyTreeData {
   extension: string;
   absolutePath: string;
   relativePath: string;
-  parent: DependencyTreeData;
+  parents: DependencyTreeData[];
   children: Array<DependencyTreeData>;
 }
 

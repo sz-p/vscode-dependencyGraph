@@ -17,7 +17,7 @@ import { parser as tsxParser } from "../parsers/tsxParser/tsxParser";
 import { parser as cssParser } from "../parsers/cssParser/cssParser";
 import { parser as noDependenceParser } from "../parsers/noDependenceParser/noDependenceParser";
 import { parser as generalCssParser } from "../parsers/generalCssParser/generalCssParser";
-import { isPathExists, isDirectory } from "../utils/utils";
+import { isPathExists } from "../utils/utils";
 export class DependencyTree {
   options: DependencyTreeOptions;
   parsers: Parsers;
@@ -25,6 +25,7 @@ export class DependencyTree {
   dependencyHash: DependencyHash;
   dependencyTreeData: DependencyTreeData;
   circularStructureNode: DependencyTreeData;
+  visited: Map<string, DependencyTreeData>;
   static jsParser: Parser;
   static generalCssParser: Parser;
   static vueParser: Parser;
@@ -38,6 +39,7 @@ export class DependencyTree {
     this.parsers = {};
     this.parseRule = {};
     this.dependencyHash = {};
+    this.visited = new Map();
     this.dependencyTreeData = {} as DependencyTreeData;
     this.circularStructureNode = {
       name: "circularStructure",
@@ -46,7 +48,7 @@ export class DependencyTree {
       absolutePath: "circularStructure",
       relativePath: "circularStructure",
       extension: "",
-      parent: null,
+      parents: [],
       children: [],
     };
   }
@@ -91,115 +93,39 @@ export class DependencyTree {
     }
   }
   /**
-   * use absolutePath and parent find circular structure
-   *
-   * @param {string} absolutePath
-   * @param {DependencyTreeData | null} parent
-   * @returns {boolean}
+   * True cycle: absolutePath is an ancestor of current in the DFS construction tree.
+   * Uses parents[0] as the DFS parent (first/construction parent of each node).
    */
   private isCircularStructure(
     absolutePath: string,
-    parent: DependencyTreeData | null
+    current: DependencyTreeData | null
   ): boolean {
-    while (parent) {
-      if (parent.absolutePath === absolutePath) {
-        return true
-      }
-      parent = parent.parent
+    while (current) {
+      if (current.absolutePath === absolutePath) return true;
+      current = current.parents[0] ?? null;
     }
-    return false
+    return false;
   }
   /**
-   * use absolutePath and parent find circular structure on Children
-   * @param {DependencyTreeData | null} parent
-   */
-  private removeRepeatNodeOnTee(dependencyTreeData: DependencyTreeData) {
-    const nodeStack = [{ ...dependencyTreeData, deep: 0 }];
-    let count = 0;
-    let removeCount = 0;
-    while (nodeStack.length) {
-      count++;
-      const node = nodeStack.pop() as DependencyTreeData;
-      const { children } = node
-      // console.log(`当前树节点数量: ${count} 当前节点深度: ${node.deep} 已移除重复子节点数量: ${removeCount} 剩余待分析节点数量: ${nodeStack.length}`)
-      node.children = [];
-      if (!children.length) {
-        continue
-      } else {
-        for (let i = 0; i < children.length; i++) {
-          const child = children[i];
-          if (this.isCircularStructure(child.absolutePath, node)) {
-            removeCount++;
-            const circularStructureNode = this.getCircularStructureNode(
-              child.absolutePath,
-              this.dependencyHash
-            )
-            node.children.push({ ...circularStructureNode, deep: (node.deep || 0) + 1 })
-          } else {
-            const nodeWithDeep = { ...child, deep: (node.deep || 0) + 1 }
-            node.children.push(nodeWithDeep);
-            if (child.children.length) {
-              nodeStack.unshift(nodeWithDeep);
-            }
-          }
-        }
-      }
-    }
-  }
-  /**
-   * if fended CircularStructure create CircularStructureNode
-   *
-   * @param {string} absolutePath
-   * @param {DependencyHash} dependencyHash
-   * @returns {DependencyTreeData}
+   * if found CircularStructure create CircularStructureNode
    */
   private getCircularStructureNode(
     absolutePath: string,
     dependencyHash: DependencyHash
   ): DependencyTreeData {
     const circularStructureNodeChild = { ...this.circularStructureNode };
-    //! circularStructureNode id?
-    let circularStructureNode = { ...dependencyHash[absolutePath], children: [circularStructureNodeChild] };
-    circularStructureNodeChild.parent = circularStructureNode
+    const circularStructureNode = { ...dependencyHash[absolutePath], children: [circularStructureNodeChild] };
+    circularStructureNodeChild.parents = [circularStructureNode];
     return circularStructureNode;
   }
-  /**
-   * reset analyzed node parent
-   *
-   * @private
-   * @param {string} absolutePath
-   * @param { DependencyTreeData | null} parent
-   * @param {DependencyTreeData} dependencyChildren
-   * @memberof DependencyTree
-   */
-  private reSetAnalyzedNodesParent(
-    absolutePath: string,
-    parent: DependencyTreeData | null,
-    dependencyChildren: DependencyTreeData
-  ) {
-    dependencyChildren.parent = parent
-  }
-  /**
-   *
-   *
-   * @private
-   * @param {string} absolutePath
-   * @param {DependencyTreeData | null} parent
-   * @param {string} childrenPath
-   * @param {DependencyTreeData[]} dependencyList
-   * @return {*}  {DependencyTreeData}
-   * @memberof DependencyTree
-   */
-  private getNewNode(absolutePath: string, parent: DependencyTreeData | null, childrenPath: string, dependencyList: DependencyTreeData[]): DependencyTreeData {
+  private getNewNode(parent: DependencyTreeData | null, childrenPath: string, dependencyList: DependencyTreeData[]): DependencyTreeData {
     const dependencyChildren = {
       absolutePath: childrenPath,
-      parent
+      parents: parent ? [parent] : [],
     } as DependencyTreeData;
     this.triggerGetNewDependencyTreeNode(dependencyChildren);
     dependencyList.push(dependencyChildren);
-    this.dependencyHash[
-      childrenPath
-    ] = dependencyChildren as DependencyTreeData;
+    this.dependencyHash[childrenPath] = dependencyChildren;
     return dependencyChildren;
   }
 
@@ -224,11 +150,12 @@ export class DependencyTree {
    */
   private initializeParseState(entryPath: string) {
     this.dependencyHash = {};
+    this.visited = new Map();
     this.dependencyTreeData = {
       absolutePath: entryPath,
-      parent: null,
+      parents: [] as DependencyTreeData[],
       children: [] as DependencyTreeData[],
-    } as DependencyTreeData;
+    } as unknown as DependencyTreeData;
   }
 
   /**
@@ -256,6 +183,7 @@ export class DependencyTree {
       console.warn(
         `no ${dependencyNode.extension} parser please register parserRule and parser`
       );
+      this.visited.set(absolutePath, dependencyNode);
       return;
     }
 
@@ -268,13 +196,10 @@ export class DependencyTree {
       this.parsers
     );
 
-    // remove repeated child
     if (children.length >= 2) {
       children = Array.from(new Set(children));
     }
 
-    // if not set dependencyNode in dependencyHash before
-    // will not found analyzed node
     this.dependencyHash[absolutePath] = dependencyNode;
 
     for (let i = 0; i < children.length; i++) {
@@ -286,6 +211,8 @@ export class DependencyTree {
         treeNodeCount
       );
     }
+
+    this.visited.set(absolutePath, dependencyNode);
   }
 
   /**
@@ -304,92 +231,36 @@ export class DependencyTree {
 
     let dependencyChildren: DependencyTreeData;
 
-    // old node; node was analyzed
     if (this.dependencyHash[childrenPath]) {
-      dependencyChildren = this.handleExistingNode(
-        childrenPath,
-        parentNode,
-        dependencyList
-      );
+      if (this.isCircularStructure(childrenPath, parentNode)) {
+        // True cycle: childrenPath is an ancestor of parentNode in the DFS tree
+        dependencyChildren = this.getCircularStructureNode(childrenPath, this.dependencyHash);
+        dependencyChildren.parents = [parentNode];
+        this.triggerGetCircularStructureNode(dependencyChildren, this.dependencyHash);
+      } else if (this.visited.has(childrenPath)) {
+        // Already fully processed: reuse the node, register the new parent
+        dependencyChildren = this.visited.get(childrenPath)!;
+        dependencyChildren.parents.push(parentNode);
+        this.triggerGetOldDependencyTreeNode(dependencyChildren);
+      } else {
+        // Queued from another branch but not yet processed: reuse the node, register new parent
+        dependencyChildren = this.dependencyHash[childrenPath];
+        dependencyChildren.parents.push(parentNode);
+        this.triggerGetOldDependencyTreeNode(dependencyChildren);
+      }
     } else {
-      // find new node
-      dependencyChildren = this.handleNewNode(
-        childrenPath,
-        parentNode,
-        dependencyList
-      );
+      // New node: create and queue for processing
+      dependencyChildren = this.getNewNode(parentNode, childrenPath, dependencyList);
     }
 
     parentNode.children.push(dependencyChildren);
     treeNodeCount.value++;
-    // console.log('已分析文件数量：' + Object.keys(this.dependencyHash).length, '依赖树节点：' + treeNodeCount.value)
-  }
-
-  /**
-   * Handle existing node (already analyzed)
-   */
-  private handleExistingNode(
-    childrenPath: string,
-    parentNode: DependencyTreeData,
-    dependencyList: DependencyTreeData[]
-  ): DependencyTreeData {
-    if (this.isCircularStructure(childrenPath, parentNode)) {
-      const circularNode = this.getCircularStructureNode(
-        childrenPath,
-        this.dependencyHash
-      );
-      this.triggerGetCircularStructureNode(circularNode, this.dependencyHash);
-      this.reSetAnalyzedNodesParent(
-        parentNode.absolutePath,
-        parentNode,
-        circularNode
-      );
-      return circularNode;
-    } else {
-      const existingNode = { ...this.dependencyHash[childrenPath] };
-      this.triggerGetOldDependencyTreeNode(existingNode);
-      this.reSetAnalyzedNodesParent(
-        parentNode.absolutePath,
-        parentNode,
-        existingNode
-      );
-
-      // not analyzed
-      if (!existingNode.name) {
-        return this.getNewNode(
-          parentNode.absolutePath,
-          parentNode,
-          childrenPath,
-          dependencyList
-        );
-      }
-
-      return existingNode;
-    }
-  }
-
-  /**
-   * Handle new node (not yet analyzed)
-   */
-  private handleNewNode(
-    childrenPath: string,
-    parentNode: DependencyTreeData,
-    dependencyList: DependencyTreeData[]
-  ): DependencyTreeData {
-    return this.getNewNode(
-      parentNode.absolutePath,
-      parentNode,
-      childrenPath,
-      dependencyList
-    );
   }
 
   /**
    * Finalize parse and return result
    */
   private finalizeParse() {
-    // console.log(`正在移除文件依赖关系中的重复节点`)
-    this.removeRepeatNodeOnTee(this.dependencyTreeData);
     return {
       dependencyTree: this.dependencyTreeData,
       dependencyNodes: this.dependencyHash,
