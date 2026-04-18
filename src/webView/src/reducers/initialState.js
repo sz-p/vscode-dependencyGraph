@@ -14,4 +14,5 @@ export const initialState = {
   focusOn: undefined,
   viewHash: undefined,
   commandSettingStatus: {},
+  layout: "force",
 };

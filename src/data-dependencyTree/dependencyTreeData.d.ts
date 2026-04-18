@@ -32,8 +32,9 @@ export interface DependencyTreeData {
   extension: string;
   absolutePath: string;
   relativePath: string;
-  parent: DependencyTreeData;
+  parents: DependencyTreeData[];
   children: Array<DependencyTreeData>;
+  importedNamesByChild?: { [childAbsolutePath: string]: string[] };
 }
 
 export interface DependencyTree {
@@ -61,4 +62,14 @@ export interface DependencyNode {
 }
 export interface DependencyNodes {
   [key: string]: DependencyNode;
+}
+export interface TransportEdge {
+  source: string;
+  target: string;
+  importedNames?: string[];
+}
+export interface TransportsData {
+  nodes: DependencyNode[];
+  edges: TransportEdge[];
+  rootId: string;
 }

@@ -12,6 +12,17 @@ import * as Resolve from "enhanced-resolve";
 import { visitOnExportDeclaration } from "../utils/utils-js";
 import { ASTNode } from "ast-types";
 
+const storeImportedNames = function (
+  dependencyNode: DependencyTreeData,
+  depPath: string,
+  names: string[]
+) {
+  if (!dependencyNode.importedNamesByChild) dependencyNode.importedNamesByChild = {};
+  const existing = dependencyNode.importedNamesByChild[depPath];
+  if (existing) existing.push(...names);
+  else dependencyNode.importedNamesByChild[depPath] = names;
+};
+
 export const parser = function (
   dependencyNode: DependencyTreeData,
   absolutePath: string,
@@ -88,6 +99,13 @@ export const parser = function (
           // TODO parse package dependencies
           return false;
         }
+        const names: string[] = [];
+        for (const spec of (nodePath.node.specifiers || [])) {
+          if (spec.type === "ImportDefaultSpecifier") names.push("default");
+          else if (spec.type === "ImportNamespaceSpecifier") names.push(`* as ${spec.local.name}`);
+          else if (spec.type === "ImportSpecifier") names.push((spec.imported as any).name ?? spec.local.name);
+        }
+        storeImportedNames(dependencyNode, dependencyPath, names);
         dependencies.push(dependencyPath);
       }
       return false;

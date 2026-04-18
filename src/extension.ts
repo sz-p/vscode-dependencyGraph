@@ -44,6 +44,30 @@ export async function activate(context: vscode.ExtensionContext) {
   logger.info("open web view with dependency tree data")
   msgPostDependencyTreeDataToWebView();
 
+  // Auto-refresh graph when workspace files change
+  if (vscode.workspace.workspaceFolders?.length) {
+    const watcher = vscode.workspace.createFileSystemWatcher(
+      new vscode.RelativePattern(vscode.workspace.workspaceFolders[0], "**/*")
+    );
+
+    let debounceTimer: NodeJS.Timeout | undefined;
+    const debouncedRefresh = () => {
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        vscode.commands.executeCommand("dependencygraph.upDateData");
+      }, 500);
+    };
+
+    const shouldIgnore = (uri: vscode.Uri) =>
+      uri.fsPath.includes(".dependencygraph");
+
+    watcher.onDidChange((uri) => { if (!shouldIgnore(uri)) debouncedRefresh(); });
+    watcher.onDidCreate((uri) => { if (!shouldIgnore(uri)) debouncedRefresh(); });
+    watcher.onDidDelete((uri) => { if (!shouldIgnore(uri)) debouncedRefresh(); });
+
+    context.subscriptions.push(watcher);
+  }
+
 }
 
 // this method is called when your extension is deactivated

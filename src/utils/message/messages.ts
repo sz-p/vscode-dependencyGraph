@@ -2,7 +2,7 @@ import { messagePoster, StatusMessagePoster } from "./messagePoster";
 import * as STATUS from "../../data-dependencyTree/statusType";
 import { getCurrentFolderPath } from "../../utils/getCurrentFolderPath";
 import * as MSG from "./messagesKeys";
-import { DependencyNodes, DependencyTree } from "../../data-dependencyTree/dependencyTreeData";
+import { TransportsData } from "../../data-dependencyTree/dependencyTreeData";
 export const statusMsgGetFolderPath = new StatusMessagePoster(
   STATUS.STATUS_GET_DEPENDENCY_DATA_GET_FOLDER
 );
@@ -43,10 +43,7 @@ export const postSetting = function (setting: object) {
   messagePoster.newMsg({ key: MSG.MESSAGE_GET_ENTRY_FILE, value: setting });
 };
 
-export const msgPostDependencyTreeDataToWebView = function (data?: {
-  dependencyTree: DependencyTree;
-  dependencyNodes: DependencyNodes;
-}) {
+export const msgPostDependencyTreeDataToWebView = function (data?: TransportsData) {
   if (data === undefined) {
     data = global.dependencyTreeData?.transportsData
   }

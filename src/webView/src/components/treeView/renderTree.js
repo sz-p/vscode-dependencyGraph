@@ -1,25 +1,9 @@
 import * as d3 from "d3";
+import * as dagre from "dagre";
 import { throttle, isMac } from "../../utils/utils";
 import { store } from "../../reducers/store";
 import { action_selectNode } from "../../actions/action";
 import { msgWebViewLog } from "../../utils/messages";
-
-const diagonal = function (s, d) {
-  const path = `M ${s.y} ${s.x}
-          C ${(s.y + d.y) / 2} ${s.x},
-            ${(s.y + d.y) / 2} ${d.x},
-            ${d.y} ${d.x}`;
-
-  return path;
-};
-
-const collapse = function (d) {
-  if (d.children) {
-    d._children = d.children;
-    d._children.forEach(collapse);
-    d.children = null;
-  }
-};
 
 export class D3Tree {
   constructor(newWindow) {
@@ -32,14 +16,19 @@ export class D3Tree {
     }
     this.initStaticVariables();
   }
+
   resize() {
+    if (!this.dom) return;
     const { width, height } = this.dom.getClientRects()[0];
     this.width = width;
     this.height = height;
-    this.options.width = width;
-    this.options.height = height;
     this.svgBox.attr("width", this.width).attr("height", this.height);
+    if (this.simulation) {
+      this.simulation.force("center", d3.forceCenter(this.width / 2, this.height / 2));
+      this.simulation.alpha(0.3).restart();
+    }
   }
+
   initStaticVariables() {
     this.PADDING = {
       LEFT: 100,
@@ -52,32 +41,25 @@ export class D3Tree {
     this.DURATION_TIME = 750;
     this.CLICK_DALEY = 500;
     this.ICON_SIZE = 22;
-    this.NODE_SIZE = {
-      width: 100,
-      height: 250,
-    };
+
     this.NODE_HIGHLIGHT_COLOR = this.window
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-editorLightBulb-foreground");
     this.DEFAULT_TEXT_COLOR = this.window
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-editor-foreground");
-
     this.DEFAULT_IGNORED_TEXT_COLOR = this.window
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-gitDecoration-ignoredResourceForeground");
-
     this.DEFAULT_FONT_FAMILY = this.window
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-font-family");
     this.DEFAULT_FONT_WEIGHT = this.window
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-font-weight");
-
     this.DEFAULT_FONT_SIZE = this.window
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-font-size");
-
     this.DEFAULT_CHECKBOX_BORDER = this.window
       .getComputedStyle(this.window.document.documentElement)
       .getPropertyValue("--vscode-checkbox-border");
@@ -90,7 +72,11 @@ export class D3Tree {
       CLICK_DALEY: this.CLICK_DALEY,
       ICON_SIZE: this.ICON_SIZE,
     };
+
+    this.focusedNodeId = null;
+    this.layout = "force";
   }
+
   initDom(dom) {
     if (!this.dom) {
       const { width, height } = dom.getClientRects()[0];
@@ -107,27 +93,18 @@ export class D3Tree {
         .attr("id", "treeViewSvgBox")
         .on("click", () => {
           store.dispatch(action_selectNode({}));
+          this.exitFocusMode();
         });
     }
     if (!this.svg) {
-      this.svg = this.svgBox
-        .append("g")
-        .attr("id", "treeViewSvg")
-        .attr(
-          "transform",
-          "translate(" +
-            this.PADDING.LEFT +
-            "," +
-            this.PADDING.TOP +
-            this.height / 2 +
-            ")"
-        );
+      this.svg = this.svgBox.append("g").attr("id", "treeViewSvg");
     }
   }
+
   initZoomForMac() {
     if (!this.zoom && this.isBrowser) {
-      let currentX = this.PADDING.LEFT;
-      let currentY = this.height / 2 - this.PADDING.TOP;
+      let currentX = this.width / 2;
+      let currentY = this.height / 2;
       let currentScale = 1;
       const scaleExtent = [0.1, 4];
       this.svg.attr("transform", `translate(${currentX},${currentY}) scale(1)`);
@@ -168,6 +145,7 @@ export class D3Tree {
       });
     }
   }
+
   initZoomForWin() {
     if (!this.zoom && this.isBrowser) {
       const zoomed = () => {
@@ -177,13 +155,9 @@ export class D3Tree {
       this.zoom = d3.zoom();
       this.zoom.on("zoom", zoomed);
       this.svgBox.call(this.zoom).on("dblclick.zoom", null);
-      this.svgBox.call(
-        this.zoom.translateBy,
-        this.PADDING.LEFT,
-        this.height / 2 - this.PADDING.TOP
-      );
     }
   }
+
   initZoom() {
     const isOnMac = isMac();
     if (isOnMac) {
@@ -192,385 +166,432 @@ export class D3Tree {
       this.initZoomForWin();
     }
   }
-  initLayout() {
-    if (!this.treemap) {
-      this.treemap = d3
-        .tree()
-        .nodeSize([this.NODE_SIZE.width, this.NODE_SIZE.height]);
-    }
-  }
+
   getData(data) {
-    this.data = data;
+    // data is { nodes, edges, rootId } from TransportsData
+    this.rootId = data.rootId;
+    this.nodes = data.nodes.map((n) => Object.assign({}, n));
+    this.edges = data.edges.map((e) => Object.assign({}, e));
+    this.nodeMap = new Map(this.nodes.map((n) => [n.fileID, n]));
   }
+
   getAssetsBaseURL(assetsBaseURL) {
     this.options.ASSETS_BASE_URL = this.ASSETS_BASE_URL = assetsBaseURL;
   }
+
   getActiveThemeKind(activeThemeKind) {
-    this.options.ASSETS_BASE_URL = this.activeThemeKind = activeThemeKind
+    this.activeThemeKind = activeThemeKind
       ? activeThemeKind.toLocaleLowerCase()
       : "dark";
   }
-  initRoot() {
-    this.root = d3.hierarchy(this.data, (d) => d.children);
-    this.root.x0 = 0;
-    this.root.y0 = 0;
-    if (this.root.children) {
-      this.root.children.forEach(collapse);
+
+  // ── Phase 5: Focus Mode ──────────────────────────────────────────────────────
+
+  exitFocusMode() {
+    this.focusedNodeId = null;
+    if (this.nodeDoms) this.nodeDoms.attr("opacity", 1);
+    if (this.linkDoms) this.linkDoms.attr("opacity", 1);
+    if (this.linkLabelDoms) this.linkLabelDoms.attr("opacity", 0);
+  }
+
+  enterFocusMode(nodeId) {
+    this.focusedNodeId = nodeId;
+    const connectedSet = new Set();
+    this.edges.forEach((e) => {
+      const srcId = e.source.fileID !== undefined ? e.source.fileID : e.source;
+      const tgtId = e.target.fileID !== undefined ? e.target.fileID : e.target;
+      if (srcId === nodeId || tgtId === nodeId) {
+        connectedSet.add(srcId);
+        connectedSet.add(tgtId);
+      }
+    });
+    this.applyFocusOpacity(nodeId, connectedSet);
+  }
+
+  applyFocusOpacity(nodeId, connectedSet) {
+    this.nodeDoms.attr("opacity", (d) => {
+      if (d.fileID === nodeId) return 1;
+      if (connectedSet.has(d.fileID)) return 0.35;
+      return 0.08;
+    });
+    this.linkDoms.attr("opacity", (d) => {
+      const srcId = d.source.fileID !== undefined ? d.source.fileID : d.source;
+      const tgtId = d.target.fileID !== undefined ? d.target.fileID : d.target;
+      return srcId === nodeId || tgtId === nodeId ? 1 : 0.08;
+    });
+    if (this.linkLabelDoms) this.linkLabelDoms.attr("opacity", 0);
+  }
+
+  // ── Phase 6: Layout Modes ────────────────────────────────────────────────────
+
+  setLayout(layoutId) {
+    this.layout = layoutId;
+    if (!this.nodes || !this.linkDoms || !this.nodeDoms) return;
+    switch (layoutId) {
+      case "hierarchical":
+        this.applyHierarchicalLayout();
+        break;
+      case "radial":
+        this.applyRadialLayout();
+        break;
+      case "grid":
+        this.applyGridLayout();
+        break;
+      default:
+        this.applyForceLayout();
+        break;
     }
   }
+
+  applyForceLayout() {
+    this.nodes.forEach((d) => { d.fx = null; d.fy = null; });
+    this.initSimulation();
+  }
+
+  applyHierarchicalLayout() {
+    if (this.simulation) this.simulation.stop();
+
+    const g = new dagre.graphlib.Graph();
+    g.setGraph({ rankdir: "TB", ranksep: 120, nodesep: 80 });
+    g.setDefaultEdgeLabel(() => ({}));
+
+    this.nodes.forEach((n) => g.setNode(n.fileID, { width: 120, height: 40 }));
+    this.edges.forEach((e) => {
+      const src = e.source.fileID !== undefined ? e.source.fileID : e.source;
+      const tgt = e.target.fileID !== undefined ? e.target.fileID : e.target;
+      g.setEdge(src, tgt);
+    });
+
+    dagre.layout(g);
+
+    const offsetX = this.width / 2 - g.graph().width / 2;
+    const offsetY = this.PADDING.TOP;
+    this.nodes.forEach((n) => {
+      const pos = g.node(n.fileID);
+      if (pos) {
+        n.fx = pos.x + offsetX;
+        n.fy = pos.y + offsetY;
+        n.x = n.fx;
+        n.y = n.fy;
+      }
+    });
+    this.ticked();
+  }
+
+  applyRadialLayout() {
+    if (this.simulation) this.simulation.stop();
+
+    const levelMap = new Map();
+    const visited = new Set();
+    const queue = [this.rootId];
+    levelMap.set(this.rootId, 0);
+    visited.add(this.rootId);
+
+    const adjacency = new Map();
+    this.edges.forEach((e) => {
+      const src = e.source.fileID !== undefined ? e.source.fileID : e.source;
+      const tgt = e.target.fileID !== undefined ? e.target.fileID : e.target;
+      if (!adjacency.has(src)) adjacency.set(src, []);
+      adjacency.get(src).push(tgt);
+    });
+
+    while (queue.length) {
+      const current = queue.shift();
+      const children = adjacency.get(current) || [];
+      children.forEach((child) => {
+        if (!visited.has(child)) {
+          visited.add(child);
+          levelMap.set(child, (levelMap.get(current) || 0) + 1);
+          queue.push(child);
+        }
+      });
+    }
+
+    const maxDepth = Math.max(...levelMap.values(), 0);
+    const radiusStep = Math.min(this.width, this.height) / (2 * (maxDepth + 1));
+    const byLevel = new Map();
+    levelMap.forEach((level, id) => {
+      if (!byLevel.has(level)) byLevel.set(level, []);
+      byLevel.get(level).push(id);
+    });
+
+    const cx = this.width / 2;
+    const cy = this.height / 2;
+
+    this.nodes.forEach((n) => {
+      const level = levelMap.has(n.fileID) ? levelMap.get(n.fileID) : maxDepth + 1;
+      if (level === 0) {
+        n.fx = cx;
+        n.fy = cy;
+      } else {
+        const peers = byLevel.get(level) || [n.fileID];
+        const idx = peers.indexOf(n.fileID);
+        const angle = (2 * Math.PI * idx) / peers.length - Math.PI / 2;
+        const radius = level * radiusStep;
+        n.fx = cx + radius * Math.cos(angle);
+        n.fy = cy + radius * Math.sin(angle);
+      }
+      n.x = n.fx;
+      n.y = n.fy;
+    });
+    this.ticked();
+  }
+
+  applyGridLayout() {
+    if (this.simulation) this.simulation.stop();
+
+    const sorted = [...this.nodes].sort((a, b) =>
+      (a.relativePath || "").localeCompare(b.relativePath || "")
+    );
+    const cols = Math.ceil(Math.sqrt(sorted.length));
+    const spacingX = Math.min(180, (this.width - this.PADDING.LEFT - this.PADDING.RIGHT) / cols);
+    const spacingY = 100;
+
+    sorted.forEach((n, i) => {
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      n.fx = this.PADDING.LEFT + col * spacingX + spacingX / 2;
+      n.fy = this.PADDING.TOP + row * spacingY + spacingY / 2;
+      n.x = n.fx;
+      n.y = n.fy;
+    });
+    this.ticked();
+  }
+
+  // ────────────────────────────────────────────────────────────────────────────
+
+  render() {
+    this.exitFocusMode();
+    this.svg.selectAll("*").remove();
+
+    // Arrowhead marker
+    const borderColor = this.DEFAULT_CHECKBOX_BORDER;
+    this.svg.append("defs").append("marker")
+      .attr("id", "arrowhead")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 18)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .attr("fill", borderColor);
+
+    const linksGroup = this.svg.append("g").attr("class", "links");
+
+    // Links layer (behind nodes)
+    this.linkDoms = linksGroup
+      .selectAll("path.link")
+      .data(this.edges)
+      .enter()
+      .append("path")
+      .attr("class", "link")
+      .attr("fill", "none")
+      .attr("stroke", this.DEFAULT_CHECKBOX_BORDER)
+      .attr("stroke-width", 1)
+      .attr("marker-end", "url(#arrowhead)");
+
+    // Edge labels (hidden by default, shown on hover)
+    this.linkLabelDoms = linksGroup
+      .selectAll("text.link-label")
+      .data(this.edges)
+      .enter()
+      .append("text")
+      .attr("class", "link-label")
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .attr("font-size", "10px")
+      .attr("fill", this.DEFAULT_IGNORED_TEXT_COLOR)
+      .attr("pointer-events", "none")
+      .attr("opacity", 0)
+      .text((d) => {
+        const names = d.importedNames || [];
+        const label = names.join(", ");
+        return label.length > 30 ? label.slice(0, 28) + "…" : label;
+      });
+
+    // Show label on link hover
+    this.linkDoms
+      .on("mouseenter", function (d, i, nodes) {
+        d3.select(nodes[i].parentNode).selectAll("text.link-label")
+          .filter((ld) => ld === d)
+          .attr("opacity", 1);
+      })
+      .on("mouseleave", function (d, i, nodes) {
+        d3.select(nodes[i].parentNode).selectAll("text.link-label")
+          .filter((ld) => ld === d)
+          .attr("opacity", 0);
+      });
+
+    // Nodes layer
+    this.nodeDoms = this.svg
+      .append("g")
+      .attr("class", "nodes")
+      .selectAll("g.node")
+      .data(this.nodes)
+      .enter()
+      .append("g")
+      .attr("class", "node")
+      .attr("cursor", "pointer")
+      .on("click", (d) => {
+        d3.event.stopPropagation();
+        store.dispatch(action_selectNode({ data: d }));
+        if (this.focusedNodeId === d.fileID) {
+          this.exitFocusMode();
+        } else {
+          this.enterFocusMode(d.fileID);
+        }
+      })
+      .call(this.buildDragBehavior());
+
+    // File type icon
+    this.nodeDoms
+      .append("svg:image")
+      .attr("class", "image")
+      .attr("xlink:href", (d) => `${this.ASSETS_BASE_URL}/icons/${d.type}.svg`)
+      .attr("x", -this.ICON_SIZE / 2)
+      .attr("y", -this.ICON_SIZE / 2)
+      .attr("width", this.ICON_SIZE)
+      .attr("height", this.ICON_SIZE);
+
+    // Tooltip
+    this.nodeDoms.append("title").text((d) => d.relativePath?.replace(/\\/g, "/"));
+
+    // Node label
+    const textDom = this.nodeDoms
+      .append("text")
+      .attr("dominant-baseline", "middle")
+      .attr("x", this.NODE_TEXT_OFFSET_X)
+      .attr("fill", this.DEFAULT_TEXT_COLOR)
+      .attr("font-family", this.DEFAULT_FONT_FAMILY)
+      .attr("font-weight", this.DEFAULT_FONT_WEIGHT)
+      .attr("font-size", this.DEFAULT_FONT_SIZE);
+
+    // Dim parent folder prefix for index files
+    textDom
+      .append("tspan")
+      .attr("fill", this.DEFAULT_IGNORED_TEXT_COLOR)
+      .text((d) => {
+        const nameWithoutExt = d.name.replace(d.extension, "");
+        const parts = d.relativePath.replace(/\\/g, "/").split("/");
+        parts.pop();
+        const parentDir = parts.pop();
+        return nameWithoutExt === "index" && parentDir ? parentDir + "/" : "";
+      });
+
+    textDom.append("tspan").text((d) => d.name);
+  }
+
+  buildDragBehavior() {
+    const dragStarted = (d) => {
+      if (!d3.event.active && this.layout === "force") {
+        this.simulation.alphaTarget(0.3).restart();
+      }
+      d.fx = d.x;
+      d.fy = d.y;
+    };
+    const dragged = (d) => {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    };
+    const dragEnded = (d) => {
+      if (!d3.event.active && this.layout === "force") {
+        this.simulation.alphaTarget(0);
+      }
+    };
+    return d3.drag()
+      .on("start", dragStarted)
+      .on("drag", dragged)
+      .on("end", dragEnded);
+  }
+
+  initSimulation() {
+    if (this.simulation) this.simulation.stop();
+
+    this.simulation = d3
+      .forceSimulation(this.nodes)
+      .force(
+        "link",
+        d3.forceLink(this.edges).id((d) => d.fileID).distance(150)
+      )
+      .force("charge", d3.forceManyBody().strength(-300))
+      .force("center", d3.forceCenter(this.width / 2, this.height / 2))
+      .on("tick", () => this.ticked());
+  }
+
+  ticked() {
+    this.linkDoms.attr("d", (d) => {
+      const sx = d.source.x, sy = d.source.y;
+      const tx = d.target.x, ty = d.target.y;
+      const mx = (sx + tx) / 2;
+      const my = (sy + ty) / 2;
+      return `M${sx},${sy} Q${mx},${my} ${tx},${ty}`;
+    });
+
+    if (this.linkLabelDoms) {
+      this.linkLabelDoms.attr("transform", (d) => {
+        const mx = (d.source.x + d.target.x) / 2;
+        const my = (d.source.y + d.target.y) / 2;
+        return `translate(${mx},${my})`;
+      });
+    }
+
+    this.nodeDoms.attr("transform", (d) => `translate(${d.x},${d.y})`);
+  }
+
   init(dom, data, assetsBaseURL, activeThemeKind) {
     this.initDom(dom);
     this.initZoom();
     this.getData(data);
     this.getAssetsBaseURL(assetsBaseURL);
     this.getActiveThemeKind(activeThemeKind);
-    this.initLayout();
-    this.setIDInTreeNode();
-    this.initRoot();
-    this.update();
-  }
-  setIDInTreeNode() {
-    const stack = [this.data];
-    while (stack.length) {
-      const node = stack.pop();
-      node.id = node.nodeID;
-      if (node.children && node.children.length) {
-        stack.push(...node.children);
-      }
+    this.render();
+    if (this.layout === "force") {
+      this.initSimulation();
+    } else {
+      this.setLayout(this.layout);
     }
   }
-  getNodesLinksData() {
-    this.treeNodes = this.treeData.descendants();
-    this.treeLinks = this.treeData.descendants().slice(1);
-  }
-  getNodes() {
-    this.nodesData = this.svg.selectAll("g.node").data(this.treeNodes, (d) => {
-      return "node_" + d.data.id;
-    });
-  }
-  appendNodeDom(source) {
-    const x = source ? source.y0 : this.root.y0;
-    const y = source ? source.x0 : this.root.x0;
-    this.nodeDom = this.nodesData
-      .enter()
-      .append("g")
-      .attr("class", "node")
-      .attr("transform", () => `translate(${x},${y})`)
-      .attr("cursor", () => "pointer")
-      .on("click", function (d) {
-        d3.event.stopPropagation();
-        store.dispatch(action_selectNode(d));
-      });
-  }
-  appendNodeIcon() {
-    this.nodeDom
-      .append("svg:image")
-      .attr("class", "image")
-      .attr("xlink:href", (d) => {
-        return this.ASSETS_BASE_URL + "/icons/" + d.data.type + ".svg";
-      })
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", 0)
-      .attr("height", 0);
-  }
-  appendNodeTitle() {
-    this.nodeDom.append("title").text((d) => {
-      return d?.data?.relativePath?.replace(/\\/g, "/");
-    });
-  }
-  appendNodeName() {
-    this.nodeTextDom = this.nodeDom
-      .append("text")
-      .attr("text-anchor", (d) => (d.children || d._children ? "end" : "start"))
-      .attr("dominant-baseline", "middle")
-      .attr("fill", this.DEFAULT_TEXT_COLOR)
-      .attr("font-family", this.DEFAULT_FONT_FAMILY)
-      .attr("font-weight", this.DEFAULT_FONT_WEIGHT)
-      .attr("font-size", this.DEFAULT_FONT_SIZE)
 
-      .attr("x", (d) =>
-        d.children || d._children
-          ? -this.NODE_TEXT_OFFSET_X
-          : this.NODE_TEXT_OFFSET_X
-      )
-      .attr("fill-opacity", 0);
-    this.nodeFatherNameTextDom = this.nodeTextDom
-      .append("tspan")
-      .attr("fill", this.DEFAULT_IGNORED_TEXT_COLOR)
-      .text((d) => {
-        const nameWhitOutExtension = d.data.name.replace(d.data.extension, "");
-        const filePath = d.data.relativePath.replace(/\\/g, "/").split("/");
-        filePath.pop();
-        const fileFatherDirName = filePath.pop();
-        if (nameWhitOutExtension === "index" && fileFatherDirName) {
-          return fileFatherDirName + "/";
-        } else {
-          return "";
-        }
-      });
-
-    this.nodeNameTextDom = this.nodeTextDom.append("tspan").text((d) => {
-      return d.data.name;
-    });
-  }
-  appendNodeArrowButton() {
-    this.nodeDom
-      .select(function (d) {
-        if (d.children || d._children) {
-          return this;
-        }
-      })
-      .append("svg:image")
-      .attr("class", "arrowButton")
-      .attr("transform-origin", "22px 0px")
-      .attr("xlink:href", (d) => {
-        return `${this.ASSETS_BASE_URL}/webview/arrow-${this.activeThemeKind}.svg`;
-      })
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", 0)
-      .attr("height", 0)
-      .attr("transform", (d) => {
-        return d.children ? "rotate(180)" : "rotate(0)";
-      })
-      .on("click", throttle(this.clickNodeArrowButton(), this.CLICK_DALEY));
-  }
-  nodesEnter() {
-    this.nodeEnter = this.nodeDom.merge(this.nodesData);
-  }
-  enterArrowButton() {
-    this.nodeEnter
-      .select("image.arrowButton")
-      .transition()
-      .duration(this.DURATION_TIME)
-      .attr("x", () => +this.ICON_SIZE / 2)
-      .attr("y", () => -this.ICON_SIZE / 2)
-      .attr("width", this.ICON_SIZE)
-      .attr("height", this.ICON_SIZE)
-      .attr("transform", (d) => (d.children ? "rotate(180)" : "rotate(0)"));
-  }
-  enterNodeIcon() {
-    this.nodeEnter
-      .select("image.image")
-      .transition()
-      .duration(this.DURATION_TIME)
-      .attr("x", () => -this.ICON_SIZE / 2)
-      .attr("y", () => -this.ICON_SIZE / 2)
-      .attr("width", this.ICON_SIZE)
-      .attr("height", this.ICON_SIZE);
-  }
-  enterNodeName() {
-    this.nodeEnter
-      .select("text")
-      .transition()
-      .duration(this.DURATION_TIME)
-      .attr("fill-opacity", 1);
-    this.nodeEnter
-      .transition()
-      .duration(this.DURATION_TIME)
-      .attr("transform", (d) => "translate(" + d.y + "," + d.x + ")")
-      .attr("fill-opacity", 1);
-  }
-  nodesExit(source) {
-    const x = source ? source.y : this.root.y0;
-    const y = source ? source.x : this.root.x0;
-    this.nodeExit = this.nodesData
-      .exit()
-      .transition()
-      .duration(this.DURATION_TIME)
-      .attr("transform", () => `translate(${x},${y})`)
-      .remove();
-  }
-  nodesExitIcon() {
-    this.nodeExit
-      .select("image")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", 0)
-      .attr("height", 0);
-  }
-  nodesExitName() {
-    this.nodeExit.select("text").attr("fill-opacity", 0);
-  }
-  nodesExitArrowButton() {
-    this.nodeExit
-      .select("image.arrowButton")
-      .transition()
-      .duration(this.DURATION_TIME)
-      .attr("transform", (d) => (d.children ? "rotate(180)" : "rotate(0)"));
-  }
-  getLinks() {
-    this.linksData = this.svg
-      .selectAll("path.link")
-      .data(this.treeLinks, (d) => {
-        return "link_" + d.data.id;
-      });
-  }
-  appendLinkDom(source) {
-    const x = source ? source.x0 : this.root.x0;
-    const y = source ? source.y0 : this.root.y0;
-    this.linkDom = this.linksData
-      .enter()
-      .insert("path", "g")
-      .attr("class", "link")
-      .attr("fill", "none")
-      .attr("stroke", this.DEFAULT_CHECKBOX_BORDER)
-      .attr("stroke-width", 1)
-      .attr("d", (d) => {
-        const o = { x, y };
-        return diagonal(o, o);
-      });
-  }
-  linksEnter() {
-    this.linkEnter = this.linkDom.merge(this.linksData);
-    this.linkEnter
-      .transition()
-      .duration(this.DURATION_TIME)
-      .attr("d", (d) => diagonal(d, d.parent));
-  }
-  linksExit(source) {
-    const x = source ? source.x : this.root.x0;
-    const y = source ? source.y : this.root.y0;
-    this.linksData
-      .exit()
-      .transition()
-      .duration(this.DURATION_TIME)
-      .attr("d", function (d) {
-        const o = { x, y };
-        return diagonal(o, o);
-      })
-      .remove();
-  }
-  update(source) {
-    this.treeData = this.treemap(this.root);
-    this.getNodesLinksData();
-
-    this.getNodes();
-    this.appendNodeDom(source);
-    this.appendNodeTitle();
-    this.appendNodeIcon();
-    this.appendNodeName();
-    this.appendNodeArrowButton();
-
-    this.nodesEnter();
-    this.enterNodeIcon();
-    this.enterNodeName();
-    this.enterArrowButton();
-
-    this.nodesExit(source);
-    this.nodesExitIcon();
-    this.nodesExitName();
-    this.nodesExitArrowButton();
-
-    this.getLinks();
-    this.appendLinkDom(source);
-    this.linksEnter();
-    this.linksExit(source);
-
-    this.stashPositions();
-  }
-  stashPositions() {
-    this.treeNodes.forEach((d) => {
-      d.x0 = d.x;
-      d.y0 = d.y;
-    });
-  }
-  clickNodeArrowButton() {
-    return (d) => {
-      if (d.children) {
-        d._children = d.children;
-        d.children = null;
-      } else {
-        d.children = d._children;
-        d._children = null;
-      }
-      this.update(d);
-      d3.event.stopPropagation();
-    };
-  }
-  openToNode(ancestors) {
-    if (!ancestors || !ancestors.length) {
-      msgWebViewLog("error", "openToNode failed no ancestors to open");
+  update() {
+    if (this.layout === "force" && this.simulation) {
+      this.simulation.alpha(0.3).restart();
     }
-    let temp = this.root;
-    let updateSource = null;
-    let updateTarget = null;
-    // find child by node's ancestors
-    for (let i = 0; i < ancestors.length; i++) {
-      // children is not hash table so here is a loop
-      if (temp && !temp.children) {
-        if (!updateSource) {
-          updateSource = temp;
-        }
-        updateTarget = temp;
-        let tempChildren = temp.children;
-        temp.children = temp._children;
-        temp._children = tempChildren;
-      }
-      for (let j = 0; j < temp?.children?.length; j++) {
-        if (temp.children[j].data.relativePath === ancestors[i]) {
-          temp = temp.children[j];
-          updateTarget = temp;
-          if (temp && !temp.children) {
-            if (!updateSource) {
-              updateSource = temp;
-            }
-            let tempChildren = temp.children;
-            temp.children = temp._children;
-            temp._children = tempChildren;
-          }
-          break;
-        }
-      }
-    }
-    if (updateSource) {
-      this.update(null, updateSource);
-    }
-    return updateTarget;
   }
+
   hightLightFocusNode(nodeData) {
-    d3.selectAll("text")
-      .select(function (d, i) {
-        if (!nodeData) {
-          if (i == 0) return this;
-        } else {
-          if (d.data.id === nodeData.data.id) {
-            return this;
-          }
-        }
+    d3.selectAll("g.node text")
+      .select(function (d) {
+        if (d && nodeData && d.fileID === nodeData.fileID) return this;
+        return null;
       })
-      .attr("fill", (d) => {
-        return this.NODE_HIGHLIGHT_COLOR;
-      })
-      .attr("fill-opacity", (d) => {
-        return 1;
-      })
+      .attr("fill", this.NODE_HIGHLIGHT_COLOR)
+      .attr("fill-opacity", 1)
       .transition()
       .duration(this.DURATION_TIME * 2)
-      .attr("fill", (d) => {
-        return this.DEFAULT_TEXT_COLOR;
-      });
+      .attr("fill", this.DEFAULT_TEXT_COLOR);
   }
+
   focusOnNode(ancestors) {
-    const updateTarget = this.openToNode(ancestors);
-    let transformToNode = undefined;
-    let transformX = undefined;
-    let transformY = undefined;
-    if (updateTarget) {
-      transformX = -updateTarget.y - this.PADDING.LEFT + this.width / 2;
-      transformY = -updateTarget.x - this.PADDING.TOP + this.height / 2;
-    } else {
-      transformX = this.PADDING.LEFT;
-      transformY = this.height / 2 - this.PADDING.TOP;
+    if (!ancestors || !ancestors.length) {
+      msgWebViewLog("error", "focusOnNode failed: no ancestors provided");
+      return;
     }
-    transformToNode = d3.zoomIdentity
-      .translate(transformX, transformY)
+    const targetPath = ancestors[ancestors.length - 1];
+    const targetNode = this.nodes
+      ? this.nodes.find((n) => n.relativePath === targetPath)
+      : null;
+    if (!targetNode) return;
+
+    this.hightLightFocusNode(targetNode);
+
+    if (!this.zoom || !this.isBrowser) return;
+    const x = targetNode.x || 0;
+    const y = targetNode.y || 0;
+    const transform = d3.zoomIdentity
+      .translate(this.width / 2 - x, this.height / 2 - y)
       .scale(1);
-    this.hightLightFocusNode(updateTarget);
-    this.svgBox
-      .transition()
-      .duration(750)
-      .call(this.zoom.transform, transformToNode);
+    this.svgBox.transition().duration(750).call(this.zoom.transform, transform);
   }
 }

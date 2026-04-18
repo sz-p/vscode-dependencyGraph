@@ -5,10 +5,18 @@ import { useEffect, useState } from "react";
 import { FontIcon } from "office-ui-fabric-react/lib/Icon";
 import { i18n } from "../../../../i18n/i18n";
 import { SETTING, SAVE, EXPORT } from "../../../../i18n/types";
-import { action_changeSettingStatus } from "../../actions/action";
+import { action_changeSettingStatus, action_setLayout } from "../../actions/action";
 import { store } from "../../reducers/store";
+
+const LAYOUT_OPTIONS = [
+  { id: "force", label: "Auto (Force)" },
+  { id: "hierarchical", label: "Hierarchical" },
+  { id: "radial", label: "Radial" },
+  { id: "grid", label: "Grid" },
+];
+
 const toolBox = function (props) {
-  const { language } = props;
+  const { language, layout } = props;
   let [TEXT_SETTING, SET_TEXT_SETTING] = useState();
   let [TEXT_SAVE, SET_TEXT_SAVE] = useState();
   let [TEXT_EXPORT, SET_TEXT_EXPORT] = useState();
@@ -71,18 +79,23 @@ const toolBox = function (props) {
           store.dispatch(action_changeSettingStatus());
         }}
       />
-      {/* <FontIcon iconName="Save" title={TEXT_SAVE} className="toolBoxIcon" />
-      <FontIcon
-        iconName="DownloadDocument"
-        title={TEXT_EXPORT}
-        className="toolBoxIcon"
-      /> */}
+      <select
+        className="toolBoxLayoutSelect"
+        value={layout || "force"}
+        onChange={(e) => store.dispatch(action_setLayout(e.target.value))}
+        title="Layout"
+      >
+        {LAYOUT_OPTIONS.map((opt) => (
+          <option key={opt.id} value={opt.id}>{opt.label}</option>
+        ))}
+      </select>
     </div>
   );
 };
 const mapStateToProps = (state) => {
   return {
     language: state.language,
+    layout: state.layout,
   };
 };
 export const ToolBox = connect(mapStateToProps)(toolBox);
